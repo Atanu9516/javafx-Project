@@ -1,0 +1,169 @@
+.root {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-background-color: linear-gradient(to bottom right, #f9e8d2, #e4f2ff, #efe6ff);
+}
+
+.title {
+    -fx-font-size: 36px;
+    -fx-font-family: "Georgia";
+    -fx-text-fill: #1e2b3a;
+}
+
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: #445468;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e2b3a;
+}
+
+.header-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.85);
+    -fx-border-color: #dbe3ea;
+    -fx-border-width: 0 0 1 0;
+}
+
+.header-title {
+    -fx-font-size: 20px;
+    -fx-font-family: "Georgia";
+    -fx-text-fill: #1e2b3a;
+}
+
+.muted {
+    -fx-text-fill: #6a7c8f;
+}
+
+.timer {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c0392b;
+}
+
+.question {
+    -fx-font-size: 20px;
+    -fx-text-fill: #1f2c3a;
+}
+
+.card {
+    -fx-background-color: rgba(255, 255, 255, 0.92);
+    -fx-background-radius: 16px;
+    -fx-border-color: #dbe3ea;
+    -fx-border-radius: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(20, 30, 60, 0.12), 10, 0.2, 0, 4);
+}
+
+.side-nav {
+    -fx-background-color: rgba(255, 255, 255, 0.88);
+    -fx-border-color: #dbe3ea;
+    -fx-border-width: 0 1 0 0;
+}
+
+.nav-button {
+    -fx-min-width: 160px;
+    -fx-background-color: rgba(255, 255, 255, 0.65);
+    -fx-border-color: #dbe3ea;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.dashboard-body {
+    -fx-alignment: center-left;
+}
+
+.stat-card {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-background-radius: 14px;
+    -fx-border-color: #dbe3ea;
+    -fx-border-radius: 14px;
+}
+
+.stat-value {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2c3a;
+}
+
+.menu-card {
+    -fx-min-width: 220px;
+    -fx-min-height: 110px;
+    -fx-background-radius: 16px;
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-border-color: #dbe3ea;
+    -fx-border-radius: 16px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.level-row {
+    -fx-padding: 10 0 10 0;
+}
+
+.level-card {
+    -fx-min-width: 210px;
+    -fx-min-height: 140px;
+    -fx-background-radius: 22px;
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(20, 30, 60, 0.18), 12, 0.2, 0, 6);
+}
+
+.level-beginner {
+    -fx-background-color: linear-gradient(to bottom right, #20b27e, #17a2b8);
+}
+
+.level-intermediate {
+    -fx-background-color: linear-gradient(to bottom right, #ff8a3d, #ff5e62);
+}
+
+.level-advanced {
+    -fx-background-color: linear-gradient(to bottom right, #6a5acd, #2c6fbb);
+}
+
+.error-text {
+    -fx-text-fill: #c0392b;
+}
+
+.button {
+    -fx-background-radius: 12px;
+    -fx-padding: 10 18 10 18;
+    -fx-font-size: 14px;
+}
+
+.text-field, .password-field {
+    -fx-background-radius: 10px;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 14px;
+}
+
+.radio-button {
+    -fx-font-size: 15px;
+}
+
+.radio-button .radio {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #8aa0b4;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-padding: 4;
+}
+
+.radio-button:selected .radio {
+    -fx-border-color: #2c6fbb;
+}
+
+.primary-button {
+    -fx-background-color: linear-gradient(to bottom right, #2c6fbb, #2f8bdc);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.danger-button {
+    -fx-background-color: linear-gradient(to bottom right, #d64541, #c0392b);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}

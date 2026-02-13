@@ -1,0 +1,63 @@
+# level,id,question,optionA,optionB,optionC,optionD,correctIndex(1-4)
+BEGINNER,B1,What does CPU stand for,Central Processing Unit,Central Power Unit,Computer Primary Unit,Control Processing Unit,1
+BEGINNER,B2,Which device is used to input text,Keyboard,Monitor,Speaker,Printer,1
+BEGINNER,B3,What does RAM stand for,Random Access Memory,Read Access Memory,Run Access Memory,Random Active Memory,1
+BEGINNER,B4,Which operating system is open source,Linux,Windows,macOS,DOS,1
+BEGINNER,B5,HTTP is used for,Web browsing,File compression,Database storage,Image editing,1
+BEGINNER,B6,Which language is widely used for Android development,Java,Swift,PHP,Ruby,1
+BEGINNER,B7,Binary number system uses base,2,8,10,16,1
+BEGINNER,B8,File extension for Java source code is,.java,.class,.jar,.js,1
+BEGINNER,B9,What does GUI stand for,Graphical User Interface,General User Input,Graphical Utility Interface,Global User Interface,1
+BEGINNER,B10,Which memory is volatile,RAM,SSD,HDD,ROM,1
+BEGINNER,B11,IP stands for,Internet Protocol,Internal Program,Interface Port,Internet Process,1
+BEGINNER,B12,Smallest unit of data is,Bit,Byte,Word,Block,1
+BEGINNER,B13,Which is an output device,Monitor,Mouse,Keyboard,Scanner,1
+BEGINNER,B14,Java single line comment starts with,//,/*,**,#,1
+BEGINNER,B15,Which device stores data permanently,Hard disk,Cache,Register,RAM,1
+BEGINNER,B16,One byte equals,8 bits,4 bits,2 bits,16 bits,1
+BEGINNER,B17,Which protocol is used to send email,SMTP,HTTP,FTP,DNS,1
+BEGINNER,B18,Topology with a central hub is,Star,Ring,Bus,Mesh,1
+BEGINNER,B19,Java is mainly an,Object oriented language,Procedural language,Assembly language,Markup language,1
+BEGINNER,B20,Which command compiles Java code,javac,java,jar,javadoc,1
+
+INTERMEDIATE,I1,Time complexity of binary search is,O log n,O n,O n log n,O 1,1
+INTERMEDIATE,I2,Data structure for FIFO is,Queue,Stack,Tree,Graph,1
+INTERMEDIATE,I3,Traversal order root left right is,Preorder,Inorder,Postorder,Level order,1
+INTERMEDIATE,I4,Primary key ensures,Uniqueness,Sorting,Compression,Indexing,1
+INTERMEDIATE,I5,SQL clause that filters groups is,HAVING,WHERE,ORDER BY,GROUP BY,1
+INTERMEDIATE,I6,Stack works on,LIFO,FIFO,LILO,FILO,1
+INTERMEDIATE,I7,Which sorting algorithm is stable,Merge sort,Quick sort,Heap sort,Selection sort,1
+INTERMEDIATE,I8,Average search time in hash table is,O 1,O log n,O n,O n log n,1
+INTERMEDIATE,I9,Second normal form removes,Partial dependency,Transitive dependency,Multivalued dependency,Redundancy,1
+INTERMEDIATE,I10,HTTP with encryption is,HTTPS,HTTP2,FTP,SSH,1
+INTERMEDIATE,I11,Deadlock occurs when,Each waits for another,CPU is overloaded,Memory is full,Disk is slow,1
+INTERMEDIATE,I12,Scheduling with time slices is,Round Robin,FCFS,Priority,Shortest Job First,1
+INTERMEDIATE,I13,Balanced tree with rotations is,AVL,Binary tree,B tree,Trie,1
+INTERMEDIATE,I14,Shortest path without negative edges uses,Dijkstra,Bellman Ford,Floyd Warshall,Kruskal,1
+INTERMEDIATE,I15,ACID stands for,Atomicity Consistency Isolation Durability,Access Control Integrity Data,Atomicity Control Isolation Data,Access Consistency Index Durability,1
+INTERMEDIATE,I16,DNS is used for,Domain to IP translation,File transfer,Email sending,User login,1
+INTERMEDIATE,I17,REST commonly uses,HTTP methods,FTP commands,SMTP headers,UDP packets,1
+INTERMEDIATE,I18,Priority queue is often implemented using,Heap,Stack,Array,Linked list,1
+INTERMEDIATE,I19,Java keyword that prevents inheritance is,final,static,private,abstract,1
+INTERMEDIATE,I20,Default port for HTTPS is,443,80,21,25,1
+
+ADVANCED,A1,CAP theorem includes,Consistency Availability Partition,Concurrency Accuracy Performance,Capacity Availability Persistence,Correctness Access Partition,1
+ADVANCED,A2,Eventual consistency means,Data converges over time,Reads are linearizable,Writes are always atomic,All nodes sync instantly,1
+ADVANCED,A3,Isolation level that prevents dirty reads is,Read committed,Read uncommitted,Read skew,Snapshot,1
+ADVANCED,A4,Distributed consensus algorithm is,Raft,Bubble sort,DFS,Quicksort,1
+ADVANCED,A5,Average time complexity of quicksort is,O n log n,O n,O log n,O n squared,1
+ADVANCED,A6,A race condition happens when,Threads access shared data unsafely,CPU runs too fast,Network is slow,Disk is full,1
+ADVANCED,A7,Reliable transport protocol is,TCP,UDP,ICMP,ARP,1
+ADVANCED,A8,A mutex is used for,Mutual exclusion,Memory paging,Message routing,Cache warming,1
+ADVANCED,A9,A page fault occurs when,Data not in RAM,CPU cache misses,Disk is idle,Network is down,1
+ADVANCED,A10,TLS is used for,Secure transport,Data compression,Task scheduling,Image rendering,1
+ADVANCED,A11,LRU cache is typically built with,Hash map and list,Stack and queue,Tree and array,Set and heap,1
+ADVANCED,A12,Bloom filter is a,Probabilistic set,Sorted array,Binary tree,Graph traversal,1
+ADVANCED,A13,SIMD stands for,Single Instruction Multiple Data,Single Input Multiple Data,System Instruction Memory Data,Shared Instruction Multiple Data,1
+ADVANCED,A14,Aging helps to,Prevent starvation,Speed up sorting,Reduce deadlock,Increase throughput,1
+ADVANCED,A15,Encryption with same key is,Symmetric,Asymmetric,Public key,Hashing,1
+ADVANCED,A16,Dead letter queue stores,Failed messages,Active sessions,Cache entries,User profiles,1
+ADVANCED,A17,Idempotent operation means,Same result on repeat,Fast execution,Encrypted output,Randomized output,1
+ADVANCED,A18,Full text search commonly uses,Inverted index,B tree,Heap table,Trie cache,1
+ADVANCED,A19,CORS is about,Cross origin access,CPU optimization,Cache ordering,Cloud resource scaling,1
+ADVANCED,A20,Sharding means,Partitioning data across nodes,Encrypting data,Backing up data,Compressing data,1

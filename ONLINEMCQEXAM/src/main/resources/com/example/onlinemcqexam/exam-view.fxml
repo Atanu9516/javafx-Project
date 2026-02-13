@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:controller="com.example.onlinemcqexam.ExamController"
+           prefHeight="700.0" prefWidth="1040.0"
+           xmlns:fx="http://javafx.com/fxml/1"
+           xmlns="http://javafx.com/javafx/17.0.6">
+    <children>
+        <!-- Student Login -->
+        <AnchorPane fx:id="loginPane" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <Label text="Online MCQ Exam" styleClass="title" />
+                        <Label text="Log in to continue." styleClass="subtitle" />
+                        <VBox spacing="10.0" styleClass="card">
+                            <children>
+                                <TextField fx:id="loginUsername" promptText="Username" />
+                                <PasswordField fx:id="loginPassword" promptText="Password" />
+                                <Label fx:id="loginMessageLabel" styleClass="error-text" />
+                                <Button text="Log In" onAction="#loginUser" styleClass="primary-button" />
+                                <Button text="Create Account" onAction="#showRegister" />
+                                <Button text="Teacher Login" onAction="#showTeacherLogin" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="20.0" bottom="16.0" left="20.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Student Register -->
+        <AnchorPane fx:id="registerPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <Label text="Create Account" styleClass="title" />
+                        <Label text="Register to take a live exam." styleClass="subtitle" />
+                        <VBox spacing="10.0" styleClass="card">
+                            <children>
+                                <TextField fx:id="registerUsername" promptText="Username" />
+                                <PasswordField fx:id="registerPassword" promptText="Password" />
+                                <PasswordField fx:id="registerConfirm" promptText="Confirm password" />
+                                <Label fx:id="registerMessageLabel" styleClass="error-text" />
+                                <Button text="Register" onAction="#registerUser" styleClass="primary-button" />
+                                <Button text="Back to Login" onAction="#showLogin" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="20.0" bottom="16.0" left="20.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Student Dashboard -->
+        <BorderPane fx:id="studentDashboardPane" visible="false" managed="false">
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="12.0" BorderPane.alignment="CENTER" styleClass="header-bar">
+                    <children>
+                        <Label text="Student Dashboard" styleClass="header-title" />
+                        <Label fx:id="studentWelcomeLabel" text="" styleClass="muted" />
+                    </children>
+                    <padding>
+                        <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                    </padding>
+                </HBox>
+            </top>
+            <left>
+                <VBox spacing="10.0" BorderPane.alignment="CENTER" styleClass="side-nav">
+                    <children>
+                        <Button text="Available Exams" onAction="#showAvailableExams" styleClass="nav-button" />
+                        <Button text="My Exams" onAction="#showResultPage" styleClass="nav-button" />
+                        <Button text="Progress" onAction="#showProgress" styleClass="nav-button" />
+                        <Button text="Discussion" onAction="#showDiscussion" styleClass="nav-button" />
+                        <Separator />
+                        <Button text="Logout" onAction="#logout" />
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="16.0" bottom="20.0" left="16.0" />
+                    </padding>
+                </VBox>
+            </left>
+            <center>
+                <VBox spacing="16.0" BorderPane.alignment="CENTER" styleClass="dashboard-body">
+                    <children>
+                        <Label text="Quick Overview" styleClass="section-title" />
+                        <HBox spacing="16.0">
+                            <children>
+                                <VBox spacing="6.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Upcoming" styleClass="muted" />
+                                        <Label text="3 Exams" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="6.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Completed" styleClass="muted" />
+                                        <Label text="8 Attempts" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="6.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Current Rank" styleClass="muted" />
+                                        <Label text="#5" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <VBox spacing="10.0" styleClass="card">
+                            <children>
+                                <Label text="Next Scheduled Exam" styleClass="subtitle" />
+                                <Label text="Java Fundamentals - Feb 15, 2026 | 10:00 AM" />
+                                <Button text="Go to Available Exams" onAction="#showAvailableExams" styleClass="primary-button" />
+                            </children>
+                            <padding>
+                                <Insets top="14.0" right="18.0" bottom="14.0" left="18.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <!-- Available Exams -->
+        <AnchorPane fx:id="availableExamsPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Available Exams" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <VBox spacing="12.0" styleClass="card" prefWidth="720.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+                            <children>
+                                <Label text="Scheduled Exams" styleClass="section-title" />
+                                <ListView fx:id="availableExamList" prefHeight="220.0" />
+                                <Button text="Start Exam" onAction="#goToLevelSelect" styleClass="primary-button" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="40.0" bottom="20.0" left="40.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Student Discussion -->
+        <AnchorPane fx:id="discussionPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Discussion" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+                            <children>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="420.0">
+                                    <children>
+                                        <Label text="Ask" styleClass="section-title" />
+                                        <TextArea fx:id="discussionAskArea" prefHeight="140.0" wrapText="true" />
+                                        <Button text="Post" onAction="#postDiscussion" styleClass="primary-button" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="420.0">
+                                    <children>
+                                        <Label text="View" styleClass="section-title" />
+                                        <ListView fx:id="discussionList" prefHeight="220.0" />
+                                        <Button text="Comment" onAction="#commentDiscussion" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Student Progress -->
+        <AnchorPane fx:id="progressPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Progress" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+                            <children>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="520.0">
+                                    <children>
+                                        <Label text="Score Trend" styleClass="section-title" />
+                                        <BarChart fx:id="progressChart" prefHeight="240.0">
+                                            <xAxis>
+                                                <CategoryAxis />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis />
+                                            </yAxis>
+                                        </BarChart>
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="320.0">
+                                    <children>
+                                        <Label text="History" styleClass="section-title" />
+                                        <ListView fx:id="historyList" prefHeight="240.0" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Leaderboard -->
+        <AnchorPane fx:id="leaderboardPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Result Board" styleClass="header-title" />
+                                <Button text="Back to Results" onAction="#showResultPage" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <VBox spacing="10.0" styleClass="card" prefWidth="620.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
+                            <children>
+                                <Label text="Rank List" styleClass="section-title" />
+                                <ListView fx:id="leaderboardList" prefHeight="220.0" />
+                                <Label text="Highest Scorer:" styleClass="muted" />
+                                <Label fx:id="highestScorerLabel" text="" styleClass="subtitle" />
+                                <Label text="Compare your performance with peers." />
+                                <Label text="Note: if score is same, submission time decides rank." styleClass="muted" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Exam Level Selection -->
+        <AnchorPane fx:id="levelPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="18.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <Label text="Select Exam Level" styleClass="title" />
+                        <Label fx:id="levelSubtitleLabel" text="Choose your exam level." styleClass="subtitle" />
+                        <Label fx:id="levelMessageLabel" styleClass="error-text" />
+                        <HBox spacing="18.0" alignment="CENTER" styleClass="level-row">
+                            <children>
+                                <Button text="Beginner" onAction="#selectBeginner" styleClass="level-card level-beginner" />
+                                <Button text="Intermediate" onAction="#selectIntermediate" styleClass="level-card level-intermediate" />
+                                <Button text="Advanced" onAction="#selectAdvanced" styleClass="level-card level-advanced" />
+                            </children>
+                        </HBox>
+                        <Button text="Back to Available Exams" onAction="#showAvailableExams" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Exam Start -->
+        <AnchorPane fx:id="startPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <Label text="Ready to Start" styleClass="title" />
+                        <Label fx:id="levelLabel" text="Level: Beginner" styleClass="subtitle" />
+                        <Label fx:id="subtitleLabel" text="Answer all questions before time ends."
+                               wrapText="true" styleClass="subtitle" />
+                        <Button fx:id="startButton" text="Start Exam" onAction="#startExam" styleClass="primary-button" />
+                        <Button text="Back to Levels" onAction="#restartExam" />
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Exam Interface -->
+        <BorderPane fx:id="examPane" visible="false" managed="false">
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="16.0" BorderPane.alignment="CENTER" styleClass="header-bar">
+                    <children>
+                        <Label text="Live Exam" styleClass="header-title" />
+                        <Label fx:id="progressLabel" text="Question 1 of 1" styleClass="muted" />
+                        <HBox spacing="8.0" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label text="Time Left" styleClass="muted" />
+                                <Label fx:id="timerLabel" text="00:00" styleClass="timer" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                    </padding>
+                </HBox>
+            </top>
+            <center>
+                <VBox spacing="16.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label fx:id="questionLabel" text="Question goes here" wrapText="true" styleClass="question" />
+                        <VBox spacing="10.0" styleClass="card">
+                            <children>
+                                <RadioButton fx:id="optionA" text="Option A" wrapText="true" />
+                                <RadioButton fx:id="optionB" text="Option B" wrapText="true" />
+                                <RadioButton fx:id="optionC" text="Option C" wrapText="true" />
+                                <RadioButton fx:id="optionD" text="Option D" wrapText="true" />
+                            </children>
+                            <padding>
+                                <Insets top="14.0" right="16.0" bottom="14.0" left="16.0" />
+                            </padding>
+                        </VBox>
+                        <ProgressBar fx:id="progressBar" prefWidth="720.0" />
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="40.0" bottom="20.0" left="40.0" />
+                    </padding>
+                </VBox>
+            </center>
+            <bottom>
+                <HBox spacing="12.0" BorderPane.alignment="CENTER" alignment="CENTER_RIGHT">
+                    <children>
+                        <Button fx:id="prevButton" text="Previous" onAction="#previousQuestion" />
+                        <Button fx:id="nextButton" text="Next" onAction="#nextQuestion" styleClass="primary-button" />
+                        <Button fx:id="submitButton" text="Submit" onAction="#submitExam" styleClass="danger-button" />
+                    </children>
+                    <padding>
+                        <Insets top="12.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </HBox>
+            </bottom>
+        </BorderPane>
+
+        <!-- Result Page -->
+        <AnchorPane fx:id="resultPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <Label text="Result Page" styleClass="title" />
+                        <HBox spacing="14.0" alignment="CENTER">
+                            <children>
+                                <VBox spacing="4.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Score" styleClass="muted" />
+                                        <Label fx:id="scoreLabel" text="0/0" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="4.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Correct" styleClass="muted" />
+                                        <Label fx:id="correctLabel" text="0" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="4.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Wrong" styleClass="muted" />
+                                        <Label fx:id="wrongLabel" text="0" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="4.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Percentage" styleClass="muted" />
+                                        <Label fx:id="percentLabel" text="0%" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="4.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Status" styleClass="muted" />
+                                        <Label fx:id="passLabel" text="Pending" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <TextArea fx:id="resultArea" prefHeight="240.0" prefWidth="760.0" editable="false"
+                                  wrapText="true" />
+                        <HBox spacing="10.0">
+                            <children>
+                                <Button text="Result Board" onAction="#showLeaderboard" />
+                                <Button text="Progress" onAction="#showProgress" />
+                                <Button text="Discussion" onAction="#showDiscussion" />
+                                <Button fx:id="restartButton" text="Back to Dashboard" onAction="#showStudentDashboard" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Teacher Login -->
+        <AnchorPane fx:id="teacherLoginPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <Label text="Teacher Login" styleClass="title" />
+                        <Label text="Sign in to manage exams." styleClass="subtitle" />
+                        <VBox spacing="10.0" styleClass="card">
+                            <children>
+                                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="Role" />
+                                        <ChoiceBox fx:id="teacherRoleChoice" />
+                                    </children>
+                                </HBox>
+                                <TextField fx:id="teacherUsername" promptText="Username" />
+                                <PasswordField fx:id="teacherPassword" promptText="Password" />
+                                <Label fx:id="teacherLoginMessageLabel" styleClass="error-text" />
+                                <Button text="Login" onAction="#loginTeacher" styleClass="primary-button" />
+                                <Button text="Back to Student Login" onAction="#showLogin" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="20.0" bottom="16.0" left="20.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Authentication Failed -->
+        <AnchorPane fx:id="teacherAuthFailPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <Label text="Authentication Failed" styleClass="title" />
+                        <Label text="Invalid credentials. Please try again." styleClass="subtitle" />
+                        <Button text="Back to Login" onAction="#showTeacherLogin" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Teacher Dashboard -->
+        <BorderPane fx:id="teacherDashboardPane" visible="false" managed="false">
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="12.0" BorderPane.alignment="CENTER" styleClass="header-bar">
+                    <children>
+                        <Label text="Teacher Dashboard" styleClass="header-title" />
+                        <Label fx:id="teacherWelcomeLabel" text="" styleClass="muted" />
+                    </children>
+                    <padding>
+                        <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                    </padding>
+                </HBox>
+            </top>
+            <center>
+                <VBox spacing="16.0" BorderPane.alignment="CENTER" styleClass="dashboard-body">
+                    <children>
+                        <Label text="Boxed Menu" styleClass="section-title" />
+                        <GridPane hgap="14.0" vgap="14.0">
+                            <children>
+                                <Button text="QB Management" onAction="#showQuestionBank" styleClass="menu-card" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <Button text="Create Exam" onAction="#showCreateExam" styleClass="menu-card" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Button text="Schedule Exam" onAction="#showScheduleExam" styleClass="menu-card" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <Button text="Results &amp; Analysis" onAction="#showTeacherAnalytics" styleClass="menu-card" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Button text="View Exams" onAction="#showViewExams" styleClass="menu-card" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <Button text="Logout" onAction="#showTeacherLogin" styleClass="menu-card" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            </children>
+                        </GridPane>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </center>
+        </BorderPane>
+
+        <!-- Question Bank Management -->
+        <AnchorPane fx:id="questionBankPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Question Bank" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+                            <children>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="520.0">
+                                    <children>
+                                        <Label text="Questions" styleClass="section-title" />
+                                        <ListView fx:id="questionBankList" prefHeight="260.0" />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <Button text="Add Q" onAction="#addQuestion" />
+                                                <Button text="Edit Q" onAction="#editQuestion" />
+                                                <Button text="Delete Q" onAction="#deleteQuestion" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="320.0">
+                                    <children>
+                                        <Label text="Filters" styleClass="section-title" />
+                                        <Label text="Category" />
+                                        <ChoiceBox fx:id="qbCategoryChoice" />
+                                        <Label text="Difficulty" />
+                                        <ChoiceBox fx:id="qbDifficultyChoice" />
+                                        <Label text="Store Correct Ans" />
+                                        <ChoiceBox fx:id="qbCorrectChoice" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Create Exam -->
+        <AnchorPane fx:id="createExamPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Create Exam" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <VBox spacing="12.0" styleClass="card" prefWidth="640.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                            <children>
+                                <Label text="Exam Details" styleClass="section-title" />
+                                <TextField promptText="Title" />
+                                <ChoiceBox fx:id="createCategoryChoice" />
+                                <ChoiceBox fx:id="createDifficultyChoice" />
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <VBox spacing="4.0">
+                                            <children>
+                                                <Label text="Number of Qs" />
+                                                <Spinner fx:id="createNumQuestions" />
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="4.0">
+                                            <children>
+                                                <Label text="Time (min)" />
+                                                <Spinner fx:id="createTime" />
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="4.0">
+                                            <children>
+                                                <Label text="Marks" />
+                                                <Spinner fx:id="createMarks" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <CheckBox text="Automatic pick" />
+                                <Button text="Save Exam" styleClass="primary-button" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Schedule Exam -->
+        <AnchorPane fx:id="scheduleExamPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Schedule Exam" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <VBox spacing="12.0" styleClass="card" prefWidth="620.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
+                            <children>
+                                <Label text="Schedule Details" styleClass="section-title" />
+                                <ChoiceBox fx:id="scheduleExamChoice" />
+                                <DatePicker fx:id="scheduleDate" />
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <TextField fx:id="scheduleStart" promptText="Start time" />
+                                        <TextField fx:id="scheduleEnd" promptText="End time" />
+                                    </children>
+                                </HBox>
+                                <Button text="Publish" styleClass="primary-button" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- View Exams -->
+        <AnchorPane fx:id="viewExamsPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="View Exams" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <VBox spacing="12.0" styleClass="card" prefWidth="680.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+                            <children>
+                                <Label text="Created Exams" styleClass="section-title" />
+                                <ListView fx:id="viewExamsList" prefHeight="260.0" />
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <Button text="Edit" />
+                                        <Button text="Delete" />
+                                    </children>
+                                </HBox>
+                                <Label text="Status: Upcoming / Ongoing / Completed" styleClass="muted" />
+                            </children>
+                            <padding>
+                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Teacher Results & Analytics -->
+        <AnchorPane fx:id="teacherAnalyticsPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Results &amp; Analytics" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <HBox spacing="16.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
+                            <children>
+                                <VBox spacing="6.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Average" styleClass="muted" />
+                                        <Label text="74" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="6.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Highest" styleClass="muted" />
+                                        <Label text="96" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="6.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Lowest" styleClass="muted" />
+                                        <Label text="42" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="6.0" styleClass="stat-card">
+                                    <children>
+                                        <Label text="Pass %" styleClass="muted" />
+                                        <Label text="68%" styleClass="stat-value" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
