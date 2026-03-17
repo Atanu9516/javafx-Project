@@ -101,6 +101,7 @@
                         <Button text="My Exams" onAction="#showResultPage" styleClass="nav-button" />
                         <Button text="Progress" onAction="#showProgress" styleClass="nav-button" />
                         <Button text="Discussion" onAction="#showDiscussion" styleClass="nav-button" />
+                        <Button text="Messaging" onAction="#showMessaging" styleClass="nav-button" />
                         <Separator />
                         <Button text="Logout" onAction="#logout" />
                     </children>
@@ -227,6 +228,68 @@
                                         <Label text="View" styleClass="section-title" />
                                         <ListView fx:id="discussionList" prefHeight="220.0" />
                                         <Button text="Comment" onAction="#commentDiscussion" />
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <!-- Student Messaging -->
+        <AnchorPane fx:id="messagingPane" visible="false" managed="false" StackPane.alignment="CENTER">
+            <children>
+                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
+                            <children>
+                                <Label text="Messaging" styleClass="header-title" />
+                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
+                            </children>
+                            <padding>
+                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
+                            </padding>
+                        </HBox>
+                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+                            <children>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="360.0">
+                                    <children>
+                                        <Label text="Friend Requests" styleClass="section-title" />
+                                        <TextField fx:id="friendRequestField" promptText="Username" />
+                                        <Button text="Send Request" onAction="#sendFriendRequest" styleClass="primary-button" />
+                                        <ListView fx:id="pendingRequestsList" prefHeight="180.0" />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <Button text="Accept" onAction="#acceptFriendRequest" />
+                                                <Button text="Decline" onAction="#declineFriendRequest" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                    <padding>
+                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox spacing="10.0" styleClass="card" prefWidth="520.0">
+                                    <children>
+                                        <Label text="Chat" styleClass="section-title" />
+                                        <Label text="Friends" styleClass="muted" />
+                                        <ListView fx:id="friendsList" prefHeight="120.0" />
+                                        <Label text="History" styleClass="muted" />
+                                        <ListView fx:id="chatHistoryList" prefHeight="160.0" />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <TextField fx:id="chatMessageField" promptText="Type a message" HBox.hgrow="ALWAYS" />
+                                                <Button text="Send" onAction="#sendChatMessage" styleClass="primary-button" />
+                                            </children>
+                                        </HBox>
                                     </children>
                                     <padding>
                                         <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />

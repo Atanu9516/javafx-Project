@@ -2,6 +2,7 @@ package com.example.onlinemcqexam;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
@@ -29,8 +30,15 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 public class ExamController {
     private static final int EXAM_DURATION_SECONDS = 900;
@@ -46,6 +54,8 @@ public class ExamController {
     private AnchorPane availableExamsPane;
     @FXML
     private AnchorPane discussionPane;
+    @FXML
+    private AnchorPane messagingPane;
     @FXML
     private AnchorPane progressPane;
     @FXML
@@ -143,6 +153,16 @@ public class ExamController {
     @FXML
     private TextArea discussionAskArea;
     @FXML
+    private TextField friendRequestField;
+    @FXML
+    private ListView<String> pendingRequestsList;
+    @FXML
+    private ListView<String> friendsList;
+    @FXML
+    private ListView<String> chatHistoryList;
+    @FXML
+    private TextField chatMessageField;
+    @FXML
     private ListView<String> historyList;
     @FXML
     private BarChart<String, Number> progressChart;
@@ -184,7 +204,15 @@ public class ExamController {
     private ListView<String> viewExamsList;
 
     private final ToggleGroup optionsGroup = new ToggleGroup();
-    private final UserStore userStore = new UserStore();
+    private final ExamClient examClient = new ExamClient();
+    private final UserService userService = new NetworkUserService(examClient);
+    private final DiscussionService discussionService = new NetworkDiscussionService(examClient);
+    private final MessagingService messagingService = new NetworkMessagingService(examClient);
+    private final ExecutorService networkExecutor = Executors.newSingleThreadExecutor(runnable -> {
+        Thread thread = new Thread(runnable, "exam-network-worker");
+        thread.setDaemon(true);
+        return thread;
+    });
     private List<Question> questions = new ArrayList<>();
     private int currentIndex;
     private int[] answers;
@@ -207,6 +235,7 @@ public class ExamController {
         optionD.setUserData(3);
         updateTimerLabel(EXAM_DURATION_SECONDS);
         configureSpinners();
+        configureMessaging();
         populateSampleData();
         showPane(loginPane);
     }
@@ -226,19 +255,26 @@ public class ExamController {
         }
     }
 
+    private void configureMessaging() {
+        if (friendsList != null) {
+            friendsList.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+                if (newValue == null || newValue.isBlank()) {
+                    if (chatHistoryList != null) {
+                        chatHistoryList.getItems().clear();
+                    }
+                    return;
+                }
+                loadChatHistory(newValue);
+            });
+        }
+    }
+
     private void populateSampleData() {
         if (availableExamList != null) {
             availableExamList.getItems().setAll(
                     "Java Fundamentals | Feb 15, 2026 | 10:00 AM",
                     "SQL Basics | Feb 17, 2026 | 02:30 PM",
                     "Data Structures | Feb 19, 2026 | 09:00 AM"
-            );
-        }
-        if (discussionList != null) {
-            discussionList.getItems().setAll(
-                    "Q: What is the time complexity of binary search?",
-                    "Q: Difference between interface and abstract class?",
-                    "Q: Tips for handling recursion?"
             );
         }
         if (historyList != null) {
@@ -354,6 +390,13 @@ public class ExamController {
     @FXML
     private void showDiscussion() {
         showPane(discussionPane);
+        refreshDiscussion();
+    }
+
+    @FXML
+    private void showMessaging() {
+        showPane(messagingPane);
+        refreshMessaging();
     }
 
     @FXML
@@ -445,21 +488,18 @@ public class ExamController {
             registerMessageLabel.setText(validation);
             return;
         }
-        try {
-            boolean created = userStore.register(username, password);
+        registerMessageLabel.setText("Registering...");
+        runNetwork(() -> userService.register(username, password), created -> {
             if (!created) {
                 registerMessageLabel.setText("Username already exists.");
                 return;
             }
-        } catch (IOException ex) {
-            registerMessageLabel.setText("Failed to save user file.");
-            return;
-        }
-        registerUsername.clear();
-        registerPassword.clear();
-        registerConfirm.clear();
-        registerMessageLabel.setText("Account created. Please log in.");
-        showPane(loginPane);
+            registerUsername.clear();
+            registerPassword.clear();
+            registerConfirm.clear();
+            registerMessageLabel.setText("Account created. Please log in.");
+            showPane(loginPane);
+        }, error -> registerMessageLabel.setText("Server error: " + error));
     }
 
     @FXML
@@ -472,21 +512,18 @@ public class ExamController {
             loginMessageLabel.setText("Enter username and password.");
             return;
         }
-        try {
-            boolean ok = userStore.authenticate(username, password);
+        loginMessageLabel.setText("Signing in...");
+        runNetwork(() -> userService.authenticate(username, password), ok -> {
             if (!ok) {
                 loginMessageLabel.setText("Invalid username or password.");
                 return;
             }
-        } catch (IOException ex) {
-            loginMessageLabel.setText("Unable to read user file.");
-            return;
-        }
-        activeUser = userStore.normalizeUsername(username);
-        if (studentWelcomeLabel != null) {
-            studentWelcomeLabel.setText("Welcome " + activeUser);
-        }
-        showPane(studentDashboardPane);
+            activeUser = userService.normalizeUsername(username);
+            if (studentWelcomeLabel != null) {
+                studentWelcomeLabel.setText("Welcome " + activeUser);
+            }
+            showPane(studentDashboardPane);
+        }, error -> loginMessageLabel.setText("Server error: " + error));
     }
 
     @FXML
@@ -495,6 +532,10 @@ public class ExamController {
         activeUser = null;
         selectedLevel = null;
         loginPassword.clear();
+        clearMessagingLists();
+        if (discussionList != null) {
+            discussionList.getItems().clear();
+        }
         showPane(loginPane);
     }
 
@@ -691,6 +732,7 @@ public class ExamController {
         setPaneVisible(studentDashboardPane, false);
         setPaneVisible(availableExamsPane, false);
         setPaneVisible(discussionPane, false);
+        setPaneVisible(messagingPane, false);
         setPaneVisible(progressPane, false);
         setPaneVisible(leaderboardPane, false);
         setPaneVisible(levelPane, false);
@@ -711,6 +753,87 @@ public class ExamController {
     private void setPaneVisible(Node pane, boolean visible) {
         pane.setVisible(visible);
         pane.setManaged(visible);
+    }
+
+    private boolean ensureLoggedIn() {
+        if (activeUser == null || activeUser.isBlank()) {
+            showError("Login required", "Please log in to use messaging.");
+            return false;
+        }
+        return true;
+    }
+
+    private void clearMessagingLists() {
+        if (pendingRequestsList != null) {
+            pendingRequestsList.getItems().clear();
+        }
+        if (friendsList != null) {
+            friendsList.getItems().clear();
+        }
+        if (chatHistoryList != null) {
+            chatHistoryList.getItems().clear();
+        }
+    }
+
+    private void refreshMessaging() {
+        if (!ensureLoggedIn()) {
+            clearMessagingLists();
+            return;
+        }
+        if (pendingRequestsList != null) {
+            runNetwork(() -> messagingService.fetchFriendRequests(activeUser), requests -> {
+                pendingRequestsList.getItems().setAll(requests);
+            }, error -> showError("Unable to load requests", error));
+        }
+        if (friendsList != null) {
+            runNetwork(() -> messagingService.fetchFriends(activeUser), friends -> {
+                friendsList.getItems().setAll(friends);
+            }, error -> showError("Unable to load friends", error));
+        }
+    }
+
+    private void loadChatHistory(String friend) {
+        if (!ensureLoggedIn() || chatHistoryList == null) {
+            return;
+        }
+        runNetwork(() -> messagingService.fetchChat(activeUser, friend), messages -> {
+            chatHistoryList.getItems().setAll(messages);
+        }, error -> showError("Unable to load chat", error));
+    }
+
+    private void refreshDiscussion() {
+        if (discussionList == null) {
+            return;
+        }
+        runNetwork(() -> discussionService.fetchMessages(), messages -> {
+            discussionList.getItems().setAll(messages);
+        }, error -> showError("Unable to load discussion", error));
+    }
+
+    private <T> void runNetwork(Callable<T> action, Consumer<T> onSuccess, Consumer<String> onError) {
+        networkExecutor.submit(() -> {
+            try {
+                T result = action.call();
+                Platform.runLater(() -> onSuccess.accept(result));
+            } catch (Exception ex) {
+                String message = formatNetworkError(ex);
+                Platform.runLater(() -> onError.accept(message));
+            }
+        });
+    }
+
+    private String formatNetworkError(Exception ex) {
+        if (ex instanceof ConnectException || ex instanceof UnknownHostException) {
+            return "Cannot reach server. Start ExamServer first.";
+        }
+        if (ex instanceof SocketTimeoutException) {
+            return "Server timed out. Try again.";
+        }
+        String message = ex.getMessage();
+        if (message == null || message.isBlank()) {
+            return "Server error.";
+        }
+        return message;
     }
 
     private void showError(String header, String content) {
@@ -774,8 +897,13 @@ public class ExamController {
             return;
         }
         String author = activeUser != null ? activeUser : "Student";
-        discussionList.getItems().add(0, "Q: " + text.trim() + " (" + author + ")");
-        discussionAskArea.clear();
+        runNetwork(() -> {
+            discussionService.postMessage(author, text.trim());
+            return true;
+        }, ignored -> {
+            discussionAskArea.clear();
+            refreshDiscussion();
+        }, error -> showError("Unable to post discussion", error));
     }
 
     @FXML
@@ -788,7 +916,97 @@ public class ExamController {
             return;
         }
         int index = discussionList.getSelectionModel().getSelectedIndex();
-        discussionList.getItems().set(index, selected + " [Commented]");
+        runNetwork(() -> discussionService.commentMessage(index), ok -> {
+            if (!ok) {
+                showError("Unable to comment", "Selected message was not found.");
+                return;
+            }
+            refreshDiscussion();
+        }, error -> showError("Unable to comment", error));
+    }
+
+    @FXML
+    private void sendFriendRequest() {
+        if (!ensureLoggedIn() || friendRequestField == null) {
+            return;
+        }
+        String target = friendRequestField.getText();
+        if (target == null || target.isBlank()) {
+            showError("Friend request", "Enter a username.");
+            return;
+        }
+        String from = activeUser;
+        runNetwork(() -> messagingService.sendFriendRequest(from, target.trim()), status -> {
+            switch (status) {
+                case SENT, ACCEPTED -> {
+                    friendRequestField.clear();
+                    refreshMessaging();
+                }
+                case ALREADY -> showError("Friend request", "Request already exists or you are already friends.");
+                case INVALID -> showError("Friend request", "Invalid user.");
+            }
+        }, error -> showError("Friend request failed", error));
+    }
+
+    @FXML
+    private void acceptFriendRequest() {
+        if (!ensureLoggedIn() || pendingRequestsList == null) {
+            return;
+        }
+        String from = pendingRequestsList.getSelectionModel().getSelectedItem();
+        if (from == null || from.isBlank()) {
+            showError("Friend request", "Select a request to accept.");
+            return;
+        }
+        runNetwork(() -> messagingService.acceptFriendRequest(activeUser, from), ok -> {
+            if (!ok) {
+                showError("Friend request", "Request not found.");
+                return;
+            }
+            refreshMessaging();
+        }, error -> showError("Unable to accept request", error));
+    }
+
+    @FXML
+    private void declineFriendRequest() {
+        if (!ensureLoggedIn() || pendingRequestsList == null) {
+            return;
+        }
+        String from = pendingRequestsList.getSelectionModel().getSelectedItem();
+        if (from == null || from.isBlank()) {
+            showError("Friend request", "Select a request to decline.");
+            return;
+        }
+        runNetwork(() -> messagingService.declineFriendRequest(activeUser, from), ok -> {
+            if (!ok) {
+                showError("Friend request", "Request not found.");
+                return;
+            }
+            refreshMessaging();
+        }, error -> showError("Unable to decline request", error));
+    }
+
+    @FXML
+    private void sendChatMessage() {
+        if (!ensureLoggedIn() || friendsList == null || chatMessageField == null) {
+            return;
+        }
+        String friend = friendsList.getSelectionModel().getSelectedItem();
+        if (friend == null || friend.isBlank()) {
+            showError("Chat", "Select a friend to chat with.");
+            return;
+        }
+        String text = chatMessageField.getText();
+        if (text == null || text.isBlank()) {
+            return;
+        }
+        runNetwork(() -> {
+            messagingService.sendChat(activeUser, friend, text.trim());
+            return true;
+        }, ignored -> {
+            chatMessageField.clear();
+            loadChatHistory(friend);
+        }, error -> showError("Unable to send message", error));
     }
 
     @FXML
