@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.6"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.onlinemcqexam.QuestionBankController"
+           styleClass="qb-root">
+
+    <VBox spacing="18" styleClass="qb-shell">
+        <HBox spacing="14" alignment="CENTER_LEFT">
+            <Button fx:id="backButton" text="Back" styleClass="qb-back-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-arrow-left" styleClass="qb-back-icon"/>
+                </graphic>
+            </Button>
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Question Bank Management" styleClass="qb-title"/>
+                <Label text="Manage and filter questions from your repository." styleClass="qb-subtitle"/>
+            </VBox>
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="qb-search-wrap">
+            <FontIcon iconLiteral="fas-search" styleClass="qb-search-icon"/>
+            <TextField fx:id="searchField"
+                       promptText="Search questions by ID or text"
+                       HBox.hgrow="ALWAYS"
+                       maxWidth="Infinity"
+                       styleClass="qb-search-field"/>
+            <Button fx:id="clearSearchButton" text="X" styleClass="qb-search-mini"/>
+            <Button fx:id="filterActionButton" styleClass="qb-search-mini">
+                <graphic>
+                    <FontIcon iconLiteral="fas-filter" styleClass="qb-search-icon"/>
+                </graphic>
+            </Button>
+        </HBox>
+
+        <HBox spacing="20" VBox.vgrow="ALWAYS">
+            <VBox spacing="14" styleClass="qb-main-column" HBox.hgrow="ALWAYS">
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <ToggleButton fx:id="chipAll" text="All" styleClass="qb-chip qb-chip-active"/>
+                    <ToggleButton fx:id="chipEasy" text="Easy" styleClass="qb-chip"/>
+                    <ToggleButton fx:id="chipMedium" text="Medium" styleClass="qb-chip"/>
+                    <ToggleButton fx:id="chipHard" text="Hard" styleClass="qb-chip"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="qb-list-scroll" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox fx:id="questionCardContainer" spacing="12" styleClass="qb-card-list"/>
+                    </content>
+                </ScrollPane>
+
+                <Button fx:id="addNewQuestionButton"
+                        text="Add New Question"
+                        styleClass="qb-add-button"
+                        maxWidth="Infinity"/>
+            </VBox>
+
+            <VBox spacing="14" prefWidth="318" minWidth="298" maxWidth="330">
+                <VBox spacing="12" styleClass="qb-side-card">
+                    <Label text="Filter Bank" styleClass="qb-side-title"/>
+
+                    <VBox spacing="5">
+                        <Label text="Select Term" styleClass="qb-field-label"/>
+                        <ChoiceBox fx:id="termChoice" styleClass="qb-choice" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <VBox spacing="5">
+                        <Label text="Select Course" styleClass="qb-field-label"/>
+                        <ChoiceBox fx:id="courseChoice" styleClass="qb-choice" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <VBox spacing="8" styleClass="qb-total-card">
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <FontIcon iconLiteral="fas-database" styleClass="qb-total-icon"/>
+                            <Label text="Total Questions" styleClass="qb-total-label"/>
+                        </HBox>
+                        <Label fx:id="totalQuestionsLabel" text="0" styleClass="qb-total-value"/>
+                    </VBox>
+
+                    <Label fx:id="showingStatusLabel"
+                           text="Showing 0 questions"
+                           wrapText="true"
+                           styleClass="qb-side-note"/>
+                </VBox>
+
+                <VBox spacing="10" styleClass="qb-side-card" VBox.vgrow="ALWAYS">
+                    <Label text="Repository Health" styleClass="qb-side-title"/>
+                    <Label fx:id="repoHealthPercentLabel" text="0.0%" styleClass="qb-health-value"/>
+                    <ProgressBar fx:id="repoHealthBar" progress="0.0" styleClass="qb-health-bar" maxWidth="Infinity"/>
+                    <Label text="Coverage of complete question records across your bank." wrapText="true" styleClass="qb-side-note"/>
+                </VBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</StackPane>

@@ -1,0 +1,215 @@
+/* Premium exam setup page */
+.exam-start-root {
+    -fx-background-color: linear-gradient(to bottom right, #06100d 0%, #0b1713 60%, #11221a 100%);
+}
+
+.exam-start-sidebar {
+    -fx-background-color: rgba(11, 24, 18, 0.96);
+    -fx-border-color: rgba(113, 245, 168, 0.16);
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 22 16;
+}
+
+.exam-start-logo {
+    -fx-text-fill: #f2fff7;
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+    -fx-padding: 4 0 14 0;
+}
+
+.exam-start-nav-button {
+    -fx-background-color: rgba(19, 40, 30, 0.9);
+    -fx-text-fill: #d7eee1;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 12;
+    -fx-padding: 11 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-max-width: Infinity;
+}
+
+.exam-start-nav-button:hover {
+    -fx-background-color: rgba(37, 70, 52, 0.95);
+    -fx-cursor: hand;
+}
+
+.exam-start-nav-button.exam-start-nav-active {
+    -fx-background-color: linear-gradient(to right, rgba(44, 255, 122, 0.27), rgba(23, 63, 44, 0.95));
+    -fx-border-color: rgba(113, 255, 178, 0.50);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.exam-start-quick-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #15d355);
+    -fx-text-fill: #04130a;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-background-radius: 10;
+    -fx-padding: 10 12;
+    -fx-max-width: Infinity;
+}
+
+.exam-start-main-wrap {
+    -fx-padding: 30;
+}
+
+.exam-start-watermark {
+    -fx-text-fill: rgba(145, 255, 195, 0.07);
+    -fx-font-size: 128px;
+    -fx-font-weight: 900;
+    -fx-padding: 0 0 -6 8;
+}
+
+.exam-start-layout {
+    -fx-background-color: transparent;
+}
+
+.exam-start-left-column {
+    -fx-padding: 2 6 0 0;
+}
+
+.exam-start-overline {
+    -fx-text-fill: #9fb2a9;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+}
+
+.exam-start-heading {
+    -fx-text-fill: #f3fff8;
+    -fx-font-size: 56px;
+    -fx-font-weight: 900;
+}
+
+.exam-start-course {
+    -fx-text-fill: #2cff7a;
+    -fx-font-size: 18px;
+    -fx-font-weight: 800;
+}
+
+.exam-start-description {
+    -fx-text-fill: #9cafA5;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 2px;
+    -fx-max-width: 620;
+}
+
+.exam-start-info-card {
+    -fx-background-color: #0f1e17;
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(106, 239, 160, 0.22);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-padding: 16 18;
+    -fx-effect: dropshadow(gaussian, rgba(13, 26, 19, 0.45), 16, 0.2, 0, 6);
+}
+
+.exam-start-info-icon {
+    -fx-icon-color: #7effb3;
+    -fx-icon-size: 14px;
+}
+
+.exam-start-info-title {
+    -fx-text-fill: #e8fff1;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.exam-start-info-value {
+    -fx-text-fill: #2cff7a;
+    -fx-font-size: 30px;
+    -fx-font-weight: 900;
+}
+
+.exam-start-right-card {
+    -fx-background-color: #0f1e17;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(109, 246, 166, 0.24);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(gaussian, rgba(35, 255, 120, 0.18), 18, 0.22, 0, 4);
+}
+
+.exam-start-right-title {
+    -fx-text-fill: #f0fff6;
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+}
+
+.exam-start-question-choice {
+    -fx-background-color: rgba(13, 29, 22, 0.95);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(104, 235, 157, 0.34);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-padding: 5 10;
+}
+
+.exam-start-question-choice > .label {
+    -fx-text-fill: #dff9ea;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+}
+
+.exam-start-question-choice > .open-button > .arrow {
+    -fx-background-color: #8dffc1;
+}
+
+.exam-start-note-box {
+    -fx-background-color: rgba(13, 29, 22, 0.95);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(94, 214, 144, 0.22);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-padding: 10 12;
+}
+
+.exam-start-note-title {
+    -fx-text-fill: #e9fff2;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+
+.exam-start-note-text {
+    -fx-text-fill: #98ada2;
+    -fx-font-size: 12px;
+}
+
+.exam-start-primary-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #16d457);
+    -fx-text-fill: #04130a;
+    -fx-font-size: 16px;
+    -fx-font-weight: 900;
+    -fx-background-radius: 13;
+    -fx-padding: 13 0;
+}
+
+.exam-start-primary-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #57ffa0, #1fe05f);
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.42), 18, 0.3, 0, 4);
+    -fx-cursor: hand;
+}
+
+.exam-start-footer {
+    -fx-background-color: rgba(14, 31, 23, 0.95);
+    -fx-background-radius: 10;
+    -fx-padding: 9 10;
+}
+
+.exam-start-footer-label {
+    -fx-text-fill: #9db3a7;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.exam-start-ready {
+    -fx-text-fill: #2cff7a;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.exam-start-footer-icon {
+    -fx-icon-color: #7fffb3;
+    -fx-icon-size: 12px;
+}

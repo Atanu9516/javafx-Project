@@ -1,0 +1,163 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="14.0" prefWidth="900.0" prefHeight="620.0"
+      fx:controller="com.example.onlinemcqexam.LeaderboardController"
+      xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/17.0.6"
+      styleClass="dashboard-body">
+    <children>
+        <HBox spacing="10.0" alignment="CENTER_LEFT" styleClass="header-bar">
+            <children>
+                <Label text="Leaderboard" styleClass="header-title" />
+                <Button text="Close" onAction="#closeWindow" />
+            </children>
+            <padding>
+                <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
+            </padding>
+        </HBox>
+
+        <HBox spacing="12.0" alignment="CENTER_LEFT" styleClass="card">
+            <children>
+                <Label text="Term" styleClass="muted" />
+                <ChoiceBox fx:id="termChoice" prefWidth="120.0" />
+                <Label text="Course" styleClass="muted" />
+                <ChoiceBox fx:id="courseChoice" prefWidth="160.0" />
+                <TextField fx:id="searchField" promptText="Search student..." prefWidth="180.0" />
+                <Button text="Refresh" onAction="#refreshLeaderboard" styleClass="primary-button" />
+                <Label fx:id="statusLabel" styleClass="muted" />
+            </children>
+            <padding>
+                <Insets top="12.0" right="14.0" bottom="12.0" left="14.0" />
+            </padding>
+        </HBox>
+
+        <TableView fx:id="leaderboardTable" VBox.vgrow="ALWAYS" styleClass="card">
+            <columns>
+                <TableColumn fx:id="rankColumn" text="Rank" prefWidth="60.0" />
+                <TableColumn fx:id="studentNameColumn" text="Student Name" prefWidth="250.0" />
+                <TableColumn fx:id="attemptsColumn" text="Attempts" prefWidth="140.0" />
+                <TableColumn fx:id="averagePercentageColumn" text="Avg %" prefWidth="140.0" />
+                <TableColumn fx:id="bestPercentageColumn" text="Best %" prefWidth="140.0" />
+            </columns>
+        </TableView>
+    </children>
+    <padding>
+        <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+    </padding>
+</VBox>
+-->
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.onlinemcqexam.LeaderboardController"
+            styleClass="root">
+
+    <!-- ================= SIDEBAR ================= -->
+    <left>
+        <VBox spacing="15" styleClass="sidebar" prefWidth="200">
+            <children>
+                <Label text="MCQ Portal" styleClass="logo"/>
+
+                <Button text="Dashboard" styleClass="nav-button"/>
+                <Button text="Leaderboard" styleClass="nav-active"/>
+
+                <VBox VBox.vgrow="ALWAYS"/>
+                <Button text="Start New Exam" styleClass="primary-button"/>
+                <Button text="Sign Out" styleClass="secondary-button"/>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- ================= MAIN ================= -->
+    <center>
+        <VBox spacing="20" styleClass="main-area">
+
+            <!-- HEADER -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Leaderboard" styleClass="title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Real-time performance metrics" styleClass="muted"/>
+            </HBox>
+
+            <!-- FILTER BAR -->
+            <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card">
+                <children>
+
+                    <TextField fx:id="searchField"
+                               promptText="Search student..."
+                               prefWidth="200"/>
+
+                    <ChoiceBox fx:id="termChoice" prefWidth="150"/>
+                    <ChoiceBox fx:id="courseChoice" prefWidth="180"/>
+
+                    <Button text="Refresh"
+                            styleClass="primary-button"
+                            onAction="#refreshLeaderboard"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label fx:id="statusLabel" styleClass="muted"/>
+
+                </children>
+                <padding>
+                    <Insets top="12" right="14" bottom="12" left="14"/>
+                </padding>
+            </HBox>
+
+            <!-- TABLE CARD -->
+            <VBox spacing="10" styleClass="card" VBox.vgrow="ALWAYS">
+
+                <TableView fx:id="leaderboardTable" VBox.vgrow="ALWAYS">
+
+                    <columns>
+                        <TableColumn fx:id="rankColumn" text="#" prefWidth="60"/>
+                        <TableColumn fx:id="studentNameColumn" text="Student" prefWidth="250"/>
+                        <TableColumn fx:id="attemptsColumn" text="Attempts" prefWidth="120"/>
+                        <TableColumn fx:id="averagePercentageColumn" text="Avg %" prefWidth="120"/>
+                        <TableColumn fx:id="bestPercentageColumn" text="Best %" prefWidth="120"/>
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+            <!-- STATS FOOTER (LIKE DESIGN 🔥) -->
+            <HBox spacing="15">
+
+                <VBox styleClass="stat-card">
+                    <Label text="Class Average"/>
+                    <Label fx:id="classAvgLabel" text="0" styleClass="stat-value"/>
+                </VBox>
+
+                <VBox styleClass="stat-card">
+                    <Label text="Participation"/>
+                    <Label fx:id="participationLabel" text="0%" styleClass="stat-value"/>
+                </VBox>
+
+                <VBox styleClass="stat-card">
+                    <Label text="Top Performers"/>
+                    <Label fx:id="topCountLabel" text="0" styleClass="stat-value"/>
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

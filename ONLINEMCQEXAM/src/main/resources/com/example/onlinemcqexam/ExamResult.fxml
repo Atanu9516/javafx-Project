@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.6"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.onlinemcqexam.ExamResultController"
+           styleClass="exam-result-root">
+
+    <VBox spacing="16" styleClass="exam-result-shell">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label fx:id="examTitleLabel" text="No data available" styleClass="exam-result-title"/>
+                <Label fx:id="completionDateLabel" text="No data available" styleClass="exam-result-subtitle"/>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" spacing="3" styleClass="exam-result-time-card">
+                <Label text="TOTAL TIME" styleClass="exam-result-time-title"/>
+                <Label fx:id="totalTimeLabel" text="No data available" styleClass="exam-result-time-value"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="12">
+            <VBox spacing="8" styleClass="exam-result-score-card" HBox.hgrow="ALWAYS">
+                <Label text="FINAL SCORE" styleClass="exam-result-card-title"/>
+                <Label fx:id="finalScoreLabel" text="No data available" styleClass="exam-result-score-value"/>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label fx:id="accuracyBadgeLabel" text="No data available" styleClass="exam-result-badge"/>
+                    <Label fx:id="statusMessageLabel" text="No data available" styleClass="exam-result-score-caption"/>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="12" HBox.hgrow="ALWAYS">
+                <HBox spacing="12">
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="exam-result-metric-card" HBox.hgrow="ALWAYS">
+                        <StackPane styleClass="exam-result-icon-wrap exam-result-icon-correct">
+                            <FontIcon iconLiteral="fas-check" styleClass="exam-result-metric-icon"/>
+                        </StackPane>
+                        <VBox spacing="2">
+                            <Label text="Correct" styleClass="exam-result-metric-title"/>
+                            <Label fx:id="correctCountLabel" text="No data available" styleClass="exam-result-metric-value"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="exam-result-metric-card" HBox.hgrow="ALWAYS">
+                        <StackPane styleClass="exam-result-icon-wrap exam-result-icon-wrong">
+                            <FontIcon iconLiteral="fas-times" styleClass="exam-result-metric-icon"/>
+                        </StackPane>
+                        <VBox spacing="2">
+                            <Label text="Wrong" styleClass="exam-result-metric-title"/>
+                            <Label fx:id="wrongCountLabel" text="No data available" styleClass="exam-result-metric-value"/>
+                        </VBox>
+                    </HBox>
+                </HBox>
+
+                <HBox spacing="12">
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="exam-result-metric-card" HBox.hgrow="ALWAYS">
+                        <StackPane styleClass="exam-result-icon-wrap exam-result-icon-accuracy">
+                            <FontIcon iconLiteral="fas-percentage" styleClass="exam-result-metric-icon"/>
+                        </StackPane>
+                        <VBox spacing="2">
+                            <Label text="Accuracy" styleClass="exam-result-metric-title"/>
+                            <Label fx:id="accuracyLabel" text="No data available" styleClass="exam-result-metric-value"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="exam-result-metric-card" HBox.hgrow="ALWAYS">
+                        <StackPane styleClass="exam-result-icon-wrap exam-result-icon-status">
+                            <FontIcon iconLiteral="fas-flag" styleClass="exam-result-metric-icon"/>
+                        </StackPane>
+                        <VBox spacing="2">
+                            <Label text="Status" styleClass="exam-result-metric-title"/>
+                            <Label fx:id="statusLabel" text="No data available" styleClass="exam-result-metric-value"/>
+                        </VBox>
+                    </HBox>
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <VBox spacing="10" styleClass="exam-result-breakdown-card" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Question Breakdown" styleClass="exam-result-section-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Region styleClass="exam-result-legend-dot exam-result-legend-correct"/>
+                        <Label text="CORRECT" styleClass="exam-result-legend-label"/>
+                    </HBox>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Region styleClass="exam-result-legend-dot exam-result-legend-wrong"/>
+                        <Label text="INCORRECT" styleClass="exam-result-legend-label"/>
+                    </HBox>
+                </HBox>
+            </HBox>
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="exam-result-breakdown-scroll" VBox.vgrow="ALWAYS">
+                <content>
+                    <VBox fx:id="questionBreakdownContainer" spacing="10" styleClass="exam-result-breakdown-list"/>
+                </content>
+            </ScrollPane>
+
+            <Label fx:id="emptyStateLabel" text="No data available" styleClass="exam-result-empty-state"/>
+        </VBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="Result Board" onAction="#onResultBoard" styleClass="exam-result-action-btn"/>
+            <Button text="Progress" onAction="#onProgress" styleClass="exam-result-action-btn"/>
+            <Button text="Discussion" onAction="#onDiscussion" styleClass="exam-result-action-btn"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Back to Dashboard" onAction="#onBackToDashboard" styleClass="exam-result-primary-btn"/>
+        </HBox>
+    </VBox>
+
+    <padding>
+        <Insets top="22" right="22" bottom="22" left="22"/>
+    </padding>
+</StackPane>

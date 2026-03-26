@@ -1,0 +1,199 @@
+/* Premium faculty login page */
+.teacher-login-root {
+    -fx-background-color: linear-gradient(to bottom right, #050d0a 0%, #0b1713 58%, #102019 100%);
+}
+
+.teacher-login-ambient {
+    -fx-pref-width: 620;
+    -fx-pref-height: 620;
+    -fx-background-color: radial-gradient(center 50% 38%, radius 65%, rgba(44, 255, 122, 0.24) 0%, rgba(36, 132, 82, 0.12) 40%, transparent 72%);
+}
+
+.teacher-login-page-wrap {
+    -fx-padding: 26;
+}
+
+.teacher-login-logo-wrap {
+    -fx-background-color: rgba(24, 53, 39, 0.92);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(106, 244, 163, 0.36);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-min-width: 54;
+    -fx-min-height: 54;
+}
+
+.teacher-login-logo-icon {
+    -fx-icon-color: #7cffb1;
+    -fx-icon-size: 18px;
+}
+
+.teacher-login-brand {
+    -fx-text-fill: #f2fff7;
+    -fx-font-size: 34px;
+    -fx-font-weight: 900;
+}
+
+.teacher-login-brand-sub {
+    -fx-text-fill: #2cff7a;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+    -fx-letter-spacing: 1.4px;
+}
+
+.teacher-login-card {
+    -fx-background-color: #0f1e17;
+    -fx-background-radius: 24;
+    -fx-border-color: rgba(103, 236, 156, 0.26);
+    -fx-border-width: 1;
+    -fx-border-radius: 24;
+    -fx-padding: 24 24 14 24;
+    -fx-effect: dropshadow(gaussian, rgba(37, 255, 126, 0.2), 26, 0.24, 0, 8);
+}
+
+.teacher-login-title {
+    -fx-text-fill: #effff5;
+    -fx-font-size: 30px;
+    -fx-font-weight: 900;
+}
+
+.teacher-login-field-label {
+    -fx-text-fill: #9aa7a2;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 1.2px;
+}
+
+.teacher-login-field-shell {
+    -fx-background-color: #0b1712;
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(84, 188, 130, 0.33);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-padding: 0 12;
+    -fx-min-height: 48;
+}
+
+.teacher-login-field-shell:focused-within {
+    -fx-border-color: #2cff7a;
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.30), 10, 0.2, 0, 0);
+}
+
+.teacher-login-field-icon {
+    -fx-icon-color: #82a293;
+    -fx-icon-size: 12px;
+}
+
+.teacher-login-input {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #ebfff4;
+    -fx-prompt-text-fill: #7f8f88;
+    -fx-padding: 11 0;
+}
+
+.teacher-login-role-choice {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-mark-color: #84ffb7;
+}
+
+.teacher-login-role-choice > .label {
+    -fx-text-fill: #e8fff1;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+}
+
+.teacher-login-role-choice > .open-button > .arrow {
+    -fx-background-color: #84ffb7;
+}
+
+.teacher-login-forgot {
+    -fx-text-fill: #9ab2a7;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.teacher-login-forgot:hover {
+    -fx-text-fill: #dbffee;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.teacher-login-signin {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #0ecf4b);
+    -fx-text-fill: #041209;
+    -fx-font-size: 15px;
+    -fx-font-weight: 900;
+    -fx-background-radius: 999;
+    -fx-padding: 13 0;
+}
+
+.teacher-login-signin:hover {
+    -fx-background-color: linear-gradient(to bottom, #57ffa0, #1ce05e);
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.4), 18, 0.3, 0, 4);
+    -fx-cursor: hand;
+}
+
+.teacher-login-redirect-wrap {
+    -fx-padding: 2 0 0 0;
+}
+
+.teacher-login-redirect-label {
+    -fx-text-fill: #8ea49a;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 1.1px;
+}
+
+.teacher-login-back {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(120, 231, 170, 0.5);
+    -fx-border-width: 1;
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+    -fx-text-fill: #d0e8db;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-padding: 10 14;
+}
+
+.teacher-login-back:hover {
+    -fx-border-color: #8dffc1;
+    -fx-text-fill: #f0fff7;
+    -fx-background-color: rgba(44, 255, 122, 0.12);
+    -fx-cursor: hand;
+}
+
+.teacher-login-status {
+    -fx-text-fill: #ff8d8d;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.teacher-login-card-footer {
+    -fx-padding: 10 2 0 2;
+    -fx-border-color: rgba(96, 208, 148, 0.22);
+    -fx-border-width: 1 0 0 0;
+}
+
+.teacher-login-footer-icon {
+    -fx-icon-color: #7dffb3;
+    -fx-icon-size: 12px;
+}
+
+.teacher-login-footer-text {
+    -fx-text-fill: #90a89d;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.teacher-login-page-footer {
+    -fx-padding: 4 0 0 0;
+}
+
+.teacher-login-page-footer-link,
+.teacher-login-page-footer-sep {
+    -fx-text-fill: #7f8f88;
+    -fx-font-size: 10px;
+}

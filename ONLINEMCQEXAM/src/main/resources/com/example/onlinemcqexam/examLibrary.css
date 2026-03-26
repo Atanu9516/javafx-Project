@@ -1,0 +1,248 @@
+.el-root {
+    -fx-background-color: linear-gradient(to bottom right, #050d0a 0%, #0b1713 100%);
+}
+
+.el-shell {
+    -fx-background-color: linear-gradient(to bottom right, rgba(7, 16, 12, 0.95), rgba(9, 19, 14, 0.86));
+    -fx-background-radius: 28;
+    -fx-border-color: rgba(123, 255, 190, 0.2);
+    -fx-border-radius: 28;
+    -fx-effect: dropshadow(gaussian, rgba(1, 10, 6, 0.5), 24, 0.24, 0, 8);
+    -fx-padding: 20;
+}
+
+.el-sidebar {
+    -fx-background-color: #0f1f17;
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(111, 191, 147, 0.24);
+    -fx-border-radius: 18;
+    -fx-padding: 14;
+}
+
+.el-profile-card {
+    -fx-background-color: rgba(16, 35, 25, 0.95);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(93, 181, 136, 0.18);
+    -fx-border-radius: 14;
+    -fx-padding: 12;
+}
+
+.el-avatar {
+    -fx-background-color: rgba(44, 255, 122, 0.22);
+    -fx-background-radius: 999;
+}
+
+.el-avatar-text {
+    -fx-text-fill: #dcffec;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Bold";
+}
+
+.el-profile-name {
+    -fx-text-fill: #ecfff4;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.el-profile-role,
+.el-footer {
+    -fx-text-fill: #8da295;
+    -fx-font-size: 11px;
+}
+
+.el-nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #bfd8cb;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-radius: 10;
+    -fx-padding: 9 10 9 10;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+}
+
+.el-nav-button:hover {
+    -fx-background-color: rgba(23, 48, 35, 0.9);
+}
+
+.el-nav-active {
+    -fx-background-color: rgba(44, 255, 122, 0.2);
+    -fx-text-fill: #eafff2;
+    -fx-border-color: rgba(113, 255, 178, 0.46);
+    -fx-border-radius: 10;
+}
+
+.el-main,
+.el-metric-card,
+.el-filter-card,
+.el-list-card,
+.el-exam-card {
+    -fx-background-color: #0f1f17;
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(111, 191, 147, 0.24);
+    -fx-border-radius: 18;
+}
+
+.el-main {
+    -fx-padding: 14;
+}
+
+.el-title {
+    -fx-text-fill: #f4fff8;
+    -fx-font-size: 34px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.el-session-pill {
+    -fx-background-color: rgba(17, 37, 26, 0.98);
+    -fx-background-radius: 999;
+    -fx-border-color: rgba(107, 208, 150, 0.4);
+    -fx-border-radius: 999;
+    -fx-padding: 8 14 8 14;
+    -fx-text-fill: #dff9ea;
+    -fx-font-size: 12px;
+}
+
+.el-metric-card,
+.el-filter-card,
+.el-list-card {
+    -fx-padding: 12;
+}
+
+.el-metric-title {
+    -fx-text-fill: #9fb4a8;
+    -fx-font-size: 12px;
+}
+
+.el-metric-value {
+    -fx-text-fill: #35ff81;
+    -fx-font-size: 30px;
+    -fx-font-family: "Segoe UI Bold";
+}
+
+.el-metric-sub,
+.el-list-count {
+    -fx-text-fill: #8da295;
+    -fx-font-size: 11px;
+}
+
+.el-red-pill {
+    -fx-background-color: rgba(255, 103, 103, 0.24);
+    -fx-text-fill: #ffc4c4;
+    -fx-background-radius: 999;
+    -fx-padding: 2 8 2 8;
+    -fx-font-size: 10px;
+    -fx-font-family: "Segoe UI Bold";
+}
+
+.el-search {
+    -fx-background-color: rgba(18, 37, 27, 0.95);
+    -fx-background-radius: 11;
+    -fx-border-color: rgba(88, 165, 124, 0.3);
+    -fx-border-radius: 11;
+    -fx-text-fill: #e8fff1;
+    -fx-prompt-text-fill: #7f9388;
+}
+
+.el-choice {
+    -fx-background-color: rgba(20, 43, 31, 0.96);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(92, 177, 133, 0.28);
+    -fx-border-radius: 12;
+    -fx-padding: 2;
+}
+
+.el-choice > .label {
+    -fx-text-fill: #d6f2e3;
+}
+
+.el-new-button {
+    -fx-background-color: linear-gradient(to right, #2cff7a, #1ce663);
+    -fx-text-fill: #06140d;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-background-radius: 12;
+    -fx-padding: 10 16 10 16;
+    -fx-cursor: hand;
+}
+
+.el-new-button:hover {
+    -fx-background-color: linear-gradient(to right, #49ff92, #2cff7a);
+}
+
+.el-list-title {
+    -fx-text-fill: #ecfff4;
+    -fx-font-size: 17px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.el-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.el-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.el-card-stack {
+    -fx-padding: 2;
+}
+
+.el-exam-card {
+    -fx-padding: 12;
+    -fx-effect: dropshadow(gaussian, rgba(3, 10, 6, 0.42), 10, 0.2, 0, 3);
+}
+
+.el-exam-id {
+    -fx-text-fill: #d8f2e4;
+    -fx-font-size: 12px;
+    -fx-font-family: "Consolas";
+}
+
+.el-exam-title {
+    -fx-text-fill: #effff6;
+    -fx-font-size: 15px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.el-exam-meta {
+    -fx-text-fill: #9cb1a5;
+    -fx-font-size: 12px;
+}
+
+.el-status-pill {
+    -fx-background-radius: 999;
+    -fx-padding: 4 10 4 10;
+    -fx-font-size: 10px;
+    -fx-font-family: "Segoe UI Bold";
+}
+
+.el-status-upcoming {
+    -fx-background-color: rgba(49, 247, 132, 0.22);
+    -fx-text-fill: #adffd0;
+}
+
+.el-status-complete {
+    -fx-background-color: rgba(100, 165, 255, 0.25);
+    -fx-text-fill: #c8e0ff;
+}
+
+.el-status-notscheduled {
+    -fx-background-color: rgba(255, 103, 103, 0.24);
+    -fx-text-fill: #ffc4c4;
+}
+
+.el-icon-btn {
+    -fx-background-color: rgba(21, 44, 32, 0.96);
+    -fx-text-fill: #c9e4d6;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(102, 178, 134, 0.28);
+    -fx-border-radius: 10;
+    -fx-padding: 6 10 6 10;
+    -fx-cursor: hand;
+}
+
+.el-icon-btn:hover {
+    -fx-background-color: rgba(34, 67, 50, 0.96);
+}

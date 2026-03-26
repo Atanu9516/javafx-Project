@@ -1,12 +1,12 @@
 Server (PowerShell, Terminal 1):
 $env:JAVA_HOME="C:\Program Files\Java\jdk-21.0.10"
 $env:PATH="$env:JAVA_HOME\bin;$env:PATH"
-cd C:\Users\PC\Desktop\learning\javafx-Project\ONLINEMCQEXAM
+cd E:\2405117\javafx-Project\ONLINEMCQEXAM
 .\mvnw.cmd -q -DskipTests compile
 java -cp target\classes com.example.onlinemcqexam.ExamServer
 
 Client (PowerShell, Terminal 2+):
 $env:JAVA_HOME="C:\Program Files\Java\jdk-21.0.10"
 $env:PATH="$env:JAVA_HOME\bin;$env:PATH"
-cd C:\Users\PC\Desktop\learning\javafx-Project\ONLINEMCQEXAM
+cd E:\2405117\javafx-Project\ONLINEMCQEXAM
 .\mvnw.cmd -q javafx:run

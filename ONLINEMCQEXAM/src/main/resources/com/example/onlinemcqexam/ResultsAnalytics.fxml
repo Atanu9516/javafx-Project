@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.6"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.onlinemcqexam.ResultsAnalyticsController"
+           styleClass="ra-root">
+
+    <VBox spacing="16" styleClass="ra-shell">
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="ra-topbar">
+            <Button fx:id="backButton" text="Back" styleClass="ra-back-button"/>
+            <Label text="Analytics Dashboard" styleClass="ra-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="sessionIndicatorLabel" text="Academic Session" styleClass="ra-session-pill"/>
+        </HBox>
+
+        <VBox spacing="10" styleClass="ra-filter-card">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Academic Term" styleClass="ra-filter-label"/>
+                <ChoiceBox fx:id="termFilterChoice" styleClass="ra-choice" prefWidth="260"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Course Selection" styleClass="ra-filter-label"/>
+                <ChoiceBox fx:id="courseFilterChoice" styleClass="ra-choice" prefWidth="320"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="applyFiltersButton" text="Apply Filters" styleClass="ra-apply-btn"/>
+            </HBox>
+        </VBox>
+
+        <HBox spacing="12">
+            <VBox styleClass="ra-stat-card" HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Average Score" styleClass="ra-stat-title"/>
+                <Label fx:id="avgScoreLabel" text="0.0%" styleClass="ra-stat-value"/>
+                <Label fx:id="avgScoreDeltaLabel" text="Baseline N/A" styleClass="ra-stat-delta"/>
+            </VBox>
+            <VBox styleClass="ra-stat-card" HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Highest Score" styleClass="ra-stat-title"/>
+                <Label fx:id="highestScoreLabel" text="0.0%" styleClass="ra-stat-value"/>
+                <Label fx:id="highestScoreDeltaLabel" text="Baseline N/A" styleClass="ra-stat-delta"/>
+            </VBox>
+            <VBox styleClass="ra-stat-card" HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Lowest Score" styleClass="ra-stat-title"/>
+                <Label fx:id="lowestScoreLabel" text="0.0%" styleClass="ra-stat-value"/>
+                <Label fx:id="lowestScoreDeltaLabel" text="Baseline N/A" styleClass="ra-stat-delta"/>
+            </VBox>
+            <VBox styleClass="ra-stat-card" HBox.hgrow="ALWAYS" spacing="4">
+                <Label text="Pass Percentage" styleClass="ra-stat-title"/>
+                <Label fx:id="passRateLabel" text="0.0%" styleClass="ra-stat-value"/>
+                <Label fx:id="passRateDeltaLabel" text="Baseline N/A" styleClass="ra-stat-delta"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="12" VBox.vgrow="ALWAYS">
+            <VBox spacing="8" styleClass="ra-chart-card" HBox.hgrow="ALWAYS">
+                <Label text="Score Distribution" styleClass="ra-section-title"/>
+                <BarChart fx:id="scoreDistributionChart" categoryGap="18" barGap="5" legendVisible="false" animated="false" VBox.vgrow="ALWAYS" styleClass="ra-bar-chart">
+                    <xAxis>
+                        <CategoryAxis/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis autoRanging="true"/>
+                    </yAxis>
+                </BarChart>
+            </VBox>
+
+            <VBox spacing="10" styleClass="ra-insights-card" prefWidth="320" minWidth="300" maxWidth="340">
+                <Label text="Insights" styleClass="ra-section-title"/>
+                <Label fx:id="insightOneLabel" text="" wrapText="true" styleClass="ra-insight-text"/>
+                <Label fx:id="insightTwoLabel" text="" wrapText="true" styleClass="ra-insight-text"/>
+                <Label fx:id="insightThreeLabel" text="" wrapText="true" styleClass="ra-insight-text"/>
+            </VBox>
+        </HBox>
+
+        <VBox spacing="10" styleClass="ra-table-card" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Individual Student Performance" styleClass="ra-section-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="studentSearchField" promptText="Search students..." styleClass="ra-search" prefWidth="260"/>
+            </HBox>
+
+            <TableView fx:id="studentTable" VBox.vgrow="ALWAYS" styleClass="ra-table">
+                <columns>
+                    <TableColumn fx:id="studentNameColumn" text="Student Name" prefWidth="170"/>
+                    <TableColumn fx:id="studentIdColumn" text="Student ID" prefWidth="120"/>
+                    <TableColumn fx:id="examDateColumn" text="Exam Date" prefWidth="155"/>
+                    <TableColumn fx:id="gradeBandColumn" text="Grade Band" prefWidth="110"/>
+                    <TableColumn fx:id="percentageColumn" text="Percentage" prefWidth="110"/>
+                    <TableColumn fx:id="performanceStatusColumn" text="Performance Status" prefWidth="145"/>
+                    <TableColumn fx:id="scoreColumn" text="Score" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+
+    <padding>
+        <Insets top="24" right="24" bottom="24" left="24"/>
+    </padding>
+</StackPane>

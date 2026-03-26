@@ -2,14 +2,50 @@ package com.example.onlinemcqexam;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public final class QuestionBank {
+    private static final Map<String, Set<String>> ALLOWED_COURSES_BY_TERM = Map.of(
+            "1-1", Set.of("CSE101", "CSE103"),
+            "1-2", Set.of("CSE105", "CSE107"),
+            "2-1", Set.of("CSE205", "CSE207", "CSE215"),
+            "2-2", Set.of("CSE200", "CSE209", "CSE211", "CSE213", "CSE219"),
+            "3-1", Set.of("CSE301", "CSE309", "CSE313", "CSE315", "CSE317"),
+            "3-2", Set.of("CSE311", "CSE321", "CSE325", "CSE329")
+    );
+
+    public static final class CourseInfo {
+        private final String courseCode;
+        private final String courseName;
+
+        public CourseInfo(String courseCode, String courseName) {
+            this.courseCode = courseCode;
+            this.courseName = courseName;
+        }
+
+        public String getCourseCode() {
+            return courseCode;
+        }
+
+        public String getCourseName() {
+            return courseName;
+        }
+
+        public String getDisplayLabel() {
+            return courseCode + " - " + courseName;
+        }
+    }
+
     private QuestionBank() {
     }
 
@@ -24,43 +60,250 @@ public final class QuestionBank {
         return Collections.unmodifiableList(filtered);
     }
 
+    public static List<String> loadTerms() throws IOException {
+        List<Question> allQuestions = loadFromCsv("questions.csv");
+        List<String> terms = new ArrayList<>();
+        for (Question question : allQuestions) {
+            String term = question.getTerm();
+            if (!isAllowedCourse(term, question.getCourseCode())) {
+                continue;
+            }
+            if (term == null || term.isBlank() || terms.contains(term)) {
+                continue;
+            }
+            terms.add(term);
+        }
+        terms.sort(Comparator.comparingInt(QuestionBank::termSortKey));
+        return Collections.unmodifiableList(terms);
+    }
+
+    public static List<CourseInfo> loadCoursesForTerm(String term) throws IOException {
+        if (term == null || term.isBlank()) {
+            return List.of();
+        }
+        List<Question> allQuestions = loadFromCsv("questions.csv");
+        Map<String, String> byCode = new LinkedHashMap<>();
+        for (Question question : allQuestions) {
+            if (!term.equals(question.getTerm())) {
+                continue;
+            }
+            String code = question.getCourseCode();
+            if (!isAllowedCourse(term, code)) {
+                continue;
+            }
+            String name = question.getCourseName();
+            if (code == null || code.isBlank() || byCode.containsKey(code)) {
+                continue;
+            }
+            byCode.put(code, name == null ? "" : name);
+        }
+        List<CourseInfo> courses = new ArrayList<>();
+        for (Map.Entry<String, String> entry : byCode.entrySet()) {
+            courses.add(new CourseInfo(entry.getKey(), entry.getValue()));
+        }
+        return Collections.unmodifiableList(courses);
+    }
+
+    public static List<Question> loadQuestions(String term, String courseCode) throws IOException {
+        if (term == null || term.isBlank() || courseCode == null || courseCode.isBlank()) {
+            return List.of();
+        }
+        if (!isAllowedCourse(term, courseCode)) {
+            return List.of();
+        }
+        List<Question> allQuestions = loadFromCsv("questions.csv");
+        List<Question> filtered = new ArrayList<>();
+        for (Question question : allQuestions) {
+            if (term.equals(question.getTerm())
+                    && normalizeCourseCode(courseCode).equals(normalizeCourseCode(question.getCourseCode()))
+                    && isAllowedCourse(question.getTerm(), question.getCourseCode())) {
+                filtered.add(question);
+            }
+        }
+        return Collections.unmodifiableList(filtered);
+    }
+
+    public static List<String> loadExamIdsForCourse(String term, String courseCode) throws IOException {
+        if (term == null || term.isBlank() || courseCode == null || courseCode.isBlank()) {
+            return List.of();
+        }
+        List<Question> allQuestions = loadFromCsv("questions.csv");
+        List<String> examIds = new ArrayList<>();
+        for (Question question : allQuestions) {
+            if (!term.equals(question.getTerm()) || !courseCode.equals(question.getCourseCode())) {
+                continue;
+            }
+            String examId = question.getExamId();
+            if (examId == null || examId.isBlank() || examIds.contains(examId)) {
+                continue;
+            }
+            examIds.add(examId);
+        }
+        return Collections.unmodifiableList(examIds);
+    }
+
+    public static List<Question> loadQuestions(String term, String courseCode, String examId) throws IOException {
+        if (term == null || term.isBlank() || courseCode == null || courseCode.isBlank() || examId == null || examId.isBlank()) {
+            return List.of();
+        }
+        List<Question> allQuestions = loadFromCsv("questions.csv");
+        List<Question> filtered = new ArrayList<>();
+        for (Question question : allQuestions) {
+            if (term.equals(question.getTerm())
+                    && courseCode.equals(question.getCourseCode())
+                    && examId.equals(question.getExamId())) {
+                filtered.add(question);
+            }
+        }
+        return Collections.unmodifiableList(filtered);
+    }
+
     private static List<Question> loadFromCsv(String resourceName) throws IOException {
-        InputStream stream = QuestionBank.class.getResourceAsStream(resourceName);
-        if (stream == null) {
-            throw new IOException("Missing resource: " + resourceName);
+        Path sourcePath = resolveCsvPath(resourceName);
+        if (sourcePath == null) {
+            throw new IOException("CSV file not found in source resources. Checked: "
+                    + Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", resourceName).toAbsolutePath()
+                    + " and "
+                    + Paths.get("src", "main", "resources", resourceName).toAbsolutePath());
         }
 
         List<Question> questions = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = Files.newBufferedReader(sourcePath, StandardCharsets.UTF_8)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.isBlank() || line.startsWith("#")) {
                     continue;
                 }
                 List<String> values = parseCsvLine(line);
-                if (values.size() < 8) {
+                try {
+                    // New strict format: term,courseCode,courseName,examId,questionId,question,optionA,optionB,optionC,optionD,correctIndex
+                    if (values.size() >= 11) {
+                        String term = values.get(0).trim();
+                        String courseCode = values.get(1).trim();
+                        String courseName = values.get(2).trim();
+                        String examId = values.get(3).trim();
+                        if (examId.isBlank()) {
+                            continue;
+                        }
+                        String id = values.get(4).trim();
+                        String text = values.get(5).trim();
+                        List<String> options = List.of(
+                                values.get(6).trim(),
+                                values.get(7).trim(),
+                                values.get(8).trim(),
+                                values.get(9).trim()
+                        );
+                        int correctIndex = Integer.parseInt(values.get(10).trim()) - 1;
+                        if (correctIndex < 0 || correctIndex > 3) {
+                            continue;
+                        }
+                        questions.add(new Question(term, courseCode, courseName, examId, id, mapLevelFromTerm(term), text, options, correctIndex));
+                        continue;
+                    }
+
+                    // Transitional format without examId.
+                    if (values.size() >= 10) {
+                        String term = values.get(0).trim();
+                        String courseCode = values.get(1).trim();
+                        String courseName = values.get(2).trim();
+                        String id = values.get(3).trim();
+                        String text = values.get(4).trim();
+                        List<String> options = List.of(
+                                values.get(5).trim(),
+                                values.get(6).trim(),
+                                values.get(7).trim(),
+                                values.get(8).trim()
+                        );
+                        int correctIndex = Integer.parseInt(values.get(9).trim()) - 1;
+                        if (correctIndex < 0 || correctIndex > 3) {
+                            continue;
+                        }
+                        questions.add(new Question(term, courseCode, courseName, "DEFAULT", id, mapLevelFromTerm(term), text, options, correctIndex));
+                        continue;
+                    }
+
+                    if (values.size() < 8) {
+                        continue;
+                    }
+                    Level level = Level.fromCsv(values.get(0));
+                    if (level == null) {
+                        continue;
+                    }
+                    String id = values.get(1).trim();
+                    String text = values.get(2).trim();
+                    List<String> options = List.of(
+                            values.get(3).trim(),
+                            values.get(4).trim(),
+                            values.get(5).trim(),
+                            values.get(6).trim()
+                    );
+                    int correctIndex = Integer.parseInt(values.get(7).trim()) - 1;
+                    if (correctIndex < 0 || correctIndex > 3) {
+                        continue;
+                    }
+                    questions.add(new Question(id, level, text, options, correctIndex));
+                } catch (RuntimeException ex) {
+                    // Skip malformed rows and continue loading valid questions.
                     continue;
                 }
-                Level level = Level.fromCsv(values.get(0));
-                if (level == null) {
-                    continue;
-                }
-                String id = values.get(1).trim();
-                String text = values.get(2).trim();
-                List<String> options = List.of(
-                        values.get(3).trim(),
-                        values.get(4).trim(),
-                        values.get(5).trim(),
-                        values.get(6).trim()
-                );
-                int correctIndex = Integer.parseInt(values.get(7).trim()) - 1;
-                if (correctIndex < 0 || correctIndex > 3) {
-                    continue;
-                }
-                questions.add(new Question(id, level, text, options, correctIndex));
             }
         }
         return Collections.unmodifiableList(questions);
+    }
+
+    private static Path resolveCsvPath(String resourceName) {
+        Path packagePath = Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", resourceName);
+        if (Files.exists(packagePath)) {
+            return packagePath;
+        }
+        Path topLevelResourcesPath = Paths.get("src", "main", "resources", resourceName);
+        if (Files.exists(topLevelResourcesPath)) {
+            return topLevelResourcesPath;
+        }
+        return null;
+    }
+
+    private static Level mapLevelFromTerm(String term) {
+        if (term == null) {
+            return Level.BEGINNER;
+        }
+        return switch (term.trim()) {
+            case "2-1", "2-2" -> Level.INTERMEDIATE;
+            case "3-1", "3-2" -> Level.ADVANCED;
+            default -> Level.BEGINNER;
+        };
+    }
+
+    private static int termSortKey(String term) {
+        if (term == null || term.isBlank()) {
+            return Integer.MAX_VALUE;
+        }
+        String[] parts = term.split("-");
+        if (parts.length != 2) {
+            return Integer.MAX_VALUE;
+        }
+        try {
+            int level = Integer.parseInt(parts[0].trim());
+            int section = Integer.parseInt(parts[1].trim());
+            return level * 10 + section;
+        } catch (NumberFormatException ex) {
+            return Integer.MAX_VALUE;
+        }
+    }
+
+    private static boolean isAllowedCourse(String term, String courseCode) {
+        if (term == null || courseCode == null) {
+            return false;
+        }
+        Set<String> allowed = ALLOWED_COURSES_BY_TERM.get(term.trim());
+        if (allowed == null) {
+            return false;
+        }
+        return allowed.contains(normalizeCourseCode(courseCode));
+    }
+
+    private static String normalizeCourseCode(String courseCode) {
+        return courseCode == null ? "" : courseCode.replace(" ", "").trim().toUpperCase();
     }
 
     private static List<String> parseCsvLine(String line) {

@@ -1,0 +1,195 @@
+/* Modern neon-green login theme */
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.login-root {
+    -fx-background-color: radial-gradient(center 50% 35%, radius 90%, #163224 0%, #102519 45%, #0b1a12 100%);
+    -fx-padding: 36;
+}
+
+.login-layout {
+    -fx-padding: 12;
+}
+
+.card {
+    -fx-background-color: rgba(9, 24, 14, 0.92);
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-border-color: rgba(80, 255, 146, 0.26);
+    -fx-padding: 28 28 24 28;
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.26), 44, 0.25, 0, 14);
+}
+
+.title {
+    -fx-font-size: 56px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #32FF71;
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.62), 22, 0.3, 0, 0);
+}
+
+.login-app-title {
+    -fx-font-size: 68px;
+    -fx-padding: 0 0 8 0;
+}
+
+.section-title {
+    -fx-font-size: 30px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #D6FFE3;
+}
+
+.login-subtitle {
+    -fx-font-size: 28px;
+}
+
+.field-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #9BA5B3;
+    -fx-letter-spacing: 1.1px;
+}
+
+.muted {
+    -fx-font-size: 12px;
+    -fx-text-fill: #9BA5B3;
+}
+
+.forgot {
+    -fx-padding: 0 0 2 0;
+}
+
+.forgot:hover {
+    -fx-text-fill: #32FF71;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.text-field,
+.password-field {
+    -fx-background-color: #0F1F0F;
+    -fx-text-fill: #E8FFF1;
+    -fx-prompt-text-fill: #6C776C;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-border-color: #1F5F3E;
+    -fx-padding: 11 12;
+}
+
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #32FF71;
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.34), 12, 0.2, 0, 0);
+}
+
+.primary-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #0ecf4b);
+    -fx-text-fill: #07120a;
+    -fx-font-size: 15px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 10;
+    -fx-padding: 12 0;
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4dff95, #14e65a);
+    -fx-cursor: hand;
+}
+
+.secondary-button {
+    -fx-background-color: rgba(14, 31, 20, 0.7);
+    -fx-text-fill: #C8E9D4;
+    -fx-border-color: rgba(97, 255, 156, 0.45);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-padding: 11 0;
+}
+
+.secondary-button:hover {
+    -fx-background-color: rgba(44, 255, 122, 0.12);
+    -fx-border-color: #32FF71;
+    -fx-cursor: hand;
+}
+
+.link-highlight {
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #32FF71;
+}
+
+.link-highlight:hover {
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.error-text {
+    -fx-text-fill: #ff7979;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-wrap-text: true;
+    -fx-alignment: center;
+}
+
+/* Global ChoiceBox theme for all pages */
+.choice-box {
+    -fx-background-color: rgba(22, 39, 30, 0.92);
+    -fx-background-radius: 999;
+    -fx-border-color: rgba(90, 246, 152, 0.26);
+    -fx-border-width: 1;
+    -fx-border-radius: 999;
+    -fx-mark-color: #7dffaf;
+    -fx-padding: 4 10;
+}
+
+.choice-box:hover {
+    -fx-background-color: rgba(33, 60, 45, 0.95);
+    -fx-border-color: rgba(110, 255, 171, 0.45);
+}
+
+.choice-box:focused {
+    -fx-border-color: rgba(131, 255, 185, 0.65);
+    -fx-effect: dropshadow(gaussian, rgba(52, 255, 106, 0.20), 10, 0.2, 0, 0);
+}
+
+.choice-box > .label {
+    -fx-text-fill: #dbf5e6;
+    -fx-font-size: 12px;
+}
+
+.choice-box > .open-button > .arrow {
+    -fx-background-color: #84ffb7;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #11231a;
+    -fx-border-color: rgba(96, 247, 160, 0.25);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 4;
+}
+
+.choice-box .menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 6 10;
+}
+
+.choice-box .menu-item .label {
+    -fx-text-fill: #d8f2e2;
+    -fx-font-size: 12px;
+}
+
+.choice-box .menu-item:focused,
+.choice-box .menu-item:hover {
+    -fx-background-color: rgba(52, 255, 106, 0.22);
+    -fx-background-radius: 8;
+}
+
+.choice-box .menu-item:focused .label,
+.choice-box .menu-item:hover .label {
+    -fx-text-fill: #effff4;
+}

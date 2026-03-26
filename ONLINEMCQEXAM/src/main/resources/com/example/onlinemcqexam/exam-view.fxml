@@ -5,7 +5,6 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -15,14 +14,23 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <StackPane fx:controller="com.example.onlinemcqexam.ExamController"
            prefHeight="700.0" prefWidth="1040.0"
@@ -30,875 +38,1582 @@
            xmlns="http://javafx.com/javafx/17.0.6">
     <children>
         <!-- Student Login -->
-        <AnchorPane fx:id="loginPane" StackPane.alignment="CENTER">
-            <children>
-                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <Label text="Online MCQ Exam" styleClass="title" />
-                        <Label text="Log in to continue." styleClass="subtitle" />
-                        <VBox spacing="10.0" styleClass="card">
-                            <children>
-                                <TextField fx:id="loginUsername" promptText="Username" />
-                                <PasswordField fx:id="loginPassword" promptText="Password" />
-                                <Label fx:id="loginMessageLabel" styleClass="error-text" />
-                                <Button text="Log In" onAction="#loginUser" styleClass="primary-button" />
-                                <Button text="Create Account" onAction="#showRegister" />
-                                <Button text="Teacher Login" onAction="#showTeacherLogin" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="20.0" bottom="16.0" left="20.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                </VBox>
-            </children>
-        </AnchorPane>
+      
+        <!-- =========================================================
+     STUDENT LOGIN PAGE
+============================================================ -->
+<StackPane fx:id="loginPane"
+        visible="true" managed="true"
+        styleClass="root login-root"
+           xmlns:fx="http://javafx.com/fxml">
+
+    <VBox alignment="CENTER" spacing="18" styleClass="login-layout">
+
+        <!-- APP TITLE -->
+        <VBox alignment="CENTER" spacing="6">
+            <Label text="Exam Portal" styleClass="title login-app-title"/>
+        </VBox>
+
+        <!-- LOGIN CARD -->
+          <VBox spacing="14" alignment="CENTER"
+              styleClass="card"
+              prefWidth="380"
+              maxWidth="380">
+
+            <Label text="Online MCQ Exam" styleClass="section-title login-subtitle"/>
+            <Label text="Log in to continue" styleClass="muted"/>
+
+            <!-- USERNAME -->
+            <VBox spacing="6" maxWidth="Infinity" alignment="CENTER_LEFT">
+                <Label text="USERNAME" styleClass="field-label"/>
+                <TextField fx:id="loginUsername"
+                           maxWidth="Infinity"
+                           promptText="Enter your student ID"/>
+            </VBox>
+
+            <!-- PASSWORD -->
+            <VBox spacing="6" maxWidth="Infinity" alignment="CENTER_LEFT">
+                <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
+                    <Label text="PASSWORD" styleClass="field-label"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Forgot?" styleClass="muted forgot"/>
+                </HBox>
+
+                <PasswordField fx:id="loginPassword" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- LOGIN BUTTON -->
+            <Button text="Log In"
+                    styleClass="primary-button"
+                    maxWidth="Infinity"
+                    onAction="#loginUser"/>
+
+                <!-- REGISTER -->
+                <HBox alignment="CENTER" spacing="6">
+                <Label text="New here?" styleClass="muted"/>
+                <Label text="Create Account" styleClass="link-highlight" onMouseClicked="#showRegister"/>
+                </HBox>
+
+            <!-- TEACHER LOGIN -->
+            <Button text="Teacher Login"
+                    styleClass="secondary-button teacher-login-button"
+                    maxWidth="Infinity"
+                    onAction="#showTeacherLogin"/>
+
+            <!-- STATUS -->
+            <Label fx:id="loginMessageLabel" styleClass="error-text"/>
+
+        </VBox>
+
+    </VBox>
+
+</StackPane>
 
         <!-- Student Register -->
-        <AnchorPane fx:id="registerPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <Label text="Create Account" styleClass="title" />
-                        <Label text="Register to take a live exam." styleClass="subtitle" />
-                        <VBox spacing="10.0" styleClass="card">
-                            <children>
-                                <TextField fx:id="registerUsername" promptText="Username" />
-                                <PasswordField fx:id="registerPassword" promptText="Password" />
-                                <PasswordField fx:id="registerConfirm" promptText="Confirm password" />
-                                <Label fx:id="registerMessageLabel" styleClass="error-text" />
-                                <Button text="Register" onAction="#registerUser" styleClass="primary-button" />
-                                <Button text="Back to Login" onAction="#showLogin" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="20.0" bottom="16.0" left="20.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                </VBox>
-            </children>
-        </AnchorPane>
+       <!-- =========================================================
+     REGISTER PAGE
+============================================================ -->
+<StackPane fx:id="registerPane"
+           visible="false" managed="false"
+           styleClass="root register-root"
+           xmlns:fx="http://javafx.com/fxml">
 
-        <!-- Student Dashboard -->
-        <BorderPane fx:id="studentDashboardPane" visible="false" managed="false">
-            <top>
-                <HBox alignment="CENTER_LEFT" spacing="12.0" BorderPane.alignment="CENTER" styleClass="header-bar">
-                    <children>
-                        <Label text="Student Dashboard" styleClass="header-title" />
-                        <Label fx:id="studentWelcomeLabel" text="" styleClass="muted" />
-                    </children>
-                    <padding>
-                        <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                    </padding>
+    <children>
+        <Region styleClass="register-ambient-glow"/>
+
+        <HBox alignment="CENTER" spacing="44" styleClass="register-layout">
+            <VBox prefWidth="360" maxWidth="420" spacing="20" styleClass="register-info-panel">
+                <VBox spacing="8" styleClass="register-info-block">
+                    <FontIcon iconLiteral="fas-shield-alt" styleClass="register-info-icon"/>
+                    <Label text="Secure Assessment" styleClass="register-info-title"/>
+                    <Label text="Encrypted student sessions and protected exam submissions keep every attempt reliable and safe."
+                           styleClass="register-info-text" wrapText="true"/>
+                </VBox>
+
+                <VBox spacing="8" styleClass="register-info-block">
+                    <FontIcon iconLiteral="fas-chart-line" styleClass="register-info-icon"/>
+                    <Label text="Real-time Analytics" styleClass="register-info-title"/>
+                    <Label text="Track exam progress, completion insights, and leaderboard movement the moment students finish."
+                           styleClass="register-info-text" wrapText="true"/>
+                </VBox>
+            </VBox>
+
+            <VBox prefWidth="430" maxWidth="430" spacing="16" styleClass="register-card">
+                <StackPane prefWidth="54" prefHeight="54" styleClass="register-badge">
+                    <FontIcon iconLiteral="fas-user-shield" styleClass="register-badge-icon"/>
+                </StackPane>
+
+                <VBox spacing="4" alignment="CENTER_LEFT">
+                    <Label text="Create Account" styleClass="register-title"/>
+                    <Label text="Register to take exams" styleClass="register-subtitle"/>
+                </VBox>
+
+                <HBox fx:id="registerErrorBanner" spacing="8" alignment="CENTER_LEFT" styleClass="register-error-banner" visible="false" managed="false">
+                    <FontIcon iconLiteral="fas-exclamation-triangle" styleClass="register-error-icon"/>
+                    <Label fx:id="registerMessageLabel" styleClass="register-error-text" wrapText="true"/>
                 </HBox>
-            </top>
-            <left>
-                <VBox spacing="10.0" BorderPane.alignment="CENTER" styleClass="side-nav">
-                    <children>
-                        <Button text="Available Exams" onAction="#showAvailableExams" styleClass="nav-button" />
-                        <Button text="My Exams" onAction="#showResultPage" styleClass="nav-button" />
-                        <Button text="Progress" onAction="#showProgress" styleClass="nav-button" />
-                        <Button text="Discussion" onAction="#showDiscussion" styleClass="nav-button" />
-                        <Button text="Messaging" onAction="#showMessaging" styleClass="nav-button" />
-                        <Separator />
-                        <Button text="Logout" onAction="#logout" />
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="16.0" bottom="20.0" left="16.0" />
-                    </padding>
-                </VBox>
-            </left>
-            <center>
-                <VBox spacing="16.0" BorderPane.alignment="CENTER" styleClass="dashboard-body">
-                    <children>
-                        <Label text="Quick Overview" styleClass="section-title" />
-                        <HBox spacing="16.0">
-                            <children>
-                                <VBox spacing="6.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Upcoming" styleClass="muted" />
-                                        <Label text="3 Exams" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="6.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Completed" styleClass="muted" />
-                                        <Label text="8 Attempts" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="6.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Current Rank" styleClass="muted" />
-                                        <Label text="#5" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
+
+                <VBox spacing="12" alignment="CENTER_LEFT">
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="USERNAME / STUDENT ID" styleClass="register-field-label"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
+                            <FontIcon iconLiteral="fas-user" styleClass="register-field-icon"/>
+                            <TextField fx:id="registerUsername"
+                                       HBox.hgrow="ALWAYS"
+                                       maxWidth="Infinity"
+                                       promptText="Enter student ID"/>
                         </HBox>
-                        <VBox spacing="10.0" styleClass="card">
-                            <children>
-                                <Label text="Next Scheduled Exam" styleClass="subtitle" />
-                                <Label text="Java Fundamentals - Feb 15, 2026 | 10:00 AM" />
-                                <Button text="Go to Available Exams" onAction="#showAvailableExams" styleClass="primary-button" />
-                            </children>
-                            <padding>
-                                <Insets top="14.0" right="18.0" bottom="14.0" left="18.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
+                    </VBox>
+
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="FULL NAME" styleClass="register-field-label"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
+                            <FontIcon iconLiteral="fas-id-card" styleClass="register-field-icon"/>
+                            <TextField fx:id="registerFullName"
+                                       HBox.hgrow="ALWAYS"
+                                       maxWidth="Infinity"
+                                       promptText="Enter full name"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="PASSWORD" styleClass="register-field-label"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
+                            <FontIcon iconLiteral="fas-lock" styleClass="register-field-icon"/>
+                            <PasswordField fx:id="registerPassword"
+                                           HBox.hgrow="ALWAYS"
+                                           maxWidth="Infinity"
+                                           promptText="Create password"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="CONFIRM PASSWORD" styleClass="register-field-label"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
+                            <FontIcon iconLiteral="fas-check-circle" styleClass="register-field-icon"/>
+                            <PasswordField fx:id="registerConfirm"
+                                           HBox.hgrow="ALWAYS"
+                                           maxWidth="Infinity"
+                                           promptText="Re-enter password"/>
+                        </HBox>
+                    </VBox>
                 </VBox>
-            </center>
-        </BorderPane>
+
+                <Button text="Register"
+                        styleClass="register-primary-button"
+                        maxWidth="Infinity"
+                        onAction="#registerUser"/>
+
+                <Button text="Back to Login"
+                        styleClass="register-back-link"
+                        maxWidth="Infinity"
+                        onAction="#showLogin"/>
+            </VBox>
+        </HBox>
+    </children>
+
+</StackPane>
+        
+        <!-- =========================================================
+     STUDENT DASHBOARD PAGE — STITCH STYLE (FINAL)
+============================================================ -->
+<BorderPane fx:id="studentDashboardPane"
+            visible="false" managed="false"
+            styleClass="dashboard-root">
+
+    <left>
+        <VBox prefWidth="250" spacing="12" styleClass="dash-sidebar">
+            <HBox spacing="12" alignment="CENTER_LEFT" styleClass="dash-profile-block">
+                <StackPane styleClass="dash-avatar-circle">
+                    <Label text="AS" styleClass="dash-avatar-initials"/>
+                </StackPane>
+                <VBox spacing="2">
+                    <Label text="Alex Student" styleClass="dash-profile-name"/>
+                    <Label text="Semester Candidate" styleClass="dash-profile-subtitle"/>
+                </VBox>
+            </HBox>
+
+            <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="dash-nav-button dash-nav-active">
+                <graphic>
+                    <FontIcon iconLiteral="fas-th-large" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+            <Button text="Available Exams" onAction="#showAvailableExams" styleClass="dash-nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="far-question-circle" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+            <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="dash-nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="far-calendar-alt" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+            <Button text="My Exams" onAction="#showExamHistory" styleClass="dash-nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="far-edit" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+            <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="dash-nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-signal" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+            <Button text="Discussion" onAction="#showDiscussion" styleClass="dash-nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="far-comment-alt" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+            <Button text="Messaging" onAction="#showMessaging" styleClass="dash-nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-comment-dots" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Settings" onAction="#showSettings" styleClass="dash-nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-cog" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+            <Button text="Logout" onAction="#handleLogout" styleClass="dash-nav-button dash-nav-danger">
+                <graphic>
+                    <FontIcon iconLiteral="fas-sign-out-alt" styleClass="dash-nav-icon"/>
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22" styleClass="dash-main-area">
+            <HBox alignment="CENTER_LEFT" styleClass="dash-header-row">
+                <Label text="Dashboard Overview" styleClass="dash-page-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Label text="Alerts" styleClass="dash-header-pill"/>
+                    <Label text="Profile" styleClass="dash-header-pill"/>
+                </HBox>
+            </HBox>
+
+            <HBox spacing="16" styleClass="dash-stat-row">
+                <StackPane HBox.hgrow="ALWAYS" styleClass="dash-stat-card">
+                    <Region styleClass="dash-stat-shine" StackPane.alignment="TOP_RIGHT"/>
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="Upcoming Exams" styleClass="dash-stat-title"/>
+                        <Label fx:id="dashboardUpcomingCountLabel" text="No data available" styleClass="dash-stat-value"/>
+                    </VBox>
+                </StackPane>
+
+                <StackPane HBox.hgrow="ALWAYS" styleClass="dash-stat-card">
+                    <Region styleClass="dash-stat-shine" StackPane.alignment="TOP_RIGHT"/>
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="Completed Exams" styleClass="dash-stat-title"/>
+                        <Label fx:id="dashboardCompletedCountLabel" text="No data available" styleClass="dash-stat-value"/>
+                    </VBox>
+                </StackPane>
+
+                <StackPane HBox.hgrow="ALWAYS" styleClass="dash-stat-card">
+                    <Region styleClass="dash-stat-shine" StackPane.alignment="TOP_RIGHT"/>
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="Current Rank" styleClass="dash-stat-title"/>
+                        <Label fx:id="dashboardRankLabel" text="No data available" styleClass="dash-stat-value"/>
+                    </VBox>
+                </StackPane>
+            </HBox>
+
+            <HBox spacing="18" VBox.vgrow="ALWAYS">
+                <VBox spacing="18" HBox.hgrow="ALWAYS">
+                    <VBox spacing="16" styleClass="dash-next-exam-card" VBox.vgrow="ALWAYS">
+                        <Label text="Next Scheduled Exam" styleClass="dash-card-label"/>
+                        <Label fx:id="dashboardNextExamTitleLabel" text="No data available" styleClass="dash-next-exam-title" wrapText="true"/>
+                        <Label fx:id="dashboardNextExamStatusLabel" text="No data available" styleClass="dash-status-badge"/>
+
+                        <HBox spacing="12">
+                            <VBox spacing="4" styleClass="dash-meta-box" HBox.hgrow="ALWAYS">
+                                <Label text="DATE" styleClass="dash-meta-label"/>
+                                <Label fx:id="dashboardNextExamDateValueLabel" text="No data available" styleClass="dash-meta-value"/>
+                            </VBox>
+                            <VBox spacing="4" styleClass="dash-meta-box" HBox.hgrow="ALWAYS">
+                                <Label text="TIME" styleClass="dash-meta-label"/>
+                                <Label fx:id="dashboardNextExamTimeValueLabel" text="No data available" styleClass="dash-meta-value"/>
+                            </VBox>
+                        </HBox>
+
+                        <Button text="Start Exam" styleClass="dash-primary-button" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <HBox spacing="14" alignment="CENTER_LEFT" styleClass="dash-support-card">
+                        <StackPane styleClass="dash-support-icon-box">
+                            <Label text="?" styleClass="dash-support-icon"/>
+                        </StackPane>
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Need support?" styleClass="dash-support-title"/>
+                            <Label text="Connect with your tutor for guidance, exam doubts, and quick help before your session starts."
+                                   wrapText="true"
+                                   styleClass="dash-support-desc"/>
+                        </VBox>
+                        <Button text="Contact Tutor" styleClass="dash-neutral-button"/>
+                    </HBox>
+                </VBox>
+
+                <VBox prefWidth="310" spacing="12" styleClass="dash-right-column">
+                    <Label text="Upcoming Exams" styleClass="dash-card-label"/>
+
+                    <Label text="Live Feed" styleClass="dash-card-label"/>
+                    <ListView fx:id="dashboardUpcomingExamList" prefHeight="220" styleClass="dash-upcoming-list"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
+
+    
+           
+                        
+                   
 
         <!-- Available Exams -->
-        <AnchorPane fx:id="availableExamsPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Available Exams" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
+       <!-- =========================================================
+    AVAILABLE EXAMS PAGE
+============================================================ -->
+<BorderPane fx:id="availableExamsPane"
+            visible="false" managed="false"
+            styleClass="available-root">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="available-header">
+            <VBox spacing="3">
+                <Label text="Available Courses" styleClass="available-page-title"/>
+                <Label text="Choose a course card to continue to exam setup" styleClass="available-page-subtitle"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Back" onAction="#showStudentDashboard" styleClass="available-back-button"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="available-scroll">
+            <content>
+                <VBox spacing="40" styleClass="available-content">
+
+                    <VBox spacing="10" styleClass="available-feed-panel">
+                        <Label text="Catalog Feed" styleClass="available-group-meta"/>
+                        <ListView fx:id="availableExamList" prefHeight="120" styleClass="available-list-view"/>
+                    </VBox>
+
+                    <VBox spacing="16" styleClass="available-term-group">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="1-1" styleClass="available-term-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label text="FRESHMAN ALPHA" styleClass="available-group-meta"/>
                         </HBox>
-                        <VBox spacing="12.0" styleClass="card" prefWidth="720.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
-                            <children>
-                                <Label text="Scheduled Exams" styleClass="section-title" />
-                                <ListView fx:id="availableExamList" prefHeight="220.0" />
-                                <Button text="Start Exam" onAction="#goToLevelSelect" styleClass="primary-button" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="40.0" bottom="20.0" left="40.0" />
-                    </padding>
+                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Label text="CSE101" styleClass="available-badge"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label text="i" styleClass="available-icon-placeholder"/>
+                                    <Label text="..." styleClass="available-icon-placeholder"/>
+                                </HBox>
+                                <Label text="Structured Programming Language" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Core logic, flow control, and program design fundamentals." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="1-1|CSE101" styleClass="available-continue-button"/>
+                            </VBox>
+
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Label text="CSE103" styleClass="available-badge"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label text="i" styleClass="available-icon-placeholder"/>
+                                    <Label text="..." styleClass="available-icon-placeholder"/>
+                                </HBox>
+                                <Label text="Discrete Mathematics" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Sets, logic, graphs, and proof techniques for computing." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="1-1|CSE103" styleClass="available-continue-button"/>
+                            </VBox>
+                        </FlowPane>
+                    </VBox>
+
+                    <VBox spacing="16" styleClass="available-term-group">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="1-2" styleClass="available-term-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label text="FRESHMAN BETA" styleClass="available-group-meta"/>
+                        </HBox>
+                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Label text="CSE105" styleClass="available-badge"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label text="i" styleClass="available-icon-placeholder"/>
+                                    <Label text="..." styleClass="available-icon-placeholder"/>
+                                </HBox>
+                                <Label text="Data Structures and Algorithms I" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Core data structures, algorithm analysis, and complexity foundations." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="1-2|CSE105" styleClass="available-continue-button"/>
+                            </VBox>
+
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Label text="CSE107" styleClass="available-badge"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label text="i" styleClass="available-icon-placeholder"/>
+                                    <Label text="..." styleClass="available-icon-placeholder"/>
+                                </HBox>
+                                <Label text="Object Oriented Programming Language" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Classes, objects, encapsulation, inheritance, and polymorphism." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="1-2|CSE107" styleClass="available-continue-button"/>
+                            </VBox>
+                        </FlowPane>
+                    </VBox>
+
+                    <VBox spacing="16" styleClass="available-term-group">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="2-1" styleClass="available-term-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label text="SOPHOMORE ALPHA" styleClass="available-group-meta"/>
+                        </HBox>
+                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Label text="CSE205" styleClass="available-badge"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label text="i" styleClass="available-icon-placeholder"/>
+                                    <Label text="..." styleClass="available-icon-placeholder"/>
+                                </HBox>
+                                <Label text="Digital Logic Design" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Sequential systems, timing models, and hardware testing." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-1|CSE205" styleClass="available-continue-button"/>
+                            </VBox>
+
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Label text="CSE207" styleClass="available-badge"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label text="i" styleClass="available-icon-placeholder"/>
+                                    <Label text="..." styleClass="available-icon-placeholder"/>
+                                </HBox>
+                                <Label text="Data Structures and Algorithms II" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Sorting, graphs, recursion, and optimization strategy." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-1|CSE207" styleClass="available-continue-button"/>
+                            </VBox>
+
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <Label text="CSE215" styleClass="available-badge"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label text="i" styleClass="available-icon-placeholder"/>
+                                    <Label text="..." styleClass="available-icon-placeholder"/>
+                                </HBox>
+                                <Label text="Database" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Relational modeling, SQL querying, indexing, and design." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-1|CSE215" styleClass="available-continue-button"/>
+                            </VBox>
+                        </FlowPane>
+                    </VBox>
+
+                    <VBox spacing="16" styleClass="available-term-group">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="2-2" styleClass="available-term-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label text="SOPHOMORE BETA" styleClass="available-group-meta"/>
+                        </HBox>
+                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE200" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
+                                <Label text="Technical Writing and Presentation" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Communication, presentation, and technical documentation skills." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE200" styleClass="available-continue-button"/>
+                            </VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE209" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
+                                <Label text="Computer Architecture" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Instruction sets, memory hierarchy, and CPU design basics." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE209" styleClass="available-continue-button"/>
+                            </VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE211" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
+                                <Label text="Theory of Computation" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Automata, formal grammars, and computational limits." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE211" styleClass="available-continue-button"/>
+                            </VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE213" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
+                                <Label text="Software Engineering" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Lifecycle models, testing, requirements, and teamwork." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE213" styleClass="available-continue-button"/>
+                            </VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card">
+                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE219" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
+                                <Label text="Signals and Linear Systems" styleClass="available-course-title" wrapText="true"/>
+                                <Label text="Transform methods and system response for engineering problems." styleClass="available-course-desc" wrapText="true"/>
+                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE219" styleClass="available-continue-button"/>
+                            </VBox>
+                        </FlowPane>
+                    </VBox>
+
+                    <VBox spacing="16" styleClass="available-term-group">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="3-1" styleClass="available-term-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label text="JUNIOR ALPHA" styleClass="available-group-meta"/>
+                        </HBox>
+                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE301" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Mathematics for Computing and Data Science" styleClass="available-course-title" wrapText="true"/><Label text="Applied math foundations for analytics and machine intelligence." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE301" styleClass="available-continue-button"/></VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE309" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Machine Learning" styleClass="available-course-title" wrapText="true"/><Label text="Model building, evaluation metrics, and real data workflows." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE309" styleClass="available-continue-button"/></VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE313" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Computer Networks" styleClass="available-course-title" wrapText="true"/><Label text="Protocol layers, routing, and reliable communication systems." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE313" styleClass="available-continue-button"/></VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE315" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Operating Systems" styleClass="available-course-title" wrapText="true"/><Label text="Concurrency, memory management, and process scheduling." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE315" styleClass="available-continue-button"/></VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE317" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Computer Graphics" styleClass="available-course-title" wrapText="true"/><Label text="Rendering pipelines, transforms, and visual simulation." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE317" styleClass="available-continue-button"/></VBox>
+                        </FlowPane>
+                    </VBox>
+
+                    <VBox spacing="16" styleClass="available-term-group">
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="3-2" styleClass="available-term-title"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label text="JUNIOR BETA" styleClass="available-group-meta"/>
+                        </HBox>
+                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE311" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Compiler Design" styleClass="available-course-title" wrapText="true"/><Label text="Lexical, syntax, and semantic analysis with optimization." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE311" styleClass="available-continue-button"/></VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE321" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Artificial Intelligence" styleClass="available-course-title" wrapText="true"/><Label text="Search, inference, and intelligent agent architecture." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE321" styleClass="available-continue-button"/></VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE325" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Information Security" styleClass="available-course-title" wrapText="true"/><Label text="Threat models, cryptography basics, and secure systems." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE325" styleClass="available-continue-button"/></VBox>
+                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE329" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Cloud Computing" styleClass="available-course-title" wrapText="true"/><Label text="Distributed services, deployment models, and scalability." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE329" styleClass="available-continue-button"/></VBox>
+                        </FlowPane>
+                    </VBox>
+
                 </VBox>
-            </children>
-        </AnchorPane>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
+        <!-- Student Scheduled Exams -->
+        <!-- =========================================================
+     STUDENT SCHEDULED EXAMS PAGE
+============================================================ -->
+<BorderPane fx:id="scheduledExamsPane"
+            visible="false" managed="false"
+            styleClass="scheduled-root">
+
+    <top>
+        <HBox spacing="16" alignment="CENTER_LEFT" styleClass="scheduled-header">
+            <VBox spacing="4">
+                <Label text="Scheduled Exams" styleClass="scheduled-page-title"/>
+                <Label fx:id="studentScheduledSubtitleLabel" text="No data available" styleClass="scheduled-page-subtitle"/>
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="TERM" styleClass="scheduled-filter-label"/>
+                <ChoiceBox fx:id="studentScheduledTermChoice" styleClass="scheduled-filter-choice"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="STREAM" styleClass="scheduled-filter-label"/>
+                <ChoiceBox fx:id="studentScheduledCourseChoice" styleClass="scheduled-filter-choice"/>
+            </HBox>
+
+            <Button text="Back" onAction="#showStudentDashboard" styleClass="scheduled-back-button"/>
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="22" styleClass="scheduled-main-wrap">
+
+            <VBox spacing="16" HBox.hgrow="ALWAYS">
+                <ListView fx:id="studentScheduledExamList" prefHeight="360" VBox.vgrow="ALWAYS" styleClass="scheduled-list-view"/>
+                <Button fx:id="startScheduledExamButton"
+                        text="Start Exam"
+                    onAction="#startSelectedScheduledExam"
+                        styleClass="scheduled-primary-button"
+                        maxWidth="Infinity"/>
+            </VBox>
+
+            <VBox spacing="14" prefWidth="320">
+                <VBox spacing="10" styleClass="scheduled-side-card">
+                    <Label text="Protocol Brief" styleClass="scheduled-side-title"/>
+                    <Label text="- Keep camera and microphone enabled" styleClass="scheduled-side-text"/>
+                    <Label text="- Do not switch tabs during exam runtime" styleClass="scheduled-side-text"/>
+                    <Label text="- Submit before the countdown reaches zero" styleClass="scheduled-side-text"/>
+                    <Label text="View Full Regulations" styleClass="scheduled-side-link"/>
+                </VBox>
+
+                <VBox spacing="12" styleClass="scheduled-side-card">
+                    <Label text="Technical Support" styleClass="scheduled-side-title"/>
+                    <Button text="Live Chat" styleClass="scheduled-support-button"/>
+                    <Button text="Help Center" styleClass="scheduled-support-button"/>
+                    <Label fx:id="studentScheduledStatusLabel" styleClass="scheduled-side-text" wrapText="true"/>
+                </VBox>
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>
+     
 
         <!-- Student Discussion -->
-        <AnchorPane fx:id="discussionPane" visible="false" managed="false" StackPane.alignment="CENTER">
+       
+<BorderPane fx:id="discussionPane"
+            visible="false" managed="false"
+            styleClass="discussion-root">
+
+    <left>
+        <VBox spacing="12" styleClass="discussion-sidebar" prefWidth="240">
             <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Discussion" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
-                            <children>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="420.0">
-                                    <children>
-                                        <Label text="Ask" styleClass="section-title" />
-                                        <TextArea fx:id="discussionAskArea" prefHeight="140.0" wrapText="true" />
-                                        <Button text="Post" onAction="#postDiscussion" styleClass="primary-button" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="420.0">
-                                    <children>
-                                        <Label text="View" styleClass="section-title" />
-                                        <ListView fx:id="discussionList" prefHeight="220.0" />
-                                        <Button text="Comment" onAction="#commentDiscussion" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
+                <Label text="Exam Portal" styleClass="discussion-logo"/>
+
+                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="discussion-nav-button"/>
+                <Button text="Available Exams" onAction="#showAvailableExams" styleClass="discussion-nav-button"/>
+                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="discussion-nav-button"/>
+                <Button text="My Exams" onAction="#showExamHistory" styleClass="discussion-nav-button"/>
+                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="discussion-nav-button"/>
+                <Button text="Discussion" styleClass="discussion-nav-button discussion-nav-active"/>
+                <Button text="Messaging" onAction="#showMessaging" styleClass="discussion-nav-button"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="discussion-logout-button"/>
             </children>
-        </AnchorPane>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" styleClass="discussion-main-area">
+
+            <VBox spacing="6">
+                <Label text="Discussion" styleClass="discussion-page-title"/>
+                <Label text="Connect with other students and clarify architectural concepts." styleClass="discussion-page-subtitle"/>
+            </VBox>
+
+            <HBox spacing="18" VBox.vgrow="ALWAYS">
+                <VBox spacing="16" prefWidth="360" styleClass="discussion-left-column">
+
+                    <VBox spacing="12" styleClass="discussion-card discussion-ask-card">
+                        <Label text="Ask Question" styleClass="discussion-card-title"/>
+
+                        <TextArea fx:id="discussionAskArea"
+                                  promptText="Ask your question..."
+                                  prefRowCount="7"
+                                  wrapText="true"
+                                  styleClass="discussion-ask-input"/>
+
+                        <Label text="Markdown is supported" styleClass="discussion-helper-text"/>
+
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button styleClass="discussion-icon-button">
+                                <graphic>
+                                    <FontIcon iconLiteral="far-image" styleClass="discussion-tool-icon"/>
+                                </graphic>
+                            </Button>
+                            <Button styleClass="discussion-icon-button">
+                                <graphic>
+                                    <FontIcon iconLiteral="far-file-alt" styleClass="discussion-tool-icon"/>
+                                </graphic>
+                            </Button>
+                            <Button styleClass="discussion-icon-button">
+                                <graphic>
+                                    <FontIcon iconLiteral="far-smile" styleClass="discussion-tool-icon"/>
+                                </graphic>
+                            </Button>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="Post" onAction="#postDiscussion" styleClass="discussion-post-button"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="10" styleClass="discussion-card discussion-guidelines-card">
+                        <Label text="Community Guidelines" styleClass="discussion-card-title"/>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <FontIcon iconLiteral="fas-circle" styleClass="discussion-guideline-dot"/>
+                            <Label text="Be respectful to peers." styleClass="discussion-guideline-text"/>
+                        </HBox>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <FontIcon iconLiteral="fas-circle" styleClass="discussion-guideline-dot"/>
+                            <Label text="Check for duplicates." styleClass="discussion-guideline-text"/>
+                        </HBox>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <FontIcon iconLiteral="fas-circle" styleClass="discussion-guideline-dot"/>
+                            <Label text="Tag your technologies correctly." styleClass="discussion-guideline-text"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <VBox spacing="12" styleClass="discussion-card discussion-feed-panel" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Discussion Feed" styleClass="discussion-card-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Latest" styleClass="discussion-tab-button discussion-tab-active"/>
+                        <Button text="Trending" styleClass="discussion-tab-button"/>
+                    </HBox>
+
+                    <ListView fx:id="discussionList" styleClass="discussion-feed-list" VBox.vgrow="ALWAYS"/>
+
+                    <Button text="Load More Conversations" styleClass="discussion-load-more" maxWidth="Infinity"/>
+                </VBox>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
 
         <!-- Student Messaging -->
-        <AnchorPane fx:id="messagingPane" visible="false" managed="false" StackPane.alignment="CENTER">
+    
+                 <!-- =========================================================
+     MESSAGING PAGE
+============================================================ -->
+<BorderPane fx:id="messagingPane"
+            visible="false" managed="false"
+            styleClass="messaging-root">
+
+    <!-- SIDEBAR -->
+    <left>
+        <VBox spacing="15" styleClass="messaging-sidebar" prefWidth="220">
             <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Messaging" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
-                            <children>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="360.0">
-                                    <children>
-                                        <Label text="Friend Requests" styleClass="section-title" />
-                                        <TextField fx:id="friendRequestField" promptText="Username" />
-                                        <Button text="Send Request" onAction="#sendFriendRequest" styleClass="primary-button" />
-                                        <ListView fx:id="pendingRequestsList" prefHeight="180.0" />
-                                        <HBox spacing="10.0">
-                                            <children>
-                                                <Button text="Accept" onAction="#acceptFriendRequest" />
-                                                <Button text="Decline" onAction="#declineFriendRequest" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="520.0">
-                                    <children>
-                                        <Label text="Chat" styleClass="section-title" />
-                                        <Label text="Friends" styleClass="muted" />
-                                        <ListView fx:id="friendsList" prefHeight="120.0" />
-                                        <Label text="History" styleClass="muted" />
-                                        <ListView fx:id="chatHistoryList" prefHeight="160.0" />
-                                        <HBox spacing="10.0">
-                                            <children>
-                                                <TextField fx:id="chatMessageField" promptText="Type a message" HBox.hgrow="ALWAYS" />
-                                                <Button text="Send" onAction="#sendChatMessage" styleClass="primary-button" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
+                <Label text="Exam Portal" styleClass="messaging-logo"/>
+
+                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="messaging-nav-button"/>
+                <Button text="Available Exams" onAction="#showAvailableExams" styleClass="messaging-nav-button"/>
+                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="messaging-nav-button"/>
+                <Button text="My Exams" onAction="#showExamHistory" styleClass="messaging-nav-button"/>
+                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="messaging-nav-button"/>
+                <Button text="Messaging" styleClass="messaging-nav-button messaging-nav-active"/>
+
+                <VBox VBox.vgrow="ALWAYS"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="messaging-logout-button"/>
             </children>
-        </AnchorPane>
+        </VBox>
+    </left>
+
+    <!-- CENTER -->
+    <center>
+        <HBox spacing="18" styleClass="messaging-main-area">
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="messaging-left-scroll" prefWidth="360">
+                <content>
+                    <VBox spacing="14" styleClass="messaging-left-column">
+                        <VBox spacing="12" styleClass="messaging-panel-card">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="Friend Requests" styleClass="messaging-section-title"/>
+                                <Label fx:id="messagingRequestBadgeLabel" text="No data available" styleClass="messaging-badge"/>
+                            </HBox>
+
+                            <HBox spacing="8" alignment="CENTER_LEFT" styleClass="messaging-search-shell">
+                                <FontIcon iconLiteral="fas-search" styleClass="messaging-search-icon"/>
+                                <TextField fx:id="friendRequestField" promptText="Find students..." HBox.hgrow="ALWAYS" styleClass="messaging-search-field"/>
+                                <Button text="Add" onAction="#sendFriendRequest" styleClass="messaging-add-button"/>
+                            </HBox>
+
+                            <ListView fx:id="pendingRequestsList" prefHeight="210" styleClass="messaging-request-list"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="messaging-panel-card" VBox.vgrow="ALWAYS">
+                            <Label text="Friends Online" styleClass="messaging-section-title"/>
+                            <ListView fx:id="friendsList" VBox.vgrow="ALWAYS" styleClass="messaging-friends-list"/>
+                        </VBox>
+                    </VBox>
+                </content>
+            </ScrollPane>
+
+            <VBox spacing="12" styleClass="messaging-chat-panel" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="messaging-chat-header">
+                    <StackPane styleClass="messaging-chat-avatar">
+                        <Label text="FR" styleClass="messaging-chat-avatar-label"/>
+                    </StackPane>
+
+                    <VBox spacing="2">
+                        <Label fx:id="messagingActiveFriendLabel" text="Select a friend" styleClass="messaging-chat-title"/>
+                        <Label fx:id="messagingActiveStatusLabel" text="Active" styleClass="messaging-chat-status"/>
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button styleClass="messaging-header-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-phone-alt" styleClass="messaging-header-icon"/>
+                        </graphic>
+                    </Button>
+                    <Button styleClass="messaging-header-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-video" styleClass="messaging-header-icon"/>
+                        </graphic>
+                    </Button>
+                    <Button styleClass="messaging-header-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-ellipsis-h" styleClass="messaging-header-icon"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+
+                <ListView fx:id="chatHistoryList" VBox.vgrow="ALWAYS" styleClass="messaging-chat-list"/>
+
+                <HBox alignment="CENTER_LEFT" spacing="8" styleClass="messaging-composer-bar">
+                    <Button styleClass="messaging-composer-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-plus" styleClass="messaging-composer-icon"/>
+                        </graphic>
+                    </Button>
+                    <TextField fx:id="chatMessageField" promptText="Write a message..." HBox.hgrow="ALWAYS" styleClass="messaging-chat-input"/>
+                    <Button styleClass="messaging-composer-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="far-smile" styleClass="messaging-composer-icon"/>
+                        </graphic>
+                    </Button>
+                    <Button onAction="#sendChatMessage" styleClass="messaging-send-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-paper-plane" styleClass="messaging-send-icon"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>
 
         <!-- Student Progress -->
-        <AnchorPane fx:id="progressPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Progress" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showStudentDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
-                            <children>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="520.0">
-                                    <children>
-                                        <Label text="Score Trend" styleClass="section-title" />
-                                        <BarChart fx:id="progressChart" prefHeight="240.0">
-                                            <xAxis>
-                                                <CategoryAxis />
-                                            </xAxis>
-                                            <yAxis>
-                                                <NumberAxis />
-                                            </yAxis>
-                                        </BarChart>
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="320.0">
-                                    <children>
-                                        <Label text="History" styleClass="section-title" />
-                                        <ListView fx:id="historyList" prefHeight="240.0" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
+      
+                  <!-- =========================================================
+     STUDENT PROGRESS PAGE
+============================================================ -->
+<BorderPane fx:id="progressPane"
+            visible="false" managed="false"
+            styleClass="progress-root">
+
+    <center>
+        <VBox spacing="18" styleClass="progress-main-wrap">
+
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="4">
+                    <Label text="Progress Dashboard" styleClass="progress-page-title"/>
+                    <Label text="Track your score trends, attempts, and improvement areas." styleClass="progress-page-subtitle"/>
                 </VBox>
-            </children>
-        </AnchorPane>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Back" onAction="#showStudentDashboard" styleClass="progress-back-button"/>
+            </HBox>
+
+            <HBox spacing="14">
+                <VBox styleClass="progress-metric-card" HBox.hgrow="ALWAYS" spacing="4">
+                    <Label text="Average Score" styleClass="progress-metric-title"/>
+                    <Label fx:id="avgScoreLabel" text="No data available" styleClass="progress-metric-value"/>
+                    <Label text="No data available" styleClass="progress-metric-trend"/>
+                </VBox>
+
+                <VBox styleClass="progress-metric-card" HBox.hgrow="ALWAYS" spacing="4">
+                    <Label text="Avg. Time per Exam" styleClass="progress-metric-title"/>
+                    <Label fx:id="avgTimeLabel" text="No data available" styleClass="progress-metric-value"/>
+                    <Label text="No data available" styleClass="progress-metric-trend"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="18" VBox.vgrow="ALWAYS">
+
+                <VBox spacing="14" HBox.hgrow="ALWAYS">
+                    <VBox spacing="12" styleClass="progress-chart-card" VBox.vgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT">
+                            <VBox spacing="2">
+                                <Label text="Score Progression" styleClass="progress-card-title"/>
+                                <Label text="Performance trend over recent attempts" styleClass="progress-card-subtitle"/>
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS"/>
+                        </HBox>
+
+                        <LineChart fx:id="progressLineChart" prefHeight="250" styleClass="progress-line-chart" VBox.vgrow="ALWAYS">
+                            <xAxis>
+                                <CategoryAxis label="Attempts"/>
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis label="Score (%)"/>
+                            </yAxis>
+                        </LineChart>
+
+                        <BarChart fx:id="progressChart" prefHeight="170" styleClass="progress-bar-chart">
+                            <xAxis>
+                                <CategoryAxis/>
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis/>
+                            </yAxis>
+                        </BarChart>
+
+                        <Label fx:id="progressEmptyStateLabel" text="No exam history available" styleClass="progress-empty-state"/>
+                    </VBox>
+
+                    <HBox spacing="14">
+                        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="progress-summary-card" HBox.hgrow="ALWAYS">
+                            <StackPane styleClass="progress-summary-icon-wrap">
+                                <Label text="+" styleClass="progress-summary-icon"/>
+                            </StackPane>
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label text="Strongest Subject" styleClass="progress-summary-title"/>
+                                <Label fx:id="strongestSubjectLabel" text="No data available" styleClass="progress-summary-value"/>
+                                <Label fx:id="strongestSubjectMessageLabel" text="Consistent accuracy and strong performance" styleClass="progress-summary-desc" wrapText="true"/>
+                            </VBox>
+                        </HBox>
+
+                        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="progress-summary-card" HBox.hgrow="ALWAYS">
+                            <StackPane styleClass="progress-summary-icon-wrap">
+                                <Label text="~" styleClass="progress-summary-icon"/>
+                            </StackPane>
+                            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                                <Label text="Improvement Area" styleClass="progress-summary-title"/>
+                                <Label fx:id="improvementAreaLabel" text="No data available" styleClass="progress-summary-value"/>
+                                <Label fx:id="improvementAreaMessageLabel" text="Needs improvement and more practice" styleClass="progress-summary-desc" wrapText="true"/>
+                            </VBox>
+                        </HBox>
+                    </HBox>
+                </VBox>
+
+                <VBox prefWidth="360" spacing="12" styleClass="progress-history-panel">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Exam History" styleClass="progress-card-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Export Report" styleClass="progress-export-button"/>
+                    </HBox>
+
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <ChoiceBox fx:id="progressTermChoice" styleClass="progress-filter-choice" HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <TableView fx:id="historyTable" styleClass="progress-history-table" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="historyCourseColumn" text="Exam/Course" prefWidth="120"/>
+                            <TableColumn fx:id="historyAttemptsColumn" text="Attempts" prefWidth="75"/>
+                            <TableColumn fx:id="historyBestColumn" text="Best %" prefWidth="75"/>
+                            <TableColumn fx:id="historyAvgColumn" text="Avg %" prefWidth="75"/>
+                        </columns>
+                    </TableView>
+
+                    <ListView fx:id="historyList" visible="false" managed="false" prefHeight="0"/>
+                </VBox>
+
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
 
         <!-- Leaderboard -->
-        <AnchorPane fx:id="leaderboardPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Result Board" styleClass="header-title" />
-                                <Button text="Back to Results" onAction="#showResultPage" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <VBox spacing="10.0" styleClass="card" prefWidth="620.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
-                            <children>
-                                <Label text="Rank List" styleClass="section-title" />
-                                <ListView fx:id="leaderboardList" prefHeight="220.0" />
-                                <Label text="Highest Scorer:" styleClass="muted" />
-                                <Label fx:id="highestScorerLabel" text="" styleClass="subtitle" />
-                                <Label text="Compare your performance with peers." />
-                                <Label text="Note: if score is same, submission time decides rank." styleClass="muted" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-        </AnchorPane>
+       <!-- =========================================================
+     LEADERBOARD PAGE
+============================================================ -->
+<BorderPane fx:id="leaderboardPane"
+            visible="false" managed="false"
+            styleClass="leaderboard-root">
 
-        <!-- Exam Level Selection -->
-        <AnchorPane fx:id="levelPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox alignment="CENTER" spacing="18.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <Label text="Select Exam Level" styleClass="title" />
-                        <Label fx:id="levelSubtitleLabel" text="Choose your exam level." styleClass="subtitle" />
-                        <Label fx:id="levelMessageLabel" styleClass="error-text" />
-                        <HBox spacing="18.0" alignment="CENTER" styleClass="level-row">
-                            <children>
-                                <Button text="Beginner" onAction="#selectBeginner" styleClass="level-card level-beginner" />
-                                <Button text="Intermediate" onAction="#selectIntermediate" styleClass="level-card level-intermediate" />
-                                <Button text="Advanced" onAction="#selectAdvanced" styleClass="level-card level-advanced" />
-                            </children>
-                        </HBox>
-                        <Button text="Back to Available Exams" onAction="#showAvailableExams" />
-                    </children>
+    <center>
+        <VBox spacing="16" styleClass="leaderboard-main-wrap">
+
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="4">
+                    <Label text="Leaderboard" styleClass="leaderboard-page-title"/>
+                    <Label text="Real-time performance metrics for the current academic session." styleClass="leaderboard-page-subtitle"/>
                 </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Back" onAction="#showStudentDashboard" styleClass="leaderboard-back-button"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="leaderboard-filter-bar">
+                <HBox spacing="8" alignment="CENTER_LEFT" styleClass="leaderboard-search-wrap" HBox.hgrow="ALWAYS">
+                    <Label text="Q" styleClass="leaderboard-search-icon"/>
+                    <TextField promptText="Search student..." styleClass="leaderboard-search-field" HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <Label text="TERM" styleClass="leaderboard-filter-label"/>
+                <ChoiceBox fx:id="leaderboardTermChoice" styleClass="leaderboard-filter-choice"/>
+                <Label text="COURSE" styleClass="leaderboard-filter-label"/>
+                <ChoiceBox fx:id="leaderboardCourseChoice" styleClass="leaderboard-filter-choice"/>
+
+                <Button text="Refresh" onAction="#refreshLeaderboardView" styleClass="leaderboard-refresh-button"/>
+            </HBox>
+
+            <ListView fx:id="leaderboardList" prefHeight="360" VBox.vgrow="ALWAYS" styleClass="leaderboard-list-view"/>
+
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="leaderboard-pagination-bar">
+                <Label fx:id="leaderboardSummaryLabel" text="No data available" styleClass="leaderboard-pagination-text"/>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <HBox spacing="12">
+                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="leaderboard-stat-card" HBox.hgrow="ALWAYS">
+                    <StackPane styleClass="leaderboard-stat-icon-wrap"><Label text="A" styleClass="leaderboard-stat-icon"/></StackPane>
+                    <VBox spacing="2">
+                        <Label text="Class Average" styleClass="leaderboard-stat-title"/>
+                        <Label fx:id="leaderboardClassAverageValueLabel" text="No data available" styleClass="leaderboard-stat-value"/>
+                        <Label text="Derived from results CSV" styleClass="leaderboard-stat-meta"/>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="leaderboard-stat-card" HBox.hgrow="ALWAYS">
+                    <StackPane styleClass="leaderboard-stat-icon-wrap"><Label text="P" styleClass="leaderboard-stat-icon"/></StackPane>
+                    <VBox spacing="2">
+                        <Label text="Participation" styleClass="leaderboard-stat-title"/>
+                        <Label fx:id="leaderboardParticipationValueLabel" text="No data available" styleClass="leaderboard-stat-value"/>
+                        <Label text="Active students in filtered results" styleClass="leaderboard-stat-meta"/>
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="leaderboard-stat-card" HBox.hgrow="ALWAYS">
+                    <StackPane styleClass="leaderboard-stat-icon-wrap"><Label text="M" styleClass="leaderboard-stat-icon"/></StackPane>
+                    <VBox spacing="2">
+                        <Label text="Mastery Achieved" styleClass="leaderboard-stat-title"/>
+                        <Label fx:id="leaderboardMasteryValueLabel" text="No data available" styleClass="leaderboard-stat-value"/>
+                        <Label text="Users with average score >= 90%" styleClass="leaderboard-stat-meta"/>
+                    </VBox>
+                </HBox>
+            </HBox>
+
+            <TableView fx:id="leaderboardHiddenTable" visible="false" managed="false">
+                <columns>
+                    <TableColumn fx:id="leaderboardHiddenRankColumn" text="Rank" prefWidth="80"/>
+                    <TableColumn fx:id="leaderboardHiddenUserColumn" text="User" prefWidth="150"/>
+                    <TableColumn fx:id="leaderboardHiddenAvgScoreColumn" text="Avg Score (%)" prefWidth="150"/>
+                    <TableColumn fx:id="leaderboardHiddenAttemptsColumn" text="Attempts" prefWidth="120"/>
+                </columns>
+            </TableView>
+
+            <Label fx:id="highestScorerLabel" styleClass="leaderboard-page-subtitle"/>
+        </VBox>
+    </center>
+
+</BorderPane>
+
+        <!-- Exam Term and Course Selection -->
+        
+        <!-- =========================================================
+     TERM & COURSE SELECTION PAGE
+============================================================ -->
+<BorderPane fx:id="levelPane"
+            visible="false" managed="false"
+            styleClass="root">
+
+    <!-- LEFT SIDEBAR (reuse same style) -->
+    <left>
+        <VBox spacing="15" styleClass="sidebar" prefWidth="220">
+            <children>
+                <Label text="Exam Portal" styleClass="logo"/>
+
+                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="nav-button"/>
+                <Button text="Available Exams" styleClass="nav-active"/>
+                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="nav-button"/>
+                <Button text="My Exams" onAction="#showExamHistory" styleClass="nav-button"/>
+                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="nav-button"/>
+                <Button text="Discussion" onAction="#showDiscussion" styleClass="nav-button"/>
+                <Button text="Messaging" onAction="#showMessaging" styleClass="nav-button"/>
+
+                <VBox VBox.vgrow="ALWAYS"/>
+
+                <Button text="Start Quick Quiz" styleClass="primary-button"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="nav-button"/>
             </children>
-        </AnchorPane>
+        </VBox>
+    </left>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <VBox alignment="CENTER" spacing="20" styleClass="main-area">
+
+            <Label fx:id="levelLabel" text="Select Term and Course" styleClass="title"/>
+            <Label fx:id="levelSubtitleLabel" text="Choose your academic term and course to proceed"
+                   styleClass="muted"/>
+
+            <!-- CARD -->
+            <VBox spacing="15" styleClass="card" prefWidth="400">
+
+                <Label text="TERM" styleClass="muted"/>
+                <ChoiceBox fx:id="termChoice" prefWidth="360"/>
+
+                <Label text="COURSE" styleClass="muted"/>
+                <ChoiceBox fx:id="courseChoice" prefWidth="360"/>
+
+                <Button text="Continue"
+                        onAction="#selectCourseExam"
+                        styleClass="primary-button"/>
+
+            </VBox>
+
+            <HBox spacing="20">
+                <Label text="Secure Connection" styleClass="muted"/>
+                <Label fx:id="levelMessageLabel" text="Select term and course to continue." styleClass="muted"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
 
         <!-- Exam Start -->
-        <AnchorPane fx:id="startPane" visible="false" managed="false" StackPane.alignment="CENTER">
+       <!-- =========================================================
+     EXAM SETUP PAGE (READY TO START)
+============================================================ -->
+<BorderPane fx:id="startPane"
+            visible="false" managed="false"
+            styleClass="exam-start-root">
+
+    <!-- Sidebar -->
+    <left>
+        <VBox spacing="12" styleClass="exam-start-sidebar" prefWidth="220">
             <children>
-                <VBox alignment="CENTER" spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <Label text="Ready to Start" styleClass="title" />
-                        <Label fx:id="levelLabel" text="Level: Beginner" styleClass="subtitle" />
-                        <Label fx:id="subtitleLabel" text="Answer all questions before time ends."
-                               wrapText="true" styleClass="subtitle" />
-                        <Button fx:id="startButton" text="Start Exam" onAction="#startExam" styleClass="primary-button" />
-                        <Button text="Back to Levels" onAction="#restartExam" />
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
+                <Label text="Exam Portal" styleClass="exam-start-logo"/>
+
+                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="exam-start-nav-button"/>
+                <Button text="Available Exams" styleClass="exam-start-nav-button exam-start-nav-active"/>
+                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="exam-start-nav-button"/>
+                <Button text="My Exams" onAction="#showExamHistory" styleClass="exam-start-nav-button"/>
+                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="exam-start-nav-button"/>
+                <Button text="Discussion" onAction="#showDiscussion" styleClass="exam-start-nav-button"/>
+                <Button text="Messaging" onAction="#showMessaging" styleClass="exam-start-nav-button"/>
+
+                <VBox VBox.vgrow="ALWAYS"/>
+
+                <Button text="Start Quick Quiz" styleClass="exam-start-quick-button"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="exam-start-nav-button"/>
             </children>
-        </AnchorPane>
+        </VBox>
+    </left>
+
+    <!-- CENTER -->
+    <center>
+        <StackPane styleClass="exam-start-main-wrap">
+            <Label text="EXAM" styleClass="exam-start-watermark" StackPane.alignment="BOTTOM_LEFT"/>
+
+            <HBox spacing="24" alignment="TOP_LEFT" styleClass="exam-start-layout">
+
+                <VBox spacing="16" HBox.hgrow="ALWAYS" styleClass="exam-start-left-column">
+                    <Label text="Exam Setup" styleClass="exam-start-overline"/>
+                    <Label text="Ready to Start" styleClass="exam-start-heading"/>
+                    <Label fx:id="subtitleLabel" text="[CS402 - Artificial Intelligence]" styleClass="exam-start-course"/>
+
+                    <Label text="Please review the exam details and confirm your setup before beginning. Once started, the timer will begin immediately and navigation controls remain active until submission."
+                           styleClass="exam-start-description" wrapText="true"/>
+
+                    <HBox spacing="14">
+                        <VBox styleClass="exam-start-info-card" HBox.hgrow="ALWAYS" spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <FontIcon iconLiteral="fas-clock" styleClass="exam-start-info-icon"/>
+                                <Label text="Time Limit" styleClass="exam-start-info-title"/>
+                            </HBox>
+                            <Label text="No data available" styleClass="exam-start-info-value"/>
+                        </VBox>
+
+                        <VBox styleClass="exam-start-info-card" HBox.hgrow="ALWAYS" spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <FontIcon iconLiteral="fas-chart-line" styleClass="exam-start-info-icon"/>
+                                <Label text="Passing Score" styleClass="exam-start-info-title"/>
+                            </HBox>
+                            <Label fx:id="passLabel" text="No data available" styleClass="exam-start-info-value"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <VBox prefWidth="330" spacing="12" styleClass="exam-start-right-card">
+                    <Label text="Question Count" styleClass="exam-start-right-title"/>
+
+                    <ChoiceBox fx:id="examQuestionCountChoice" styleClass="exam-start-question-choice"/>
+
+                    <VBox spacing="6" styleClass="exam-start-note-box">
+                        <Label text="Instructions" styleClass="exam-start-note-title"/>
+                        <Label text="Select your preferred question set. Standard mode includes balanced difficulty and shuffled ordering." styleClass="exam-start-note-text" wrapText="true"/>
+                    </VBox>
+
+                    <Button text="Start Exam"
+                            onAction="#startExam"
+                            styleClass="exam-start-primary-button"
+                            maxWidth="Infinity"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="exam-start-footer">
+                        <Label text="Status:" styleClass="exam-start-footer-label"/>
+                        <Label text="READY" styleClass="exam-start-ready"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <FontIcon iconLiteral="fas-shield-alt" styleClass="exam-start-footer-icon"/>
+                        <Label text="System Secure" styleClass="exam-start-footer-label"/>
+                    </HBox>
+                </VBox>
+
+            </HBox>
+        </StackPane>
+    </center>
+
+</BorderPane>
 
         <!-- Exam Interface -->
-        <BorderPane fx:id="examPane" visible="false" managed="false">
-            <top>
-                <HBox alignment="CENTER_LEFT" spacing="16.0" BorderPane.alignment="CENTER" styleClass="header-bar">
-                    <children>
-                        <Label text="Live Exam" styleClass="header-title" />
-                        <Label fx:id="progressLabel" text="Question 1 of 1" styleClass="muted" />
-                        <HBox spacing="8.0" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
-                            <children>
-                                <Label text="Time Left" styleClass="muted" />
-                                <Label fx:id="timerLabel" text="00:00" styleClass="timer" />
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                    </padding>
-                </HBox>
-            </top>
-            <center>
-                <VBox spacing="16.0" BorderPane.alignment="CENTER">
-                    <children>
-                        <Label fx:id="questionLabel" text="Question goes here" wrapText="true" styleClass="question" />
-                        <VBox spacing="10.0" styleClass="card">
-                            <children>
-                                <RadioButton fx:id="optionA" text="Option A" wrapText="true" />
-                                <RadioButton fx:id="optionB" text="Option B" wrapText="true" />
-                                <RadioButton fx:id="optionC" text="Option C" wrapText="true" />
-                                <RadioButton fx:id="optionD" text="Option D" wrapText="true" />
-                            </children>
-                            <padding>
-                                <Insets top="14.0" right="16.0" bottom="14.0" left="16.0" />
-                            </padding>
-                        </VBox>
-                        <ProgressBar fx:id="progressBar" prefWidth="720.0" />
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="40.0" bottom="20.0" left="40.0" />
-                    </padding>
-                </VBox>
-            </center>
-            <bottom>
-                <HBox spacing="12.0" BorderPane.alignment="CENTER" alignment="CENTER_RIGHT">
-                    <children>
-                        <Button fx:id="prevButton" text="Previous" onAction="#previousQuestion" />
-                        <Button fx:id="nextButton" text="Next" onAction="#nextQuestion" styleClass="primary-button" />
-                        <Button fx:id="submitButton" text="Submit" onAction="#submitExam" styleClass="danger-button" />
-                    </children>
-                    <padding>
-                        <Insets top="12.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </HBox>
-            </bottom>
-        </BorderPane>
+      <!-- =========================================================
+     LIVE EXAM PAGE
+============================================================ -->
+<BorderPane fx:id="examPane"
+            visible="false" managed="false"
+            styleClass="live-exam-root">
 
-        <!-- Result Page -->
+    <!-- TOP BAR -->
+    <top>
+        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="live-exam-topbar">
+            <HBox spacing="8" alignment="CENTER_LEFT" styleClass="live-exam-live-pill">
+                <FontIcon iconLiteral="fas-circle" styleClass="live-exam-live-dot"/>
+                <Label text="Live Exam" styleClass="live-exam-live-text"/>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="progressLabel" text="No data available" styleClass="live-exam-question-tracker"/>
+
+            <Label fx:id="timerLabel" text="No data available" styleClass="live-exam-timer-badge"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER -->
+    <center>
+        <VBox spacing="16" styleClass="live-exam-main-area">
+
+            <VBox spacing="12" styleClass="live-exam-question-card">
+                <Label fx:id="questionLabel" wrapText="true" styleClass="live-exam-question-text"/>
+                <Label fx:id="examTopicLabel" text="Topic: Core Concepts" styleClass="live-exam-question-topic"/>
+            </VBox>
+
+            <VBox spacing="10" styleClass="live-exam-options-wrap">
+                <RadioButton fx:id="optionA" text="No data available" styleClass="live-exam-option-card"/>
+                <RadioButton fx:id="optionB" text="No data available" styleClass="live-exam-option-card"/>
+                <RadioButton fx:id="optionC" text="No data available" styleClass="live-exam-option-card"/>
+                <RadioButton fx:id="optionD" text="No data available" styleClass="live-exam-option-card"/>
+            </VBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="8" styleClass="live-exam-topic-info-card">
+                <FontIcon iconLiteral="fas-tag" styleClass="live-exam-topic-icon"/>
+                <Label text="Topic" styleClass="live-exam-topic-info-label"/>
+                <Label fx:id="levelLabel" text="Core Concepts" styleClass="live-exam-topic-info-value"/>
+            </HBox>
+
+            <ProgressBar fx:id="progressBar" progress="0" styleClass="live-exam-progress"/>
+
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="live-exam-footer-bar">
+                <Button fx:id="prevButton" text="&lt; Previous" styleClass="live-exam-nav-button" onAction="#previousQuestion"/>
+                <Button fx:id="nextButton" text="Next &gt;" styleClass="live-exam-nav-button" onAction="#nextQuestion"/>
+
+                <VBox spacing="2">
+                    <Label fx:id="examAutosaveLabel" text="Auto-saving response..." styleClass="live-exam-footer-muted"/>
+                    <Label fx:id="examCompletionLabel" text="No data available" styleClass="live-exam-footer-muted"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="submitButton" text="Submit Exam" styleClass="live-exam-submit-button" onAction="#submitExam"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
+        <!-- Exam Result -->
         <AnchorPane fx:id="resultPane" visible="false" managed="false" StackPane.alignment="CENTER">
             <children>
-                <VBox alignment="CENTER" spacing="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <Label text="Result Page" styleClass="title" />
-                        <HBox spacing="14.0" alignment="CENTER">
-                            <children>
-                                <VBox spacing="4.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Score" styleClass="muted" />
-                                        <Label fx:id="scoreLabel" text="0/0" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="4.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Correct" styleClass="muted" />
-                                        <Label fx:id="correctLabel" text="0" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="4.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Wrong" styleClass="muted" />
-                                        <Label fx:id="wrongLabel" text="0" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="4.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Percentage" styleClass="muted" />
-                                        <Label fx:id="percentLabel" text="0%" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="4.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Status" styleClass="muted" />
-                                        <Label fx:id="passLabel" text="Pending" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="10.0" right="14.0" bottom="10.0" left="14.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
-                        </HBox>
-                        <TextArea fx:id="resultArea" prefHeight="240.0" prefWidth="760.0" editable="false"
-                                  wrapText="true" />
-                        <HBox spacing="10.0">
-                            <children>
-                                <Button text="Result Board" onAction="#showLeaderboard" />
-                                <Button text="Progress" onAction="#showProgress" />
-                                <Button text="Discussion" onAction="#showDiscussion" />
-                                <Button fx:id="restartButton" text="Back to Dashboard" onAction="#showStudentDashboard" />
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
+                <fx:include fx:id="examResultView" source="ExamResult.fxml"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"/>
             </children>
         </AnchorPane>
 
         <!-- Teacher Login -->
-        <AnchorPane fx:id="teacherLoginPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <Label text="Teacher Login" styleClass="title" />
-                        <Label text="Sign in to manage exams." styleClass="subtitle" />
-                        <VBox spacing="10.0" styleClass="card">
-                            <children>
-                                <HBox spacing="10.0" alignment="CENTER_LEFT">
-                                    <children>
-                                        <Label text="Role" />
-                                        <ChoiceBox fx:id="teacherRoleChoice" />
-                                    </children>
-                                </HBox>
-                                <TextField fx:id="teacherUsername" promptText="Username" />
-                                <PasswordField fx:id="teacherPassword" promptText="Password" />
-                                <Label fx:id="teacherLoginMessageLabel" styleClass="error-text" />
-                                <Button text="Login" onAction="#loginTeacher" styleClass="primary-button" />
-                                <Button text="Back to Student Login" onAction="#showLogin" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="20.0" bottom="16.0" left="20.0" />
-                            </padding>
-                        </VBox>
-                    </children>
+      <!-- =========================================================
+     TEACHER LOGIN PAGE
+============================================================ -->
+<StackPane fx:id="teacherLoginPane"
+           visible="false" managed="false"
+           styleClass="teacher-login-root"
+           xmlns:fx="http://javafx.com/fxml">
+
+    <children>
+        <Region styleClass="teacher-login-ambient"/>
+
+        <VBox alignment="CENTER" spacing="18" styleClass="teacher-login-page-wrap">
+            <VBox alignment="CENTER" spacing="6" styleClass="teacher-login-header">
+                <StackPane styleClass="teacher-login-logo-wrap">
+                    <FontIcon iconLiteral="fas-book-open" styleClass="teacher-login-logo-icon"/>
+                </StackPane>
+                <Label text="ExamNode" styleClass="teacher-login-brand"/>
+                <Label text="FACULTY PORTAL" styleClass="teacher-login-brand-sub"/>
+            </VBox>
+
+            <VBox spacing="14" styleClass="teacher-login-card" prefWidth="470" maxWidth="470">
+                <Label text="Teacher Login" styleClass="teacher-login-title"/>
+
+                <VBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="PORTAL ROLE" styleClass="teacher-login-field-label"/>
+                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
+                        <FontIcon iconLiteral="fas-user-graduate" styleClass="teacher-login-field-icon"/>
+                        <ChoiceBox fx:id="teacherRoleChoice" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-role-choice"/>
+                        <FontIcon iconLiteral="fas-lock" styleClass="teacher-login-field-icon"/>
+                    </HBox>
                 </VBox>
-            </children>
-        </AnchorPane>
+
+                <VBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="EMPLOYEE ID / USERNAME" styleClass="teacher-login-field-label"/>
+                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
+                        <FontIcon iconLiteral="fas-id-badge" styleClass="teacher-login-field-icon"/>
+                        <TextField fx:id="teacherUsername" promptText="Enter your credentials" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="8" alignment="CENTER_LEFT">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="PASSWORD" styleClass="teacher-login-field-label"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Forgot Access?" styleClass="teacher-login-forgot"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
+                        <FontIcon iconLiteral="fas-key" styleClass="teacher-login-field-icon"/>
+                        <PasswordField fx:id="teacherPassword" promptText="Enter secure password" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                        <FontIcon iconLiteral="fas-eye" styleClass="teacher-login-field-icon"/>
+                    </HBox>
+                </VBox>
+
+                <Button text="Sign In to Dashboard  ->" styleClass="teacher-login-signin" maxWidth="Infinity" onAction="#loginTeacher"/>
+
+                <VBox spacing="8" styleClass="teacher-login-redirect-wrap">
+                    <Label text="REDIRECT" styleClass="teacher-login-redirect-label"/>
+                    <Button text="&lt;-  Back to Student Login" styleClass="teacher-login-back" maxWidth="Infinity" onAction="#showLogin"/>
+                </VBox>
+
+                <Label fx:id="teacherLoginMessageLabel" styleClass="teacher-login-status" wrapText="true"/>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-card-footer">
+                    <FontIcon iconLiteral="fas-signal" styleClass="teacher-login-footer-icon"/>
+                    <Label text="SYSTEM ONLINE" styleClass="teacher-login-footer-text"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="v2.4.1-Stable" styleClass="teacher-login-footer-text"/>
+                </HBox>
+            </VBox>
+
+            <HBox alignment="CENTER" spacing="18" styleClass="teacher-login-page-footer">
+                <Label text="Privacy Policy" styleClass="teacher-login-page-footer-link"/>
+                <Label text="|" styleClass="teacher-login-page-footer-sep"/>
+                <Label text="Terms of Service" styleClass="teacher-login-page-footer-link"/>
+                <Label text="|" styleClass="teacher-login-page-footer-sep"/>
+                <Label text="Support" styleClass="teacher-login-page-footer-link"/>
+            </HBox>
+        </VBox>
+    </children>
+
+</StackPane>
 
         <!-- Authentication Failed -->
-        <AnchorPane fx:id="teacherAuthFailPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox alignment="CENTER" spacing="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <Label text="Authentication Failed" styleClass="title" />
-                        <Label text="Invalid credentials. Please try again." styleClass="subtitle" />
-                        <Button text="Back to Login" onAction="#showTeacherLogin" />
-                    </children>
-                </VBox>
-            </children>
-        </AnchorPane>
-
-        <!-- Teacher Dashboard -->
-        <BorderPane fx:id="teacherDashboardPane" visible="false" managed="false">
-            <top>
-                <HBox alignment="CENTER_LEFT" spacing="12.0" BorderPane.alignment="CENTER" styleClass="header-bar">
-                    <children>
-                        <Label text="Teacher Dashboard" styleClass="header-title" />
-                        <Label fx:id="teacherWelcomeLabel" text="" styleClass="muted" />
-                    </children>
-                    <padding>
-                        <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                    </padding>
-                </HBox>
-            </top>
-            <center>
-                <VBox spacing="16.0" BorderPane.alignment="CENTER" styleClass="dashboard-body">
-                    <children>
-                        <Label text="Boxed Menu" styleClass="section-title" />
-                        <GridPane hgap="14.0" vgap="14.0">
-                            <children>
-                                <Button text="QB Management" onAction="#showQuestionBank" styleClass="menu-card" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <Button text="Create Exam" onAction="#showCreateExam" styleClass="menu-card" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                <Button text="Schedule Exam" onAction="#showScheduleExam" styleClass="menu-card" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                <Button text="Results &amp; Analysis" onAction="#showTeacherAnalytics" styleClass="menu-card" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <Button text="View Exams" onAction="#showViewExams" styleClass="menu-card" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                <Button text="Logout" onAction="#showTeacherLogin" styleClass="menu-card" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                            </children>
-                        </GridPane>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
-            </center>
-        </BorderPane>
-
-        <!-- Question Bank Management -->
-        <AnchorPane fx:id="questionBankPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Question Bank" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <HBox spacing="20.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
-                            <children>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="520.0">
-                                    <children>
-                                        <Label text="Questions" styleClass="section-title" />
-                                        <ListView fx:id="questionBankList" prefHeight="260.0" />
-                                        <HBox spacing="10.0">
-                                            <children>
-                                                <Button text="Add Q" onAction="#addQuestion" />
-                                                <Button text="Edit Q" onAction="#editQuestion" />
-                                                <Button text="Delete Q" onAction="#deleteQuestion" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="10.0" styleClass="card" prefWidth="320.0">
-                                    <children>
-                                        <Label text="Filters" styleClass="section-title" />
-                                        <Label text="Category" />
-                                        <ChoiceBox fx:id="qbCategoryChoice" />
-                                        <Label text="Difficulty" />
-                                        <ChoiceBox fx:id="qbDifficultyChoice" />
-                                        <Label text="Store Correct Ans" />
-                                        <ChoiceBox fx:id="qbCorrectChoice" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-        </AnchorPane>
-
-        <!-- Create Exam -->
-        <AnchorPane fx:id="createExamPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Create Exam" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <VBox spacing="12.0" styleClass="card" prefWidth="640.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
-                            <children>
-                                <Label text="Exam Details" styleClass="section-title" />
-                                <TextField promptText="Title" />
-                                <ChoiceBox fx:id="createCategoryChoice" />
-                                <ChoiceBox fx:id="createDifficultyChoice" />
-                                <HBox spacing="10.0">
-                                    <children>
-                                        <VBox spacing="4.0">
-                                            <children>
-                                                <Label text="Number of Qs" />
-                                                <Spinner fx:id="createNumQuestions" />
-                                            </children>
-                                        </VBox>
-                                        <VBox spacing="4.0">
-                                            <children>
-                                                <Label text="Time (min)" />
-                                                <Spinner fx:id="createTime" />
-                                            </children>
-                                        </VBox>
-                                        <VBox spacing="4.0">
-                                            <children>
-                                                <Label text="Marks" />
-                                                <Spinner fx:id="createMarks" />
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </HBox>
-                                <CheckBox text="Automatic pick" />
-                                <Button text="Save Exam" styleClass="primary-button" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-        </AnchorPane>
-
-        <!-- Schedule Exam -->
-        <AnchorPane fx:id="scheduleExamPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Schedule Exam" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <VBox spacing="12.0" styleClass="card" prefWidth="620.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0">
-                            <children>
-                                <Label text="Schedule Details" styleClass="section-title" />
-                                <ChoiceBox fx:id="scheduleExamChoice" />
-                                <DatePicker fx:id="scheduleDate" />
-                                <HBox spacing="10.0">
-                                    <children>
-                                        <TextField fx:id="scheduleStart" promptText="Start time" />
-                                        <TextField fx:id="scheduleEnd" promptText="End time" />
-                                    </children>
-                                </HBox>
-                                <Button text="Publish" styleClass="primary-button" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-        </AnchorPane>
-
-        <!-- View Exams -->
-        <AnchorPane fx:id="viewExamsPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="View Exams" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <VBox spacing="12.0" styleClass="card" prefWidth="680.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
-                            <children>
-                                <Label text="Created Exams" styleClass="section-title" />
-                                <ListView fx:id="viewExamsList" prefHeight="260.0" />
-                                <HBox spacing="10.0">
-                                    <children>
-                                        <Button text="Edit" />
-                                        <Button text="Delete" />
-                                    </children>
-                                </HBox>
-                                <Label text="Status: Upcoming / Ongoing / Completed" styleClass="muted" />
-                            </children>
-                            <padding>
-                                <Insets top="16.0" right="18.0" bottom="16.0" left="18.0" />
-                            </padding>
-                        </VBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-        </AnchorPane>
-
-        <!-- Teacher Results & Analytics -->
-        <AnchorPane fx:id="teacherAnalyticsPane" visible="false" managed="false" StackPane.alignment="CENTER">
-            <children>
-                <VBox spacing="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="header-bar">
-                            <children>
-                                <Label text="Results &amp; Analytics" styleClass="header-title" />
-                                <Button text="Back to Dashboard" onAction="#showTeacherDashboard" />
-                            </children>
-                            <padding>
-                                <Insets top="12.0" right="20.0" bottom="12.0" left="20.0" />
-                            </padding>
-                        </HBox>
-                        <HBox spacing="16.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
-                            <children>
-                                <VBox spacing="6.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Average" styleClass="muted" />
-                                        <Label text="74" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="6.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Highest" styleClass="muted" />
-                                        <Label text="96" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="6.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Lowest" styleClass="muted" />
-                                        <Label text="42" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox spacing="6.0" styleClass="stat-card">
-                                    <children>
-                                        <Label text="Pass %" styleClass="muted" />
-                                        <Label text="68%" styleClass="stat-value" />
-                                    </children>
-                                    <padding>
-                                        <Insets top="12.0" right="16.0" bottom="12.0" left="16.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
-                    </padding>
-                </VBox>
-            </children>
-        </AnchorPane>
+        <!-- =========================================================
+     AUTHENTICATION FAILED PAGE
+============================================================ -->
+<StackPane fx:id="teacherAuthFailPane"
+           visible="false" managed="false"
+           styleClass="root auth-failed-root"
+           xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <fx:include fx:id="authFailedView" source="AuthFailed.fxml"/>
     </children>
 </StackPane>
+        <!-- Teacher Dashboard -->
+      <!-- =========================================================
+     TEACHER DASHBOARD
+============================================================ -->
+<BorderPane fx:id="teacherDashboardPane"
+            visible="true" managed="true"
+            styleClass="root xdash-root">
+
+    <center>
+        <HBox styleClass="xdash-shell" spacing="28">
+
+            <VBox styleClass="xdash-main-column" spacing="24" HBox.hgrow="ALWAYS">
+                <HBox styleClass="xdash-brand-row" alignment="CENTER_LEFT" spacing="12">
+                    <StackPane styleClass="xdash-brand-mark">
+                        <FontIcon iconLiteral="fas-graduation-cap" styleClass="xdash-brand-icon"/>
+                    </StackPane>
+                    <Label text="ExamNode" styleClass="xdash-brand-text"/>
+                </HBox>
+
+                <VBox styleClass="xdash-header" spacing="6">
+                    <Label fx:id="teacherWelcomeLabel" text="Welcome, Instructor" styleClass="xdash-title"/>
+                    <Label text="Manage your curriculum and assessment workflow." styleClass="xdash-subtitle"/>
+                </VBox>
+
+                <GridPane styleClass="xdash-grid" hgap="20" vgap="20" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="xdash-card" spacing="11" prefHeight="224">
+                        <StackPane styleClass="xdash-icon-box">
+                            <FontIcon iconLiteral="fas-book" styleClass="xdash-card-icon"/>
+                        </StackPane>
+                        <Label text="QB Management" styleClass="xdash-card-title"/>
+                        <Label text="Organize, filter, and maintain your full question library by term and course." wrapText="true" styleClass="xdash-card-text"/>
+                        <Region VBox.vgrow="ALWAYS"/>
+                        <Button text="Access Library →" styleClass="xdash-link" onAction="#showQuestionBank"/>
+                    </VBox>
+
+                    <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="xdash-card" spacing="11" prefHeight="224">
+                        <StackPane styleClass="xdash-icon-box">
+                            <FontIcon iconLiteral="fas-file-medical" styleClass="xdash-card-icon"/>
+                        </StackPane>
+                        <Label text="Create Exam" styleClass="xdash-card-title"/>
+                        <Label text="Generate new assessments quickly with weighted topics and controlled duration." wrapText="true" styleClass="xdash-card-text"/>
+                        <Region VBox.vgrow="ALWAYS"/>
+                        <Button text="Start New" styleClass="xdash-primary" onAction="#showCreateExam"/>
+                    </VBox>
+
+                    <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="xdash-card" spacing="11" prefHeight="224">
+                        <StackPane styleClass="xdash-icon-box">
+                            <FontIcon iconLiteral="fas-calendar-alt" styleClass="xdash-card-icon"/>
+                        </StackPane>
+                        <Label text="Schedule Exam" styleClass="xdash-card-title"/>
+                        <Label text="Configure calendar slots, availability windows, and release timing from one panel." wrapText="true" styleClass="xdash-card-text"/>
+                        <Region VBox.vgrow="ALWAYS"/>
+                        <Button text="Open Calendar →" styleClass="xdash-link" onAction="#showScheduleExam"/>
+                    </VBox>
+
+                    <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="xdash-card" spacing="11" prefHeight="224">
+                        <StackPane styleClass="xdash-icon-box">
+                            <FontIcon iconLiteral="fas-chart-line" styleClass="xdash-card-icon"/>
+                        </StackPane>
+                        <Label text="Results &amp; Analysis" styleClass="xdash-card-title"/>
+                        <Label text="Inspect outcome trends, performance gaps, and section-level scoring insights." wrapText="true" styleClass="xdash-card-text"/>
+                        <Region VBox.vgrow="ALWAYS"/>
+                        <Button text="View Insights →" styleClass="xdash-link" onAction="#showTeacherAnalytics"/>
+                    </VBox>
+
+                    <HBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" styleClass="xdash-card xdash-wide" alignment="CENTER_LEFT" spacing="14" prefHeight="124">
+                        <StackPane styleClass="xdash-icon-box">
+                            <FontIcon iconLiteral="fas-folder-open" styleClass="xdash-card-icon"/>
+                        </StackPane>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="View Exams" styleClass="xdash-card-title"/>
+                            <Label text="Browse all generated exams and monitor active sessions in one place." styleClass="xdash-card-text"/>
+                        </VBox>
+                        <Label fx:id="teacherActiveExamsBadgeLabel" text="No data available" styleClass="xdash-badge"/>
+                        <Button text="Open List →" styleClass="xdash-link" onAction="#showViewExams"/>
+                    </HBox>
+                </GridPane>
+            </VBox>
+
+            <VBox styleClass="xdash-sidebar" spacing="16" prefWidth="310" minWidth="298" maxWidth="322">
+                <VBox styleClass="xdash-side-card xdash-stats" spacing="14">
+                    <Label text="Quick Stats" styleClass="xdash-side-title"/>
+
+                    <VBox spacing="6">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Active Students" styleClass="xdash-stat-label"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="teacherActiveStudentsLabel" text="No data available" styleClass="xdash-stat-value"/>
+                        </HBox>
+                        <ProgressBar fx:id="teacherActiveStudentsProgressBar" styleClass="xdash-progress" maxWidth="Infinity"/>
+                    </VBox>
+
+                    <VBox spacing="6">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Avg. Grade" styleClass="xdash-stat-label"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Label fx:id="teacherAverageGradeLabel" text="No data available" styleClass="xdash-grade-pill"/>
+                        </HBox>
+                        <Label text="Stable performance this term" styleClass="xdash-note"/>
+                    </VBox>
+                </VBox>
+
+                <VBox styleClass="xdash-side-card xdash-logout" spacing="10">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <FontIcon iconLiteral="fas-sign-out-alt" styleClass="xdash-logout-icon"/>
+                        <Label text="Logout" styleClass="xdash-side-title"/>
+                    </HBox>
+                    <Label text="End your current session securely." styleClass="xdash-note" wrapText="true"/>
+                    <Button text="LOGOUT" styleClass="xdash-logout-btn" onAction="#logout" maxWidth="Infinity"/>
+                </VBox>
+
+                <VBox styleClass="xdash-side-card xdash-help" spacing="10" VBox.vgrow="ALWAYS">
+                    <Label text="Help Center" styleClass="xdash-side-title"/>
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="Need assistance with exam creation workflows?" styleClass="xdash-note" wrapText="true"/>
+                        </VBox>
+                        <StackPane styleClass="xdash-help-art" prefWidth="92" prefHeight="74">
+                            <FontIcon iconLiteral="fas-question-circle" styleClass="xdash-help-icon"/>
+                        </StackPane>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>
+
+        <!-- Question Bank -->
+       <!-- =========================================================
+    QUESTION BANK PAGE
+============================================================ -->
+<BorderPane fx:id="questionBankPane"
+            visible="false" managed="false"
+            styleClass="root">
+    <center>
+        <fx:include fx:id="questionBankView" source="QuestionBank.fxml"/>
+    </center>
+
+</BorderPane>
+
+        <!-- Create Exam -->
+       
+                                      
+                     <!-- =========================================================
+     CREATE EXAM PAGE
+============================================================ -->
+<BorderPane fx:id="createExamPane"
+            visible="false" managed="false"
+            styleClass="root">
+    <center>
+        <fx:include fx:id="createExamView" source="CreateExam.fxml"/>
+    </center>
+
+</BorderPane>
+
+        <!-- Schedule Exam -->
+       
+                  <!-- =========================================================
+     SCHEDULE EXAM PAGE
+============================================================ -->
+<BorderPane fx:id="scheduleExamPane"
+            visible="false" managed="false"
+            styleClass="root">
+    <center>
+        <fx:include fx:id="scheduleExamView" source="ScheduleExam.fxml"/>
+    </center>
+
+</BorderPane>
+
+        <!-- View Exams -->
+      
+                            <!-- =========================================================
+     EXAM LIBRARY / VIEW EXAMS
+============================================================ -->
+<BorderPane fx:id="viewExamsPane"
+            visible="false" managed="false"
+            styleClass="root">
+    <center>
+        <fx:include fx:id="examLibraryView" source="ExamLibrary.fxml"/>
+    </center>
+
+</BorderPane>
+        <!-- Teacher Results & Analytics -->
+      
+                      <!-- =========================================================
+     RESULTS & ANALYTICS PAGE
+============================================================ -->
+<BorderPane fx:id="teacherAnalyticsPane"
+            visible="false" managed="false"
+            styleClass="root">
+    <center>
+        <fx:include fx:id="resultsAnalyticsView" source="ResultsAnalytics.fxml"/>
+    </center>
+
+</BorderPane>
+        </children>
+</StackPane>
+
+

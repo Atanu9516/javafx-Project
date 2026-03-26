@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane fx:id="teacherLoginPane"
+           xmlns="http://javafx.com/javafx/17.0.6"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.onlinemcqexam.ExamController"
+           styleClass="teacher-login-root">
+
+    <children>
+        <Region styleClass="teacher-login-ambient"/>
+
+        <VBox alignment="CENTER" spacing="18" styleClass="teacher-login-page-wrap">
+            <VBox alignment="CENTER" spacing="6" styleClass="teacher-login-header">
+                <StackPane styleClass="teacher-login-logo-wrap">
+                    <FontIcon iconLiteral="fas-book-open" styleClass="teacher-login-logo-icon"/>
+                </StackPane>
+                <Label text="ExamNode" styleClass="teacher-login-brand"/>
+                <Label text="FACULTY PORTAL" styleClass="teacher-login-brand-sub"/>
+            </VBox>
+
+            <VBox spacing="14" styleClass="teacher-login-card" prefWidth="470" maxWidth="470">
+                <Label text="Teacher Login" styleClass="teacher-login-title"/>
+
+                <VBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="PORTAL ROLE" styleClass="teacher-login-field-label"/>
+                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
+                        <FontIcon iconLiteral="fas-user-graduate" styleClass="teacher-login-field-icon"/>
+                        <ChoiceBox fx:id="teacherRoleChoice" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-role-choice"/>
+                        <FontIcon iconLiteral="fas-lock" styleClass="teacher-login-field-icon"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="EMPLOYEE ID / USERNAME" styleClass="teacher-login-field-label"/>
+                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
+                        <FontIcon iconLiteral="fas-id-badge" styleClass="teacher-login-field-icon"/>
+                        <TextField fx:id="teacherUsername" promptText="Enter your credentials" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="8" alignment="CENTER_LEFT">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="PASSWORD" styleClass="teacher-login-field-label"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Forgot Access?" styleClass="teacher-login-forgot"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
+                        <FontIcon iconLiteral="fas-key" styleClass="teacher-login-field-icon"/>
+                        <PasswordField fx:id="teacherPassword" promptText="Enter secure password" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                        <FontIcon iconLiteral="fas-eye" styleClass="teacher-login-field-icon"/>
+                    </HBox>
+                </VBox>
+
+                <Button text="Sign In to Dashboard  ->" styleClass="teacher-login-signin" maxWidth="Infinity" onAction="#loginTeacher"/>
+
+                <VBox spacing="8" styleClass="teacher-login-redirect-wrap">
+                    <Label text="REDIRECT" styleClass="teacher-login-redirect-label"/>
+                    <Button text="&lt;-  Back to Student Login" styleClass="teacher-login-back" maxWidth="Infinity" onAction="#showLogin"/>
+                </VBox>
+
+                <Label fx:id="teacherLoginMessageLabel" styleClass="teacher-login-status" wrapText="true"/>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-card-footer">
+                    <FontIcon iconLiteral="fas-signal" styleClass="teacher-login-footer-icon"/>
+                    <Label text="SYSTEM ONLINE" styleClass="teacher-login-footer-text"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="v2.4.1-Stable" styleClass="teacher-login-footer-text"/>
+                </HBox>
+            </VBox>
+
+            <HBox alignment="CENTER" spacing="18" styleClass="teacher-login-page-footer">
+                <Label text="Privacy Policy" styleClass="teacher-login-page-footer-link"/>
+                <Label text="|" styleClass="teacher-login-page-footer-sep"/>
+                <Label text="Terms of Service" styleClass="teacher-login-page-footer-link"/>
+                <Label text="|" styleClass="teacher-login-page-footer-sep"/>
+                <Label text="Support" styleClass="teacher-login-page-footer-link"/>
+            </HBox>
+        </VBox>
+    </children>
+</StackPane>

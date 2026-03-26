@@ -1,0 +1,251 @@
+/* Premium live exam interface */
+.live-exam-root {
+    -fx-background-color: linear-gradient(to bottom right, #050d0a 0%, #0b1713 58%, #11221a 100%);
+}
+
+.live-exam-topbar {
+    -fx-background-color: rgba(12, 25, 19, 0.96);
+    -fx-padding: 14 22;
+    -fx-border-color: rgba(102, 235, 155, 0.16);
+    -fx-border-width: 0 0 1 0;
+}
+
+.live-exam-live-pill {
+    -fx-background-color: rgba(23, 47, 34, 0.95);
+    -fx-background-radius: 999;
+    -fx-padding: 6 12;
+}
+
+.live-exam-live-dot {
+    -fx-icon-color: #2cff7a;
+    -fx-icon-size: 10px;
+}
+
+.live-exam-live-text {
+    -fx-text-fill: #edfff5;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+
+.live-exam-question-tracker {
+    -fx-text-fill: #cde4d8;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+}
+
+.live-exam-timer-badge {
+    -fx-background-color: rgba(44, 255, 122, 0.18);
+    -fx-border-color: rgba(110, 255, 173, 0.58);
+    -fx-border-width: 1;
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+    -fx-text-fill: #99ffbf;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-padding: 7 14;
+}
+
+.live-exam-main-area {
+    -fx-padding: 24 28 18 28;
+}
+
+.live-exam-question-card {
+    -fx-background-color: #0f1f17;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(106, 238, 158, 0.18);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(gaussian, rgba(12, 20, 15, 0.45), 18, 0.22, 0, 6);
+}
+
+.live-exam-question-text {
+    -fx-text-fill: #f3fff8;
+    -fx-font-size: 26px;
+    -fx-font-weight: 800;
+    -fx-line-spacing: 3;
+}
+
+.live-exam-question-topic {
+    -fx-text-fill: #91a89c;
+    -fx-font-size: 12px;
+}
+
+.live-exam-options-wrap {
+    -fx-padding: 2 0;
+}
+
+.live-exam-option-card {
+    -fx-background-color: rgba(15, 32, 24, 0.96);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(95, 213, 145, 0.18);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-text-fill: #e6fff1;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-padding: 14 16;
+}
+
+.live-exam-option-card > .radio {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-padding: 0;
+}
+
+.live-exam-option-card:hover {
+    -fx-background-color: rgba(27, 56, 41, 0.96);
+    -fx-border-color: rgba(94, 239, 153, 0.42);
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.2), 12, 0.2, 0, 0);
+    -fx-cursor: hand;
+}
+
+.live-exam-option-card:selected {
+    -fx-background-color: rgba(25, 65, 45, 0.98);
+    -fx-border-color: rgba(44, 255, 122, 0.74);
+    -fx-border-width: 1 1 1 6;
+}
+
+.live-exam-topic-info-card {
+    -fx-background-color: rgba(14, 31, 23, 0.96);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(95, 216, 145, 0.22);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-padding: 9 12;
+}
+
+.live-exam-topic-icon {
+    -fx-icon-color: #84ffb7;
+    -fx-icon-size: 12px;
+}
+
+.live-exam-topic-info-label {
+    -fx-text-fill: #9eb3a8;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.live-exam-topic-info-value {
+    -fx-text-fill: #dff8ea;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+}
+
+.live-exam-progress {
+    -fx-accent: #2cff7a;
+    -fx-pref-height: 6;
+    -fx-background-radius: 999;
+}
+
+.live-exam-progress > .track {
+    -fx-background-color: rgba(31, 54, 43, 0.96);
+    -fx-background-radius: 999;
+}
+
+.live-exam-progress > .bar {
+    -fx-background-color: linear-gradient(to right, #2cff7a, #17d457);
+    -fx-background-radius: 999;
+}
+
+.live-exam-footer-bar {
+    -fx-background-color: rgba(12, 25, 19, 0.96);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(104, 238, 159, 0.16);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-padding: 10 12;
+}
+
+.live-exam-nav-button {
+    -fx-background-color: rgba(22, 45, 33, 0.96);
+    -fx-text-fill: #d8efe2;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 11;
+    -fx-padding: 9 14;
+}
+
+.live-exam-nav-button:hover {
+    -fx-background-color: rgba(36, 70, 52, 0.96);
+    -fx-cursor: hand;
+}
+
+.live-exam-submit-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #15d355);
+    -fx-text-fill: #041209;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-background-radius: 12;
+    -fx-padding: 10 18;
+}
+
+.live-exam-submit-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #57ffa0, #1fe05f);
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.38), 16, 0.28, 0, 3);
+    -fx-cursor: hand;
+}
+
+.live-exam-footer-muted {
+    -fx-text-fill: #94ab9f;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.app-confirm-dialog {
+    -fx-background-color: linear-gradient(to bottom right, #0b1713, #12241b);
+    -fx-border-color: rgba(102, 235, 155, 0.26);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+.app-info-dialog {
+    -fx-background-color: linear-gradient(to bottom right, #0b1713, #12241b);
+    -fx-border-color: rgba(102, 235, 155, 0.26);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+.app-confirm-dialog:header *.header-panel,
+.app-info-dialog:header *.header-panel {
+    -fx-background-color: rgba(16, 35, 25, 0.96);
+    -fx-padding: 14 16;
+    -fx-border-color: rgba(102, 235, 155, 0.16);
+    -fx-border-width: 0 0 1 0;
+}
+
+.app-confirm-dialog:header *.header-panel *.label,
+.app-info-dialog:header *.header-panel *.label {
+    -fx-text-fill: #e9fff2;
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+}
+
+.app-confirm-dialog > *.content.label,
+.app-info-dialog > *.content.label {
+    -fx-text-fill: #cde4d8;
+    -fx-font-size: 13px;
+    -fx-padding: 14 16 8 16;
+}
+
+.app-confirm-dialog > *.button-bar > *.container,
+.app-info-dialog > *.button-bar > *.container {
+    -fx-padding: 8 14 12 14;
+}
+
+.app-confirm-dialog .button,
+.app-info-dialog .button {
+    -fx-background-color: rgba(28, 56, 42, 0.95);
+    -fx-text-fill: #d8efe2;
+    -fx-font-weight: 700;
+    -fx-background-radius: 9;
+    -fx-padding: 7 16;
+}
+
+.app-confirm-dialog .button:hover,
+.app-info-dialog .button:hover {
+    -fx-background-color: rgba(44, 255, 122, 0.20);
+    -fx-text-fill: #effff5;
+}

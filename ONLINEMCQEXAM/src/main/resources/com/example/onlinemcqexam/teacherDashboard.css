@@ -1,0 +1,234 @@
+.xdash-root {
+    -fx-background-color: linear-gradient(to bottom right, #050d0a 0%, #0b1713 100%);
+    -fx-padding: 30;
+}
+
+.xdash-shell {
+    -fx-background-color: linear-gradient(to bottom right, rgba(7, 15, 11, 0.95), rgba(9, 19, 14, 0.88));
+    -fx-background-radius: 32;
+    -fx-border-color: rgba(124, 255, 190, 0.22);
+    -fx-border-radius: 32;
+    -fx-padding: 34;
+    -fx-effect: dropshadow(gaussian, rgba(3, 8, 6, 0.62), 26, 0.28, 0, 8);
+}
+
+.xdash-main-column {
+    -fx-padding: 2 0 0 0;
+}
+
+.xdash-header {
+    -fx-padding: 2 0 4 0;
+}
+
+.xdash-brand-row {
+    -fx-padding: 2 0 0 0;
+}
+
+.xdash-brand-mark {
+    -fx-min-width: 38;
+    -fx-min-height: 38;
+    -fx-pref-width: 38;
+    -fx-pref-height: 38;
+    -fx-background-color: rgba(44, 255, 122, 0.16);
+    -fx-background-radius: 19;
+    -fx-border-color: rgba(44, 255, 122, 0.36);
+    -fx-border-radius: 19;
+}
+
+.xdash-brand-icon {
+    -fx-icon-size: 16;
+    -fx-icon-color: #2cff7a;
+}
+
+.xdash-brand-text {
+    -fx-text-fill: #ebfff3;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.xdash-title {
+    -fx-text-fill: #f4fff8;
+    -fx-font-size: 46px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.xdash-subtitle {
+    -fx-text-fill: #93a79c;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI";
+}
+
+.xdash-grid {
+    -fx-padding: 2 0 0 0;
+}
+
+.xdash-card {
+    -fx-background-color: #102218;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(112, 198, 149, 0.28);
+    -fx-border-radius: 20;
+    -fx-padding: 22;
+    -fx-effect: dropshadow(gaussian, rgba(3, 9, 6, 0.46), 12, 0.2, 0, 3);
+}
+
+.xdash-icon-box {
+    -fx-min-width: 38;
+    -fx-min-height: 38;
+    -fx-pref-width: 38;
+    -fx-pref-height: 38;
+    -fx-background-color: rgba(44, 255, 122, 0.14);
+    -fx-background-radius: 11;
+    -fx-border-color: rgba(44, 255, 122, 0.26);
+    -fx-border-radius: 11;
+}
+
+.xdash-card-icon {
+    -fx-icon-size: 15;
+    -fx-icon-color: #2cff7a;
+}
+
+.xdash-card-title {
+    -fx-text-fill: #f2fff7;
+    -fx-font-size: 19px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.xdash-card-text {
+    -fx-text-fill: #96aa9d;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI";
+}
+
+.xdash-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: #79f8a8;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 5 0 0 0;
+    -fx-cursor: hand;
+}
+
+.xdash-link:hover {
+    -fx-text-fill: #b8ffd0;
+    -fx-underline: true;
+}
+
+.xdash-primary {
+    -fx-background-color: linear-gradient(to right, #2cff7a, #23de68);
+    -fx-background-radius: 9;
+    -fx-text-fill: #07140d;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-padding: 10 18 10 18;
+    -fx-cursor: hand;
+}
+
+.xdash-primary:hover {
+    -fx-background-color: linear-gradient(to right, #3dff89, #2cff7a);
+}
+
+.xdash-wide {
+    -fx-padding: 18 20 18 20;
+}
+
+.xdash-badge {
+    -fx-background-color: rgba(52, 255, 136, 0.2);
+    -fx-background-radius: 999;
+    -fx-text-fill: #9bffc3;
+    -fx-font-size: 10px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-padding: 6 12 6 12;
+}
+
+.xdash-sidebar {
+    -fx-padding: 4 0 0 0;
+}
+
+.xdash-side-card {
+    -fx-background-color: #11251c;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(114, 190, 145, 0.3);
+    -fx-border-radius: 20;
+    -fx-padding: 16;
+}
+
+.xdash-side-title {
+    -fx-text-fill: #ebfff3;
+    -fx-font-size: 17px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.xdash-stat-label {
+    -fx-text-fill: #94a69c;
+    -fx-font-size: 11px;
+    -fx-font-family: "Segoe UI";
+}
+
+.xdash-stat-value {
+    -fx-text-fill: #f4fff8;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI Bold";
+}
+
+.xdash-grade-pill {
+    -fx-background-color: rgba(51, 246, 132, 0.2);
+    -fx-background-radius: 999;
+    -fx-text-fill: #b8ffd4;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-padding: 2 8 2 8;
+}
+
+.xdash-progress {
+    -fx-accent: #2cff7a;
+    -fx-control-inner-background: #1a3026;
+    -fx-background-radius: 999;
+    -fx-pref-height: 9;
+}
+
+.xdash-progress .track {
+    -fx-background-color: #1a3026;
+    -fx-background-radius: 999;
+}
+
+.xdash-progress .bar {
+    -fx-background-color: linear-gradient(to right, #2cff7a, #20ca5f);
+    -fx-background-radius: 999;
+}
+
+.xdash-note {
+    -fx-text-fill: #889a8f;
+    -fx-font-size: 11px;
+    -fx-font-family: "Segoe UI";
+}
+
+.xdash-logout-icon {
+    -fx-icon-size: 15;
+    -fx-icon-color: #f6939a;
+}
+
+.xdash-logout-btn {
+    -fx-background-color: linear-gradient(to right, #f24a58, #d33a46);
+    -fx-background-radius: 11;
+    -fx-text-fill: #fff5f6;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-padding: 10 0 10 0;
+    -fx-cursor: hand;
+}
+
+.xdash-logout-btn:hover {
+    -fx-background-color: linear-gradient(to right, #ff5c69, #e44753);
+}
+
+.xdash-help-art {
+    -fx-background-color: rgba(44, 255, 122, 0.12);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(44, 255, 122, 0.22);
+    -fx-border-radius: 12;
+}
+
+.xdash-help-icon {
+    -fx-icon-size: 20;
+    -fx-icon-color: #8ef2b6;
+}

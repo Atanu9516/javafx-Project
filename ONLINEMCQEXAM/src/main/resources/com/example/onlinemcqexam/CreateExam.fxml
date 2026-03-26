@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.6"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.onlinemcqexam.CreateExamController"
+           styleClass="ce-root">
+
+    <VBox spacing="18" styleClass="ce-shell">
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="ce-header-row">
+            <Button fx:id="backButton" text="Back" styleClass="ce-back-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-arrow-left" styleClass="ce-back-icon"/>
+                </graphic>
+            </Button>
+            <HBox alignment="CENTER_LEFT" spacing="8" styleClass="ce-brand-pill">
+                <FontIcon iconLiteral="fas-cubes" styleClass="ce-brand-icon"/>
+                <Label text="ExamNode" styleClass="ce-brand-text"/>
+            </HBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Create New Exam" styleClass="ce-title"/>
+                <Label text="Configure your assessment parameters and question set." styleClass="ce-subtitle"/>
+            </VBox>
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="ce-filter-bar">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Academic Term" styleClass="ce-field-label"/>
+                <ChoiceBox fx:id="termChoice" styleClass="ce-choice" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Course Module" styleClass="ce-field-label"/>
+                <ChoiceBox fx:id="courseChoice" styleClass="ce-choice" maxWidth="Infinity"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="ce-mode-card">
+            <Label text="Selection Mode" styleClass="ce-mode-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ToggleButton fx:id="manualModeButton" text="Manual" styleClass="ce-mode-toggle ce-mode-manual">
+                <graphic>
+                    <FontIcon iconLiteral="fas-hand-pointer" styleClass="ce-mode-icon"/>
+                </graphic>
+            </ToggleButton>
+            <ToggleButton fx:id="autoModeButton" text="Auto-Gen" styleClass="ce-mode-toggle ce-mode-auto">
+                <graphic>
+                    <FontIcon iconLiteral="fas-magic" styleClass="ce-mode-icon"/>
+                </graphic>
+            </ToggleButton>
+        </HBox>
+
+        <VBox spacing="10" styleClass="ce-question-wrap" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Question List" styleClass="ce-section-title"/>
+                <Label fx:id="questionCountLabel" text="0 questions found" styleClass="ce-count-text"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="searchField" promptText="Search question text" styleClass="ce-search" prefWidth="250"/>
+                <Button fx:id="manageBankButton" text="Manage Bank" styleClass="ce-manage-link"/>
+            </HBox>
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="ce-scroll" VBox.vgrow="ALWAYS">
+                <content>
+                    <VBox fx:id="questionCardContainer" spacing="11" styleClass="ce-card-list"/>
+                </content>
+            </ScrollPane>
+        </VBox>
+
+        <HBox spacing="14" alignment="CENTER_LEFT" styleClass="ce-target-card">
+            <Label text="Target Count" styleClass="ce-target-label"/>
+            <Button fx:id="targetMinusButton" text="-" styleClass="ce-stepper-btn"/>
+            <Label fx:id="targetCountValueLabel" text="0" styleClass="ce-target-value"/>
+            <Button fx:id="targetPlusButton" text="+" styleClass="ce-stepper-btn"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <VBox spacing="2" styleClass="ce-metric-card">
+                <Label text="Computed Time" styleClass="ce-metric-title"/>
+                <Label fx:id="computedTimeLabel" text="0 min" styleClass="ce-metric-value"/>
+            </VBox>
+            <VBox spacing="2" styleClass="ce-metric-card">
+                <Label text="Computed Marks" styleClass="ce-metric-title"/>
+                <Label fx:id="computedMarksLabel" text="0" styleClass="ce-metric-value"/>
+            </VBox>
+        </HBox>
+
+        <Button fx:id="saveExamButton" text="Save Exam" styleClass="ce-save-button" maxWidth="Infinity">
+            <graphic>
+                <FontIcon iconLiteral="fas-save" styleClass="ce-save-icon"/>
+            </graphic>
+        </Button>
+
+        <Label fx:id="statusLabel" styleClass="ce-status"/>
+    </VBox>
+</StackPane>

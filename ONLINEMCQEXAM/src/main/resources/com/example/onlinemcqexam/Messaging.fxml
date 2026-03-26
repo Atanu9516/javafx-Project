@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="messagingPane"
+            xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.onlinemcqexam.ExamController"
+            styleClass="messaging-root">
+
+    <left>
+        <VBox spacing="15" styleClass="messaging-sidebar" prefWidth="220">
+            <children>
+                <Label text="Exam Portal" styleClass="messaging-logo"/>
+
+                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="messaging-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-th-large" styleClass="messaging-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Available Exams" onAction="#showAvailableExams" styleClass="messaging-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="far-question-circle" styleClass="messaging-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="messaging-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="far-calendar-alt" styleClass="messaging-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="My Exams" onAction="#showExamHistory" styleClass="messaging-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="far-edit" styleClass="messaging-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="messaging-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-signal" styleClass="messaging-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Messaging" styleClass="messaging-nav-button messaging-nav-active">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-comment-dots" styleClass="messaging-nav-icon"/>
+                    </graphic>
+                </Button>
+
+                <VBox VBox.vgrow="ALWAYS"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="messaging-logout-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-sign-out-alt" styleClass="messaging-nav-icon"/>
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <HBox spacing="18" styleClass="messaging-main-area">
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="messaging-left-scroll" prefWidth="360">
+                <content>
+                    <VBox spacing="14" styleClass="messaging-left-column">
+                        <VBox spacing="12" styleClass="messaging-panel-card">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="Friend Requests" styleClass="messaging-section-title"/>
+                                <Label fx:id="messagingRequestBadgeLabel" text="No data available" styleClass="messaging-badge"/>
+                            </HBox>
+
+                            <HBox spacing="8" alignment="CENTER_LEFT" styleClass="messaging-search-shell">
+                                <FontIcon iconLiteral="fas-search" styleClass="messaging-search-icon"/>
+                                <TextField fx:id="friendRequestField" promptText="Find students..." HBox.hgrow="ALWAYS" styleClass="messaging-search-field"/>
+                                <Button text="Add" onAction="#sendFriendRequest" styleClass="messaging-add-button"/>
+                            </HBox>
+
+                            <ListView fx:id="pendingRequestsList" prefHeight="210" styleClass="messaging-request-list"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="messaging-panel-card" VBox.vgrow="ALWAYS">
+                            <Label text="Friends Online" styleClass="messaging-section-title"/>
+                            <ListView fx:id="friendsList" VBox.vgrow="ALWAYS" styleClass="messaging-friends-list"/>
+                        </VBox>
+                    </VBox>
+                </content>
+            </ScrollPane>
+
+            <VBox spacing="12" styleClass="messaging-chat-panel" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="10" styleClass="messaging-chat-header">
+                    <StackPane styleClass="messaging-chat-avatar">
+                        <Label text="FR" styleClass="messaging-chat-avatar-label"/>
+                    </StackPane>
+
+                    <VBox spacing="2">
+                        <Label fx:id="messagingActiveFriendLabel" text="Select a friend" styleClass="messaging-chat-title"/>
+                        <Label fx:id="messagingActiveStatusLabel" text="Active" styleClass="messaging-chat-status"/>
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button styleClass="messaging-header-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-phone-alt" styleClass="messaging-header-icon"/>
+                        </graphic>
+                    </Button>
+                    <Button styleClass="messaging-header-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-video" styleClass="messaging-header-icon"/>
+                        </graphic>
+                    </Button>
+                    <Button styleClass="messaging-header-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-ellipsis-h" styleClass="messaging-header-icon"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+
+                <ListView fx:id="chatHistoryList" VBox.vgrow="ALWAYS" styleClass="messaging-chat-list"/>
+
+                <HBox alignment="CENTER_LEFT" spacing="8" styleClass="messaging-composer-bar">
+                    <Button styleClass="messaging-composer-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-plus" styleClass="messaging-composer-icon"/>
+                        </graphic>
+                    </Button>
+                    <TextField fx:id="chatMessageField" promptText="Write a message..." HBox.hgrow="ALWAYS" styleClass="messaging-chat-input"/>
+                    <Button styleClass="messaging-composer-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="far-smile" styleClass="messaging-composer-icon"/>
+                        </graphic>
+                    </Button>
+                    <Button onAction="#sendChatMessage" styleClass="messaging-send-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-paper-plane" styleClass="messaging-send-icon"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>

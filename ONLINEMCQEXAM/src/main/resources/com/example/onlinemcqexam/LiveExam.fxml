@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="examPane"
+            xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.onlinemcqexam.ExamController"
+            styleClass="live-exam-root">
+
+    <top>
+        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="live-exam-topbar">
+            <HBox spacing="8" alignment="CENTER_LEFT" styleClass="live-exam-live-pill">
+                <FontIcon iconLiteral="fas-circle" styleClass="live-exam-live-dot"/>
+                <Label text="Live Exam" styleClass="live-exam-live-text"/>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="progressLabel" text="Question 1 of 20" styleClass="live-exam-question-tracker"/>
+
+            <Label fx:id="timerLabel" text="00:00" styleClass="live-exam-timer-badge"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="16" styleClass="live-exam-main-area">
+
+            <VBox spacing="12" styleClass="live-exam-question-card">
+                <Label fx:id="questionLabel" wrapText="true" styleClass="live-exam-question-text"/>
+                <Label fx:id="examTopicLabel" text="Topic: Core Concepts" styleClass="live-exam-question-topic"/>
+            </VBox>
+
+            <VBox spacing="10" styleClass="live-exam-options-wrap">
+                <RadioButton fx:id="optionA" text="A  Option A" styleClass="live-exam-option-card"/>
+                <RadioButton fx:id="optionB" text="B  Option B" styleClass="live-exam-option-card"/>
+                <RadioButton fx:id="optionC" text="C  Option C" styleClass="live-exam-option-card"/>
+                <RadioButton fx:id="optionD" text="D  Option D" styleClass="live-exam-option-card"/>
+            </VBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="8" styleClass="live-exam-topic-info-card">
+                <FontIcon iconLiteral="fas-tag" styleClass="live-exam-topic-icon"/>
+                <Label text="Topic" styleClass="live-exam-topic-info-label"/>
+                <Label fx:id="levelLabel" text="Core Concepts" styleClass="live-exam-topic-info-value"/>
+            </HBox>
+
+            <ProgressBar fx:id="progressBar" progress="0" styleClass="live-exam-progress"/>
+
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="live-exam-footer-bar">
+                <Button fx:id="prevButton" text="&lt; Previous" styleClass="live-exam-nav-button" onAction="#previousQuestion"/>
+                <Button fx:id="nextButton" text="Next &gt;" styleClass="live-exam-nav-button" onAction="#nextQuestion"/>
+
+                <VBox spacing="2">
+                    <Label fx:id="examAutosaveLabel" text="Auto-saving response..." styleClass="live-exam-footer-muted"/>
+                    <Label fx:id="examCompletionLabel" text="0% Complete" styleClass="live-exam-footer-muted"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="submitButton" text="Submit Exam" styleClass="live-exam-submit-button" onAction="#submitExam"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

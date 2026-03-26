@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="startPane"
+            xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.onlinemcqexam.ExamController"
+            styleClass="exam-start-root">
+
+    <left>
+        <VBox spacing="12" styleClass="exam-start-sidebar" prefWidth="220">
+            <children>
+                <Label text="Exam Portal" styleClass="exam-start-logo"/>
+
+                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="exam-start-nav-button"/>
+                <Button text="Available Exams" styleClass="exam-start-nav-button exam-start-nav-active"/>
+                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="exam-start-nav-button"/>
+                <Button text="My Exams" onAction="#showExamHistory" styleClass="exam-start-nav-button"/>
+                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="exam-start-nav-button"/>
+                <Button text="Discussion" onAction="#showDiscussion" styleClass="exam-start-nav-button"/>
+                <Button text="Messaging" onAction="#showMessaging" styleClass="exam-start-nav-button"/>
+
+                <VBox VBox.vgrow="ALWAYS"/>
+
+                <Button text="Start Quick Quiz" styleClass="exam-start-quick-button"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="exam-start-nav-button"/>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane styleClass="exam-start-main-wrap">
+            <Label text="EXAM" styleClass="exam-start-watermark" StackPane.alignment="BOTTOM_LEFT"/>
+
+            <HBox spacing="24" alignment="TOP_LEFT" styleClass="exam-start-layout">
+
+                <VBox spacing="16" HBox.hgrow="ALWAYS" styleClass="exam-start-left-column">
+                    <Label text="Exam Setup" styleClass="exam-start-overline"/>
+                    <Label text="Ready to Start" styleClass="exam-start-heading"/>
+                    <Label fx:id="subtitleLabel" text="[CS402 - Artificial Intelligence]" styleClass="exam-start-course"/>
+
+                    <Label text="Please review the exam details and confirm your setup before beginning. Once started, the timer will begin immediately and navigation controls remain active until submission."
+                           styleClass="exam-start-description" wrapText="true"/>
+
+                    <HBox spacing="14">
+                        <VBox styleClass="exam-start-info-card" HBox.hgrow="ALWAYS" spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <FontIcon iconLiteral="fas-clock" styleClass="exam-start-info-icon"/>
+                                <Label text="Time Limit" styleClass="exam-start-info-title"/>
+                            </HBox>
+                            <Label text="45 Minutes" styleClass="exam-start-info-value"/>
+                        </VBox>
+
+                        <VBox styleClass="exam-start-info-card" HBox.hgrow="ALWAYS" spacing="8">
+                            <HBox spacing="8" alignment="CENTER_LEFT">
+                                <FontIcon iconLiteral="fas-chart-line" styleClass="exam-start-info-icon"/>
+                                <Label text="Passing Score" styleClass="exam-start-info-title"/>
+                            </HBox>
+                            <Label fx:id="passLabel" text="70%" styleClass="exam-start-info-value"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <VBox prefWidth="330" spacing="12" styleClass="exam-start-right-card">
+                    <Label text="Question Count" styleClass="exam-start-right-title"/>
+
+                    <ChoiceBox fx:id="examQuestionCountChoice" styleClass="exam-start-question-choice"/>
+
+                    <VBox spacing="6" styleClass="exam-start-note-box">
+                        <Label text="Instructions" styleClass="exam-start-note-title"/>
+                        <Label text="Select your preferred question set. Standard mode includes balanced difficulty and shuffled ordering." styleClass="exam-start-note-text" wrapText="true"/>
+                    </VBox>
+
+                    <Button text="Start Exam"
+                            onAction="#startExam"
+                            styleClass="exam-start-primary-button"
+                            maxWidth="Infinity"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="exam-start-footer">
+                        <Label text="Status:" styleClass="exam-start-footer-label"/>
+                        <Label text="READY" styleClass="exam-start-ready"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <FontIcon iconLiteral="fas-shield-alt" styleClass="exam-start-footer-icon"/>
+                        <Label text="System Secure" styleClass="exam-start-footer-label"/>
+                    </HBox>
+                </VBox>
+
+            </HBox>
+        </StackPane>
+    </center>
+
+</BorderPane>

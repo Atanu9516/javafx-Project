@@ -1,0 +1,121 @@
+.af-root {
+    -fx-background-color: linear-gradient(to bottom right, #050d0a 0%, #0b1713 100%);
+}
+
+.af-layout {
+    -fx-padding: 34 26 26 26;
+}
+
+.af-icon-outer {
+    -fx-min-width: 86;
+    -fx-min-height: 86;
+    -fx-max-width: 86;
+    -fx-max-height: 86;
+    -fx-background-color: rgba(44, 255, 122, 0.16);
+    -fx-background-radius: 999;
+    -fx-border-color: rgba(44, 255, 122, 0.36);
+    -fx-border-radius: 999;
+    -fx-border-width: 1;
+}
+
+.af-icon-inner {
+    -fx-min-width: 62;
+    -fx-min-height: 62;
+    -fx-max-width: 62;
+    -fx-max-height: 62;
+    -fx-background-color: #0f1f17;
+    -fx-background-radius: 999;
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.22), 20, 0.3, 0, 3);
+}
+
+.af-main-icon {
+    -fx-icon-color: #2cff7a;
+    -fx-icon-size: 26;
+}
+
+.af-title {
+    -fx-text-fill: #f3fff8;
+    -fx-font-size: 42px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.af-subtitle {
+    -fx-text-fill: #9aac9f;
+    -fx-font-size: 14px;
+}
+
+.af-card {
+    -fx-background-color: #0f1f17;
+    -fx-background-radius: 22;
+    -fx-border-color: rgba(111, 191, 147, 0.24);
+    -fx-border-radius: 22;
+    -fx-padding: 16 18 18 18;
+    -fx-effect: dropshadow(gaussian, rgba(3, 10, 6, 0.64), 22, 0.32, 0, 7);
+}
+
+.af-decor-row {
+    -fx-padding: 0 0 2 0;
+}
+
+.af-decor-pill {
+    -fx-min-width: 34;
+    -fx-pref-width: 34;
+    -fx-max-width: 34;
+    -fx-min-height: 3;
+    -fx-pref-height: 3;
+    -fx-max-height: 3;
+    -fx-background-color: rgba(130, 148, 139, 0.55);
+    -fx-background-radius: 999;
+}
+
+.af-primary-btn {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #0ecf4b);
+    -fx-background-radius: 14;
+    -fx-text-fill: #051f0d;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI Bold";
+    -fx-padding: 13 14 13 14;
+    -fx-graphic-text-gap: 9;
+    -fx-cursor: hand;
+}
+
+.af-primary-btn:hover {
+    -fx-background-color: linear-gradient(to bottom, #56ffa0, #1ce05f);
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.46), 20, 0.3, 0, 4);
+}
+
+.af-primary-btn:focused {
+    -fx-border-color: rgba(44, 255, 122, 0.7);
+    -fx-border-radius: 14;
+}
+
+.af-primary-icon {
+    -fx-icon-color: #062711;
+    -fx-icon-size: 14;
+}
+
+.af-link {
+    -fx-text-fill: #2cff7a;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.af-support {
+    -fx-text-fill: #83958d;
+    -fx-font-size: 12px;
+}
+
+.af-footer-row {
+    -fx-padding: 5 0 0 0;
+}
+
+.af-footer-icon {
+    -fx-icon-color: #7f948b;
+    -fx-icon-size: 12;
+}
+
+.af-footer-text {
+    -fx-text-fill: #7f948b;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI Semibold";
+}

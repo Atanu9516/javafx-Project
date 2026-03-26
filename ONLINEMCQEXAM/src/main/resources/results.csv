@@ -1,0 +1,9 @@
+username,term,course,examId,totalQuestions,correctAnswers,percentage,timeTaken,date,type
+Tabassum,1-1,CSE101,NA,20,0,0.0,10,2026-03-24T14:11,practice
+Tabassum,1-1,CSE101,NA,20,17,85.0,135,2026-03-26T17:59,practice
+Tabassum,1-1,CSE101,NA,20,1,5.0,12,2026-03-26T20:25,practice
+Tabassum,2-2,CSE209,NA,20,2,10.0,69,2026-03-26T20:50,practice
+Tabassum,2-1,CSE207,NA,30,1,3.3,11,2026-03-26T20:54,practice
+Tabassum,1-1,CSE103,NA,20,11,55.0,135,2026-03-26T21:05,practice
+Tabassum,1-1,CSE101,EX003,20,7,35.0,58,2026-03-26T21:20,scheduled
+Tabassum,3-1,CSE309,EX005,20,1,5.0,38,2026-03-26T21:28,scheduled

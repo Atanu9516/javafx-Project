@@ -1,0 +1,268 @@
+/* Modern dark card-based Scheduled Exams page */
+.scheduled-root {
+    -fx-background-color: linear-gradient(to bottom, #071014, #0c1512 62%, #0e1b15);
+}
+
+.scheduled-header {
+    -fx-padding: 24 28 14 28;
+}
+
+.scheduled-page-title {
+    -fx-text-fill: #effff4;
+    -fx-font-size: 34px;
+    -fx-font-weight: 800;
+}
+
+.scheduled-page-subtitle {
+    -fx-text-fill: #93a79b;
+    -fx-font-size: 13px;
+}
+
+.scheduled-filter-label {
+    -fx-text-fill: #93a79b;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.scheduled-filter-choice {
+    -fx-background-color: rgba(22, 39, 30, 0.9);
+    -fx-background-radius: 999;
+    -fx-mark-color: #7dffaf;
+    -fx-border-color: rgba(90, 246, 152, 0.25);
+    -fx-border-radius: 999;
+    -fx-text-fill: #dbf5e6;
+    -fx-padding: 4 10;
+}
+
+.scheduled-filter-choice:hover {
+    -fx-background-color: rgba(33, 60, 45, 0.95);
+    -fx-border-color: rgba(110, 255, 171, 0.45);
+}
+
+.scheduled-filter-choice:focused {
+    -fx-border-color: rgba(131, 255, 185, 0.65);
+    -fx-effect: dropshadow(gaussian, rgba(52, 255, 106, 0.20), 10, 0.2, 0, 0);
+}
+
+.scheduled-filter-choice .label {
+    -fx-text-fill: #dbf5e6;
+    -fx-font-size: 12px;
+}
+
+.scheduled-filter-choice .arrow {
+    -fx-background-color: #84ffb7;
+}
+
+.scheduled-filter-choice .context-menu {
+    -fx-background-color: #11231a;
+    -fx-border-color: rgba(96, 247, 160, 0.25);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 4;
+}
+
+.scheduled-filter-choice .menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 6 10;
+}
+
+.scheduled-filter-choice .menu-item .label {
+    -fx-text-fill: #d8f2e2;
+    -fx-font-size: 12px;
+}
+
+.scheduled-filter-choice .menu-item:focused,
+.scheduled-filter-choice .menu-item:hover {
+    -fx-background-color: rgba(52, 255, 106, 0.22);
+    -fx-background-radius: 8;
+}
+
+.scheduled-filter-choice .menu-item:focused .label,
+.scheduled-filter-choice .menu-item:hover .label {
+    -fx-text-fill: #effff4;
+}
+
+.scheduled-back-button {
+    -fx-background-color: rgba(27, 48, 37, 0.9);
+    -fx-text-fill: #dff8ea;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(95, 255, 159, 0.32);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-padding: 9 15;
+}
+
+.scheduled-back-button:hover {
+    -fx-background-color: rgba(45, 88, 61, 0.75);
+    -fx-cursor: hand;
+}
+
+.scheduled-main-wrap {
+    -fx-padding: 10 28 26 28;
+}
+
+.scheduled-ongoing-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(44, 255, 122, 0.20), rgba(18, 47, 30, 0.92));
+    -fx-background-radius: 22;
+    -fx-border-color: rgba(110, 255, 171, 0.35);
+    -fx-border-width: 1;
+    -fx-border-radius: 22;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.18), 20, 0.2, 0, 8);
+}
+
+.scheduled-status-badge {
+    -fx-background-color: rgba(52, 255, 106, 0.24);
+    -fx-text-fill: #8bffb9;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 999;
+    -fx-padding: 5 10;
+}
+
+.scheduled-card-meta {
+    -fx-text-fill: #9cb3a7;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.scheduled-exam-title {
+    -fx-text-fill: #f2fff7;
+    -fx-font-size: 24px;
+    -fx-font-weight: 800;
+}
+
+.scheduled-meta-box {
+    -fx-background-color: rgba(13, 29, 21, 0.84);
+    -fx-background-radius: 12;
+    -fx-padding: 10;
+    -fx-border-color: rgba(98, 246, 160, 0.20);
+    -fx-border-radius: 12;
+}
+
+.scheduled-meta-label {
+    -fx-text-fill: #88a094;
+    -fx-font-size: 11px;
+}
+
+.scheduled-meta-value {
+    -fx-text-fill: #e8fff1;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+}
+
+.scheduled-primary-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #0ecf4b);
+    -fx-text-fill: #06140c;
+    -fx-background-radius: 12;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+    -fx-padding: 11 14;
+}
+
+.scheduled-primary-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #52ff9b, #1be362);
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.28), 14, 0.2, 0, 3);
+}
+
+.scheduled-exam-card {
+    -fx-background-color: rgba(18, 33, 25, 0.92);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(92, 243, 153, 0.18);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-padding: 14;
+}
+
+.scheduled-exam-card:hover {
+    -fx-background-color: rgba(29, 56, 40, 0.86);
+    -fx-border-color: rgba(112, 255, 172, 0.38);
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.12), 12, 0.2, 0, 4);
+}
+
+.scheduled-upcoming-badge {
+    -fx-background-color: rgba(38, 91, 61, 0.65);
+    -fx-text-fill: #9fffc4;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 999;
+    -fx-padding: 5 9;
+}
+
+.scheduled-card-title {
+    -fx-text-fill: #effff4;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+}
+
+.scheduled-card-time {
+    -fx-text-fill: #9eb4a8;
+    -fx-font-size: 12px;
+}
+
+.scheduled-secondary-green-button {
+    -fx-background-color: rgba(43, 255, 121, 0.18);
+    -fx-text-fill: #88ffb6;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(109, 255, 171, 0.32);
+    -fx-border-radius: 10;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-padding: 8 12;
+}
+
+.scheduled-secondary-green-button:hover {
+    -fx-background-color: rgba(62, 255, 132, 0.26);
+    -fx-cursor: hand;
+}
+
+.scheduled-side-card {
+    -fx-background-color: rgba(15, 28, 21, 0.93);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(94, 245, 156, 0.16);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-padding: 14;
+}
+
+.scheduled-side-title {
+    -fx-text-fill: #edfff4;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+}
+
+.scheduled-side-text {
+    -fx-text-fill: #9bb0a4;
+    -fx-font-size: 12px;
+}
+
+.scheduled-side-link {
+    -fx-text-fill: #47ff8c;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.scheduled-side-link:hover {
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.scheduled-support-button {
+    -fx-background-color: rgba(37, 58, 47, 0.92);
+    -fx-text-fill: #e5f9ee;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(96, 241, 157, 0.20);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-padding: 9 12;
+}
+
+.scheduled-support-button:hover {
+    -fx-background-color: rgba(49, 94, 67, 0.85);
+    -fx-cursor: hand;
+}

@@ -1,0 +1,235 @@
+/* Premium dark-neon create account page */
+.register-root {
+    -fx-background-color: linear-gradient(to bottom right, #06120d 0%, #0a1711 42%, #101f17 100%);
+    -fx-padding: 34;
+}
+
+.register-layout {
+    -fx-max-width: 980;
+    -fx-min-width: 900;
+    -fx-padding: 16;
+}
+
+.register-ambient-glow {
+    -fx-pref-width: 560;
+    -fx-pref-height: 560;
+    -fx-background-color: radial-gradient(center 68% 40%, radius 68%, rgba(45, 255, 126, 0.30) 0%, rgba(27, 134, 72, 0.14) 42%, transparent 72%);
+}
+
+.register-info-panel {
+    -fx-padding: 24 16 24 10;
+}
+
+.register-info-block {
+    -fx-background-color: rgba(11, 27, 19, 0.72);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(118, 255, 173, 0.16);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-padding: 20 20 18 20;
+}
+
+.register-info-icon {
+    -fx-text-fill: #79ffaf;
+    -fx-icon-color: #79ffaf;
+    -fx-font-size: 16px;
+    -fx-font-weight: 900;
+    -fx-icon-size: 18px;
+}
+
+.register-info-title {
+    -fx-text-fill: #ecfff3;
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+}
+
+.register-info-text {
+    -fx-text-fill: #9fafaa;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 2px;
+}
+
+.register-card {
+    -fx-background-color: #0f1e17;
+    -fx-background-radius: 24;
+    -fx-border-color: rgba(121, 255, 175, 0.30);
+    -fx-border-width: 1;
+    -fx-border-radius: 24;
+    -fx-padding: 30 30 26 30;
+    -fx-effect: dropshadow(gaussian, rgba(25, 255, 119, 0.25), 44, 0.28, 0, 16);
+}
+
+.register-badge {
+    -fx-background-color: linear-gradient(to bottom right, rgba(43, 84, 60, 0.92), rgba(19, 44, 31, 0.92));
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(145, 255, 194, 0.44);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.32), 14, 0.35, 0, 4);
+}
+
+.register-badge-icon {
+    -fx-text-fill: #ddffea;
+    -fx-icon-color: #ddffea;
+    -fx-font-size: 17px;
+    -fx-font-weight: 900;
+    -fx-icon-size: 20px;
+}
+
+.register-title {
+    -fx-text-fill: #f4fff8;
+    -fx-font-size: 36px;
+    -fx-font-weight: 900;
+}
+
+.register-subtitle {
+    -fx-text-fill: #99a8a2;
+    -fx-font-size: 14px;
+}
+
+.register-error-banner {
+    -fx-background-color: rgba(184, 52, 52, 0.88);
+    -fx-background-radius: 12;
+    -fx-padding: 9 12;
+}
+
+.register-error-icon {
+    -fx-text-fill: #ffffff;
+    -fx-icon-color: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 900;
+    -fx-icon-size: 14px;
+}
+
+.register-error-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+}
+
+.register-field-label {
+    -fx-text-fill: #9aa3a0;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 1.3px;
+}
+
+.register-input-shell {
+    -fx-background-color: #0c1612;
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(84, 188, 130, 0.34);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-padding: 0 13;
+    -fx-min-height: 50;
+}
+
+.register-field-icon {
+    -fx-text-fill: #7f9b8f;
+    -fx-icon-color: #7f9b8f;
+    -fx-font-size: 12px;
+    -fx-font-weight: 800;
+    -fx-icon-size: 14px;
+}
+
+.register-input-shell > .text-field,
+.register-input-shell > .password-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #e8fff1;
+    -fx-prompt-text-fill: #7f8a84;
+    -fx-padding: 11 0;
+    -fx-highlight-fill: rgba(44, 255, 122, 0.32);
+}
+
+.register-input-shell > .text-field:focused,
+.register-input-shell > .password-field:focused {
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.28), 10, 0.2, 0, 0);
+}
+
+.register-primary-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #0ecf4b);
+    -fx-text-fill: #031108;
+    -fx-font-size: 16px;
+    -fx-font-weight: 900;
+    -fx-background-radius: 12;
+    -fx-padding: 14 0;
+    -fx-effect: dropshadow(gaussian, rgba(47, 255, 125, 0.22), 14, 0.26, 0, 4);
+}
+
+.register-primary-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #5cff9f, #20df61);
+    -fx-effect: dropshadow(gaussian, rgba(47, 255, 125, 0.46), 20, 0.3, 0, 6);
+    -fx-cursor: hand;
+}
+
+.register-primary-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #26e86c, #0db544);
+}
+
+.register-back-link {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #d2e8da;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-padding: 2 0 0 0;
+}
+
+.register-back-link:hover {
+    -fx-underline: true;
+    -fx-text-fill: #f0fff6;
+    -fx-cursor: hand;
+}
+
+/* Compact mode for narrower windows (toggled by controller at runtime) */
+.register-root.register-compact {
+    -fx-padding: 20;
+}
+
+.register-root.register-compact .register-layout {
+    -fx-spacing: 20;
+    -fx-min-width: 0;
+    -fx-max-width: Infinity;
+    -fx-padding: 6;
+}
+
+.register-root.register-compact .register-info-panel {
+    -fx-pref-width: 270;
+    -fx-max-width: 300;
+    -fx-padding: 6 4 6 0;
+    -fx-spacing: 12;
+}
+
+.register-root.register-compact .register-info-title {
+    -fx-font-size: 16px;
+}
+
+.register-root.register-compact .register-info-text {
+    -fx-font-size: 12px;
+}
+
+.register-root.register-compact .register-card {
+    -fx-pref-width: 360;
+    -fx-max-width: 380;
+    -fx-padding: 22 22 18 22;
+    -fx-spacing: 12;
+}
+
+.register-root.register-compact .register-title {
+    -fx-font-size: 30px;
+}
+
+.register-root.register-compact .register-subtitle {
+    -fx-font-size: 12px;
+}
+
+.register-root.register-compact .register-input-shell {
+    -fx-min-height: 44;
+}
+
+.register-root.register-compact .register-primary-button {
+    -fx-font-size: 15px;
+    -fx-padding: 12 0;
+}

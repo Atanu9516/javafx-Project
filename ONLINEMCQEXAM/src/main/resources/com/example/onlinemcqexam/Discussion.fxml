@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="discussionPane"
+            xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.onlinemcqexam.ExamController"
+            styleClass="discussion-root">
+
+    <left>
+        <VBox spacing="12" styleClass="discussion-sidebar" prefWidth="240">
+            <children>
+                <Label text="Exam Portal" styleClass="discussion-logo"/>
+
+                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="discussion-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-th-large" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Available Exams" onAction="#showAvailableExams" styleClass="discussion-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="far-question-circle" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="discussion-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="far-calendar-alt" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="My Exams" onAction="#showExamHistory" styleClass="discussion-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="far-edit" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="discussion-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-signal" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Discussion" styleClass="discussion-nav-button discussion-nav-active">
+                    <graphic>
+                        <FontIcon iconLiteral="far-comment-alt" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+                <Button text="Messaging" onAction="#showMessaging" styleClass="discussion-nav-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-comment-dots" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+
+                <Region VBox.vgrow="ALWAYS"/>
+                <Button text="Logout" onAction="#handleLogout" styleClass="discussion-logout-button">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-sign-out-alt" styleClass="discussion-nav-icon"/>
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" styleClass="discussion-main-area">
+
+            <VBox spacing="6">
+                <Label text="Discussion" styleClass="discussion-page-title"/>
+                <Label text="Connect with other students and clarify architectural concepts." styleClass="discussion-page-subtitle"/>
+            </VBox>
+
+            <HBox spacing="18" VBox.vgrow="ALWAYS">
+                <VBox spacing="16" prefWidth="360" styleClass="discussion-left-column">
+
+                    <VBox spacing="12" styleClass="discussion-card discussion-ask-card">
+                        <Label text="Ask Question" styleClass="discussion-card-title"/>
+
+                        <TextArea fx:id="discussionAskArea"
+                                  promptText="Ask your question..."
+                                  prefRowCount="7"
+                                  wrapText="true"
+                                  styleClass="discussion-ask-input"/>
+
+                        <Label text="Markdown is supported" styleClass="discussion-helper-text"/>
+
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button styleClass="discussion-icon-button">
+                                <graphic>
+                                    <FontIcon iconLiteral="far-image" styleClass="discussion-tool-icon"/>
+                                </graphic>
+                            </Button>
+                            <Button styleClass="discussion-icon-button">
+                                <graphic>
+                                    <FontIcon iconLiteral="far-file-alt" styleClass="discussion-tool-icon"/>
+                                </graphic>
+                            </Button>
+                            <Button styleClass="discussion-icon-button">
+                                <graphic>
+                                    <FontIcon iconLiteral="far-smile" styleClass="discussion-tool-icon"/>
+                                </graphic>
+                            </Button>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="Post" onAction="#postDiscussion" styleClass="discussion-post-button"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="10" styleClass="discussion-card discussion-guidelines-card">
+                        <Label text="Community Guidelines" styleClass="discussion-card-title"/>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <FontIcon iconLiteral="fas-circle" styleClass="discussion-guideline-dot"/>
+                            <Label text="Be respectful to peers." styleClass="discussion-guideline-text"/>
+                        </HBox>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <FontIcon iconLiteral="fas-circle" styleClass="discussion-guideline-dot"/>
+                            <Label text="Check for duplicates." styleClass="discussion-guideline-text"/>
+                        </HBox>
+
+                        <HBox spacing="8" alignment="CENTER_LEFT">
+                            <FontIcon iconLiteral="fas-circle" styleClass="discussion-guideline-dot"/>
+                            <Label text="Tag your technologies correctly." styleClass="discussion-guideline-text"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <VBox spacing="12" styleClass="discussion-card discussion-feed-panel" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Discussion Feed" styleClass="discussion-card-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Latest" styleClass="discussion-tab-button discussion-tab-active"/>
+                        <Button text="Trending" styleClass="discussion-tab-button"/>
+                    </HBox>
+
+                    <ListView fx:id="discussionList" styleClass="discussion-feed-list" VBox.vgrow="ALWAYS"/>
+
+                    <Button text="Load More Conversations" styleClass="discussion-load-more" maxWidth="Infinity"/>
+                </VBox>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

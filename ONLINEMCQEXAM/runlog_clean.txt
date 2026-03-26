@@ -1,0 +1,27 @@
+[ERROR] COMPILATION ERROR : 
+[ERROR] /E:/2405117/javafx-Project/ONLINEMCQEXAM/src/main/java/com/example/onlinemcqexam/ExamController.java:[2533,9] cannot find symbol
+  symbol:   class VBox
+  location: class com.example.onlinemcqexam.ExamController
+[ERROR] /E:/2405117/javafx-Project/ONLINEMCQEXAM/src/main/java/com/example/onlinemcqexam/ExamController.java:[2533,31] cannot find symbol
+  symbol:   class VBox
+  location: class com.example.onlinemcqexam.ExamController
+[ERROR] /E:/2405117/javafx-Project/ONLINEMCQEXAM/src/main/java/com/example/onlinemcqexam/ExamController.java:[2538,21] cannot find symbol
+  symbol:   class HBox
+  location: class com.example.onlinemcqexam.ExamController
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project onlinemcqexam: Compilation failure: Compilation failure: 
+[ERROR] /E:/2405117/javafx-Project/ONLINEMCQEXAM/src/main/java/com/example/onlinemcqexam/ExamController.java:[2533,9] cannot find symbol
+[ERROR]   symbol:   class VBox
+[ERROR]   location: class com.example.onlinemcqexam.ExamController
+[ERROR] /E:/2405117/javafx-Project/ONLINEMCQEXAM/src/main/java/com/example/onlinemcqexam/ExamController.java:[2533,31] cannot find symbol
+[ERROR]   symbol:   class VBox
+[ERROR]   location: class com.example.onlinemcqexam.ExamController
+[ERROR] /E:/2405117/javafx-Project/ONLINEMCQEXAM/src/main/java/com/example/onlinemcqexam/ExamController.java:[2538,21] cannot find symbol
+[ERROR]   symbol:   class HBox
+[ERROR]   location: class com.example.onlinemcqexam.ExamController
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

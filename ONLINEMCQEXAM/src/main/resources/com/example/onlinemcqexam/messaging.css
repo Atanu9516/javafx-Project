@@ -1,0 +1,422 @@
+/* Messaging page premium dark-neon style */
+.messaging-root {
+    -fx-background-color: linear-gradient(to bottom right, #06100d 0%, #0b1713 55%, #102019 100%);
+}
+
+.messaging-main-area {
+    -fx-padding: 24;
+}
+
+.messaging-sidebar {
+    -fx-background-color: rgba(11, 24, 18, 0.96);
+    -fx-border-color: rgba(118, 255, 176, 0.16);
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 22 16;
+}
+
+.messaging-logo {
+    -fx-text-fill: #f4fff8;
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+    -fx-padding: 4 0 14 0;
+}
+
+.messaging-nav-button {
+    -fx-background-color: rgba(19, 40, 30, 0.88);
+    -fx-text-fill: #d8eee2;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 12;
+    -fx-padding: 11 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-content-display: LEFT;
+    -fx-graphic-text-gap: 10;
+    -fx-max-width: Infinity;
+}
+
+.messaging-nav-icon {
+    -fx-icon-size: 14;
+    -fx-icon-color: #d8eee2;
+}
+
+.messaging-nav-button:hover {
+    -fx-background-color: rgba(37, 69, 52, 0.94);
+    -fx-cursor: hand;
+}
+
+.messaging-nav-button:hover .messaging-nav-icon {
+    -fx-icon-color: #effff5;
+}
+
+.messaging-nav-button.messaging-nav-active {
+    -fx-background-color: linear-gradient(to right, rgba(44, 255, 122, 0.26), rgba(23, 63, 45, 0.94));
+    -fx-border-color: rgba(119, 255, 180, 0.48);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.messaging-nav-button.messaging-nav-active .messaging-nav-icon {
+    -fx-icon-color: #effff5;
+}
+
+.messaging-logout-button {
+    -fx-background-color: rgba(43, 20, 20, 0.9);
+    -fx-text-fill: #ffd4d4;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-content-display: LEFT;
+    -fx-graphic-text-gap: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10 12;
+    -fx-max-width: Infinity;
+}
+
+.messaging-logout-button .messaging-nav-icon {
+    -fx-icon-color: #ffd4d4;
+}
+
+.messaging-left-scroll {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}
+
+.messaging-left-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.messaging-left-column {
+    -fx-padding: 0 2 0 0;
+}
+
+.messaging-panel-card {
+    -fx-background-color: rgba(15, 31, 23, 0.96);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(112, 246, 168, 0.18);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 16, 0.2, 0, 5);
+}
+
+.messaging-section-title {
+    -fx-text-fill: #effff4;
+    -fx-font-size: 19px;
+    -fx-font-weight: 800;
+}
+
+.messaging-badge {
+    -fx-background-color: rgba(44, 255, 122, 0.22);
+    -fx-text-fill: #b7ffd2;
+    -fx-font-size: 10px;
+    -fx-font-weight: 900;
+    -fx-padding: 4 8;
+    -fx-background-radius: 999;
+    -fx-border-color: rgba(113, 255, 178, 0.45);
+    -fx-border-width: 1;
+    -fx-border-radius: 999;
+}
+
+.messaging-search-shell {
+    -fx-background-color: #0b1712;
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(88, 196, 136, 0.34);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-padding: 2 8;
+}
+
+.messaging-search-icon {
+    -fx-icon-color: #84a99a;
+    -fx-icon-size: 12px;
+}
+
+.messaging-search-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #e7fff0;
+    -fx-prompt-text-fill: #809287;
+}
+
+.messaging-add-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #15d355);
+    -fx-text-fill: #031208;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+    -fx-background-radius: 10;
+    -fx-padding: 7 12;
+}
+
+.messaging-add-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #53ffa0, #22e365);
+    -fx-cursor: hand;
+}
+
+.messaging-request-list,
+.messaging-friends-list,
+.messaging-chat-list {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.messaging-request-list .viewport,
+.messaging-friends-list .viewport,
+.messaging-chat-list .viewport {
+    -fx-background-color: transparent;
+}
+
+.messaging-request-list .list-cell,
+.messaging-friends-list .list-cell,
+.messaging-chat-list .list-cell {
+    -fx-background-color: transparent;
+}
+
+.messaging-request-card {
+    -fx-background-color: rgba(20, 41, 31, 0.95);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(112, 247, 168, 0.14);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-padding: 10;
+}
+
+.messaging-avatar {
+    -fx-background-color: linear-gradient(to bottom right, rgba(44, 255, 122, 0.35), rgba(29, 82, 58, 0.95));
+    -fx-background-radius: 999;
+    -fx-min-width: 34;
+    -fx-min-height: 34;
+    -fx-max-width: 34;
+    -fx-max-height: 34;
+}
+
+.messaging-avatar-label {
+    -fx-text-fill: #effff5;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.messaging-request-name,
+.messaging-friend-name {
+    -fx-text-fill: #f0fff6;
+    -fx-font-size: 13px;
+    -fx-font-weight: 800;
+}
+
+.messaging-request-meta,
+.messaging-friend-status {
+    -fx-text-fill: #9ab2a5;
+    -fx-font-size: 11px;
+}
+
+.messaging-accept-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #16d457);
+    -fx-text-fill: #06150c;
+    -fx-font-size: 11px;
+    -fx-font-weight: 800;
+    -fx-background-radius: 8;
+    -fx-padding: 5 10;
+}
+
+.messaging-decline-button {
+    -fx-background-color: rgba(39, 54, 47, 0.95);
+    -fx-text-fill: #d2dfd9;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-background-radius: 8;
+    -fx-padding: 5 10;
+}
+
+.messaging-friend-card {
+    -fx-background-color: rgba(20, 41, 31, 0.95);
+    -fx-background-radius: 14;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-padding: 10;
+}
+
+.messaging-friends-list .list-cell:filled:selected .messaging-friend-card,
+.messaging-friends-list .list-cell:filled:selected:focused .messaging-friend-card {
+    -fx-border-color: rgba(44, 255, 122, 0.75);
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.26), 12, 0.2, 0, 0);
+}
+
+.messaging-chat-panel {
+    -fx-background-color: rgba(15, 31, 23, 0.96);
+    -fx-background-radius: 22;
+    -fx-border-color: rgba(113, 247, 169, 0.18);
+    -fx-border-width: 1;
+    -fx-border-radius: 22;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 16, 0.2, 0, 5);
+}
+
+.messaging-chat-header {
+    -fx-background-color: rgba(20, 42, 31, 0.94);
+    -fx-background-radius: 14;
+    -fx-padding: 10 12;
+}
+
+.messaging-chat-avatar {
+    -fx-background-color: linear-gradient(to bottom right, rgba(44, 255, 122, 0.35), rgba(30, 85, 60, 0.95));
+    -fx-background-radius: 999;
+    -fx-min-width: 38;
+    -fx-min-height: 38;
+}
+
+.messaging-chat-avatar-label {
+    -fx-text-fill: #effff5;
+    -fx-font-size: 12px;
+    -fx-font-weight: 900;
+}
+
+.messaging-chat-title {
+    -fx-text-fill: #f2fff7;
+    -fx-font-size: 15px;
+    -fx-font-weight: 800;
+}
+
+.messaging-chat-status {
+    -fx-text-fill: #99c0ac;
+    -fx-font-size: 11px;
+}
+
+.messaging-header-icon-button {
+    -fx-background-color: rgba(28, 56, 42, 0.95);
+    -fx-text-fill: #cce5d8;
+    -fx-background-radius: 8;
+    -fx-padding: 6;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+}
+
+.messaging-header-icon {
+    -fx-icon-size: 12;
+    -fx-icon-color: #cce5d8;
+}
+
+.messaging-header-icon-button:hover {
+    -fx-background-color: rgba(44, 255, 122, 0.20);
+    -fx-text-fill: #effff5;
+}
+
+.messaging-header-icon-button:hover .messaging-header-icon {
+    -fx-icon-color: #effff5;
+}
+
+.messaging-chat-bubble-row {
+    -fx-padding: 2 0;
+}
+
+.messaging-bubble-left,
+.messaging-bubble-right {
+    -fx-padding: 8 10;
+    -fx-background-radius: 14;
+    -fx-max-width: 460;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 8, 0.2, 0, 2);
+}
+
+.messaging-bubble-left {
+    -fx-background-color: rgba(23, 48, 35, 0.98);
+}
+
+.messaging-bubble-right {
+    -fx-background-color: linear-gradient(to bottom right, rgba(44, 255, 122, 0.44), rgba(30, 111, 70, 0.98));
+}
+
+.messaging-bubble-text {
+    -fx-text-fill: #ebfff4;
+    -fx-font-size: 13px;
+    -fx-wrap-text: true;
+}
+
+.messaging-bubble-time {
+    -fx-text-fill: #9ab4a8;
+    -fx-font-size: 10px;
+}
+
+.messaging-composer-bar {
+    -fx-background-color: rgba(13, 27, 20, 0.96);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(99, 231, 156, 0.25);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-padding: 8;
+}
+
+.messaging-chat-input {
+    -fx-background-color: rgba(20, 43, 32, 0.95);
+    -fx-background-radius: 12;
+    -fx-border-color: transparent;
+    -fx-text-fill: #ecfff5;
+    -fx-prompt-text-fill: #8da499;
+    -fx-padding: 9 12;
+}
+
+.messaging-chat-input:focused {
+    -fx-border-color: rgba(56, 255, 125, 0.42);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.messaging-composer-icon-button {
+    -fx-background-color: rgba(27, 54, 40, 0.95);
+    -fx-text-fill: #cde6d9;
+    -fx-background-radius: 8;
+    -fx-padding: 7;
+    -fx-min-width: 34;
+    -fx-min-height: 34;
+}
+
+.messaging-composer-icon {
+    -fx-icon-size: 12;
+    -fx-icon-color: #cde6d9;
+}
+
+.messaging-send-button {
+    -fx-background-color: linear-gradient(to bottom, #2cff7a, #17d658);
+    -fx-text-fill: #031209;
+    -fx-background-radius: 999;
+    -fx-min-width: 42;
+    -fx-min-height: 42;
+}
+
+.messaging-send-icon {
+    -fx-icon-size: 14;
+    -fx-icon-color: #031209;
+}
+
+.messaging-send-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #57ffa0, #25e366);
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.35), 14, 0.25, 0, 2);
+    -fx-cursor: hand;
+}
+
+.messaging-request-list .scroll-bar:vertical,
+.messaging-friends-list .scroll-bar:vertical,
+.messaging-chat-list .scroll-bar:vertical,
+.messaging-left-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8;
+}
+
+.messaging-request-list .scroll-bar:vertical .thumb,
+.messaging-friends-list .scroll-bar:vertical .thumb,
+.messaging-chat-list .scroll-bar:vertical .thumb,
+.messaging-left-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(78, 184, 128, 0.5);
+    -fx-background-radius: 999;
+}
+
+.messaging-request-list .scroll-bar .increment-button,
+.messaging-request-list .scroll-bar .decrement-button,
+.messaging-friends-list .scroll-bar .increment-button,
+.messaging-friends-list .scroll-bar .decrement-button,
+.messaging-chat-list .scroll-bar .increment-button,
+.messaging-chat-list .scroll-bar .decrement-button,
+.messaging-left-scroll .scroll-bar .increment-button,
+.messaging-left-scroll .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
+}

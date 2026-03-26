@@ -1,0 +1,273 @@
+/* Modern dark style for Progress page */
+.progress-root {
+    -fx-background-color: linear-gradient(to bottom, #071014, #0d1612 62%, #0f1d16);
+}
+
+.progress-main-wrap {
+    -fx-padding: 22 26 24 26;
+}
+
+.progress-page-title {
+    -fx-text-fill: #effff5;
+    -fx-font-size: 33px;
+    -fx-font-weight: 800;
+}
+
+.progress-page-subtitle {
+    -fx-text-fill: #93a89b;
+    -fx-font-size: 13px;
+}
+
+.progress-back-button {
+    -fx-background-color: rgba(25, 48, 35, 0.9);
+    -fx-text-fill: #dbf4e7;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(97, 246, 157, 0.28);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-padding: 9 15;
+}
+
+.progress-back-button:hover {
+    -fx-background-color: rgba(42, 82, 57, 0.8);
+    -fx-cursor: hand;
+}
+
+.progress-metric-card {
+    -fx-background-color: rgba(17, 34, 25, 0.92);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(96, 243, 155, 0.16);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 10, 0.2, 0, 5);
+}
+
+.progress-metric-title {
+    -fx-text-fill: #9ab0a3;
+    -fx-font-size: 12px;
+}
+
+.progress-metric-value {
+    -fx-text-fill: #33ff66;
+    -fx-font-size: 31px;
+    -fx-font-weight: 800;
+}
+
+.progress-metric-trend {
+    -fx-text-fill: #86ffb4;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.progress-chart-card {
+    -fx-background-color: rgba(15, 29, 21, 0.95);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(96, 247, 160, 0.16);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.10), 16, 0.2, 0, 4);
+}
+
+.progress-card-title {
+    -fx-text-fill: #effff5;
+    -fx-font-size: 19px;
+    -fx-font-weight: 700;
+}
+
+.progress-card-subtitle {
+    -fx-text-fill: #8ea596;
+    -fx-font-size: 12px;
+}
+
+.progress-toggle-button {
+    -fx-background-color: rgba(31, 52, 40, 0.9);
+    -fx-text-fill: #cde7d8;
+    -fx-background-radius: 999;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-padding: 6 12;
+}
+
+.progress-toggle-button:hover {
+    -fx-background-color: rgba(53, 95, 67, 0.72);
+    -fx-cursor: hand;
+}
+
+.progress-toggle-active {
+    -fx-background-color: rgba(52, 255, 106, 0.22);
+    -fx-text-fill: #8fffb9;
+}
+
+.progress-line-chart,
+.progress-bar-chart {
+    -fx-background-color: rgba(10, 21, 15, 0.78);
+    -fx-background-radius: 14;
+    -fx-padding: 8;
+}
+
+.progress-line-chart .chart-plot-background,
+.progress-bar-chart .chart-plot-background {
+    -fx-background-color: rgba(10, 21, 15, 0.78);
+}
+
+.progress-line-chart .chart-vertical-grid-lines,
+.progress-line-chart .chart-horizontal-grid-lines,
+.progress-bar-chart .chart-vertical-grid-lines,
+.progress-bar-chart .chart-horizontal-grid-lines {
+    -fx-stroke: rgba(132, 153, 142, 0.20);
+}
+
+.progress-line-chart .chart-series-line {
+    -fx-stroke: #33ff66;
+    -fx-stroke-width: 3px;
+    -fx-effect: dropshadow(gaussian, rgba(51, 255, 102, 0.35), 8, 0.2, 0, 0);
+}
+
+.progress-line-chart .default-color0.chart-line-symbol {
+    -fx-background-color: #33ff66, #122418;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 7px;
+    -fx-padding: 6px;
+}
+
+.progress-bar-chart .default-color0.chart-bar {
+    -fx-bar-fill: #2cff7a;
+}
+
+.progress-line-chart .axis,
+.progress-bar-chart .axis {
+    -fx-tick-label-fill: #a8bcae;
+}
+
+.progress-line-chart .axis-label,
+.progress-bar-chart .axis-label {
+    -fx-text-fill: #95ab9d;
+}
+
+.progress-empty-state {
+    -fx-text-fill: #8da495;
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+}
+
+.progress-history-panel {
+    -fx-background-color: rgba(16, 30, 22, 0.95);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(96, 247, 160, 0.16);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-padding: 14;
+}
+
+.progress-export-button {
+    -fx-background-color: rgba(45, 255, 122, 0.2);
+    -fx-text-fill: #89ffb8;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(109, 255, 171, 0.34);
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-padding: 7 10;
+}
+
+.progress-export-button:hover {
+    -fx-background-color: rgba(64, 255, 132, 0.28);
+    -fx-cursor: hand;
+}
+
+.progress-filter-choice {
+    -fx-background-color: rgba(22, 39, 30, 0.9);
+    -fx-background-radius: 999;
+    -fx-border-color: rgba(90, 246, 152, 0.26);
+    -fx-border-width: 1;
+    -fx-border-radius: 999;
+    -fx-mark-color: #7dffaf;
+}
+
+.progress-filter-choice .label {
+    -fx-text-fill: #d8f2e2;
+}
+
+.progress-history-table {
+    -fx-background-color: rgba(11, 23, 17, 0.96);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(94, 248, 160, 0.14);
+    -fx-border-radius: 12;
+}
+
+.progress-history-table .column-header-background {
+    -fx-background-color: rgba(24, 44, 33, 0.96);
+    -fx-background-radius: 12 12 0 0;
+}
+
+.progress-history-table .column-header,
+.progress-history-table .filler {
+    -fx-background-color: transparent;
+}
+
+.progress-history-table .column-header .label {
+    -fx-text-fill: #9fb5a8;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.progress-history-table .table-cell {
+    -fx-text-fill: #dff6e9;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: transparent;
+}
+
+.progress-history-table .table-row-cell {
+    -fx-background-color: rgba(18, 36, 25, 0.92);
+}
+
+.progress-history-table .table-row-cell:odd {
+    -fx-background-color: rgba(16, 30, 22, 0.88);
+}
+
+.progress-history-table .table-row-cell:selected {
+    -fx-background-color: rgba(52, 255, 106, 0.20);
+}
+
+.progress-summary-card {
+    -fx-background-color: rgba(18, 34, 25, 0.93);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(96, 244, 156, 0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-padding: 12;
+}
+
+.progress-summary-icon-wrap {
+    -fx-pref-width: 36;
+    -fx-pref-height: 36;
+    -fx-background-color: rgba(49, 255, 121, 0.18);
+    -fx-background-radius: 10;
+}
+
+.progress-summary-icon {
+    -fx-text-fill: #91ffbb;
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+}
+
+.progress-summary-title {
+    -fx-text-fill: #d6ece0;
+    -fx-font-size: 12px;
+}
+
+.progress-summary-value {
+    -fx-text-fill: #effff5;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+}
+
+.progress-summary-desc {
+    -fx-text-fill: #8ea495;
+    -fx-font-size: 11px;
+}
