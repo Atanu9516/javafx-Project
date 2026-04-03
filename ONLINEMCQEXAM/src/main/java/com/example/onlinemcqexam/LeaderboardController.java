@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LeaderboardController {
-    private static final String EXAM_HISTORY_FILE = "src/main/resources/exam_history.csv";
+    private static final String RESULTS_FILE = AppPaths.resourceFile("results.csv").toString();
 
     @FXML
     private ChoiceBox<String> termChoice;
@@ -57,10 +57,12 @@ public class LeaderboardController {
     private final FilteredList<LeaderboardEntry> filteredList = new FilteredList<>(originalList, entry -> true);
     private final SortedList<LeaderboardEntry> sortedList = new SortedList<>(filteredList);
     private String currentUser;
+    private String currentSemester;
 
     @FXML
     private void initialize() {
         currentUser = UserSession.getUsername();
+        currentSemester = UserSession.getSemester();
         configureTable();
         configureFilters();
         configureSearch();
@@ -122,8 +124,16 @@ public class LeaderboardController {
     }
 
     private void loadTerms() {
-        termChoice.getItems().setAll("1-1", "1-2", "2-1", "2-2", "3-1", "3-2");
+        String lockedSemester = normalizeSemester(currentSemester);
+        if (!lockedSemester.isBlank()) {
+            termChoice.getItems().setAll(lockedSemester);
+            termChoice.getSelectionModel().select(lockedSemester);
+            termChoice.setDisable(true);
+            return;
+        }
+        termChoice.getItems().setAll("1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2");
         termChoice.getSelectionModel().selectFirst();
+        termChoice.setDisable(false);
     }
 
     private void loadCoursesForTerm(String term) {
@@ -147,6 +157,7 @@ public class LeaderboardController {
     @FXML
     private void refreshLeaderboard() {
         currentUser = UserSession.getUsername();
+        currentSemester = UserSession.getSemester();
         String selectedTerm = termChoice.getValue();
         String selectedCourse = normalizeCourseCode(courseChoice.getValue());
         if (selectedTerm == null || selectedTerm.isBlank() || selectedCourse.isBlank()) {
@@ -221,7 +232,7 @@ public class LeaderboardController {
         if (!isCourseInSelectedTerm(selectedTerm, selectedCourse)) {
             return rows;
         }
-        Path path = Paths.get(EXAM_HISTORY_FILE);
+        Path path = Paths.get(RESULTS_FILE);
         if (Files.notExists(path)) {
             return rows;
         }
@@ -232,19 +243,19 @@ public class LeaderboardController {
                     continue;
                 }
                 String lower = line.toLowerCase();
-                if (lower.startsWith("username,") || lower.startsWith("coursecode,")) {
+                if (lower.startsWith("username,term,course,examid,")) {
                     continue;
                 }
                 ExamRecord record = parseExamRecord(line);
                 if (record == null) {
                     continue;
                 }
-                String courseCode = normalizeCourseCode(record.getCourseCode());
-                if (!selectedCourse.equals(courseCode)) {
+                if (!selectedTerm.equals(record.getTerm())) {
                     continue;
                 }
-
-                // Course list is loaded from selected term, so matching course implies selected term.
+                if (!selectedCourse.equals(normalizeCourseCode(record.getCourseCode()))) {
+                    continue;
+                }
                 rows.add(record);
             }
         } catch (IOException ex) {
@@ -270,41 +281,22 @@ public class LeaderboardController {
     }
 
     private ExamRecord parseExamRecord(String line) {
-        String[] parts = line.split(",");
+        String[] parts = line.split(",", -1);
         if (parts.length < 7) {
             return null;
         }
-
-        boolean newFormat = !looksLikeDate(parts[1].trim());
-        String username;
-        String courseCode;
-        int totalQuestions;
-        int correctAnswers;
-        double percentage;
-
-        if (newFormat) {
-            username = parts[0].trim();
-            courseCode = normalizeCourseCode(parts[1]);
-            totalQuestions = parseIntOrDefault(parts[3], 0);
-            correctAnswers = parseIntOrDefault(parts[4], 0);
-            percentage = parseDoubleOrDefault(parts[5], computePercentage(correctAnswers, totalQuestions));
-        } else {
-            courseCode = normalizeCourseCode(parts[0]);
-            totalQuestions = parseIntOrDefault(parts[2], 0);
-            correctAnswers = parseIntOrDefault(parts[3], 0);
-            percentage = parseDoubleOrDefault(parts[4], computePercentage(correctAnswers, totalQuestions));
-            username = parts[6].trim();
-        }
+        String username = parts[0].trim();
+        String term = parts[1].trim();
+        String courseCode = normalizeCourseCode(parts[2]);
+        double percentage = parseDoubleOrDefault(parts[6], 0.0);
 
         if (username == null || username.trim().isEmpty() || username.equalsIgnoreCase("Unknown")) {
             return null;
         }
-
-        return new ExamRecord(username.trim(), courseCode, percentage);
-    }
-
-    private boolean looksLikeDate(String value) {
-        return value != null && value.contains("T") && value.contains("-") && value.contains(":");
+        if (!normalizeSemester(currentSemester).isBlank() && !normalizeSemester(currentSemester).equals(normalizeSemester(term))) {
+            return null;
+        }
+        return new ExamRecord(username.trim(), normalizeSemester(term), courseCode, percentage);
     }
 
     private String normalizeCourseCode(String value) {
@@ -312,6 +304,10 @@ public class LeaderboardController {
             return "";
         }
         return value.replace(" ", "").trim().toUpperCase();
+    }
+
+    private String normalizeSemester(String value) {
+        return value == null ? "" : value.trim();
     }
 
     private int parseIntOrDefault(String value, int fallback) {
@@ -330,20 +326,15 @@ public class LeaderboardController {
         }
     }
 
-    private double computePercentage(int correctAnswers, int totalQuestions) {
-        if (totalQuestions <= 0) {
-            return 0.0;
-        }
-        return (correctAnswers * 100.0) / totalQuestions;
-    }
-
     public static class ExamRecord {
         private final String username;
+        private final String term;
         private final String courseCode;
         private final double percentage;
 
-        public ExamRecord(String username, String courseCode, double percentage) {
+        public ExamRecord(String username, String term, String courseCode, double percentage) {
             this.username = username;
+            this.term = term;
             this.courseCode = courseCode;
             this.percentage = percentage;
         }
@@ -354,6 +345,10 @@ public class LeaderboardController {
 
         public String getCourseCode() {
             return courseCode;
+        }
+
+        public String getTerm() {
+            return term;
         }
 
         public double getPercentage() {

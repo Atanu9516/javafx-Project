@@ -7,6 +7,50 @@
     -fx-padding: 22 24 24 24;
 }
 
+.leaderboard-main-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-fit-to-width: true;
+}
+
+.leaderboard-main-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.leaderboard-main-scroll > .corner {
+    -fx-background-color: transparent;
+}
+
+.leaderboard-main-scroll .scroll-bar:vertical,
+.leaderboard-main-scroll .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.leaderboard-main-scroll .scroll-bar .track,
+.leaderboard-main-scroll .scroll-bar .track-background {
+    -fx-background-color: rgba(14, 28, 20, 0.94);
+    -fx-background-radius: 999;
+}
+
+.leaderboard-main-scroll .scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, rgba(50, 255, 113, 0.92), rgba(14, 207, 75, 0.92));
+    -fx-background-radius: 999;
+}
+
+.leaderboard-main-scroll .scroll-bar .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(102, 255, 154, 0.96), rgba(24, 224, 92, 0.96));
+}
+
+.leaderboard-main-scroll .scroll-bar .increment-button,
+.leaderboard-main-scroll .scroll-bar .decrement-button,
+.leaderboard-main-scroll .scroll-bar .increment-arrow,
+.leaderboard-main-scroll .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
 .leaderboard-page-title {
     -fx-text-fill: #effff5;
     -fx-font-size: 34px;
@@ -282,4 +326,125 @@
 .leaderboard-stat-meta {
     -fx-text-fill: #8ea597;
     -fx-font-size: 11px;
+}
+
+.leaderboard-page-chip {
+    -fx-text-fill: #c8ffd9;
+    -fx-background-color: rgba(58, 255, 126, 0.12);
+    -fx-border-color: rgba(114, 255, 175, 0.32);
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+    -fx-padding: 5 10;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+}
+
+.leaderboard-spotlight-strip {
+    -fx-padding: 2 0 2 0;
+}
+
+.leaderboard-spotlight-card,
+.leaderboard-note-card {
+    -fx-background-color: linear-gradient(to bottom right, rgba(16, 33, 24, 0.98), rgba(13, 24, 19, 0.98));
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(113, 255, 174, 0.16);
+    -fx-border-radius: 18;
+    -fx-border-width: 1;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(18, 255, 98, 0.10), 16, 0.2, 0, 4);
+}
+
+.leaderboard-note-card {
+    -fx-pref-width: 230;
+    -fx-max-width: 230;
+}
+
+.leaderboard-spotlight-label {
+    -fx-text-fill: #a1b7aa;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.leaderboard-spotlight-title {
+    -fx-text-fill: #effff5;
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+}
+
+.leaderboard-spotlight-meta {
+    -fx-text-fill: #8ea597;
+    -fx-font-size: 12px;
+}
+
+.leaderboard-list-shell {
+    -fx-background-color: linear-gradient(to bottom, rgba(10, 22, 16, 0.98), rgba(12, 26, 18, 0.98));
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(95, 247, 156, 0.14);
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-padding: 10;
+}
+
+.leaderboard-list-view {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2;
+}
+
+.leaderboard-list-view .viewport,
+.leaderboard-list-view .virtual-flow,
+.leaderboard-list-view .clipped-container,
+.leaderboard-list-view .sheet {
+    -fx-background-color: transparent;
+}
+
+.leaderboard-list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 12 0;
+}
+
+.leaderboard-list-cell:filled:selected,
+.leaderboard-list-cell:filled:selected:focused {
+    -fx-background-color: transparent;
+}
+
+.leaderboard-row-card {
+    -fx-background-color: linear-gradient(to right, rgba(15, 30, 22, 0.98), rgba(20, 38, 27, 0.96));
+}
+
+.leaderboard-row-current {
+    -fx-border-color: rgba(128, 255, 182, 0.38);
+    -fx-effect: dropshadow(gaussian, rgba(84, 255, 148, 0.16), 18, 0.24, 0, 4);
+}
+
+.leaderboard-row-top1 {
+    -fx-background-color: linear-gradient(to right, rgba(38, 43, 18, 0.98), rgba(25, 35, 21, 0.96));
+    -fx-border-color: rgba(255, 224, 120, 0.40);
+}
+
+.leaderboard-row-top2 {
+    -fx-background-color: linear-gradient(to right, rgba(24, 31, 36, 0.98), rgba(20, 31, 28, 0.96));
+    -fx-border-color: rgba(193, 213, 223, 0.26);
+}
+
+.leaderboard-row-top3 {
+    -fx-background-color: linear-gradient(to right, rgba(38, 27, 20, 0.98), rgba(22, 30, 24, 0.96));
+    -fx-border-color: rgba(206, 146, 106, 0.30);
+}
+
+.leaderboard-list-view .scroll-bar:vertical,
+.leaderboard-list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.leaderboard-list-view .scroll-bar:vertical .thumb,
+.leaderboard-list-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(86, 255, 149, 0.22);
+    -fx-background-radius: 999;
+}
+
+.leaderboard-empty-label {
+    -fx-text-fill: #95ad9f;
+    -fx-font-size: 13px;
 }

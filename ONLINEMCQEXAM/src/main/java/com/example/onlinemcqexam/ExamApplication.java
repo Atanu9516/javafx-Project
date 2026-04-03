@@ -3,6 +3,7 @@ package com.example.onlinemcqexam;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ public class ExamApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(ExamApplication.class.getResource("exam-view.fxml"));
         Scene scene = new Scene(loader.load());
+        scene.setFill(Color.web("#08130d"));
         scene.getStylesheets().add(ExamApplication.class.getResource("styles.css").toExternalForm());
         scene.getStylesheets().add(ExamApplication.class.getResource("dashboard.css").toExternalForm());
         scene.getStylesheets().add(ExamApplication.class.getResource("availableExams.css").toExternalForm());

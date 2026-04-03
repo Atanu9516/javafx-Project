@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -34,6 +35,7 @@
 
 <StackPane fx:controller="com.example.onlinemcqexam.ExamController"
            prefHeight="700.0" prefWidth="1040.0"
+           styleClass="app-shell"
            xmlns:fx="http://javafx.com/fxml/1"
            xmlns="http://javafx.com/javafx/17.0.6">
     <children>
@@ -44,14 +46,22 @@
 ============================================================ -->
 <StackPane fx:id="loginPane"
         visible="true" managed="true"
-        styleClass="root login-root"
            xmlns:fx="http://javafx.com/fxml">
+    <styleClass>
+        <String fx:value="root"/>
+        <String fx:value="login-root"/>
+    </styleClass>
 
     <VBox alignment="CENTER" spacing="18" styleClass="login-layout">
 
         <!-- APP TITLE -->
         <VBox alignment="CENTER" spacing="6">
-            <Label text="Exam Portal" styleClass="title login-app-title"/>
+            <Label text="Exam Portal">
+                <styleClass>
+                    <String fx:value="title"/>
+                    <String fx:value="login-app-title"/>
+                </styleClass>
+            </Label>
         </VBox>
 
         <!-- LOGIN CARD -->
@@ -60,13 +70,19 @@
               prefWidth="380"
               maxWidth="380">
 
-            <Label text="Online MCQ Exam" styleClass="section-title login-subtitle"/>
+            <Label text="Online MCQ Exam">
+                <styleClass>
+                    <String fx:value="section-title"/>
+                    <String fx:value="login-subtitle"/>
+                </styleClass>
+            </Label>
             <Label text="Log in to continue" styleClass="muted"/>
 
             <!-- USERNAME -->
             <VBox spacing="6" maxWidth="Infinity" alignment="CENTER_LEFT">
                 <Label text="USERNAME" styleClass="field-label"/>
                 <TextField fx:id="loginUsername"
+                           onAction="#loginUser"
                            maxWidth="Infinity"
                            promptText="Enter your student ID"/>
             </VBox>
@@ -76,10 +92,15 @@
                 <HBox alignment="CENTER_LEFT" maxWidth="Infinity">
                     <Label text="PASSWORD" styleClass="field-label"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Label text="Forgot?" styleClass="muted forgot"/>
+                    <Label text="Forgot?">
+                        <styleClass>
+                            <String fx:value="muted"/>
+                            <String fx:value="forgot"/>
+                        </styleClass>
+                    </Label>
                 </HBox>
 
-                <PasswordField fx:id="loginPassword" maxWidth="Infinity"/>
+                <PasswordField fx:id="loginPassword" onAction="#loginUser" maxWidth="Infinity"/>
             </VBox>
 
             <!-- LOGIN BUTTON -->
@@ -96,9 +117,13 @@
 
             <!-- TEACHER LOGIN -->
             <Button text="Teacher Login"
-                    styleClass="secondary-button teacher-login-button"
                     maxWidth="Infinity"
-                    onAction="#showTeacherLogin"/>
+                    onAction="#showTeacherLogin">
+                <styleClass>
+                    <String fx:value="secondary-button"/>
+                    <String fx:value="teacher-login-button"/>
+                </styleClass>
+            </Button>
 
             <!-- STATUS -->
             <Label fx:id="loginMessageLabel" styleClass="error-text"/>
@@ -115,8 +140,11 @@
 ============================================================ -->
 <StackPane fx:id="registerPane"
            visible="false" managed="false"
-           styleClass="root register-root"
            xmlns:fx="http://javafx.com/fxml">
+    <styleClass>
+        <String fx:value="root"/>
+        <String fx:value="register-root"/>
+    </styleClass>
 
     <children>
         <Region styleClass="register-ambient-glow"/>
@@ -159,6 +187,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
                             <FontIcon iconLiteral="fas-user" styleClass="register-field-icon"/>
                             <TextField fx:id="registerUsername"
+                                       onAction="#registerUser"
                                        HBox.hgrow="ALWAYS"
                                        maxWidth="Infinity"
                                        promptText="Enter student ID"/>
@@ -170,9 +199,21 @@
                         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
                             <FontIcon iconLiteral="fas-id-card" styleClass="register-field-icon"/>
                             <TextField fx:id="registerFullName"
+                                       onAction="#registerUser"
                                        HBox.hgrow="ALWAYS"
                                        maxWidth="Infinity"
                                        promptText="Enter full name"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="SEMESTER" styleClass="register-field-label"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
+                            <FontIcon iconLiteral="fas-layer-group" styleClass="register-field-icon"/>
+                            <ChoiceBox fx:id="registerSemesterChoice"
+                                       HBox.hgrow="ALWAYS"
+                                       maxWidth="Infinity"
+                                       styleClass="register-choice-box"/>
                         </HBox>
                     </VBox>
 
@@ -181,6 +222,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
                             <FontIcon iconLiteral="fas-lock" styleClass="register-field-icon"/>
                             <PasswordField fx:id="registerPassword"
+                                           onAction="#registerUser"
                                            HBox.hgrow="ALWAYS"
                                            maxWidth="Infinity"
                                            promptText="Create password"/>
@@ -192,6 +234,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="10" styleClass="register-input-shell">
                             <FontIcon iconLiteral="fas-check-circle" styleClass="register-field-icon"/>
                             <PasswordField fx:id="registerConfirm"
+                                           onAction="#registerUser"
                                            HBox.hgrow="ALWAYS"
                                            maxWidth="Infinity"
                                            promptText="Re-enter password"/>
@@ -225,15 +268,19 @@
         <VBox prefWidth="250" spacing="12" styleClass="dash-sidebar">
             <HBox spacing="12" alignment="CENTER_LEFT" styleClass="dash-profile-block">
                 <StackPane styleClass="dash-avatar-circle">
-                    <Label text="AS" styleClass="dash-avatar-initials"/>
+                    <Label fx:id="dashboardProfileInitialsLabel" text="ST" styleClass="dash-avatar-initials"/>
                 </StackPane>
                 <VBox spacing="2">
-                    <Label text="Alex Student" styleClass="dash-profile-name"/>
-                    <Label text="Semester Candidate" styleClass="dash-profile-subtitle"/>
+                    <Label fx:id="dashboardProfileNameLabel" text="Student" styleClass="dash-profile-name"/>
+                    <Label fx:id="dashboardProfileSubtitleLabel" text="Semester not selected" styleClass="dash-profile-subtitle"/>
                 </VBox>
             </HBox>
 
-            <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="dash-nav-button dash-nav-active">
+            <Button text="Dashboard" onAction="#showStudentDashboard">
+                <styleClass>
+                    <String fx:value="dash-nav-button"/>
+                    <String fx:value="dash-nav-active"/>
+                </styleClass>
                 <graphic>
                     <FontIcon iconLiteral="fas-th-large" styleClass="dash-nav-icon"/>
                 </graphic>
@@ -276,7 +323,11 @@
                     <FontIcon iconLiteral="fas-cog" styleClass="dash-nav-icon"/>
                 </graphic>
             </Button>
-            <Button text="Logout" onAction="#handleLogout" styleClass="dash-nav-button dash-nav-danger">
+            <Button text="Logout" onAction="#handleLogout">
+                <styleClass>
+                    <String fx:value="dash-nav-button"/>
+                    <String fx:value="dash-nav-danger"/>
+                </styleClass>
                 <graphic>
                     <FontIcon iconLiteral="fas-sign-out-alt" styleClass="dash-nav-icon"/>
                 </graphic>
@@ -285,12 +336,14 @@
     </left>
 
     <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="dash-main-scroll">
+            <content>
         <VBox spacing="22" styleClass="dash-main-area">
             <HBox alignment="CENTER_LEFT" styleClass="dash-header-row">
                 <Label text="Dashboard Overview" styleClass="dash-page-title"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <HBox spacing="10" alignment="CENTER_RIGHT">
-                    <Label text="Alerts" styleClass="dash-header-pill"/>
+                    <Label fx:id="dashboardAlertsLabel" text="Alerts Clear" styleClass="dash-header-pill"/>
                     <Label text="Profile" styleClass="dash-header-pill"/>
                 </HBox>
             </HBox>
@@ -339,7 +392,6 @@
                             </VBox>
                         </HBox>
 
-                        <Button text="Start Exam" styleClass="dash-primary-button" maxWidth="Infinity"/>
                     </VBox>
 
                     <HBox spacing="14" alignment="CENTER_LEFT" styleClass="dash-support-card">
@@ -352,7 +404,6 @@
                                    wrapText="true"
                                    styleClass="dash-support-desc"/>
                         </VBox>
-                        <Button text="Contact Tutor" styleClass="dash-neutral-button"/>
                     </HBox>
                 </VBox>
 
@@ -364,6 +415,8 @@
                 </VBox>
             </HBox>
         </VBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>
@@ -401,187 +454,7 @@
                         <Label text="Catalog Feed" styleClass="available-group-meta"/>
                         <ListView fx:id="availableExamList" prefHeight="120" styleClass="available-list-view"/>
                     </VBox>
-
-                    <VBox spacing="16" styleClass="available-term-group">
-                        <HBox alignment="CENTER_LEFT">
-                            <Label text="1-1" styleClass="available-term-title"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label text="FRESHMAN ALPHA" styleClass="available-group-meta"/>
-                        </HBox>
-                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8">
-                                    <Label text="CSE101" styleClass="available-badge"/>
-                                    <Region HBox.hgrow="ALWAYS"/>
-                                    <Label text="i" styleClass="available-icon-placeholder"/>
-                                    <Label text="..." styleClass="available-icon-placeholder"/>
-                                </HBox>
-                                <Label text="Structured Programming Language" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Core logic, flow control, and program design fundamentals." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="1-1|CSE101" styleClass="available-continue-button"/>
-                            </VBox>
-
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8">
-                                    <Label text="CSE103" styleClass="available-badge"/>
-                                    <Region HBox.hgrow="ALWAYS"/>
-                                    <Label text="i" styleClass="available-icon-placeholder"/>
-                                    <Label text="..." styleClass="available-icon-placeholder"/>
-                                </HBox>
-                                <Label text="Discrete Mathematics" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Sets, logic, graphs, and proof techniques for computing." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="1-1|CSE103" styleClass="available-continue-button"/>
-                            </VBox>
-                        </FlowPane>
-                    </VBox>
-
-                    <VBox spacing="16" styleClass="available-term-group">
-                        <HBox alignment="CENTER_LEFT">
-                            <Label text="1-2" styleClass="available-term-title"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label text="FRESHMAN BETA" styleClass="available-group-meta"/>
-                        </HBox>
-                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8">
-                                    <Label text="CSE105" styleClass="available-badge"/>
-                                    <Region HBox.hgrow="ALWAYS"/>
-                                    <Label text="i" styleClass="available-icon-placeholder"/>
-                                    <Label text="..." styleClass="available-icon-placeholder"/>
-                                </HBox>
-                                <Label text="Data Structures and Algorithms I" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Core data structures, algorithm analysis, and complexity foundations." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="1-2|CSE105" styleClass="available-continue-button"/>
-                            </VBox>
-
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8">
-                                    <Label text="CSE107" styleClass="available-badge"/>
-                                    <Region HBox.hgrow="ALWAYS"/>
-                                    <Label text="i" styleClass="available-icon-placeholder"/>
-                                    <Label text="..." styleClass="available-icon-placeholder"/>
-                                </HBox>
-                                <Label text="Object Oriented Programming Language" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Classes, objects, encapsulation, inheritance, and polymorphism." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="1-2|CSE107" styleClass="available-continue-button"/>
-                            </VBox>
-                        </FlowPane>
-                    </VBox>
-
-                    <VBox spacing="16" styleClass="available-term-group">
-                        <HBox alignment="CENTER_LEFT">
-                            <Label text="2-1" styleClass="available-term-title"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label text="SOPHOMORE ALPHA" styleClass="available-group-meta"/>
-                        </HBox>
-                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8">
-                                    <Label text="CSE205" styleClass="available-badge"/>
-                                    <Region HBox.hgrow="ALWAYS"/>
-                                    <Label text="i" styleClass="available-icon-placeholder"/>
-                                    <Label text="..." styleClass="available-icon-placeholder"/>
-                                </HBox>
-                                <Label text="Digital Logic Design" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Sequential systems, timing models, and hardware testing." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-1|CSE205" styleClass="available-continue-button"/>
-                            </VBox>
-
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8">
-                                    <Label text="CSE207" styleClass="available-badge"/>
-                                    <Region HBox.hgrow="ALWAYS"/>
-                                    <Label text="i" styleClass="available-icon-placeholder"/>
-                                    <Label text="..." styleClass="available-icon-placeholder"/>
-                                </HBox>
-                                <Label text="Data Structures and Algorithms II" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Sorting, graphs, recursion, and optimization strategy." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-1|CSE207" styleClass="available-continue-button"/>
-                            </VBox>
-
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8">
-                                    <Label text="CSE215" styleClass="available-badge"/>
-                                    <Region HBox.hgrow="ALWAYS"/>
-                                    <Label text="i" styleClass="available-icon-placeholder"/>
-                                    <Label text="..." styleClass="available-icon-placeholder"/>
-                                </HBox>
-                                <Label text="Database" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Relational modeling, SQL querying, indexing, and design." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-1|CSE215" styleClass="available-continue-button"/>
-                            </VBox>
-                        </FlowPane>
-                    </VBox>
-
-                    <VBox spacing="16" styleClass="available-term-group">
-                        <HBox alignment="CENTER_LEFT">
-                            <Label text="2-2" styleClass="available-term-title"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label text="SOPHOMORE BETA" styleClass="available-group-meta"/>
-                        </HBox>
-                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE200" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
-                                <Label text="Technical Writing and Presentation" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Communication, presentation, and technical documentation skills." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE200" styleClass="available-continue-button"/>
-                            </VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE209" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
-                                <Label text="Computer Architecture" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Instruction sets, memory hierarchy, and CPU design basics." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE209" styleClass="available-continue-button"/>
-                            </VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE211" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
-                                <Label text="Theory of Computation" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Automata, formal grammars, and computational limits." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE211" styleClass="available-continue-button"/>
-                            </VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE213" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
-                                <Label text="Software Engineering" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Lifecycle models, testing, requirements, and teamwork." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE213" styleClass="available-continue-button"/>
-                            </VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card">
-                                <HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE219" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox>
-                                <Label text="Signals and Linear Systems" styleClass="available-course-title" wrapText="true"/>
-                                <Label text="Transform methods and system response for engineering problems." styleClass="available-course-desc" wrapText="true"/>
-                                <Button text="Continue" onAction="#selectCourseExam" userData="2-2|CSE219" styleClass="available-continue-button"/>
-                            </VBox>
-                        </FlowPane>
-                    </VBox>
-
-                    <VBox spacing="16" styleClass="available-term-group">
-                        <HBox alignment="CENTER_LEFT">
-                            <Label text="3-1" styleClass="available-term-title"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label text="JUNIOR ALPHA" styleClass="available-group-meta"/>
-                        </HBox>
-                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE301" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Mathematics for Computing and Data Science" styleClass="available-course-title" wrapText="true"/><Label text="Applied math foundations for analytics and machine intelligence." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE301" styleClass="available-continue-button"/></VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE309" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Machine Learning" styleClass="available-course-title" wrapText="true"/><Label text="Model building, evaluation metrics, and real data workflows." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE309" styleClass="available-continue-button"/></VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE313" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Computer Networks" styleClass="available-course-title" wrapText="true"/><Label text="Protocol layers, routing, and reliable communication systems." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE313" styleClass="available-continue-button"/></VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE315" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Operating Systems" styleClass="available-course-title" wrapText="true"/><Label text="Concurrency, memory management, and process scheduling." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE315" styleClass="available-continue-button"/></VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE317" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Computer Graphics" styleClass="available-course-title" wrapText="true"/><Label text="Rendering pipelines, transforms, and visual simulation." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-1|CSE317" styleClass="available-continue-button"/></VBox>
-                        </FlowPane>
-                    </VBox>
-
-                    <VBox spacing="16" styleClass="available-term-group">
-                        <HBox alignment="CENTER_LEFT">
-                            <Label text="3-2" styleClass="available-term-title"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label text="JUNIOR BETA" styleClass="available-group-meta"/>
-                        </HBox>
-                        <FlowPane hgap="20" vgap="20" prefWrapLength="860" styleClass="available-card-grid">
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE311" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Compiler Design" styleClass="available-course-title" wrapText="true"/><Label text="Lexical, syntax, and semantic analysis with optimization." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE311" styleClass="available-continue-button"/></VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE321" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Artificial Intelligence" styleClass="available-course-title" wrapText="true"/><Label text="Search, inference, and intelligent agent architecture." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE321" styleClass="available-continue-button"/></VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE325" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Information Security" styleClass="available-course-title" wrapText="true"/><Label text="Threat models, cryptography basics, and secure systems." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE325" styleClass="available-continue-button"/></VBox>
-                            <VBox prefWidth="255" styleClass="available-course-card"><HBox alignment="CENTER_LEFT" spacing="8"><Label text="CSE329" styleClass="available-badge"/><Region HBox.hgrow="ALWAYS"/><Label text="i" styleClass="available-icon-placeholder"/><Label text="..." styleClass="available-icon-placeholder"/></HBox><Label text="Cloud Computing" styleClass="available-course-title" wrapText="true"/><Label text="Distributed services, deployment models, and scalability." styleClass="available-course-desc" wrapText="true"/><Button text="Continue" onAction="#selectCourseExam" userData="3-2|CSE329" styleClass="available-continue-button"/></VBox>
-                        </FlowPane>
-                    </VBox>
-
+                    <VBox fx:id="availableExamCardContainer" spacing="16"/>
                 </VBox>
             </content>
         </ScrollPane>
@@ -670,7 +543,12 @@
                 <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="discussion-nav-button"/>
                 <Button text="My Exams" onAction="#showExamHistory" styleClass="discussion-nav-button"/>
                 <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="discussion-nav-button"/>
-                <Button text="Discussion" styleClass="discussion-nav-button discussion-nav-active"/>
+                <Button text="Discussion">
+                    <styleClass>
+                        <String fx:value="discussion-nav-button"/>
+                        <String fx:value="discussion-nav-active"/>
+                    </styleClass>
+                </Button>
                 <Button text="Messaging" onAction="#showMessaging" styleClass="discussion-nav-button"/>
 
                 <Region VBox.vgrow="ALWAYS"/>
@@ -690,10 +568,15 @@
             <HBox spacing="18" VBox.vgrow="ALWAYS">
                 <VBox spacing="16" prefWidth="360" styleClass="discussion-left-column">
 
-                    <VBox spacing="12" styleClass="discussion-card discussion-ask-card">
+                    <VBox spacing="12">
+                        <styleClass>
+                            <String fx:value="discussion-card"/>
+                            <String fx:value="discussion-ask-card"/>
+                        </styleClass>
                         <Label text="Ask Question" styleClass="discussion-card-title"/>
 
                         <TextArea fx:id="discussionAskArea"
+                                  onKeyPressed="#handleDiscussionSubmitKey"
                                   promptText="Ask your question..."
                                   prefRowCount="7"
                                   wrapText="true"
@@ -701,28 +584,17 @@
 
                         <Label text="Markdown is supported" styleClass="discussion-helper-text"/>
 
-                        <HBox spacing="10" alignment="CENTER_LEFT">
-                            <Button styleClass="discussion-icon-button">
-                                <graphic>
-                                    <FontIcon iconLiteral="far-image" styleClass="discussion-tool-icon"/>
-                                </graphic>
-                            </Button>
-                            <Button styleClass="discussion-icon-button">
-                                <graphic>
-                                    <FontIcon iconLiteral="far-file-alt" styleClass="discussion-tool-icon"/>
-                                </graphic>
-                            </Button>
-                            <Button styleClass="discussion-icon-button">
-                                <graphic>
-                                    <FontIcon iconLiteral="far-smile" styleClass="discussion-tool-icon"/>
-                                </graphic>
-                            </Button>
+                        <HBox spacing="10" alignment="CENTER_RIGHT">
                             <Region HBox.hgrow="ALWAYS"/>
                             <Button text="Post" onAction="#postDiscussion" styleClass="discussion-post-button"/>
                         </HBox>
                     </VBox>
 
-                    <VBox spacing="10" styleClass="discussion-card discussion-guidelines-card">
+                    <VBox spacing="10">
+                        <styleClass>
+                            <String fx:value="discussion-card"/>
+                            <String fx:value="discussion-guidelines-card"/>
+                        </styleClass>
                         <Label text="Community Guidelines" styleClass="discussion-card-title"/>
 
                         <HBox spacing="8" alignment="CENTER_LEFT">
@@ -742,11 +614,20 @@
                     </VBox>
                 </VBox>
 
-                <VBox spacing="12" styleClass="discussion-card discussion-feed-panel" HBox.hgrow="ALWAYS">
+                <VBox spacing="12" HBox.hgrow="ALWAYS">
+                    <styleClass>
+                        <String fx:value="discussion-card"/>
+                        <String fx:value="discussion-feed-panel"/>
+                    </styleClass>
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <Label text="Discussion Feed" styleClass="discussion-card-title"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Button text="Latest" styleClass="discussion-tab-button discussion-tab-active"/>
+                        <Button text="Latest">
+                            <styleClass>
+                                <String fx:value="discussion-tab-button"/>
+                                <String fx:value="discussion-tab-active"/>
+                            </styleClass>
+                        </Button>
                         <Button text="Trending" styleClass="discussion-tab-button"/>
                     </HBox>
 
@@ -781,7 +662,12 @@
                 <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="messaging-nav-button"/>
                 <Button text="My Exams" onAction="#showExamHistory" styleClass="messaging-nav-button"/>
                 <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="messaging-nav-button"/>
-                <Button text="Messaging" styleClass="messaging-nav-button messaging-nav-active"/>
+                <Button text="Messaging">
+                    <styleClass>
+                        <String fx:value="messaging-nav-button"/>
+                        <String fx:value="messaging-nav-active"/>
+                    </styleClass>
+                </Button>
 
                 <VBox VBox.vgrow="ALWAYS"/>
                 <Button text="Logout" onAction="#handleLogout" styleClass="messaging-logout-button"/>
@@ -804,9 +690,11 @@
 
                             <HBox spacing="8" alignment="CENTER_LEFT" styleClass="messaging-search-shell">
                                 <FontIcon iconLiteral="fas-search" styleClass="messaging-search-icon"/>
-                                <TextField fx:id="friendRequestField" promptText="Find students..." HBox.hgrow="ALWAYS" styleClass="messaging-search-field"/>
+                                <TextField fx:id="friendRequestField" onAction="#sendFriendRequest" promptText="Find students..." HBox.hgrow="ALWAYS" styleClass="messaging-search-field"/>
                                 <Button text="Add" onAction="#sendFriendRequest" styleClass="messaging-add-button"/>
                             </HBox>
+
+                            <Label fx:id="messagingFeedbackLabel" text="" visible="false" managed="false" wrapText="true" styleClass="messaging-feedback-label"/>
 
                             <ListView fx:id="pendingRequestsList" prefHeight="210" styleClass="messaging-request-list"/>
                         </VBox>
@@ -831,37 +719,12 @@
                     </VBox>
 
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Button styleClass="messaging-header-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-phone-alt" styleClass="messaging-header-icon"/>
-                        </graphic>
-                    </Button>
-                    <Button styleClass="messaging-header-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-video" styleClass="messaging-header-icon"/>
-                        </graphic>
-                    </Button>
-                    <Button styleClass="messaging-header-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-ellipsis-h" styleClass="messaging-header-icon"/>
-                        </graphic>
-                    </Button>
                 </HBox>
 
                 <ListView fx:id="chatHistoryList" VBox.vgrow="ALWAYS" styleClass="messaging-chat-list"/>
 
                 <HBox alignment="CENTER_LEFT" spacing="8" styleClass="messaging-composer-bar">
-                    <Button styleClass="messaging-composer-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-plus" styleClass="messaging-composer-icon"/>
-                        </graphic>
-                    </Button>
-                    <TextField fx:id="chatMessageField" promptText="Write a message..." HBox.hgrow="ALWAYS" styleClass="messaging-chat-input"/>
-                    <Button styleClass="messaging-composer-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="far-smile" styleClass="messaging-composer-icon"/>
-                        </graphic>
-                    </Button>
+                    <TextField fx:id="chatMessageField" onAction="#sendChatMessage" promptText="Write a message..." HBox.hgrow="ALWAYS" styleClass="messaging-chat-input"/>
                     <Button onAction="#sendChatMessage" styleClass="messaging-send-button">
                         <graphic>
                             <FontIcon iconLiteral="fas-paper-plane" styleClass="messaging-send-icon"/>
@@ -885,10 +748,13 @@
             styleClass="progress-root">
 
     <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="progress-main-scroll">
+            <content>
         <VBox spacing="18" styleClass="progress-main-wrap">
 
             <HBox alignment="CENTER_LEFT">
                 <VBox spacing="4">
+                    <Label text="STUDENT ANALYTICS" styleClass="progress-page-chip"/>
                     <Label text="Progress Dashboard" styleClass="progress-page-title"/>
                     <Label text="Track your score trends, attempts, and improvement areas." styleClass="progress-page-subtitle"/>
                 </VBox>
@@ -970,13 +836,22 @@
 
                 <VBox prefWidth="360" spacing="12" styleClass="progress-history-panel">
                     <HBox alignment="CENTER_LEFT">
-                        <Label text="Exam History" styleClass="progress-card-title"/>
+                        <VBox spacing="2">
+                            <Label text="Exam History" styleClass="progress-card-title"/>
+                            <Label text="Filter by semester and course to focus the chart." styleClass="progress-card-subtitle"/>
+                        </VBox>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Button text="Export Report" styleClass="progress-export-button"/>
                     </HBox>
 
-                    <HBox spacing="8" alignment="CENTER_LEFT">
-                        <ChoiceBox fx:id="progressTermChoice" styleClass="progress-filter-choice" HBox.hgrow="ALWAYS"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="progress-filter-bar">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="Semester" styleClass="progress-filter-label"/>
+                            <ChoiceBox fx:id="progressTermChoice" styleClass="progress-filter-choice" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="Course Focus" styleClass="progress-filter-label"/>
+                            <ChoiceBox fx:id="progressCourseChoice" styleClass="progress-filter-choice" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                        </VBox>
                     </HBox>
 
                     <TableView fx:id="historyTable" styleClass="progress-history-table" VBox.vgrow="ALWAYS">
@@ -993,6 +868,8 @@
 
             </HBox>
         </VBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>
@@ -1006,10 +883,13 @@
             styleClass="leaderboard-root">
 
     <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="leaderboard-main-scroll">
+            <content>
         <VBox spacing="16" styleClass="leaderboard-main-wrap">
 
             <HBox alignment="CENTER_LEFT">
                 <VBox spacing="4">
+                    <Label text="RANKING BOARD" styleClass="leaderboard-page-chip"/>
                     <Label text="Leaderboard" styleClass="leaderboard-page-title"/>
                     <Label text="Real-time performance metrics for the current academic session." styleClass="leaderboard-page-subtitle"/>
                 </VBox>
@@ -1031,7 +911,21 @@
                 <Button text="Refresh" onAction="#refreshLeaderboardView" styleClass="leaderboard-refresh-button"/>
             </HBox>
 
-            <ListView fx:id="leaderboardList" prefHeight="360" VBox.vgrow="ALWAYS" styleClass="leaderboard-list-view"/>
+            <HBox spacing="12" styleClass="leaderboard-spotlight-strip">
+                <VBox spacing="6" styleClass="leaderboard-spotlight-card" HBox.hgrow="ALWAYS">
+                    <Label text="Current Crown" styleClass="leaderboard-spotlight-label"/>
+                    <Label fx:id="highestScorerLabel" text="No data available" styleClass="leaderboard-spotlight-title" wrapText="true"/>
+                    <Label text="Standings are restricted to the logged-in semester and selected course." styleClass="leaderboard-spotlight-meta" wrapText="true"/>
+                </VBox>
+                <VBox spacing="6" styleClass="leaderboard-note-card">
+                    <Label text="How Ranking Works" styleClass="leaderboard-spotlight-label"/>
+                    <Label text="Average score decides the order, with best score acting as the tie-break." styleClass="leaderboard-spotlight-meta" wrapText="true"/>
+                </VBox>
+            </HBox>
+
+            <StackPane styleClass="leaderboard-list-shell" VBox.vgrow="ALWAYS">
+                <ListView fx:id="leaderboardList" prefHeight="360" VBox.vgrow="ALWAYS" styleClass="leaderboard-list-view"/>
+            </StackPane>
 
             <HBox alignment="CENTER_LEFT" spacing="10" styleClass="leaderboard-pagination-bar">
                 <Label fx:id="leaderboardSummaryLabel" text="No data available" styleClass="leaderboard-pagination-text"/>
@@ -1075,9 +969,9 @@
                     <TableColumn fx:id="leaderboardHiddenAttemptsColumn" text="Attempts" prefWidth="120"/>
                 </columns>
             </TableView>
-
-            <Label fx:id="highestScorerLabel" styleClass="leaderboard-page-subtitle"/>
         </VBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>
@@ -1161,7 +1055,12 @@
                 <Label text="Exam Portal" styleClass="exam-start-logo"/>
 
                 <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="exam-start-nav-button"/>
-                <Button text="Available Exams" styleClass="exam-start-nav-button exam-start-nav-active"/>
+                <Button text="Available Exams">
+                    <styleClass>
+                        <String fx:value="exam-start-nav-button"/>
+                        <String fx:value="exam-start-nav-active"/>
+                    </styleClass>
+                </Button>
                 <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="exam-start-nav-button"/>
                 <Button text="My Exams" onAction="#showExamHistory" styleClass="exam-start-nav-button"/>
                 <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="exam-start-nav-button"/>
@@ -1352,7 +1251,7 @@
                     <Label text="EMPLOYEE ID / USERNAME" styleClass="teacher-login-field-label"/>
                     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
                         <FontIcon iconLiteral="fas-id-badge" styleClass="teacher-login-field-icon"/>
-                        <TextField fx:id="teacherUsername" promptText="Enter your credentials" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                        <TextField fx:id="teacherUsername" onAction="#loginTeacher" promptText="Enter your credentials" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
                     </HBox>
                 </VBox>
 
@@ -1365,7 +1264,7 @@
 
                     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
                         <FontIcon iconLiteral="fas-key" styleClass="teacher-login-field-icon"/>
-                        <PasswordField fx:id="teacherPassword" promptText="Enter secure password" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                        <PasswordField fx:id="teacherPassword" onAction="#loginTeacher" promptText="Enter secure password" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
                         <FontIcon iconLiteral="fas-eye" styleClass="teacher-login-field-icon"/>
                     </HBox>
                 </VBox>
@@ -1405,8 +1304,11 @@
 ============================================================ -->
 <StackPane fx:id="teacherAuthFailPane"
            visible="false" managed="false"
-           styleClass="root auth-failed-root"
            xmlns:fx="http://javafx.com/fxml">
+    <styleClass>
+        <String fx:value="root"/>
+        <String fx:value="auth-failed-root"/>
+    </styleClass>
     <children>
         <fx:include fx:id="authFailedView" source="AuthFailed.fxml"/>
     </children>
@@ -1417,9 +1319,15 @@
 ============================================================ -->
 <BorderPane fx:id="teacherDashboardPane"
             visible="true" managed="true"
-            styleClass="root xdash-root">
+            >
+    <styleClass>
+        <String fx:value="root"/>
+        <String fx:value="xdash-root"/>
+    </styleClass>
 
     <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="xdash-scroll">
+            <content>
         <HBox styleClass="xdash-shell" spacing="28">
 
             <VBox styleClass="xdash-main-column" spacing="24" HBox.hgrow="ALWAYS">
@@ -1481,7 +1389,11 @@
                         <Button text="View Insights →" styleClass="xdash-link" onAction="#showTeacherAnalytics"/>
                     </VBox>
 
-                    <HBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" styleClass="xdash-card xdash-wide" alignment="CENTER_LEFT" spacing="14" prefHeight="124">
+                    <HBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" alignment="CENTER_LEFT" spacing="14" prefHeight="124">
+                        <styleClass>
+                            <String fx:value="xdash-card"/>
+                            <String fx:value="xdash-wide"/>
+                        </styleClass>
                         <StackPane styleClass="xdash-icon-box">
                             <FontIcon iconLiteral="fas-folder-open" styleClass="xdash-card-icon"/>
                         </StackPane>
@@ -1496,7 +1408,11 @@
             </VBox>
 
             <VBox styleClass="xdash-sidebar" spacing="16" prefWidth="310" minWidth="298" maxWidth="322">
-                <VBox styleClass="xdash-side-card xdash-stats" spacing="14">
+                <VBox spacing="14">
+                    <styleClass>
+                        <String fx:value="xdash-side-card"/>
+                        <String fx:value="xdash-stats"/>
+                    </styleClass>
                     <Label text="Quick Stats" styleClass="xdash-side-title"/>
 
                     <VBox spacing="6">
@@ -1518,7 +1434,11 @@
                     </VBox>
                 </VBox>
 
-                <VBox styleClass="xdash-side-card xdash-logout" spacing="10">
+                <VBox spacing="10">
+                    <styleClass>
+                        <String fx:value="xdash-side-card"/>
+                        <String fx:value="xdash-logout"/>
+                    </styleClass>
                     <HBox alignment="CENTER_LEFT" spacing="8">
                         <FontIcon iconLiteral="fas-sign-out-alt" styleClass="xdash-logout-icon"/>
                         <Label text="Logout" styleClass="xdash-side-title"/>
@@ -1527,7 +1447,11 @@
                     <Button text="LOGOUT" styleClass="xdash-logout-btn" onAction="#logout" maxWidth="Infinity"/>
                 </VBox>
 
-                <VBox styleClass="xdash-side-card xdash-help" spacing="10" VBox.vgrow="ALWAYS">
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <styleClass>
+                        <String fx:value="xdash-side-card"/>
+                        <String fx:value="xdash-help"/>
+                    </styleClass>
                     <Label text="Help Center" styleClass="xdash-side-title"/>
                     <HBox spacing="12" alignment="CENTER_LEFT">
                         <VBox spacing="4" HBox.hgrow="ALWAYS">
@@ -1541,6 +1465,8 @@
             </VBox>
 
         </HBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>

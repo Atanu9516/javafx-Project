@@ -7,6 +7,50 @@
     -fx-padding: 22 26 24 26;
 }
 
+.progress-main-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-fit-to-width: true;
+}
+
+.progress-main-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.progress-main-scroll > .corner {
+    -fx-background-color: transparent;
+}
+
+.progress-main-scroll .scroll-bar:vertical,
+.progress-main-scroll .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.progress-main-scroll .scroll-bar .track,
+.progress-main-scroll .scroll-bar .track-background {
+    -fx-background-color: rgba(14, 28, 20, 0.94);
+    -fx-background-radius: 999;
+}
+
+.progress-main-scroll .scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, rgba(50, 255, 113, 0.92), rgba(14, 207, 75, 0.92));
+    -fx-background-radius: 999;
+}
+
+.progress-main-scroll .scroll-bar .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(104, 255, 155, 0.96), rgba(24, 224, 92, 0.96));
+}
+
+.progress-main-scroll .scroll-bar .increment-button,
+.progress-main-scroll .scroll-bar .decrement-button,
+.progress-main-scroll .scroll-bar .increment-arrow,
+.progress-main-scroll .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
 .progress-page-title {
     -fx-text-fill: #effff5;
     -fx-font-size: 33px;
@@ -270,4 +314,88 @@
 .progress-summary-desc {
     -fx-text-fill: #8ea495;
     -fx-font-size: 11px;
+}
+
+.progress-page-chip {
+    -fx-text-fill: #b6ffd1;
+    -fx-background-color: rgba(43, 255, 118, 0.12);
+    -fx-border-color: rgba(116, 255, 173, 0.34);
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+    -fx-padding: 5 10;
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-letter-spacing: 1px;
+}
+
+.progress-filter-bar {
+    -fx-background-color: rgba(10, 24, 17, 0.82);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(96, 247, 160, 0.10);
+    -fx-border-radius: 16;
+    -fx-padding: 10;
+}
+
+.progress-filter-label {
+    -fx-text-fill: #8fa89a;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+}
+
+.progress-history-table {
+    -fx-fixed-cell-size: 52;
+}
+
+.progress-history-table .table-row-cell {
+    -fx-background-insets: 0, 0 10 6 10;
+    -fx-padding: 4 6 4 6;
+}
+
+.progress-history-table .table-row-cell:selected {
+    -fx-background-color: rgba(82, 255, 144, 0.22);
+    -fx-border-color: rgba(135, 255, 186, 0.30);
+    -fx-border-width: 1;
+}
+
+.progress-history-table .virtual-flow .clipped-container .sheet {
+    -fx-background-color: transparent;
+}
+
+.progress-history-table .placeholder .label {
+    -fx-text-fill: #92ab9d;
+    -fx-font-size: 12px;
+}
+
+.progress-line-chart,
+.progress-bar-chart {
+    -fx-border-color: rgba(120, 255, 178, 0.08);
+    -fx-border-radius: 16;
+}
+
+.progress-line-chart .chart-plot-background,
+.progress-bar-chart .chart-plot-background {
+    -fx-background-color: linear-gradient(to bottom, rgba(8, 20, 15, 0.94), rgba(13, 31, 22, 0.88));
+    -fx-background-radius: 12;
+}
+
+.progress-line-chart .chart-alternative-column-fill,
+.progress-line-chart .chart-alternative-row-fill,
+.progress-bar-chart .chart-alternative-column-fill,
+.progress-bar-chart .chart-alternative-row-fill {
+    -fx-fill: transparent;
+}
+
+.progress-line-chart .chart-vertical-zero-line,
+.progress-line-chart .chart-horizontal-zero-line,
+.progress-bar-chart .chart-vertical-zero-line,
+.progress-bar-chart .chart-horizontal-zero-line {
+    -fx-stroke: rgba(143, 255, 188, 0.22);
+}
+
+.progress-line-chart .default-color0.chart-line-symbol {
+    -fx-effect: dropshadow(gaussian, rgba(92, 255, 159, 0.45), 12, 0.35, 0, 0);
+}
+
+.progress-bar-chart .chart-bar {
+    -fx-background-radius: 10 10 4 4;
 }

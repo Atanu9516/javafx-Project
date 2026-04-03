@@ -25,10 +25,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ExamResultController {
-    private static final String RESULTS_FILE = "src/main/resources/results.csv";
-    private static final String RESULT_DETAILS_FILE = "src/main/resources/result_details.csv";
-    private static final String QUESTIONS_FILE = "src/main/resources/com/example/onlinemcqexam/questions.csv";
-    private static final String EXAMS_FILE = "src/main/resources/exams.csv";
+    private static final String RESULTS_FILE = AppPaths.resourceFile("results.csv").toString();
+    private static final String RESULT_DETAILS_FILE = AppPaths.resourceFile("result_details.csv").toString();
+    private static final String QUESTIONS_FILE = AppPaths.packageResourceFile("questions.csv").toString();
+    private static final String EXAMS_FILE = AppPaths.resourceFile("exams.csv").toString();
     private static final String NO_DATA = "No data available";
     private static final double PASS_PERCENTAGE = 40.0;
     private static final DateTimeFormatter HISTORY_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");

@@ -153,6 +153,17 @@
     -fx-cursor: hand;
 }
 
+.messaging-feedback-label {
+    -fx-text-fill: #98ffbf;
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-background-color: rgba(44, 255, 122, 0.12);
+    -fx-border-color: rgba(113, 255, 178, 0.24);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8 10;
+}
+
 .messaging-request-list,
 .messaging-friends-list,
 .messaging-chat-list {

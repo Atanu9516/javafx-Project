@@ -256,9 +256,17 @@ public final class QuestionBank {
         if (Files.exists(packagePath)) {
             return packagePath;
         }
+        Path modulePackagePath = Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", resourceName);
+        if (Files.exists(modulePackagePath)) {
+            return modulePackagePath;
+        }
         Path topLevelResourcesPath = Paths.get("src", "main", "resources", resourceName);
         if (Files.exists(topLevelResourcesPath)) {
             return topLevelResourcesPath;
+        }
+        Path moduleTopLevelResourcesPath = Paths.get("ONLINEMCQEXAM", "src", "main", "resources", resourceName);
+        if (Files.exists(moduleTopLevelResourcesPath)) {
+            return moduleTopLevelResourcesPath;
         }
         return null;
     }
@@ -269,7 +277,7 @@ public final class QuestionBank {
         }
         return switch (term.trim()) {
             case "2-1", "2-2" -> Level.INTERMEDIATE;
-            case "3-1", "3-2" -> Level.ADVANCED;
+            case "3-1", "3-2", "4-1", "4-2" -> Level.ADVANCED;
             default -> Level.BEGINNER;
         };
     }
@@ -297,7 +305,7 @@ public final class QuestionBank {
         }
         Set<String> allowed = ALLOWED_COURSES_BY_TERM.get(term.trim());
         if (allowed == null) {
-            return false;
+            return !normalizeCourseCode(courseCode).isBlank();
         }
         return allowed.contains(normalizeCourseCode(courseCode));
     }

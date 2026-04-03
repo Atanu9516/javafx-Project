@@ -31,8 +31,8 @@ public final class ExamClient {
         this.readTimeoutMs = readTimeoutMs;
     }
 
-    public ServerResponse register(String username, String password) throws IOException {
-        return sendCommand("REGISTER", username, password);
+    public ServerResponse register(String username, String password, String semester) throws IOException {
+        return sendCommand("REGISTER", username, password, semester);
     }
 
     public ServerResponse login(String username, String password) throws IOException {

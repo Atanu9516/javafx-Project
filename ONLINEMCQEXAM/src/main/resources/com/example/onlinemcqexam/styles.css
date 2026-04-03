@@ -3,8 +3,15 @@
     -fx-font-family: "Segoe UI", "Arial", sans-serif;
 }
 
+.app-shell {
+    -fx-background-color:
+        radial-gradient(center 24% 18%, radius 42%, rgba(52, 255, 106, 0.18) 0%, rgba(52, 255, 106, 0.04) 42%, transparent 72%),
+        radial-gradient(center 78% 84%, radius 50%, rgba(30, 120, 72, 0.20) 0%, rgba(30, 120, 72, 0.04) 48%, transparent 76%),
+        linear-gradient(to bottom right, #06110c 0%, #0b1711 46%, #102019 100%);
+}
+
 .login-root {
-    -fx-background-color: radial-gradient(center 50% 35%, radius 90%, #163224 0%, #102519 45%, #0b1a12 100%);
+    -fx-background-color: transparent;
     -fx-padding: 36;
 }
 
@@ -192,4 +199,85 @@
 .choice-box .menu-item:focused .label,
 .choice-box .menu-item:hover .label {
     -fx-text-fill: #effff4;
+}
+
+/* Global dark scrollbar theme so unstyled controls do not fall back to white JavaFX defaults */
+.scroll-pane,
+.list-view,
+.table-view,
+.text-area,
+.text-area .content {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane > .viewport,
+.list-view > .viewport,
+.table-view > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .corner,
+.list-view > .corner,
+.table-view > .corner {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal,
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal,
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal,
+.text-area .scroll-bar:vertical,
+.text-area .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-padding: 3;
+}
+
+.scroll-pane .scroll-bar .track,
+.scroll-pane .scroll-bar .track-background,
+.list-view .scroll-bar .track,
+.list-view .scroll-bar .track-background,
+.table-view .scroll-bar .track,
+.table-view .scroll-bar .track-background,
+.text-area .scroll-bar .track,
+.text-area .scroll-bar .track-background {
+    -fx-background-color: rgba(13, 27, 20, 0.92);
+    -fx-background-radius: 999;
+}
+
+.scroll-pane .scroll-bar .thumb,
+.list-view .scroll-bar .thumb,
+.table-view .scroll-bar .thumb,
+.text-area .scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, rgba(50, 255, 113, 0.88), rgba(14, 207, 75, 0.88));
+    -fx-background-radius: 999;
+}
+
+.scroll-pane .scroll-bar .thumb:hover,
+.list-view .scroll-bar .thumb:hover,
+.table-view .scroll-bar .thumb:hover,
+.text-area .scroll-bar .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(97, 255, 150, 0.96), rgba(24, 224, 92, 0.96));
+}
+
+.scroll-pane .scroll-bar .increment-button,
+.scroll-pane .scroll-bar .decrement-button,
+.scroll-pane .scroll-bar .increment-arrow,
+.scroll-pane .scroll-bar .decrement-arrow,
+.list-view .scroll-bar .increment-button,
+.list-view .scroll-bar .decrement-button,
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow,
+.table-view .scroll-bar .increment-button,
+.table-view .scroll-bar .decrement-button,
+.table-view .scroll-bar .increment-arrow,
+.table-view .scroll-bar .decrement-arrow,
+.text-area .scroll-bar .increment-button,
+.text-area .scroll-bar .decrement-button,
+.text-area .scroll-bar .increment-arrow,
+.text-area .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
 }

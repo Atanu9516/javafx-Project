@@ -96,12 +96,16 @@ public final class ExamServer implements AutoCloseable {
     }
 
     private String handleRegister(String[] parts) throws IOException {
-        if (parts.length < 3) {
+        if (parts.length < 4) {
             return error("BAD_REQUEST");
         }
         String username = NetworkProtocol.decode(parts[1]);
         String password = NetworkProtocol.decode(parts[2]);
-        boolean created = userStore.register(username, password);
+        String semester = NetworkProtocol.decode(parts[3]);
+        if (userStore.normalizeSemester(semester).isBlank()) {
+            return error("INVALID");
+        }
+        boolean created = userStore.register(username, password, semester);
         return created ? ok("") : error("EXISTS");
     }
 
@@ -111,8 +115,14 @@ public final class ExamServer implements AutoCloseable {
         }
         String username = NetworkProtocol.decode(parts[1]);
         String password = NetworkProtocol.decode(parts[2]);
-        boolean ok = userStore.authenticate(username, password);
-        return ok ? ok("") : error("INVALID");
+        UserStore.StoredUser user = userStore.authenticate(username, password);
+        if (user == null) {
+            return error("INVALID");
+        }
+        if (user.semester() == null || user.semester().isBlank()) {
+            return error("NO_SEMESTER");
+        }
+        return ok(user.semester());
     }
 
     private String handleDiscussionList() {
@@ -159,7 +169,7 @@ public final class ExamServer implements AutoCloseable {
         try {
             String fromKey = userStore.normalizeUsername(from);
             String toKey = userStore.normalizeUsername(to);
-            java.util.Map<String, String> users = userStore.loadUsers();
+            java.util.Map<String, UserStore.StoredUser> users = userStore.loadUsers();
             if (!users.containsKey(fromKey) || !users.containsKey(toKey)) {
                 return error("INVALID");
             }

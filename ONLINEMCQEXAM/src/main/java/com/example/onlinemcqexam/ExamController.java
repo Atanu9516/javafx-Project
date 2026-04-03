@@ -29,6 +29,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -36,9 +37,12 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -57,9 +61,11 @@ import java.nio.file.Paths;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -78,15 +84,17 @@ public class ExamController {
     private static final int EXAM_DURATION_SECONDS = 900;
     private static final double PASS_THRESHOLD = 0.6;
     private static final double REGISTER_COMPACT_BREAKPOINT = 1000;
+    private static final String CHAT_METADATA_SEPARATOR = "\u001F";
+    private static final DateTimeFormatter CHAT_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
     private static final int DEFAULT_EXAM_QUESTION_COUNT = 20;
     private static final int SECONDS_PER_QUESTION = 30;
-    private static final String EXAM_HISTORY_FILE = "src/main/resources/exam_history.csv";
-    private static final String QUESTIONS_FILE = "src/main/resources/com/example/onlinemcqexam/questions.csv";
-    private static final String EXAMS_FILE = "src/main/resources/exams.csv";
-    private static final String SCHEDULE_FILE = "schedule.csv";
-    private static final String LEGACY_SCHEDULE_FILE = "src/main/resources/schedule.csv";
-    private static final String RESULTS_FILE = "src/main/resources/results.csv";
-    private static final String RESULT_DETAILS_FILE = "src/main/resources/result_details.csv";
+    private static final String EXAM_HISTORY_FILE = AppPaths.resourceFile("exam_history.csv").toString();
+    private static final String QUESTIONS_FILE = AppPaths.packageResourceFile("questions.csv").toString();
+    private static final String EXAMS_FILE = AppPaths.resourceFile("exams.csv").toString();
+    private static final String SCHEDULE_FILE = AppPaths.appFile("schedule.csv").toString();
+    private static final String LEGACY_SCHEDULE_FILE = AppPaths.resourceFile("schedule.csv").toString();
+    private static final String RESULTS_FILE = AppPaths.resourceFile("results.csv").toString();
+    private static final String RESULT_DETAILS_FILE = AppPaths.resourceFile("result_details.csv").toString();
     private static final double ANALYTICS_PASS_THRESHOLD = 40.0;
     private static final String FILTER_ALL_TERMS = "All Terms";
     private static final String FILTER_ALL_COURSES = "All Courses";
@@ -95,6 +103,7 @@ public class ExamController {
     private static final String IMPROVEMENT_AREA_MESSAGE = "Needs improvement and more practice";
     private static final DateTimeFormatter HISTORY_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     private static final DateTimeFormatter SCHEDULE_TIME_FORMAT = DateTimeFormatter.ofPattern("H:mm");
+    private static final List<String> SUPPORTED_SEMESTERS = List.of("1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2");
 
     @FXML
     private Node loginPane;
@@ -162,6 +171,14 @@ public class ExamController {
     @FXML
     private Label studentWelcomeLabel;
     @FXML
+    private Label dashboardProfileInitialsLabel;
+    @FXML
+    private Label dashboardProfileNameLabel;
+    @FXML
+    private Label dashboardProfileSubtitleLabel;
+    @FXML
+    private Label dashboardAlertsLabel;
+    @FXML
     private Label dashboardUpcomingCountLabel;
     @FXML
     private Label dashboardCompletedCountLabel;
@@ -180,6 +197,8 @@ public class ExamController {
 
     @FXML
     private TextField registerUsername;
+    @FXML
+    private ChoiceBox<String> registerSemesterChoice;
     @FXML
     private PasswordField registerPassword;
     @FXML
@@ -247,11 +266,15 @@ public class ExamController {
     @FXML
     private ListView<String> availableExamList;
     @FXML
+    private VBox availableExamCardContainer;
+    @FXML
     private ListView<String> discussionList;
     @FXML
     private TextArea discussionAskArea;
     @FXML
     private TextField friendRequestField;
+    @FXML
+    private Label messagingFeedbackLabel;
     @FXML
     private Label messagingRequestBadgeLabel;
     @FXML
@@ -301,7 +324,7 @@ public class ExamController {
     @FXML
     private Label improvementAreaMessageLabel;
     @FXML
-    private ListView<String> leaderboardList;
+    private ListView<LeaderboardRowCard> leaderboardList;
     @FXML
     private Label highestScorerLabel;
     @FXML
@@ -423,11 +446,14 @@ public class ExamController {
     private int currentIndex;
     private int[] answers;
     private Timeline timer;
+    private Timeline messagingRefreshTimeline;
+    private Timeline dashboardAlertRefreshTimeline;
     private int secondsRemaining;
     private String selectedTerm;
     private String selectedCourseCode;
     private String selectedCourseLabel;
     private String activeUser;
+    private String activeUserSemester;
     private String activeTeacher;
     private String activeAttemptType = "practice";
     private String activeAttemptExamId = "NA";
@@ -439,11 +465,14 @@ public class ExamController {
     private final Map<String, String> studentScheduledCourseCodeByLabel = new LinkedHashMap<>();
     private final Map<String, String> analyticsCourseCodeByLabel = new LinkedHashMap<>();
     private final Map<String, String> leaderboardCourseCodeByLabel = new LinkedHashMap<>();
+    private final Map<String, Long> latestSeenIncomingMessageByFriend = new LinkedHashMap<>();
     private final Map<String, TeacherExamSummary> scheduleExamByLabel = new LinkedHashMap<>();
     private final Map<String, TeacherExamSummary> viewExamByLabel = new LinkedHashMap<>();
     private final Map<String, ScheduleRow> studentScheduledRowByLabel = new LinkedHashMap<>();
     private final Map<String, List<ExamRecord>> courseMap = new LinkedHashMap<>();
     private boolean progressFilterRefreshInProgress;
+    private boolean chatAlertSnapshotInitialized;
+    private boolean dashboardAlertRefreshInFlight;
     private final ToggleGroup createModeGroup = new ToggleGroup();
     private final List<TeacherQuestionRow> qbCurrentRows = new ArrayList<>();
     private final List<Question> createCourseQuestions = new ArrayList<>();
@@ -465,6 +494,8 @@ public class ExamController {
         configureExamQuestionCount();
         configureHistoryTable();
         configureProgressFilters();
+        configureProgressCharts();
+        configureLeaderboardList();
         configureMessaging();
         configureDiscussionFeed();
         configureTeacherAuthoring();
@@ -475,10 +506,19 @@ public class ExamController {
         configureExamLibraryNavigation();
         configureResultsAnalyticsNavigation();
         configureExamResultNavigation();
+        populateRegistrationSemesters();
         populateSampleData();
         configureExamSelection();
         configureRegisterResponsiveMode();
         showPane(loginPane);
+    }
+
+    private void populateRegistrationSemesters() {
+        if (registerSemesterChoice == null) {
+            return;
+        }
+        registerSemesterChoice.getItems().setAll(SUPPORTED_SEMESTERS);
+        registerSemesterChoice.getSelectionModel().clearSelection();
     }
 
     private void configureExamResultNavigation() {
@@ -585,6 +625,22 @@ public class ExamController {
         historyAttemptsColumn.setCellValueFactory(new PropertyValueFactory<>("attempts"));
         historyBestColumn.setCellValueFactory(new PropertyValueFactory<>("bestPercentage"));
         historyAvgColumn.setCellValueFactory(new PropertyValueFactory<>("averagePercentage"));
+        Label placeholder = new Label("No attempts yet for this course filter.");
+        placeholder.getStyleClass().add("progress-empty-state");
+        historyTable.setPlaceholder(placeholder);
+        historyTable.setRowFactory(table -> new TableRow<>() {
+            @Override
+            protected void updateItem(CourseSummaryRow item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setStyle("");
+                    return;
+                }
+                setStyle(item.bestPercentageValue >= 80.0
+                        ? "-fx-font-weight: 700;"
+                        : "");
+            }
+        });
 
         historyTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, selected) -> {
             if (selected == null) {
@@ -601,8 +657,30 @@ public class ExamController {
                 if (progressFilterRefreshInProgress) {
                     return;
                 }
+                refreshProgressCourseFilterOptions();
                 loadExamHistory();
             });
+        }
+        if (progressCourseChoice != null) {
+            progressCourseChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+                if (progressFilterRefreshInProgress) {
+                    return;
+                }
+                loadExamHistory();
+            });
+        }
+    }
+
+    private void configureProgressCharts() {
+        if (progressLineChart != null) {
+            progressLineChart.setAnimated(false);
+            progressLineChart.setLegendVisible(false);
+        }
+        if (progressChart != null) {
+            progressChart.setAnimated(false);
+            progressChart.setLegendVisible(false);
+            progressChart.setCategoryGap(18);
+            progressChart.setBarGap(8);
         }
     }
 
@@ -623,9 +701,10 @@ public class ExamController {
 
     private void loadExamCatalog() {
         try {
-            List<String> terms = QuestionBank.loadTerms();
+            List<String> terms = filterStudentTerms(QuestionBank.loadTerms());
             if (termChoice != null) {
                 termChoice.getItems().setAll(terms);
+                termChoice.setDisable(!normalizeSemester(activeUserSemester).isBlank());
                 if (!terms.isEmpty()) {
                     termChoice.getSelectionModel().selectFirst();
                     onTermChanged(terms.get(0));
@@ -657,9 +736,97 @@ public class ExamController {
             }
         }
         availableExamList.getItems().setAll(rows);
+        renderAvailableExamCards(terms);
+    }
+
+    private void renderAvailableExamCards(List<String> terms) {
+        if (availableExamCardContainer == null) {
+            return;
+        }
+        availableExamCardContainer.getChildren().clear();
+        if (terms == null || terms.isEmpty()) {
+            Label empty = new Label("No courses available for your semester.");
+            empty.getStyleClass().add("available-course-desc");
+            availableExamCardContainer.getChildren().add(empty);
+            return;
+        }
+
+        for (String term : terms) {
+            List<QuestionBank.CourseInfo> courses;
+            try {
+                courses = QuestionBank.loadCoursesForTerm(term);
+            } catch (IOException ex) {
+                continue;
+            }
+            if (courses.isEmpty()) {
+                continue;
+            }
+
+            Label termTitle = new Label(term);
+            termTitle.getStyleClass().add("available-term-title");
+            Label termMeta = new Label(termLabel(term));
+            termMeta.getStyleClass().add("available-group-meta");
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            HBox header = new HBox(termTitle, spacer, termMeta);
+            header.setAlignment(Pos.CENTER_LEFT);
+
+            FlowPane grid = new FlowPane();
+            grid.setHgap(20);
+            grid.setVgap(20);
+            grid.setPrefWrapLength(860);
+            grid.getStyleClass().add("available-card-grid");
+
+            for (QuestionBank.CourseInfo course : courses) {
+                String courseCode = canonicalCourseCode(course.getCourseCode());
+                String courseName = course.getCourseName() == null || course.getCourseName().isBlank()
+                        ? courseCode
+                        : course.getCourseName().trim();
+
+                Label badge = new Label(courseCode);
+                badge.getStyleClass().add("available-badge");
+                Region badgeSpacer = new Region();
+                HBox.setHgrow(badgeSpacer, Priority.ALWAYS);
+                Label iconOne = new Label("i");
+                iconOne.getStyleClass().add("available-icon-placeholder");
+                Label iconTwo = new Label("...");
+                iconTwo.getStyleClass().add("available-icon-placeholder");
+                HBox topRow = new HBox(8, badge, badgeSpacer, iconOne, iconTwo);
+                topRow.setAlignment(Pos.CENTER_LEFT);
+
+                Label title = new Label(courseName);
+                title.setWrapText(true);
+                title.getStyleClass().add("available-course-title");
+
+                Label desc = new Label("Questions are available only for semester " + term + " in this course.");
+                desc.setWrapText(true);
+                desc.getStyleClass().add("available-course-desc");
+
+                Button continueButton = new Button("Continue");
+                continueButton.setUserData(term + "|" + courseCode);
+                continueButton.getStyleClass().add("available-continue-button");
+                continueButton.setOnAction(this::selectCourseExam);
+
+                VBox card = new VBox(12, topRow, title, desc, continueButton);
+                card.setPrefWidth(255);
+                card.getStyleClass().add("available-course-card");
+                grid.getChildren().add(card);
+            }
+
+            VBox termGroup = new VBox(16, header, grid);
+            termGroup.getStyleClass().add("available-term-group");
+            availableExamCardContainer.getChildren().add(termGroup);
+        }
     }
 
     private void onTermChanged(String term) {
+        if (!isActiveStudentSemester(term)) {
+            if (courseChoice != null) {
+                courseChoice.getItems().clear();
+            }
+            levelMessageLabel.setText("You can only view courses from semester " + activeUserSemester + ".");
+            return;
+        }
         selectedTerm = term;
         courseCodeByLabel.clear();
         selectedCourseCode = null;
@@ -693,8 +860,59 @@ public class ExamController {
             case "2-2" -> "Level-2 Term-2 (2-2)";
             case "3-1" -> "Level-3 Term-1 (3-1)";
             case "3-2" -> "Level-3 Term-2 (3-2)";
+            case "4-1" -> "Level-4 Term-1 (4-1)";
+            case "4-2" -> "Level-4 Term-2 (4-2)";
             default -> term;
         };
+    }
+
+    private List<String> filterStudentTerms(List<String> terms) {
+        if (terms == null) {
+            return List.of();
+        }
+        String semester = normalizeSemester(activeUserSemester);
+        List<String> filtered = new ArrayList<>();
+        if (semester.isBlank()) {
+            filtered.addAll(terms);
+            return filtered;
+        }
+        for (String term : terms) {
+            if (semester.equals(normalizeSemester(term))) {
+                filtered.add(term);
+            }
+        }
+        if (filtered.isEmpty()) {
+            filtered.add(semester);
+        }
+        return filtered;
+    }
+
+    private String normalizeSemester(String semester) {
+        if (semester == null) {
+            return "";
+        }
+        String normalized = semester.trim();
+        return SUPPORTED_SEMESTERS.contains(normalized) ? normalized : "";
+    }
+
+    private boolean isActiveStudentSemester(String semester) {
+        String activeSemester = normalizeSemester(activeUserSemester);
+        return activeSemester.isBlank() || activeSemester.equals(normalizeSemester(semester));
+    }
+
+    private void setStudentSemesterChoice(ChoiceBox<String> choiceBox, String semester) {
+        if (choiceBox == null) {
+            return;
+        }
+        String normalized = normalizeSemester(semester);
+        if (normalized.isBlank()) {
+            choiceBox.getItems().clear();
+            choiceBox.setDisable(false);
+            return;
+        }
+        choiceBox.getItems().setAll(normalized);
+        choiceBox.getSelectionModel().select(normalized);
+        choiceBox.setDisable(true);
     }
 
     private void configureSpinners() {
@@ -974,14 +1192,36 @@ public class ExamController {
 
     private ChatBubbleData parseChatBubble(String raw, int index) {
         String value = raw == null ? "" : raw;
-        int split = value.indexOf(": ");
-        String sender = split >= 0 ? value.substring(0, split).trim() : "Friend";
-        String message = split >= 0 ? value.substring(split + 2).trim() : value.trim();
-        boolean outgoing = activeUser != null && activeUser.equalsIgnoreCase(sender);
+        String sender;
+        String message;
+        String timeLabel;
 
-        int minute = (index * 3) + 1;
-        String timeLabel = minute + " min";
+        String[] metadataParts = value.split(CHAT_METADATA_SEPARATOR, 3);
+        if (metadataParts.length == 3) {
+            sender = metadataParts[0].trim();
+            message = metadataParts[2].trim();
+            timeLabel = formatChatTimestamp(metadataParts[1]);
+        } else {
+            int split = value.indexOf(": ");
+            sender = split >= 0 ? value.substring(0, split).trim() : "Friend";
+            message = split >= 0 ? value.substring(split + 2).trim() : value.trim();
+            int minute = (index * 3) + 1;
+            timeLabel = minute + " min";
+        }
+        boolean outgoing = activeUser != null && activeUser.equalsIgnoreCase(sender);
         return new ChatBubbleData(sender, message, outgoing, timeLabel);
+    }
+
+    private String formatChatTimestamp(String rawTimestamp) {
+        try {
+            long timestamp = Long.parseLong(rawTimestamp == null ? "" : rawTimestamp.trim());
+            return Instant.ofEpochMilli(timestamp)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalTime()
+                    .format(CHAT_TIME_FORMATTER);
+        } catch (RuntimeException ex) {
+            return "Now";
+        }
     }
 
     private void handleFriendRequestDecision(String from, boolean accept) {
@@ -1071,6 +1311,82 @@ public class ExamController {
 
                 setText(null);
                 setGraphic(card);
+            }
+        });
+    }
+
+    private void configureLeaderboardList() {
+        if (leaderboardList == null) {
+            return;
+        }
+        Label placeholder = new Label("No rankings yet for the selected semester and course.");
+        placeholder.getStyleClass().add("leaderboard-empty-label");
+        leaderboardList.setPlaceholder(placeholder);
+        leaderboardList.setFocusTraversable(false);
+        leaderboardList.setCellFactory(listView -> new ListCell<>() {
+            @Override
+            protected void updateItem(LeaderboardRowCard item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                    return;
+                }
+
+                Label rankNumber = new Label(String.format("%02d", item.rank()));
+                rankNumber.getStyleClass().add("leaderboard-rank-number");
+                Label tierLabel = new Label(item.tierLabel());
+                tierLabel.getStyleClass().add("leaderboard-rank-icon");
+                VBox rankBox = new VBox(2, rankNumber, tierLabel);
+                rankBox.setAlignment(Pos.CENTER_LEFT);
+
+                Label avatarText = new Label(item.avatarText());
+                avatarText.getStyleClass().add("leaderboard-avatar-text");
+                StackPane avatar = new StackPane(avatarText);
+                avatar.getStyleClass().add("leaderboard-avatar-circle");
+
+                Label nameLabel = new Label(item.username());
+                nameLabel.getStyleClass().add("leaderboard-name");
+                Label subjectLabel = new Label(item.subtitle());
+                subjectLabel.getStyleClass().add("leaderboard-subject");
+                HBox attemptBadge = new HBox();
+                Label attemptsLabel = new Label(item.attempts() + " attempt(s)");
+                attemptsLabel.getStyleClass().add("leaderboard-attempt-badge");
+                attemptBadge.getChildren().add(attemptsLabel);
+
+                ProgressBar scoreBar = new ProgressBar(item.progressValue());
+                scoreBar.setMaxWidth(Double.MAX_VALUE);
+                scoreBar.getStyleClass().add("leaderboard-progress-bar");
+
+                VBox identityBox = new VBox(6, nameLabel, subjectLabel, attemptBadge, scoreBar);
+                HBox.setHgrow(identityBox, Priority.ALWAYS);
+
+                Label avgLabel = new Label(String.format("AVG %.1f%%", item.averageScore()));
+                avgLabel.getStyleClass().add("leaderboard-score-main");
+                Label bestLabel = new Label(String.format("BEST %.1f%%", item.bestScore()));
+                bestLabel.getStyleClass().add("leaderboard-score-sub");
+                VBox scoreBox = new VBox(6, avgLabel, bestLabel);
+                scoreBox.setAlignment(Pos.CENTER_RIGHT);
+
+                HBox row = new HBox(14, rankBox, avatar, identityBox, scoreBox);
+                row.setAlignment(Pos.CENTER_LEFT);
+                row.getStyleClass().add("leaderboard-row-card");
+                if (item.currentUser()) {
+                    row.getStyleClass().add("leaderboard-row-current");
+                }
+                if (item.rank() == 1) {
+                    row.getStyleClass().add("leaderboard-row-top1");
+                } else if (item.rank() == 2) {
+                    row.getStyleClass().add("leaderboard-row-top2");
+                } else if (item.rank() == 3) {
+                    row.getStyleClass().add("leaderboard-row-top3");
+                }
+
+                setText(null);
+                setGraphic(row);
+                if (!getStyleClass().contains("leaderboard-list-cell")) {
+                    getStyleClass().add("leaderboard-list-cell");
+                }
             }
         });
     }
@@ -1181,7 +1497,9 @@ public class ExamController {
 
     @FXML
     private void showStudentDashboard() {
+        refreshStudentIdentityDisplay();
         refreshDashboardUpcomingCard();
+        refreshDashboardAlerts();
         hideAllPanes();
         setPaneVisible(studentDashboardPane, true);
     }
@@ -1195,7 +1513,8 @@ public class ExamController {
 
     @FXML
     private void showScheduledExams() {
-        loadTeacherTerms();
+        setStudentSemesterChoice(studentScheduledTermChoice, activeUserSemester);
+        loadStudentScheduledCoursesForTerm(studentScheduledTermChoice != null ? studentScheduledTermChoice.getValue() : activeUserSemester);
         refreshStudentScheduledExamList();
         updateStudentScheduledControls();
         hideAllPanes();
@@ -1204,9 +1523,9 @@ public class ExamController {
 
     @FXML
     private void showExamHistory() {
-        loadExamHistory();
         hideAllPanes();
         setPaneVisible(progressPane, true);
+        Platform.runLater(this::loadExamHistory);
     }
 
     @FXML
@@ -1221,6 +1540,7 @@ public class ExamController {
         hideAllPanes();
         setPaneVisible(messagingPane, true);
         refreshMessaging();
+        startMessagingRefresh();
     }
 
     @FXML
@@ -1251,7 +1571,8 @@ public class ExamController {
 
     @FXML
     private void showLeaderboard() {
-        loadTeacherTerms();
+        setStudentSemesterChoice(leaderboardTermChoice, activeUserSemester);
+        loadLeaderboardCoursesForTerm(leaderboardTermChoice != null ? leaderboardTermChoice.getValue() : activeUserSemester);
         refreshLeaderboardView();
         hideAllPanes();
         setPaneVisible(leaderboardPane, true);
@@ -1440,22 +1761,26 @@ public class ExamController {
     @FXML
     private void registerUser() {
         String username = registerUsername.getText();
+        String semester = registerSemesterChoice != null ? registerSemesterChoice.getValue() : null;
         String password = registerPassword.getText();
         String confirm = registerConfirm.getText();
         setRegisterMessage("");
 
-        String validation = validateRegistration(username, password, confirm);
+        String validation = validateRegistration(username, semester, password, confirm);
         if (validation != null) {
             setRegisterMessage(validation);
             return;
         }
         setRegisterMessage("Registering...");
-        runNetwork(() -> userService.register(username, password), created -> {
+        runNetwork(() -> userService.register(username, password, semester), created -> {
             if (!created) {
-                setRegisterMessage("Username already exists.");
+                setRegisterMessage("Username already exists or semester is invalid.");
                 return;
             }
             registerUsername.clear();
+            if (registerSemesterChoice != null) {
+                registerSemesterChoice.getSelectionModel().clearSelection();
+            }
             registerPassword.clear();
             registerConfirm.clear();
             setRegisterMessage("");
@@ -1474,17 +1799,23 @@ public class ExamController {
             return;
         }
         loginMessageLabel.setText("Signing in...");
-        runNetwork(() -> userService.authenticate(username, password), ok -> {
-            if (!ok) {
+        runNetwork(() -> userService.authenticate(username, password), profile -> {
+            if (profile == null) {
                 loginMessageLabel.setText("Invalid username or password.");
                 return;
             }
-            activeUser = userService.normalizeUsername(username);
-            UserSession.setUsername(activeUser);
-            if (studentWelcomeLabel != null) {
-                studentWelcomeLabel.setText("Welcome " + activeUser);
+            activeUser = profile.username();
+            activeUserSemester = normalizeSemester(profile.semester());
+            if (activeUserSemester.isBlank()) {
+                loginMessageLabel.setText("No semester is assigned to this account.");
+                return;
             }
-            showPane(studentDashboardPane);
+            UserSession.setUsername(activeUser);
+            UserSession.setSemester(activeUserSemester);
+            resetDashboardAlertState();
+            startDashboardAlertRefresh();
+            refreshStudentIdentityDisplay();
+            showStudentDashboard();
         }, error -> loginMessageLabel.setText("Server error: " + error));
     }
 
@@ -1492,6 +1823,7 @@ public class ExamController {
     private void logout() {
         stopTimer();
         activeUser = null;
+        activeUserSemester = null;
         UserSession.clear();
         selectedTerm = null;
         selectedCourseCode = null;
@@ -1503,6 +1835,9 @@ public class ExamController {
         if (discussionList != null) {
             discussionList.getItems().clear();
         }
+        stopDashboardAlertRefresh();
+        resetDashboardAlertState();
+        refreshStudentIdentityDisplay();
         showPane(loginPane);
     }
 
@@ -1538,6 +1873,10 @@ public class ExamController {
 
         if (term == null || term.isBlank()) {
             levelMessageLabel.setText("Select a term to continue.");
+            return;
+        }
+        if (!isActiveStudentSemester(term)) {
+            levelMessageLabel.setText("You can only access courses from semester " + activeUserSemester + ".");
             return;
         }
 
@@ -1582,6 +1921,11 @@ public class ExamController {
     private void startExam() {
         if (selectedTerm == null || selectedCourseCode == null) {
             levelMessageLabel.setText("Select term and course to continue.");
+            showPane(levelPane);
+            return;
+        }
+        if (!isActiveStudentSemester(selectedTerm)) {
+            levelMessageLabel.setText("You can only start exams from semester " + activeUserSemester + ".");
             showPane(levelPane);
             return;
         }
@@ -1812,6 +2156,7 @@ public class ExamController {
     }
 
     private void hideAllPanes() {
+        stopMessagingRefresh();
         setPaneVisible(loginPane, false);
         setPaneVisible(registerPane, false);
         setPaneVisible(studentDashboardPane, false);
@@ -1861,6 +2206,7 @@ public class ExamController {
         if (chatHistoryList != null) {
             chatHistoryList.getItems().clear();
         }
+        setMessagingFeedback("");
     }
 
     private void refreshMessaging() {
@@ -1888,11 +2234,23 @@ public class ExamController {
                 }
                 if (currentSelection != null && friends.contains(currentSelection)) {
                     friendsList.getSelectionModel().select(currentSelection);
+                    refreshActiveChat();
                 } else {
                     friendsList.getSelectionModel().selectFirst();
                 }
             }, error -> showError("Unable to load friends", error));
         }
+    }
+
+    private void refreshActiveChat() {
+        if (!ensureLoggedIn() || friendsList == null) {
+            return;
+        }
+        String friend = friendsList.getSelectionModel().getSelectedItem();
+        if (friend == null || friend.isBlank()) {
+            return;
+        }
+        loadChatHistory(friend);
     }
 
     private void loadChatHistory(String friend) {
@@ -1901,8 +2259,46 @@ public class ExamController {
         }
         runNetwork(() -> messagingService.fetchChat(activeUser, friend), messages -> {
             chatHistoryList.getItems().setAll(messages);
+            if (!messages.isEmpty()) {
+                chatHistoryList.scrollTo(messages.size() - 1);
+            }
+            markFriendMessagesAsSeen(friend, messages);
             updateMessagingHeader(friend, "Active");
         }, error -> showError("Unable to load chat", error));
+    }
+
+    private void startMessagingRefresh() {
+        if (messagingRefreshTimeline == null) {
+            messagingRefreshTimeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+                if (messagingPane != null && messagingPane.isVisible()) {
+                    refreshActiveChat();
+                }
+            }));
+            messagingRefreshTimeline.setCycleCount(Timeline.INDEFINITE);
+        }
+        messagingRefreshTimeline.playFromStart();
+    }
+
+    private void stopMessagingRefresh() {
+        if (messagingRefreshTimeline != null) {
+            messagingRefreshTimeline.stop();
+        }
+    }
+
+    private void startDashboardAlertRefresh() {
+        if (dashboardAlertRefreshTimeline == null) {
+            dashboardAlertRefreshTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> refreshDashboardAlerts()));
+            dashboardAlertRefreshTimeline.setCycleCount(Timeline.INDEFINITE);
+        }
+        refreshDashboardAlerts();
+        dashboardAlertRefreshTimeline.playFromStart();
+    }
+
+    private void stopDashboardAlertRefresh() {
+        if (dashboardAlertRefreshTimeline != null) {
+            dashboardAlertRefreshTimeline.stop();
+        }
+        dashboardAlertRefreshInFlight = false;
     }
 
     private void refreshDiscussion() {
@@ -1957,12 +2353,15 @@ public class ExamController {
         };
     }
 
-    private String validateRegistration(String username, String password, String confirm) {
+    private String validateRegistration(String username, String semester, String password, String confirm) {
         if (username == null || username.isBlank()) {
             return "Username is required.";
         }
         if (username.contains(",")) {
             return "Username cannot contain commas.";
+        }
+        if (normalizeSemester(semester).isBlank()) {
+            return "Semester selection is required.";
         }
         if (password == null || password.length() < 6) {
             return "Password must be at least 6 characters.";
@@ -1990,6 +2389,171 @@ public class ExamController {
             registerErrorBanner.setVisible(hasMessage);
             registerErrorBanner.setManaged(hasMessage);
         }
+    }
+
+    private void setMessagingFeedback(String message) {
+        if (messagingFeedbackLabel == null) {
+            return;
+        }
+        String safe = message == null ? "" : message.trim();
+        boolean hasMessage = !safe.isBlank();
+        messagingFeedbackLabel.setText(safe);
+        messagingFeedbackLabel.setVisible(hasMessage);
+        messagingFeedbackLabel.setManaged(hasMessage);
+    }
+
+    private void refreshDashboardAlerts() {
+        if (dashboardAlertsLabel == null) {
+            return;
+        }
+        if (!ensureLoggedIn()) {
+            updateDashboardAlertsLabel(0, List.of());
+            return;
+        }
+        if (dashboardAlertRefreshInFlight) {
+            return;
+        }
+
+        Map<String, Long> seenSnapshot = new LinkedHashMap<>(latestSeenIncomingMessageByFriend);
+        boolean initializeSnapshot = !chatAlertSnapshotInitialized;
+        dashboardAlertRefreshInFlight = true;
+        runNetwork(() -> buildChatAlertSummary(seenSnapshot, initializeSnapshot), summary -> {
+            dashboardAlertRefreshInFlight = false;
+            latestSeenIncomingMessageByFriend.putAll(summary.seenTimestampUpdates());
+            chatAlertSnapshotInitialized = true;
+            updateDashboardAlertsLabel(summary.unreadCount(), summary.sendingFriends());
+        }, error -> {
+            dashboardAlertRefreshInFlight = false;
+            updateDashboardAlertsLabel(0, List.of());
+        });
+    }
+
+    private ChatAlertSummary buildChatAlertSummary(Map<String, Long> seenSnapshot, boolean initializeSnapshot) throws IOException {
+        List<String> friends = messagingService.fetchFriends(activeUser);
+        Map<String, Long> seenUpdates = new LinkedHashMap<>();
+        List<String> sendingFriends = new ArrayList<>();
+        int unreadCount = 0;
+
+        for (String friend : friends) {
+            if (friend == null || friend.isBlank()) {
+                continue;
+            }
+            List<String> messages = messagingService.fetchChat(activeUser, friend);
+            long latestIncomingTimestamp = latestIncomingChatTimestamp(messages);
+            if (initializeSnapshot || !seenSnapshot.containsKey(friend)) {
+                seenUpdates.put(friend, latestIncomingTimestamp);
+                continue;
+            }
+
+            long seenTimestamp = Math.max(0L, seenSnapshot.getOrDefault(friend, 0L));
+            int friendUnreadCount = countUnreadIncomingMessages(messages, seenTimestamp);
+            if (friendUnreadCount > 0) {
+                unreadCount += friendUnreadCount;
+                sendingFriends.add(friend);
+            }
+        }
+        return new ChatAlertSummary(unreadCount, sendingFriends, seenUpdates);
+    }
+
+    private int countUnreadIncomingMessages(List<String> messages, long seenTimestamp) {
+        if (messages == null || messages.isEmpty()) {
+            return 0;
+        }
+        int unread = 0;
+        for (String raw : messages) {
+            String sender = extractChatSender(raw);
+            if (sender.isBlank() || (activeUser != null && activeUser.equalsIgnoreCase(sender))) {
+                continue;
+            }
+            long timestamp = extractChatTimestamp(raw);
+            if (timestamp > seenTimestamp) {
+                unread++;
+            }
+        }
+        return unread;
+    }
+
+    private long latestIncomingChatTimestamp(List<String> messages) {
+        if (messages == null || messages.isEmpty()) {
+            return 0L;
+        }
+        long latest = 0L;
+        for (String raw : messages) {
+            String sender = extractChatSender(raw);
+            if (sender.isBlank() || (activeUser != null && activeUser.equalsIgnoreCase(sender))) {
+                continue;
+            }
+            latest = Math.max(latest, extractChatTimestamp(raw));
+        }
+        return latest;
+    }
+
+    private void markFriendMessagesAsSeen(String friend, List<String> messages) {
+        if (friend == null || friend.isBlank()) {
+            return;
+        }
+        latestSeenIncomingMessageByFriend.put(friend, latestIncomingChatTimestamp(messages));
+        chatAlertSnapshotInitialized = true;
+    }
+
+    private String extractChatSender(String raw) {
+        String value = raw == null ? "" : raw;
+        String[] metadataParts = value.split(CHAT_METADATA_SEPARATOR, 3);
+        if (metadataParts.length == 3) {
+            return metadataParts[0].trim();
+        }
+        int split = value.indexOf(": ");
+        return split >= 0 ? value.substring(0, split).trim() : "";
+    }
+
+    private long extractChatTimestamp(String raw) {
+        String value = raw == null ? "" : raw;
+        String[] metadataParts = value.split(CHAT_METADATA_SEPARATOR, 3);
+        if (metadataParts.length == 3) {
+            try {
+                return Long.parseLong(metadataParts[1].trim());
+            } catch (NumberFormatException ignored) {
+                return 0L;
+            }
+        }
+        return 0L;
+    }
+
+    private void updateDashboardAlertsLabel(int unreadCount, List<String> sendingFriends) {
+        if (dashboardAlertsLabel == null) {
+            return;
+        }
+
+        String text;
+        String tooltipText;
+        if (unreadCount <= 0) {
+            text = "Alerts Clear";
+            tooltipText = "No new chat messages";
+            dashboardAlertsLabel.getStyleClass().remove("dash-header-pill-alert");
+        } else if (unreadCount == 1 && sendingFriends != null && sendingFriends.size() == 1) {
+            text = sendingFriends.get(0) + " messaged you";
+            tooltipText = "1 unread message from " + sendingFriends.get(0);
+            if (!dashboardAlertsLabel.getStyleClass().contains("dash-header-pill-alert")) {
+                dashboardAlertsLabel.getStyleClass().add("dash-header-pill-alert");
+            }
+        } else {
+            text = unreadCount + " New Messages";
+            tooltipText = sendingFriends == null || sendingFriends.isEmpty()
+                    ? unreadCount + " unread chat messages"
+                    : "New messages from " + String.join(", ", sendingFriends);
+            if (!dashboardAlertsLabel.getStyleClass().contains("dash-header-pill-alert")) {
+                dashboardAlertsLabel.getStyleClass().add("dash-header-pill-alert");
+            }
+        }
+
+        dashboardAlertsLabel.setText(text);
+        dashboardAlertsLabel.setTooltip(new Tooltip(tooltipText));
+    }
+
+    private void resetDashboardAlertState() {
+        latestSeenIncomingMessageByFriend.clear();
+        chatAlertSnapshotInitialized = false;
+        updateDashboardAlertsLabel(0, List.of());
     }
 
     @FXML
@@ -2025,6 +2589,18 @@ public class ExamController {
     }
 
     @FXML
+    private void handleDiscussionSubmitKey(KeyEvent event) {
+        if (event == null || event.getCode() != KeyCode.ENTER) {
+            return;
+        }
+        if (event.isShiftDown()) {
+            return;
+        }
+        event.consume();
+        postDiscussion();
+    }
+
+    @FXML
     private void commentDiscussion() {
         if (discussionList == null) {
             return;
@@ -2057,8 +2633,14 @@ public class ExamController {
         runNetwork(() -> messagingService.sendFriendRequest(from, target.trim()), status -> {
             switch (status) {
                 case SENT, ACCEPTED -> {
+                    String normalizedTarget = target.trim();
                     friendRequestField.clear();
                     refreshMessaging();
+                    if (status == FriendStore.FriendRequestStatus.SENT) {
+                        setMessagingFeedback("Friend request sent to " + normalizedTarget + ".");
+                    } else {
+                        setMessagingFeedback(normalizedTarget + " accepted the request. You are now friends.");
+                    }
                 }
                 case ALREADY -> showError("Friend request", "Request already exists or you are already friends.");
                 case INVALID -> showError("Friend request", "Invalid user.");
@@ -2082,6 +2664,7 @@ public class ExamController {
                 return;
             }
             refreshMessaging();
+            setMessagingFeedback("Friend request accepted from " + from + ".");
         }, error -> showError("Unable to accept request", error));
     }
 
@@ -2101,6 +2684,7 @@ public class ExamController {
                 return;
             }
             refreshMessaging();
+            setMessagingFeedback("Friend request declined from " + from + ".");
         }, error -> showError("Unable to decline request", error));
     }
 
@@ -2118,8 +2702,9 @@ public class ExamController {
         if (text == null || text.isBlank()) {
             return;
         }
+        String trimmedText = text.trim();
         runNetwork(() -> {
-            messagingService.sendChat(activeUser, friend, text.trim());
+            messagingService.sendChat(activeUser, friend, trimmedText);
             return true;
         }, ignored -> {
             chatMessageField.clear();
@@ -2518,7 +3103,7 @@ public class ExamController {
             return Double.compare(rAvg, lAvg);
         });
 
-        List<String> lines = new ArrayList<>();
+        List<LeaderboardRowCard> cards = new ArrayList<>();
         for (int i = 0; i < keys.size(); i++) {
             String key = keys.get(i);
             double[] stats = statsByUser.get(key);
@@ -2526,12 +3111,17 @@ public class ExamController {
             double best = bestByUser.getOrDefault(key, 0.0);
             int attempts = attemptsByUser.getOrDefault(key, 0);
             String username = displayByUser.getOrDefault(key, key);
-            lines.add((i + 1) + ". " + username
-                    + " | Avg " + String.format("%.1f", avg) + "%"
-                    + " | Best " + String.format("%.1f", best) + "%"
-                    + " | " + attempts + " attempt(s)");
+            cards.add(new LeaderboardRowCard(
+                    i + 1,
+                    username,
+                    avg,
+                    best,
+                    attempts,
+                    courseCode,
+                    activeUser != null && activeUser.equalsIgnoreCase(username)
+            ));
         }
-        leaderboardList.getItems().setAll(lines);
+        leaderboardList.getItems().setAll(cards);
 
         double classAvg = filtered.stream().mapToDouble(r -> r.percentage).average().orElse(0.0);
         long mastery = keys.stream()
@@ -2542,7 +3132,8 @@ public class ExamController {
                 .count();
 
         if (leaderboardSummaryLabel != null) {
-            leaderboardSummaryLabel.setText("Showing " + lines.size() + " active student(s)");
+            double topAverage = cards.isEmpty() ? 0.0 : cards.get(0).averageScore();
+            leaderboardSummaryLabel.setText("Showing " + cards.size() + " ranked student(s)  •  Top average " + String.format("%.1f%%", topAverage));
         }
         if (leaderboardClassAverageValueLabel != null) {
             leaderboardClassAverageValueLabel.setText(String.format("%.1f%%", classAvg));
@@ -2556,13 +3147,18 @@ public class ExamController {
 
         String topKey = keys.get(0);
         if (highestScorerLabel != null) {
-            highestScorerLabel.setText("Top performer: " + displayByUser.getOrDefault(topKey, topKey));
+            String topUser = displayByUser.getOrDefault(topKey, topKey);
+            double[] topStats = statsByUser.get(topKey);
+            double topAverage = topStats == null || topStats[1] <= 0.0 ? 0.0 : topStats[0] / topStats[1];
+            int topAttempts = attemptsByUser.getOrDefault(topKey, 0);
+            highestScorerLabel.setText(topUser + " leads with " + String.format("%.1f%% average", topAverage)
+                    + " across " + topAttempts + " attempt(s).");
         }
     }
 
     private void setLeaderboardNoDataState() {
         if (leaderboardList != null) {
-            leaderboardList.getItems().setAll("No data available");
+            leaderboardList.getItems().clear();
         }
         if (leaderboardSummaryLabel != null) {
             leaderboardSummaryLabel.setText("No data available");
@@ -2853,6 +3449,9 @@ public class ExamController {
         List<ScheduleRow> future = new ArrayList<>();
         LocalDateTime now = LocalDateTime.now();
         for (ScheduleRow row : loadSchedules()) {
+            if (!isActiveStudentSemester(row.term)) {
+                continue;
+            }
             LocalDateTime at = scheduleDateTimeSafe(row);
             if (at == LocalDateTime.MIN) {
                 continue;
@@ -2878,7 +3477,7 @@ public class ExamController {
             dashboardUpcomingCountLabel.setText(future.isEmpty() ? "No data available" : future.size() + " Exams");
         }
 
-        List<ExamRecord> completed = loadCurrentUserHistoryRecords();
+        List<ResultRow> completed = loadCurrentUserResultRows();
         if (dashboardCompletedCountLabel != null) {
             dashboardCompletedCountLabel.setText(completed.isEmpty() ? "No data available" : completed.size() + " Exams");
         }
@@ -2971,6 +3570,12 @@ public class ExamController {
             return "No data available";
         }
         List<ResultRow> rows = loadResults();
+        String semester = normalizeSemester(activeUserSemester);
+        if (!semester.isBlank()) {
+            rows = rows.stream()
+                    .filter(row -> semester.equals(normalizeSemester(row.term)))
+                    .collect(Collectors.toList());
+        }
         if (rows.isEmpty()) {
             return "No data available";
         }
@@ -3007,7 +3612,7 @@ public class ExamController {
                 rank++;
             }
         }
-        return ordinal(rank) + " Global";
+        return ordinal(rank) + " in " + (semester.isBlank() ? "All Terms" : semester);
     }
 
     private String ordinal(int rank) {
@@ -3082,6 +3687,10 @@ public class ExamController {
         ScheduleRow selectedRow = selectedLabel == null ? null : studentScheduledRowByLabel.get(selectedLabel);
         if (selectedRow == null) {
             setStudentScheduledStatus("Select a scheduled exam first.");
+            return;
+        }
+        if (!isActiveStudentSemester(selectedRow.term)) {
+            setStudentScheduledStatus("You can only start exams from semester " + activeUserSemester + ".");
             return;
         }
         activeAttemptType = "scheduled";
@@ -4094,6 +4703,7 @@ public class ExamController {
             return;
         }
         ensureProgressFilterOptions();
+        refreshProgressCourseFilterOptions();
 
         List<ResultRow> filteredAttempts = getFilteredProgressAttempts();
         courseMap.clear();
@@ -4172,6 +4782,10 @@ public class ExamController {
         updateProgressStats(filteredAttempts, courseAverageMap);
 
         CourseSummaryRow selected = historyTable.getSelectionModel().getSelectedItem();
+        if (selected == null || !courseMap.containsKey(selected.getCourseCode())) {
+            historyTable.getSelectionModel().selectFirst();
+            selected = historyTable.getSelectionModel().getSelectedItem();
+        }
         if (selected != null) {
             loadChartForCourse(courseMap.get(selected.getCourseCode()));
         }
@@ -4192,10 +4806,19 @@ public class ExamController {
                 .collect(Collectors.toList());
 
         progressFilterRefreshInProgress = true;
-        progressTermChoice.getItems().setAll(FILTER_ALL_TERMS);
-        progressTermChoice.getItems().addAll(terms);
+        String activeSemester = normalizeSemester(activeUserSemester);
+        if (activeSemester.isBlank()) {
+            progressTermChoice.getItems().setAll(FILTER_ALL_TERMS);
+            progressTermChoice.getItems().addAll(terms);
+            progressTermChoice.setDisable(false);
+        } else {
+            progressTermChoice.getItems().setAll(activeSemester);
+            progressTermChoice.setDisable(true);
+        }
         if (selectedTerm != null && progressTermChoice.getItems().contains(selectedTerm)) {
             progressTermChoice.setValue(selectedTerm);
+        } else if (!activeSemester.isBlank()) {
+            progressTermChoice.setValue(activeSemester);
         } else {
             progressTermChoice.setValue(FILTER_ALL_TERMS);
         }
@@ -4233,9 +4856,13 @@ public class ExamController {
         String selectedTerm = progressTermChoice == null || progressTermChoice.getValue() == null
                 ? FILTER_ALL_TERMS
                 : progressTermChoice.getValue();
+        String selectedCourse = progressCourseChoice == null || progressCourseChoice.getValue() == null
+                ? FILTER_ALL_COURSES
+                : progressCourseChoice.getValue();
 
         return loadCurrentUserResultRows().stream()
                 .filter(row -> FILTER_ALL_TERMS.equals(selectedTerm) || selectedTerm.equals(row.getTerm()))
+                .filter(row -> FILTER_ALL_COURSES.equals(selectedCourse) || selectedCourse.equals(row.getCourseName()))
                 .sorted(Comparator.comparing(ResultRow::getParsedDate))
                 .collect(Collectors.toList());
     }
@@ -4247,6 +4874,10 @@ public class ExamController {
         String active = activeUser.trim();
         return loadResults().stream()
                 .filter(row -> row.getUsername().equalsIgnoreCase(active))
+                .filter(row -> {
+                    String semester = normalizeSemester(activeUserSemester);
+                    return semester.isBlank() || semester.equals(normalizeSemester(row.getTerm()));
+                })
                 .filter(row -> row.getCourseName() != null && !row.getCourseName().isBlank())
                 .collect(Collectors.toList());
     }
@@ -4498,6 +5129,80 @@ public class ExamController {
 
         progressChart.getData().add(barSeries);
         progressLineChart.getData().add(lineSeries);
+        Platform.runLater(this::refreshProgressChartLayout);
+    }
+
+    private void refreshProgressChartLayout() {
+        if (progressLineChart != null) {
+            progressLineChart.applyCss();
+            progressLineChart.layout();
+        }
+        if (progressChart != null) {
+            progressChart.applyCss();
+            progressChart.layout();
+        }
+    }
+
+    private void refreshStudentIdentityDisplay() {
+        String username = activeUser == null || activeUser.isBlank() ? "Student" : formatDisplayName(activeUser);
+        String semester = activeUserSemester == null || activeUserSemester.isBlank()
+                ? "Semester not selected"
+                : "Semester " + activeUserSemester;
+
+        if (studentWelcomeLabel != null) {
+            studentWelcomeLabel.setText("Welcome " + username + " (" + semester.replace("Semester ", "") + ")");
+        }
+        if (dashboardProfileNameLabel != null) {
+            dashboardProfileNameLabel.setText(username);
+        }
+        if (dashboardProfileSubtitleLabel != null) {
+            dashboardProfileSubtitleLabel.setText(semester);
+        }
+        if (dashboardProfileInitialsLabel != null) {
+            dashboardProfileInitialsLabel.setText(buildInitials(username));
+        }
+    }
+
+    private String formatDisplayName(String value) {
+        if (value == null || value.isBlank()) {
+            return "Student";
+        }
+        String[] tokens = value.trim().split("\\s+");
+        List<String> formatted = new ArrayList<>();
+        for (String token : tokens) {
+            if (token.isBlank()) {
+                continue;
+            }
+            if (token.length() == 1) {
+                formatted.add(token.toUpperCase());
+            } else {
+                formatted.add(Character.toUpperCase(token.charAt(0)) + token.substring(1).toLowerCase());
+            }
+        }
+        return formatted.isEmpty() ? "Student" : String.join(" ", formatted);
+    }
+
+    private String buildInitials(String value) {
+        if (value == null || value.isBlank()) {
+            return "ST";
+        }
+        String[] tokens = value.trim().split("\\s+");
+        StringBuilder initials = new StringBuilder();
+        for (String token : tokens) {
+            if (!token.isBlank()) {
+                initials.append(Character.toUpperCase(token.charAt(0)));
+            }
+            if (initials.length() == 2) {
+                break;
+            }
+        }
+        if (initials.length() == 0) {
+            return "ST";
+        }
+        if (initials.length() == 1 && value.trim().length() > 1) {
+            initials.append(Character.toUpperCase(value.trim().charAt(1)));
+        }
+        return initials.toString();
     }
 
     private void attachBarStyle(XYChart.Data<String, Number> dataPoint, double score) {
@@ -4556,6 +5261,11 @@ public class ExamController {
         } catch (Exception ex) {
             return LocalDateTime.MIN;
         }
+    }
+
+    private record ChatAlertSummary(int unreadCount,
+                                    List<String> sendingFriends,
+                                    Map<String, Long> seenTimestampUpdates) {
     }
 
     private static final class TeacherQuestionDraft {
@@ -4826,6 +5536,38 @@ public class ExamController {
     }
 
     private record ResultAttemptDetail(String questionId, String selectedOption, String correctOption) {
+    }
+
+    private record LeaderboardRowCard(int rank,
+                                      String username,
+                                      double averageScore,
+                                      double bestScore,
+                                      int attempts,
+                                      String courseCode,
+                                      boolean currentUser) {
+        private String tierLabel() {
+            return switch (rank) {
+                case 1 -> "CROWN";
+                case 2 -> "CHASER";
+                case 3 -> "RISING";
+                default -> "RANK";
+            };
+        }
+
+        private String avatarText() {
+            if (username == null || username.isBlank()) {
+                return "--";
+            }
+            return username.substring(0, Math.min(2, username.length())).toUpperCase();
+        }
+
+        private String subtitle() {
+            return (courseCode == null || courseCode.isBlank() ? "Course" : courseCode) + "  •  Semester ranking";
+        }
+
+        private double progressValue() {
+            return Math.max(0.0, Math.min(1.0, averageScore / 100.0));
+        }
     }
 
     public static final class ExamRecord {

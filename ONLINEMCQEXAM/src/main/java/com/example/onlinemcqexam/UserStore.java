@@ -4,75 +4,205 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class UserStore {
     private static final String DATA_DIR = "data";
     private static final String USERS_FILE = "users.csv";
     private static final String DELIMITER = ",";
+    private static final Path RESULTS_PATH = AppPaths.resourceFile("results.csv");
+    private static final Set<String> VALID_SEMESTERS = Set.of(
+            "1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"
+    );
 
     private final Path usersPath;
 
     public UserStore() {
-        this.usersPath = Paths.get(DATA_DIR, USERS_FILE);
+        this.usersPath = AppPaths.dataFile(USERS_FILE);
     }
 
-    public Map<String, String> loadUsers() throws IOException {
+    public Map<String, StoredUser> loadUsers() throws IOException {
         ensureFileExists();
         List<String> lines = Files.readAllLines(usersPath, StandardCharsets.UTF_8);
-        Map<String, String> users = new HashMap<>();
+        Map<String, StoredUser> users = new LinkedHashMap<>();
         for (String line : lines) {
             if (line.isBlank() || line.startsWith("#")) {
                 continue;
             }
-            String[] parts = line.split(DELIMITER, 2);
-            if (parts.length == 2) {
-                users.put(parts[0], parts[1]);
+            List<String> parts = parseCsvLine(line);
+            if (parts.size() < 2) {
+                continue;
             }
+            String username = normalizeUsername(parts.get(0));
+            String passwordHash = parts.get(1).trim();
+            String semester = parts.size() >= 3 ? normalizeSemester(parts.get(2)) : inferSemester(username);
+            if (username.isBlank() || passwordHash.isBlank()) {
+                continue;
+            }
+            users.put(username, new StoredUser(username, passwordHash, semester));
         }
         return users;
     }
 
-    public boolean register(String username, String password) throws IOException {
+    public boolean register(String username, String password, String semester) throws IOException {
         String normalized = normalizeUsername(username);
+        String normalizedSemester = normalizeSemester(semester);
+        if (normalized.isBlank() || normalizedSemester.isBlank()) {
+            return false;
+        }
         ensureFileExists();
-        Map<String, String> users = loadUsers();
+        Map<String, StoredUser> users = loadUsers();
         if (users.containsKey(normalized)) {
             return false;
         }
         String hashed = hashPassword(password);
-        String record = normalized + DELIMITER + hashed + System.lineSeparator();
+        String record = csv(normalized) + DELIMITER + csv(hashed) + DELIMITER + csv(normalizedSemester) + System.lineSeparator();
         Files.writeString(usersPath, record, StandardCharsets.UTF_8, java.nio.file.StandardOpenOption.APPEND);
         return true;
     }
 
-    public boolean authenticate(String username, String password) throws IOException {
+    public StoredUser authenticate(String username, String password) throws IOException {
         String normalized = normalizeUsername(username);
-        Map<String, String> users = loadUsers();
-        String storedHash = users.get(normalized);
-        if (storedHash == null) {
-            return false;
+        Map<String, StoredUser> users = loadUsers();
+        StoredUser user = users.get(normalized);
+        if (user == null) {
+            return null;
         }
         String inputHash = hashPassword(password);
-        return storedHash.equals(inputHash);
+        return user.passwordHash().equals(inputHash) ? user : null;
     }
 
     public String normalizeUsername(String username) {
         return username == null ? "" : username.trim();
     }
 
+    public StoredUser findUser(String username) throws IOException {
+        String normalized = normalizeUsername(username);
+        if (normalized.isBlank()) {
+            return null;
+        }
+        return loadUsers().get(normalized);
+    }
+
+    public void upsertUser(String username, String password, String semester) throws IOException {
+        String normalized = normalizeUsername(username);
+        String normalizedSemester = normalizeSemester(semester);
+        if (normalized.isBlank() || normalizedSemester.isBlank()) {
+            return;
+        }
+        ensureFileExists();
+        Map<String, StoredUser> users = loadUsers();
+        StoredUser existing = users.get(normalized);
+        String passwordHash = existing != null && existing.passwordHash() != null && !existing.passwordHash().isBlank()
+                ? existing.passwordHash()
+                : hashPassword(password == null ? "" : password);
+        users.put(normalized, new StoredUser(normalized, passwordHash, normalizedSemester));
+        writeUsers(users);
+    }
+
+    public String normalizeSemester(String semester) {
+        String normalized = semester == null ? "" : semester.trim();
+        return VALID_SEMESTERS.contains(normalized) ? normalized : "";
+    }
+
     private void ensureFileExists() throws IOException {
-        Path dir = Paths.get(DATA_DIR);
+        Path dir = AppPaths.appRoot().resolve(DATA_DIR);
         Files.createDirectories(dir);
         if (!Files.exists(usersPath)) {
-            Files.writeString(usersPath, "# username,hashedPassword" + System.lineSeparator(), StandardCharsets.UTF_8);
+            Files.writeString(usersPath, "# username,hashedPassword,semester" + System.lineSeparator(), StandardCharsets.UTF_8);
         }
+    }
+
+    private void writeUsers(Map<String, StoredUser> users) throws IOException {
+        List<String> lines = new ArrayList<>();
+        lines.add("# username,hashedPassword,semester");
+        for (StoredUser user : users.values()) {
+            if (user == null) {
+                continue;
+            }
+            lines.add(csv(user.username()) + DELIMITER + csv(user.passwordHash()) + DELIMITER + csv(user.semester()));
+        }
+        Files.write(usersPath, lines, StandardCharsets.UTF_8);
+    }
+
+    private String inferSemester(String username) {
+        if (username == null || username.isBlank() || Files.notExists(RESULTS_PATH)) {
+            return "";
+        }
+        Map<String, Integer> countBySemester = new HashMap<>();
+        try {
+            List<String> lines = Files.readAllLines(RESULTS_PATH, StandardCharsets.UTF_8);
+            for (String line : lines) {
+                if (line == null || line.isBlank()) {
+                    continue;
+                }
+                String lower = line.toLowerCase();
+                if (lower.startsWith("username,term,course,")) {
+                    continue;
+                }
+                List<String> parts = parseCsvLine(line);
+                if (parts.size() < 2) {
+                    continue;
+                }
+                if (!normalizeUsername(parts.get(0)).equalsIgnoreCase(username)) {
+                    continue;
+                }
+                String semester = normalizeSemester(parts.get(1));
+                if (semester.isBlank()) {
+                    continue;
+                }
+                countBySemester.merge(semester, 1, Integer::sum);
+            }
+        } catch (IOException ignored) {
+            return "";
+        }
+
+        String winner = "";
+        int winnerCount = 0;
+        for (Map.Entry<String, Integer> entry : countBySemester.entrySet()) {
+            if (entry.getValue() > winnerCount) {
+                winner = entry.getKey();
+                winnerCount = entry.getValue();
+            }
+        }
+        return winner;
+    }
+
+    private List<String> parseCsvLine(String line) {
+        List<String> values = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (c == '"') {
+                inQuotes = !inQuotes;
+                continue;
+            }
+            if (c == ',' && !inQuotes) {
+                values.add(current.toString());
+                current.setLength(0);
+                continue;
+            }
+            current.append(c);
+        }
+        values.add(current.toString());
+        return values;
+    }
+
+    private String csv(String value) {
+        String safe = value == null ? "" : value;
+        if (safe.contains(",") || safe.contains("\"")) {
+            return '"' + safe.replace("\"", "\"\"") + '"';
+        }
+        return safe;
     }
 
     private String hashPassword(String password) {
@@ -83,5 +213,8 @@ public class UserStore {
         } catch (NoSuchAlgorithmException ex) {
             throw new IllegalStateException("SHA-256 not available", ex);
         }
+    }
+
+    public record StoredUser(String username, String passwordHash, String semester) {
     }
 }

@@ -133,7 +133,8 @@
 }
 
 .register-input-shell > .text-field,
-.register-input-shell > .password-field {
+.register-input-shell > .password-field,
+.register-input-shell > .choice-box {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: #e8fff1;
@@ -143,9 +144,26 @@
 }
 
 .register-input-shell > .text-field:focused,
-.register-input-shell > .password-field:focused {
+.register-input-shell > .password-field:focused,
+.register-input-shell > .choice-box:focused {
     -fx-border-color: transparent;
     -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.28), 10, 0.2, 0, 0);
+}
+
+.register-input-shell > .choice-box {
+    -fx-mark-color: #7f9b8f;
+}
+
+.register-input-shell > .choice-box > .label {
+    -fx-text-fill: #e8fff1;
+}
+
+.register-input-shell > .choice-box > .open-button {
+    -fx-background-color: transparent;
+}
+
+.register-input-shell > .choice-box .context-menu {
+    -fx-background-color: #102019;
 }
 
 .register-primary-button {

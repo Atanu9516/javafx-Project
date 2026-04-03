@@ -3,6 +3,50 @@
     -fx-background-color: linear-gradient(to bottom right, #0b140d, #0e1b12 55%, #102017 100%);
 }
 
+.dash-main-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-fit-to-width: true;
+}
+
+.dash-main-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.dash-main-scroll > .corner {
+    -fx-background-color: transparent;
+}
+
+.dash-main-scroll .scroll-bar:vertical,
+.dash-main-scroll .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.dash-main-scroll .scroll-bar .track,
+.dash-main-scroll .scroll-bar .track-background {
+    -fx-background-color: rgba(17, 34, 25, 0.92);
+    -fx-background-radius: 999;
+}
+
+.dash-main-scroll .scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, rgba(50, 255, 113, 0.92), rgba(14, 207, 75, 0.92));
+    -fx-background-radius: 999;
+}
+
+.dash-main-scroll .scroll-bar .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(95, 255, 148, 0.96), rgba(24, 224, 92, 0.96));
+}
+
+.dash-main-scroll .scroll-bar .increment-button,
+.dash-main-scroll .scroll-bar .decrement-button,
+.dash-main-scroll .scroll-bar .increment-arrow,
+.dash-main-scroll .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
 .dash-sidebar {
     -fx-background-color: linear-gradient(to bottom, #0a120c, #0d1a11);
     -fx-padding: 22 16 20 16;
@@ -49,9 +93,12 @@
     -fx-alignment: CENTER_LEFT;
     -fx-content-display: LEFT;
     -fx-graphic-text-gap: 10;
+    -fx-max-width: Infinity;
+    -fx-min-height: 42;
     -fx-background-color: rgba(19, 34, 24, 0.9);
     -fx-background-radius: 12;
     -fx-border-color: rgba(89, 252, 155, 0.10);
+    -fx-border-width: 1;
     -fx-border-radius: 12;
     -fx-text-fill: #b7ccbe;
     -fx-font-size: 13px;
@@ -79,11 +126,22 @@
 .dash-nav-active {
     -fx-background-color: linear-gradient(to bottom, #2cff7a, #0ecf4b);
     -fx-text-fill: #08170d;
-    -fx-border-color: transparent;
+    -fx-border-color: rgba(125, 255, 180, 0.32);
+    -fx-effect: dropshadow(gaussian, rgba(50, 255, 113, 0.18), 10, 0.2, 0, 2);
 }
 
 .dash-nav-active .dash-nav-icon {
     -fx-icon-color: #08170d;
+}
+
+.dash-nav-danger {
+    -fx-background-color: rgba(28, 27, 25, 0.92);
+    -fx-border-color: rgba(255, 123, 123, 0.18);
+    -fx-text-fill: #e0cbc9;
+}
+
+.dash-nav-danger .dash-nav-icon {
+    -fx-icon-color: #e0cbc9;
 }
 
 .dash-nav-danger:hover {
@@ -113,6 +171,14 @@
     -fx-text-fill: #d3ecde;
     -fx-font-size: 11px;
     -fx-padding: 6 12;
+}
+
+.dash-header-pill-alert {
+    -fx-background-color: rgba(255, 196, 76, 0.16);
+    -fx-border-color: rgba(255, 205, 88, 0.46);
+    -fx-border-radius: 999;
+    -fx-text-fill: #ffe59b;
+    -fx-font-weight: 700;
 }
 
 .dash-stat-row {

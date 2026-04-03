@@ -3,6 +3,50 @@
     -fx-padding: 30;
 }
 
+.xdash-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-fit-to-width: true;
+}
+
+.xdash-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.xdash-scroll > .corner {
+    -fx-background-color: transparent;
+}
+
+.xdash-scroll .scroll-bar:vertical,
+.xdash-scroll .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.xdash-scroll .scroll-bar .track,
+.xdash-scroll .scroll-bar .track-background {
+    -fx-background-color: rgba(13, 27, 20, 0.94);
+    -fx-background-radius: 999;
+}
+
+.xdash-scroll .scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, rgba(50, 255, 113, 0.92), rgba(14, 207, 75, 0.92));
+    -fx-background-radius: 999;
+}
+
+.xdash-scroll .scroll-bar .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(104, 255, 155, 0.96), rgba(24, 224, 92, 0.96));
+}
+
+.xdash-scroll .scroll-bar .increment-button,
+.xdash-scroll .scroll-bar .decrement-button,
+.xdash-scroll .scroll-bar .increment-arrow,
+.xdash-scroll .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
 .xdash-shell {
     -fx-background-color: linear-gradient(to bottom right, rgba(7, 15, 11, 0.95), rgba(9, 19, 14, 0.88));
     -fx-background-radius: 32;

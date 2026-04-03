@@ -23,9 +23,13 @@
     -fx-font-size: 13px;
     -fx-font-weight: 700;
     -fx-background-radius: 12;
+    -fx-border-color: rgba(113, 245, 168, 0.10);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
     -fx-padding: 11 12;
     -fx-alignment: CENTER_LEFT;
     -fx-max-width: Infinity;
+    -fx-min-height: 42;
 }
 
 .exam-start-nav-button:hover {
@@ -36,8 +40,7 @@
 .exam-start-nav-button.exam-start-nav-active {
     -fx-background-color: linear-gradient(to right, rgba(44, 255, 122, 0.27), rgba(23, 63, 44, 0.95));
     -fx-border-color: rgba(113, 255, 178, 0.50);
-    -fx-border-width: 1;
-    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(44, 255, 122, 0.14), 10, 0.18, 0, 2);
 }
 
 .exam-start-quick-button {
