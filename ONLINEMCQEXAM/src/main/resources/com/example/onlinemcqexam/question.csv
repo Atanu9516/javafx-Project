@@ -1,0 +1,64 @@
+term,course_code,course_name,question_id,difficulty,marks,question_text,option_a,option_b,option_c,option_d,answer
+1-1,CSE101,Structured Programming Language,1-1-CSE101-Q1,EASY,5,Which of the following is a valid C data type,integer,int,number,real,2
+1-1,CSE101,Structured Programming Language,1-1-CSE101-Q2,EASY,5,Which operator is used to get the address of a variable,*,&,% ,#,2
+1-1,CSE101,Structured Programming Language,1-1-CSE101-Q3,EASY,5,Which operator performs modulus operation,/,% ,*,//,2
+1-1,CSE103,Discrete Mathematics,1-1-CSE103-Q1,EASY,5,If a set has n elements how many subsets does it have,n^2,n!,2^n,n+1,3
+1-1,CSE103,Discrete Mathematics,1-1-CSE103-Q2,EASY,5,The empty set is denoted by,{0},{},empty set symbol,Both B and C,4
+1-1,CSE103,Discrete Mathematics,1-1-CSE103-Q3,EASY,5,If A subset B and B subset A then,A union B empty,A equals B,A not equal B,A proper subset B,2
+1-2,CSE105,Data Structures and Algorithms I,1-2-CSE105-Q1,EASY,5,What is an algorithm,A step by step procedure,A programming language,A hardware component,A compiler,1
+1-2,CSE105,Data Structures and Algorithms I,1-2-CSE105-Q2,EASY,5,Which notation represents the upper bound of algorithm complexity,O notation,Theta notation,Omega notation,Little o notation,1
+1-2,CSE105,Data Structures and Algorithms I,1-2-CSE105-Q3,EASY,5,Which notation represents the lower bound of complexity,Omega notation,Theta notation,O notation,Little o notation,1
+1-2,CSE107,Object Oriented Programming Language,1-2-CSE107-Q1,EASY,5,Which paradigm organizes software using objects,Object oriented programming,Procedural programming,Functional programming,Assembly programming,1
+1-2,CSE107,Object Oriented Programming Language,1-2-CSE107-Q2,EASY,5,Which concept hides internal implementation details,Encapsulation,Inheritance,Compilation,Iteration,1
+1-2,CSE107,Object Oriented Programming Language,1-2-CSE107-Q3,EASY,5,Which OOP principle represents real world entities,Abstraction,Looping,Compilation,Debugging,1
+2-1,CSE205,Digital Logic Design,2-1-CSE205-Q1,MEDIUM,10,Which number system is used in digital logic circuits,Binary,Decimal,Octal,Hexadecimal,1
+2-1,CSE205,Digital Logic Design,2-1-CSE205-Q2,MEDIUM,10,How many possible values does a binary signal have,2,4,8,16,1
+2-1,CSE205,Digital Logic Design,2-1-CSE205-Q3,MEDIUM,10,Which algebra is used for digital circuit analysis,Boolean algebra,Linear algebra,Matrix algebra,Vector algebra,1
+2-1,CSE207,Data Structures and Algorithms II,2-1-CSE207-Q1,MEDIUM,10,Which algorithm finds minimum spanning tree using greedy strategy,Prim algorithm,Dijkstra algorithm,Bellman Ford algorithm,Floyd Warshall algorithm,1
+2-1,CSE207,Data Structures and Algorithms II,2-1-CSE207-Q2,MEDIUM,10,Which algorithm builds minimum spanning tree using edge sorting,Kruskal algorithm,Prim algorithm,Dijkstra algorithm,A star algorithm,1
+2-1,CSE207,Data Structures and Algorithms II,2-1-CSE207-Q3,MEDIUM,10,Which algorithm finds shortest path from single source,Dijkstra algorithm,Prim algorithm,Kruskal algorithm,Merge sort,1
+2-1,CSE215,Database,2-1-CSE215-Q1,MEDIUM,10,What is a database,A structured collection of data,A program,A compiler,A hardware device,1
+2-1,CSE215,Database,2-1-CSE215-Q2,MEDIUM,10,Which software manages databases,DBMS,Compiler,Assembler,Interpreter,1
+2-1,CSE215,Database,2-1-CSE215-Q3,MEDIUM,10,Which model organizes data into tables,Relational model,Hierarchical model,Network model,Object model,1
+2-2,CSE200,Technical Writing and Presentation,2-2-CSE200-Q1,MEDIUM,10,What is the main purpose of technical writing,Communicate technical information clearly,Write fictional stories,Create advertisements,Write poetry,1
+2-2,CSE200,Technical Writing and Presentation,2-2-CSE200-Q2,MEDIUM,10,Which quality is most important in technical writing,Clarity,Humor,Length,Decoration,1
+2-2,CSE200,Technical Writing and Presentation,2-2-CSE200-Q3,MEDIUM,10,Which section briefly summarizes a research paper,Abstract,Introduction,Conclusion,Appendix,1
+2-2,CSE209,Computer Architecture,2-2-CSE209-Q1,MEDIUM,10,What is the basic unit of information in computers,Bit,Byte,Word,Register,1
+2-2,CSE209,Computer Architecture,2-2-CSE209-Q2,MEDIUM,10,How many bits are in one byte,8,4,16,32,1
+2-2,CSE209,Computer Architecture,2-2-CSE209-Q3,MEDIUM,10,Which system represents numbers using 0 and 1,Binary system,Decimal system,Octal system,Hexadecimal system,1
+2-2,CSE211,Theory of Computation,2-2-CSE211-Q1,MEDIUM,10,Which type of language is recognized by finite automata,Regular language,Context free language,Context sensitive language,Recursive language,1
+2-2,CSE211,Theory of Computation,2-2-CSE211-Q2,MEDIUM,10,Which machine recognizes regular languages,Finite automaton,Pushdown automaton,Turing machine,Linear bounded automaton,1
+2-2,CSE211,Theory of Computation,2-2-CSE211-Q3,MEDIUM,10,Which automaton has exactly one transition for each symbol,DFA,NFA,PDA,Turing machine,1
+2-2,CSE213,Software Engineering,2-2-CSE213-Q1,MEDIUM,10,What is the main goal of software engineering,Develop reliable software systems,Write random code,Create hardware devices,Design networks,1
+2-2,CSE213,Software Engineering,2-2-CSE213-Q2,MEDIUM,10,Which process describes stages of software development,Software development life cycle,Compilation cycle,Hardware cycle,Execution cycle,1
+2-2,CSE213,Software Engineering,2-2-CSE213-Q3,MEDIUM,10,Which stage gathers user needs,Requirements analysis,Testing,Deployment,Maintenance,1
+2-2,CSE219,Signals and Linear Systems,2-2-CSE219-Q1,MEDIUM,10,What is a signal,A function representing information,A hardware device,A compiler,A program,1
+2-2,CSE219,Signals and Linear Systems,2-2-CSE219-Q2,MEDIUM,10,Which signal is defined at discrete time instants,Discrete time signal,Continuous signal,Analog signal,Periodic signal,1
+2-2,CSE219,Signals and Linear Systems,2-2-CSE219-Q3,MEDIUM,10,Which signal is defined for every time value,Continuous time signal,Discrete signal,Digital signal,Impulse signal,1
+3-1,CSE301,Mathematics for Computing and Data Science,3-1-CSE301-Q1,HARD,15,Which concept counts number of possible outcomes,Combinatorics,Algebra,Geometry,Calculus,1
+3-1,CSE301,Mathematics for Computing and Data Science,3-1-CSE301-Q2,HARD,15,Which function counts combinations of n items taken k at a time,Binomial coefficient,Factorial function,Linear function,Exponential function,1
+3-1,CSE301,Mathematics for Computing and Data Science,3-1-CSE301-Q3,HARD,15,Which method represents sequences using power series,Generating function,Recurrence relation,Probability function,Distribution function,1
+3-1,CSE309,Compiler,3-1-CSE309-Q1,HARD,15,What is the main function of a compiler,Translate high level code to machine code,Execute programs,Store data,Manage memory,1
+3-1,CSE309,Compiler,3-1-CSE309-Q2,HARD,15,Which part of compiler analyzes source code structure,Front end,Back end,Optimizer,Assembler,1
+3-1,CSE309,Compiler,3-1-CSE309-Q3,HARD,15,Which part of compiler generates machine code,Back end,Front end,Parser,Lexer,1
+3-1,CSE313,Operating System,3-1-CSE313-Q1,HARD,15,What is the main role of an operating system,Manage computer resources,Compile programs,Design hardware,Create networks,1
+3-1,CSE313,Operating System,3-1-CSE313-Q2,HARD,15,Which OS type allows multiple users simultaneously,Multiuser operating system,Single user system,Batch system,Embedded system,1
+3-1,CSE313,Operating System,3-1-CSE313-Q3,HARD,15,Which OS feature allows multiple programs to run at once,Multitasking,Multiprocessing,Multithreading,Multiprogramming,1
+3-1,CSE315,Microprocessors Microcontrollers and Embedded Systems,3-1-CSE315-Q1,HARD,15,What is an embedded system,A computer system designed for specific tasks,A general purpose computer,A networking device,A database server,1
+3-1,CSE315,Microprocessors Microcontrollers and Embedded Systems,3-1-CSE315-Q2,HARD,15,Which component performs processing operations,Microprocessor,Sensor,Actuator,Display,1
+3-1,CSE315,Microprocessors Microcontrollers and Embedded Systems,3-1-CSE315-Q3,HARD,15,Which device integrates CPU memory and peripherals on a single chip,Microcontroller,Microprocessor,Sensor,Cache,1
+3-1,CSE317,Artificial Intelligence,3-1-CSE317-Q1,HARD,15,What is the goal of artificial intelligence,Create intelligent machines,Build faster hardware,Design networks,Store data efficiently,1
+3-1,CSE317,Artificial Intelligence,3-1-CSE317-Q2,HARD,15,Which entity perceives environment and takes actions,Intelligent agent,Compiler,Operating system,Database,1
+3-1,CSE317,Artificial Intelligence,3-1-CSE317-Q3,HARD,15,Which AI technique explores possible states to reach a goal,Search algorithm,Sorting algorithm,Compression algorithm,Hashing algorithm,1
+3-2,CSE311,Data Communication,3-2-CSE311-Q1,HARD,15,What does data communication refer to,Transmission of data between devices,Storage of data in memory,Execution of programs,Compilation of code,1
+3-2,CSE311,Data Communication,3-2-CSE311-Q2,HARD,15,Which term represents range of frequencies of a signal,Bandwidth,Latency,Amplitude,Bit rate,1
+3-2,CSE311,Data Communication,3-2-CSE311-Q3,HARD,15,Which ratio measures signal strength relative to noise,Signal to noise ratio,Bit error rate,Channel capacity,Propagation delay,1
+3-2,CSE321,Computer Networks,3-2-CSE321-Q1,HARD,15,What is a computer network,A collection of interconnected computers,A standalone computer,A database system,A compiler program,1
+3-2,CSE321,Computer Networks,3-2-CSE321-Q2,HARD,15,Which structure organizes network communication into layers,Protocol hierarchy,Network topology,Routing table,Packet queue,1
+3-2,CSE321,Computer Networks,3-2-CSE321-Q3,HARD,15,Which layer is responsible for node to node data transfer,Data link layer,Transport layer,Application layer,Network layer,1
+3-2,CSE325,Information Systems Development and Management,3-2-CSE325-Q1,HARD,15,What is the main goal of project management,Ensure project success within constraints,Write program code,Compile software,Store project data,1
+3-2,CSE325,Information Systems Development and Management,3-2-CSE325-Q2,HARD,15,Which activity identifies potential project risks,Risk management,Quality assurance,Configuration management,Deployment management,1
+3-2,CSE325,Information Systems Development and Management,3-2-CSE325-Q3,HARD,15,Which process manages relationships with project participants,Stakeholder management,Issue management,Task scheduling,Cost estimation,1
+3-2,CSE329,Machine Learning,3-2-CSE329-Q1,HARD,15,What is the goal of machine learning,Learn patterns from data,Compile programs,Manage networks,Store files,1
+3-2,CSE329,Machine Learning,3-2-CSE329-Q2,HARD,15,Which step defines the ML objective,Problem formulation,Model training,Model testing,Deployment,1
+3-2,CSE329,Machine Learning,3-2-CSE329-Q3,HARD,15,Which stage collects raw data for ML systems,Data collection,Model evaluation,Feature selection,Model optimization,1
