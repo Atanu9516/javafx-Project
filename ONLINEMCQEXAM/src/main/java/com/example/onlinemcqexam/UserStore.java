@@ -108,6 +108,22 @@ public class UserStore {
         writeUsers(users);
     }
 
+    public void updateSemester(String username, String semester) throws IOException {
+        String normalized = normalizeUsername(username);
+        String normalizedSemester = normalizeSemester(semester);
+        if (normalized.isBlank() || normalizedSemester.isBlank()) {
+            return;
+        }
+        ensureFileExists();
+        Map<String, StoredUser> users = loadUsers();
+        StoredUser existing = users.get(normalized);
+        if (existing == null) {
+            return;
+        }
+        users.put(normalized, new StoredUser(normalized, existing.passwordHash(), normalizedSemester));
+        writeUsers(users);
+    }
+
     public String normalizeSemester(String semester) {
         String normalized = semester == null ? "" : semester.trim();
         return VALID_SEMESTERS.contains(normalized) ? normalized : "";

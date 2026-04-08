@@ -9,14 +9,17 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public final class ExamServer implements AutoCloseable {
+    private static final String RECORD_SEPARATOR = "\u001F";
     private final ExecutorService clientPool;
     private final UserStore userStore;
+    private final SemesterChangeStore semesterChangeStore;
     private final DiscussionStore discussionStore;
     private final FriendStore friendStore;
     private final int readTimeoutMs;
@@ -26,6 +29,7 @@ public final class ExamServer implements AutoCloseable {
     public ExamServer(UserStore userStore, int readTimeoutMs) {
         this.userStore = userStore;
         this.readTimeoutMs = readTimeoutMs;
+        this.semesterChangeStore = new SemesterChangeStore(userStore);
         this.discussionStore = new DiscussionStore();
         this.friendStore = new FriendStore();
         this.clientPool = Executors.newCachedThreadPool(runnable -> {
@@ -80,7 +84,6 @@ public final class ExamServer implements AutoCloseable {
                 case "LOGIN" -> handleLogin(parts);
                 case "DISCUSS_LIST" -> handleDiscussionList();
                 case "DISCUSS_POST" -> handleDiscussionPost(parts);
-                case "DISCUSS_COMMENT" -> handleDiscussionComment(parts);
                 case "FRIEND_REQUEST" -> handleFriendRequest(parts);
                 case "FRIEND_PENDING" -> handleFriendPending(parts);
                 case "FRIEND_ACCEPT" -> handleFriendAccept(parts);
@@ -88,6 +91,10 @@ public final class ExamServer implements AutoCloseable {
                 case "FRIEND_LIST" -> handleFriendList(parts);
                 case "CHAT_SEND" -> handleChatSend(parts);
                 case "CHAT_HISTORY" -> handleChatHistory(parts);
+                case "SEMESTER_CHANGE_REQUEST" -> handleSemesterChangeRequest(parts);
+                case "SEMESTER_CHANGE_PENDING" -> handleSemesterChangePending();
+                case "SEMESTER_CHANGE_REVIEW" -> handleSemesterChangeReview(parts);
+                case "SEMESTER_CHANGE_STATUS" -> handleSemesterChangeStatus(parts);
                 default -> error("UNKNOWN_COMMAND");
             };
         } catch (IOException ex) {
@@ -143,21 +150,6 @@ public final class ExamServer implements AutoCloseable {
         }
         discussionStore.addMessage(author.trim(), text.trim());
         return ok("");
-    }
-
-    private String handleDiscussionComment(String[] parts) {
-        if (parts.length < 2) {
-            return error("BAD_REQUEST");
-        }
-        String indexValue = NetworkProtocol.decode(parts[1]);
-        int index;
-        try {
-            index = Integer.parseInt(indexValue.trim());
-        } catch (NumberFormatException ex) {
-            return error("BAD_REQUEST");
-        }
-        boolean ok = discussionStore.commentAt(index);
-        return ok ? ok("") : error("NOT_FOUND");
     }
 
     private String handleFriendRequest(String[] parts) {
@@ -239,6 +231,70 @@ public final class ExamServer implements AutoCloseable {
         String user = NetworkProtocol.decode(parts[1]);
         String friend = NetworkProtocol.decode(parts[2]);
         return okList(friendStore.getChatHistory(user, friend));
+    }
+
+    private String handleSemesterChangeRequest(String[] parts) throws IOException {
+        if (parts.length < 3) {
+            return error("BAD_REQUEST");
+        }
+        SemesterChangeStore.RequestOutcome outcome = semesterChangeStore.requestChange(
+                NetworkProtocol.decode(parts[1]),
+                NetworkProtocol.decode(parts[2])
+        );
+        return switch (outcome) {
+            case CREATED -> ok("");
+            case INVALID -> error("INVALID");
+            case NOT_FOUND -> error("NOT_FOUND");
+            case NO_CHANGE -> error("NO_CHANGE");
+            case ALREADY_PENDING -> error("ALREADY_PENDING");
+        };
+    }
+
+    private String handleSemesterChangePending() throws IOException {
+        List<String> records = semesterChangeStore.listPendingRequests().stream()
+                .map(this::packSemesterChangeRequest)
+                .toList();
+        return okList(records);
+    }
+
+    private String handleSemesterChangeReview(String[] parts) throws IOException {
+        if (parts.length < 4) {
+            return error("BAD_REQUEST");
+        }
+        String username = NetworkProtocol.decode(parts[1]);
+        String requestedSemester = NetworkProtocol.decode(parts[2]);
+        String decision = NetworkProtocol.decode(parts[3]);
+        SemesterChangeStore.DecisionOutcome outcome = semesterChangeStore.reviewRequest(
+                username,
+                requestedSemester,
+                "APPROVE".equalsIgnoreCase(decision)
+        );
+        return switch (outcome) {
+            case UPDATED -> ok("");
+            case INVALID -> error("INVALID");
+            case NOT_FOUND -> error("NOT_FOUND");
+        };
+    }
+
+    private String handleSemesterChangeStatus(String[] parts) throws IOException {
+        if (parts.length < 2) {
+            return error("BAD_REQUEST");
+        }
+        SemesterChangeRequest request = semesterChangeStore.findLatestForUser(NetworkProtocol.decode(parts[1]));
+        if (request == null) {
+            return ok("");
+        }
+        return ok(packSemesterChangeRequest(request));
+    }
+
+    private String packSemesterChangeRequest(SemesterChangeRequest request) {
+        return String.join(RECORD_SEPARATOR,
+                request.username(),
+                request.currentSemester(),
+                request.requestedSemester(),
+                request.status(),
+                request.requestedAt(),
+                request.reviewedAt());
     }
 
     private String ok(String message) {

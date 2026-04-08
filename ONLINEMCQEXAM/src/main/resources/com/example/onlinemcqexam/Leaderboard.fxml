@@ -13,7 +13,7 @@
 <VBox spacing="14.0" prefWidth="900.0" prefHeight="620.0"
       fx:controller="com.example.onlinemcqexam.LeaderboardController"
       xmlns:fx="http://javafx.com/fxml/1"
-      xmlns="http://javafx.com/javafx/17.0.6"
+      xmlns="http://javafx.com/javafx/21.0.2"
       styleClass="dashboard-body">
     <children>
         <HBox spacing="10.0" alignment="CENTER_LEFT" styleClass="header-bar">

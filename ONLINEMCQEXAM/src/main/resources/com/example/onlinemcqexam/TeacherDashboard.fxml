@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,7 +14,7 @@
 <BorderPane fx:controller="com.example.onlinemcqexam.TeacherDashboardViewController"
             fx:id="teacherDashboardPane"
             styleClass="root xdash-root"
-            xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns="http://javafx.com/javafx/21.0.2"
             xmlns:fx="http://javafx.com/fxml/1"
             visible="false"
             managed="false">
@@ -97,28 +96,6 @@
             </VBox>
 
             <VBox styleClass="xdash-sidebar" spacing="16" prefWidth="310" minWidth="298" maxWidth="322">
-                <VBox styleClass="xdash-side-card xdash-stats" spacing="14">
-                    <Label text="Quick Stats" styleClass="xdash-side-title"/>
-
-                    <VBox spacing="6">
-                        <HBox alignment="CENTER_LEFT" spacing="10">
-                            <Label text="Active Students" styleClass="xdash-stat-label"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label fx:id="teacherActiveStudentsLabel" text="No data available" styleClass="xdash-stat-value"/>
-                        </HBox>
-                        <ProgressBar fx:id="teacherActiveStudentsProgressBar" styleClass="xdash-progress" maxWidth="Infinity"/>
-                    </VBox>
-
-                    <VBox spacing="6">
-                        <HBox alignment="CENTER_LEFT" spacing="10">
-                            <Label text="Avg. Grade" styleClass="xdash-stat-label"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label fx:id="teacherAverageGradeLabel" text="No data available" styleClass="xdash-grade-pill"/>
-                        </HBox>
-                        <Label text="Stable performance this term" styleClass="xdash-note"/>
-                    </VBox>
-                </VBox>
-
                 <VBox styleClass="xdash-side-card xdash-logout" spacing="10">
                     <HBox alignment="CENTER_LEFT" spacing="8">
                         <FontIcon iconLiteral="fas-sign-out-alt" styleClass="xdash-logout-icon"/>
@@ -145,3 +122,4 @@
     </center>
 
 </BorderPane>
+

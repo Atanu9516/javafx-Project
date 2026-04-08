@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns="http://javafx.com/javafx/17.0.6"
+<StackPane xmlns="http://javafx.com/javafx/21.0.2"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.example.onlinemcqexam.AuthFailedController"
            styleClass="af-root">
@@ -54,3 +54,4 @@
         </HBox>
     </VBox>
 </StackPane>
+

@@ -10,8 +10,10 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public final class ExamClient {
+    private static final String RECORD_SEPARATOR = "\u001F";
     private final String host;
     private final int port;
     private final int connectTimeoutMs;
@@ -52,10 +54,6 @@ public final class ExamClient {
         return parseListResponse(responseLine);
     }
 
-    public ServerResponse commentDiscussion(int index) throws IOException {
-        return sendCommand("DISCUSS_COMMENT", String.valueOf(index));
-    }
-
     public ServerResponse sendFriendRequest(String from, String to) throws IOException {
         return sendCommand("FRIEND_REQUEST", from, to);
     }
@@ -85,6 +83,27 @@ public final class ExamClient {
     public List<String> fetchChat(String user, String friend) throws IOException {
         String responseLine = sendCommandRaw("CHAT_HISTORY", user, friend);
         return parseListResponse(responseLine);
+    }
+
+    public ServerResponse requestSemesterChange(String username, String requestedSemester) throws IOException {
+        return sendCommand("SEMESTER_CHANGE_REQUEST", username, requestedSemester);
+    }
+
+    public List<SemesterChangeRequest> fetchPendingSemesterChanges() throws IOException {
+        return parseSemesterChangeList(sendCommandRaw("SEMESTER_CHANGE_PENDING"));
+    }
+
+    public ServerResponse reviewSemesterChange(String username, String requestedSemester, boolean approve) throws IOException {
+        return sendCommand("SEMESTER_CHANGE_REVIEW", username, requestedSemester, approve ? "APPROVE" : "DECLINE");
+    }
+
+    public SemesterChangeRequest fetchSemesterChangeStatus(String username) throws IOException {
+        String responseLine = sendCommandRaw("SEMESTER_CHANGE_STATUS", username);
+        List<String> parts = parseResponseParts(responseLine);
+        if (parts.isEmpty()) {
+            return null;
+        }
+        return parseSemesterChange(parts.get(0));
     }
 
     private ServerResponse sendCommand(String command, String... args) throws IOException {
@@ -139,11 +158,15 @@ public final class ExamClient {
     }
 
     private List<String> parseListResponse(String line) throws IOException {
+        return parseResponseParts(line);
+    }
+
+    private List<String> parseResponseParts(String line) throws IOException {
         String[] parts = NetworkProtocol.split(line);
         if (parts.length == 0 || parts[0].isBlank()) {
             throw new IOException("EMPTY_RESPONSE");
         }
-        String status = parts[0].trim().toUpperCase();
+        String status = parts[0].trim().toUpperCase(Locale.ROOT);
         if ("OK".equals(status)) {
             List<String> messages = new ArrayList<>();
             for (int i = 1; i < parts.length; i++) {
@@ -156,6 +179,29 @@ public final class ExamClient {
             throw new IOException(message);
         }
         throw new IOException("UNKNOWN_RESPONSE");
+    }
+
+    private List<SemesterChangeRequest> parseSemesterChangeList(String line) throws IOException {
+        List<String> records = parseResponseParts(line);
+        List<SemesterChangeRequest> requests = new ArrayList<>();
+        for (String record : records) {
+            SemesterChangeRequest request = parseSemesterChange(record);
+            if (request != null) {
+                requests.add(request);
+            }
+        }
+        return requests;
+    }
+
+    private SemesterChangeRequest parseSemesterChange(String payload) {
+        if (payload == null || payload.isBlank()) {
+            return null;
+        }
+        String[] fields = payload.split(RECORD_SEPARATOR, -1);
+        if (fields.length < 6) {
+            return null;
+        }
+        return new SemesterChangeRequest(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5]);
     }
 
     public record ServerResponse(boolean ok, String message) {

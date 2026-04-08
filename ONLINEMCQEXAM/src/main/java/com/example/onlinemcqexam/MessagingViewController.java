@@ -16,7 +16,6 @@ public class MessagingViewController {
     @FXML TextField friendRequestField;
     @FXML TextField chatMessageField;
     @FXML Label messagingActiveFriendLabel;
-    @FXML Label messagingActiveStatusLabel;
 
     private Runnable onShowStudentDashboard;
     private Runnable onShowAvailableExams;

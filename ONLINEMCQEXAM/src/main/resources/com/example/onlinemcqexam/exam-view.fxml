@@ -37,7 +37,7 @@
            prefHeight="700.0" prefWidth="1040.0"
            styleClass="app-shell"
            xmlns:fx="http://javafx.com/fxml/1"
-           xmlns="http://javafx.com/javafx/17.0.6">
+           xmlns="http://javafx.com/javafx/21.0.2">
     <children>
         <fx:include fx:id="loginPane" source="Login.fxml"/>
         <fx:include fx:id="registerPane" source="CreateAccount.fxml"/>
@@ -103,11 +103,6 @@
 
             <Region VBox.vgrow="ALWAYS"/>
 
-            <Button text="Settings" onAction="#showSettings" styleClass="dash-nav-button">
-                <graphic>
-                    <FontIcon iconLiteral="fas-cog" styleClass="dash-nav-icon"/>
-                </graphic>
-            </Button>
             <Button text="Logout" onAction="#handleLogout">
                 <styleClass>
                     <String fx:value="dash-nav-button"/>
@@ -128,7 +123,6 @@
                 <Label text="Dashboard Overview" styleClass="dash-page-title"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <HBox spacing="10" alignment="CENTER_RIGHT">
-                    <Label fx:id="dashboardAlertsLabel" text="Alerts Clear" styleClass="dash-header-pill"/>
                     <Label text="Profile" styleClass="dash-header-pill"/>
                 </HBox>
             </HBox>
@@ -190,6 +184,18 @@
                                    styleClass="dash-support-desc"/>
                         </VBox>
                     </HBox>
+
+                    <VBox spacing="10" styleClass="dash-support-card">
+                        <Label text="Semester Transfer Request" styleClass="dash-support-title"/>
+                        <Label text="Request teacher approval before moving to a new semester." wrapText="true" styleClass="dash-support-desc"/>
+                        <ChoiceBox fx:id="studentSemesterRequestChoice" maxWidth="Infinity"/>
+                        <Button fx:id="studentSemesterRequestButton"
+                                text="Send Approval Request"
+                                onAction="#submitSemesterChangeRequest"
+                                maxWidth="Infinity"
+                                styleClass="scheduled-primary-button"/>
+                        <Label fx:id="studentSemesterRequestStatusLabel" text="No pending semester change request." wrapText="true" styleClass="scheduled-side-text"/>
+                    </VBox>
                 </VBox>
 
                 <VBox prefWidth="310" spacing="12" styleClass="dash-right-column">
@@ -491,7 +497,6 @@
 
                     <VBox spacing="2">
                         <Label fx:id="messagingActiveFriendLabel" text="Select a friend" styleClass="messaging-chat-title"/>
-                        <Label fx:id="messagingActiveStatusLabel" text="Active" styleClass="messaging-chat-status"/>
                     </VBox>
 
                     <Region HBox.hgrow="ALWAYS"/>
@@ -1180,30 +1185,21 @@
             </VBox>
 
             <VBox styleClass="xdash-sidebar" spacing="16" prefWidth="310" minWidth="298" maxWidth="322">
-                <VBox spacing="14">
+                <VBox spacing="10">
                     <styleClass>
                         <String fx:value="xdash-side-card"/>
-                        <String fx:value="xdash-stats"/>
                     </styleClass>
-                    <Label text="Quick Stats" styleClass="xdash-side-title"/>
-
-                    <VBox spacing="6">
-                        <HBox alignment="CENTER_LEFT" spacing="10">
-                            <Label text="Active Students" styleClass="xdash-stat-label"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label fx:id="teacherActiveStudentsLabel" text="No data available" styleClass="xdash-stat-value"/>
-                        </HBox>
-                        <ProgressBar fx:id="teacherActiveStudentsProgressBar" styleClass="xdash-progress" maxWidth="Infinity"/>
-                    </VBox>
-
-                    <VBox spacing="6">
-                        <HBox alignment="CENTER_LEFT" spacing="10">
-                            <Label text="Avg. Grade" styleClass="xdash-stat-label"/>
-                            <Region HBox.hgrow="ALWAYS"/>
-                            <Label fx:id="teacherAverageGradeLabel" text="No data available" styleClass="xdash-grade-pill"/>
-                        </HBox>
-                        <Label text="Stable performance this term" styleClass="xdash-note"/>
-                    </VBox>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Semester Requests" styleClass="xdash-side-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="teacherSemesterRequestBadgeLabel" text="0 Pending" styleClass="xdash-badge"/>
+                    </HBox>
+                    <Label text="Approve student requests before their semester is updated." wrapText="true" styleClass="xdash-note"/>
+                    <ListView fx:id="teacherSemesterRequestList" prefHeight="170"/>
+                    <HBox spacing="10">
+                        <Button text="Approve" onAction="#approveSelectedSemesterChange" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="xdash-primary"/>
+                        <Button text="Decline" onAction="#declineSelectedSemesterChange" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="xdash-link"/>
+                    </HBox>
                 </VBox>
 
                 <VBox spacing="10">
@@ -1313,5 +1309,6 @@
 </BorderPane>
         </children>
 </StackPane>
+
 
 

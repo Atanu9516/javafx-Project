@@ -12,7 +12,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <StackPane fx:id="registerPane"
-           xmlns="http://javafx.com/javafx/17.0.6"
+           xmlns="http://javafx.com/javafx/21.0.2"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.example.onlinemcqexam.RegisterViewController"
            styleClass="root register-root"
@@ -115,3 +115,4 @@
         </HBox>
     </children>
 </StackPane>
+

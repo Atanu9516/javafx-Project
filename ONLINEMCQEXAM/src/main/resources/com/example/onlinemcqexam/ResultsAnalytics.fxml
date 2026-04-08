@@ -9,14 +9,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane xmlns="http://javafx.com/javafx/17.0.6"
+<StackPane xmlns="http://javafx.com/javafx/21.0.2"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.example.onlinemcqexam.ResultsAnalyticsController"
            styleClass="ra-root">
@@ -31,7 +30,7 @@
 
         <VBox spacing="10" styleClass="ra-filter-card">
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label text="Academic Term" styleClass="ra-filter-label"/>
+                <Label text="Academic Year" styleClass="ra-filter-label"/>
                 <ChoiceBox fx:id="termFilterChoice" styleClass="ra-choice" prefWidth="260"/>
                 <Region HBox.hgrow="ALWAYS"/>
             </HBox>
@@ -89,9 +88,7 @@
 
         <VBox spacing="10" styleClass="ra-table-card" VBox.vgrow="ALWAYS">
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label text="Individual Student Performance" styleClass="ra-section-title"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <TextField fx:id="studentSearchField" promptText="Search students..." styleClass="ra-search" prefWidth="260"/>
+                <Label text="Student Results By Course And Year" styleClass="ra-section-title"/>
             </HBox>
 
             <TableView fx:id="studentTable" VBox.vgrow="ALWAYS" styleClass="ra-table">
@@ -112,3 +109,4 @@
         <Insets top="24" right="24" bottom="24" left="24"/>
     </padding>
 </StackPane>
+

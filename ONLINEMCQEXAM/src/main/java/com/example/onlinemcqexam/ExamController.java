@@ -193,7 +193,11 @@ public class ExamController {
     @FXML
     private Label dashboardProfileSubtitleLabel;
     @FXML
-    private Label dashboardAlertsLabel;
+    private ChoiceBox<String> studentSemesterRequestChoice;
+    @FXML
+    private Button studentSemesterRequestButton;
+    @FXML
+    private Label studentSemesterRequestStatusLabel;
     @FXML
     private Label dashboardUpcomingCountLabel;
     @FXML
@@ -304,8 +308,6 @@ public class ExamController {
     @FXML
     private Label messagingActiveFriendLabel;
     @FXML
-    private Label messagingActiveStatusLabel;
-    @FXML
     private ListView<String> historyList;
     @FXML
     private TableView<CourseSummaryRow> historyTable;
@@ -356,11 +358,9 @@ public class ExamController {
     @FXML
     private Label teacherActiveExamsBadgeLabel;
     @FXML
-    private Label teacherActiveStudentsLabel;
+    private Label teacherSemesterRequestBadgeLabel;
     @FXML
-    private ProgressBar teacherActiveStudentsProgressBar;
-    @FXML
-    private Label teacherAverageGradeLabel;
+    private ListView<String> teacherSemesterRequestList;
     @FXML
     private ListView<String> questionBankList;
     @FXML
@@ -481,14 +481,12 @@ public class ExamController {
     private final Map<String, String> studentScheduledCourseCodeByLabel = new LinkedHashMap<>();
     private final Map<String, String> analyticsCourseCodeByLabel = new LinkedHashMap<>();
     private final Map<String, String> leaderboardCourseCodeByLabel = new LinkedHashMap<>();
-    private final Map<String, Long> latestSeenIncomingMessageByFriend = new LinkedHashMap<>();
     private final Map<String, TeacherExamSummary> scheduleExamByLabel = new LinkedHashMap<>();
     private final Map<String, TeacherExamSummary> viewExamByLabel = new LinkedHashMap<>();
     private final Map<String, ScheduleRow> studentScheduledRowByLabel = new LinkedHashMap<>();
     private final Map<String, List<ExamRecord>> courseMap = new LinkedHashMap<>();
+    private final Map<String, SemesterChangeRequest> pendingSemesterChangeByLabel = new LinkedHashMap<>();
     private boolean progressFilterRefreshInProgress;
-    private boolean chatAlertSnapshotInitialized;
-    private boolean dashboardAlertRefreshInFlight;
     private final ToggleGroup createModeGroup = new ToggleGroup();
     private final List<TeacherQuestionRow> qbCurrentRows = new ArrayList<>();
     private final List<Question> createCourseQuestions = new ArrayList<>();
@@ -514,6 +512,7 @@ public class ExamController {
         configureProgressCharts();
         configureLeaderboardList();
         configureMessaging();
+        configureTeacherSemesterChangeRequests();
         configureDiscussionFeed();
         configureTeacherAuthoring();
         configureAuthFailedNavigation();
@@ -574,7 +573,6 @@ public class ExamController {
             chatHistoryList = messagingPaneController.chatHistoryList;
             chatMessageField = messagingPaneController.chatMessageField;
             messagingActiveFriendLabel = messagingPaneController.messagingActiveFriendLabel;
-            messagingActiveStatusLabel = messagingPaneController.messagingActiveStatusLabel;
             messagingPaneController.setOnShowStudentDashboard(this::showStudentDashboard);
             messagingPaneController.setOnShowAvailableExams(this::showAvailableExams);
             messagingPaneController.setOnShowScheduledExams(this::showScheduledExams);
@@ -632,9 +630,6 @@ public class ExamController {
         if (teacherDashboardPaneController != null) {
             teacherWelcomeLabel = teacherDashboardPaneController.teacherWelcomeLabel;
             teacherActiveExamsBadgeLabel = teacherDashboardPaneController.teacherActiveExamsBadgeLabel;
-            teacherActiveStudentsLabel = teacherDashboardPaneController.teacherActiveStudentsLabel;
-            teacherActiveStudentsProgressBar = teacherDashboardPaneController.teacherActiveStudentsProgressBar;
-            teacherAverageGradeLabel = teacherDashboardPaneController.teacherAverageGradeLabel;
             teacherDashboardPaneController.setOnShowQuestionBank(this::showQuestionBank);
             teacherDashboardPaneController.setOnShowCreateExam(this::showCreateExam);
             teacherDashboardPaneController.setOnShowScheduleExam(this::showScheduleExam);
@@ -1243,9 +1238,7 @@ public class ExamController {
 
                     Label nameLabel = new Label(item);
                     nameLabel.getStyleClass().add("messaging-friend-name");
-                    Label statusLabel = new Label(friendStatusText(item));
-                    statusLabel.getStyleClass().add("messaging-friend-status");
-                    VBox info = new VBox(2, nameLabel, statusLabel);
+                    VBox info = new VBox(2, nameLabel);
 
                     HBox row = new HBox(10, avatar, info);
                     row.setAlignment(Pos.CENTER_LEFT);
@@ -1261,10 +1254,10 @@ public class ExamController {
                     if (chatHistoryList != null) {
                         chatHistoryList.getItems().clear();
                     }
-                    updateMessagingHeader("Select a friend", "Active");
+                    updateMessagingHeader("Select a friend");
                     return;
                 }
-                updateMessagingHeader(newValue, "Typing...");
+                updateMessagingHeader(newValue);
                 loadChatHistory(newValue);
             });
         }
@@ -1303,21 +1296,9 @@ public class ExamController {
         }
     }
 
-    private String friendStatusText(String friend) {
-        int code = Math.abs(friend.hashCode() % 3);
-        return switch (code) {
-            case 0 -> "Typing...";
-            case 1 -> "Active";
-            default -> "Sent you a message";
-        };
-    }
-
-    private void updateMessagingHeader(String friendName, String status) {
+    private void updateMessagingHeader(String friendName) {
         if (messagingActiveFriendLabel != null) {
             messagingActiveFriendLabel.setText(friendName == null || friendName.isBlank() ? "Select a friend" : friendName);
-        }
-        if (messagingActiveStatusLabel != null) {
-            messagingActiveStatusLabel.setText(status == null || status.isBlank() ? "Active" : status);
         }
     }
 
@@ -1420,24 +1401,7 @@ public class ExamController {
                 content.setWrapText(true);
                 content.getStyleClass().add("discussion-feed-content");
 
-                Button commentButton = new Button("Comment");
-                commentButton.getStyleClass().add("discussion-feed-action-button");
-                commentButton.setOnAction(event -> {
-                    int current = getIndex();
-                    if (current >= 0 && discussionList != null) {
-                        discussionList.getSelectionModel().select(current);
-                        commentDiscussion();
-                    }
-                });
-
-                Label likes = new Label("Likes " + data.likes());
-                likes.getStyleClass().add("discussion-feed-like");
-
-                HBox actionRow = new HBox(8, commentButton, likes);
-                actionRow.getStyleClass().add("discussion-feed-actions");
-                actionRow.setAlignment(Pos.CENTER_LEFT);
-
-                VBox card = new VBox(10, header, content, actionRow);
+                VBox card = new VBox(10, header, content);
                 card.getStyleClass().add("discussion-feed-card");
 
                 setText(null);
@@ -1524,10 +1488,6 @@ public class ExamController {
 
     private DiscussionCardData parseDiscussionMessage(String raw, int index) {
         String text = raw == null ? "" : raw.trim();
-        boolean commented = text.endsWith("[Commented]");
-        if (commented) {
-            text = text.substring(0, text.length() - "[Commented]".length()).trim();
-        }
 
         if (text.startsWith("Q:")) {
             text = text.substring(2).trim();
@@ -1541,18 +1501,13 @@ public class ExamController {
             text = text.substring(0, open).trim();
         }
 
-        if (commented) {
-            text = text + "\n\nComment status: Commented";
-        }
-
         int minutes = Math.max(1, (index + 1) * 2);
         String ageText = minutes == 1 ? "1 minute ago" : minutes + " minutes ago";
-        int likes = 6 + Math.abs(raw.hashCode() % 33);
         String initials = author.isBlank() ? "S" : author.substring(0, 1).toUpperCase();
-        return new DiscussionCardData(author, text, ageText, likes, initials);
+        return new DiscussionCardData(author, text, ageText, initials);
     }
 
-    private record DiscussionCardData(String author, String content, String ageText, int likes, String avatarInitials) {
+    private record DiscussionCardData(String author, String content, String ageText, String avatarInitials) {
     }
 
     private void populateSampleData() {
@@ -1630,7 +1585,7 @@ public class ExamController {
     private void showStudentDashboard() {
         refreshStudentIdentityDisplay();
         refreshDashboardUpcomingCard();
-        refreshDashboardAlerts();
+        refreshStudentSemesterChangeControls();
         hideAllPanes();
         setPaneVisible(studentDashboardPane, true);
     }
@@ -1710,12 +1665,6 @@ public class ExamController {
     }
 
     @FXML
-    private void showSettings() {
-        hideAllPanes();
-        setPaneVisible(studentDashboardPane, true);
-    }
-
-    @FXML
     private void showResultPage() {
         showPane(resultPane);
     }
@@ -1750,12 +1699,14 @@ public class ExamController {
             teacherWelcomeLabel.setText("Welcome, Instructor");
         }
         refreshTeacherDashboardMetrics();
+        refreshTeacherSemesterChangeRequests();
         showPane(teacherDashboardPane);
     }
 
     @FXML
     private void showTeacherDashboard() {
         refreshTeacherDashboardMetrics();
+        refreshTeacherSemesterChangeRequests();
         showPane(teacherDashboardPane);
     }
 
@@ -1764,76 +1715,38 @@ public class ExamController {
         if (teacherActiveExamsBadgeLabel != null) {
             teacherActiveExamsBadgeLabel.setText(exams.isEmpty() ? "No data available" : exams.size() + " ACTIVE");
         }
-
-        List<ResultRow> results = loadResults();
-        if (results.isEmpty()) {
-            if (teacherActiveStudentsLabel != null) {
-                teacherActiveStudentsLabel.setText("No data available");
-            }
-            if (teacherAverageGradeLabel != null) {
-                teacherAverageGradeLabel.setText("No data available");
-            }
-            if (teacherActiveStudentsProgressBar != null) {
-                teacherActiveStudentsProgressBar.setProgress(-1);
-            }
-            return;
-        }
-
-        Set<String> users = new HashSet<>();
-        double sum = 0.0;
-        int count = 0;
-        for (ResultRow row : results) {
-            if (row.username != null && !row.username.isBlank()) {
-                users.add(row.username.trim().toLowerCase());
-            }
-            sum += row.percentage;
-            count++;
-        }
-
-        if (teacherActiveStudentsLabel != null) {
-            teacherActiveStudentsLabel.setText(users.isEmpty() ? "No data available" : String.valueOf(users.size()));
-        }
-        if (teacherAverageGradeLabel != null) {
-            if (count == 0) {
-                teacherAverageGradeLabel.setText("No data available");
-            } else {
-                teacherAverageGradeLabel.setText(toGrade(sum / count));
-            }
-        }
-        if (teacherActiveStudentsProgressBar != null) {
-            if (users.isEmpty()) {
-                teacherActiveStudentsProgressBar.setProgress(-1);
-            } else {
-                long masteryUsers = users.stream().filter(user -> {
-                    double total = 0.0;
-                    int attempts = 0;
-                    for (ResultRow row : results) {
-                        if (row.username != null && row.username.trim().equalsIgnoreCase(user)) {
-                            total += row.percentage;
-                            attempts++;
-                        }
-                    }
-                    return attempts > 0 && (total / attempts) >= 40.0;
-                }).count();
-                teacherActiveStudentsProgressBar.setProgress(masteryUsers / (double) users.size());
-            }
-        }
     }
 
-    private String toGrade(double averagePercentage) {
-        if (averagePercentage >= 80.0) {
-            return "A";
+    private void configureTeacherSemesterChangeRequests() {
+        if (teacherSemesterRequestList == null) {
+            return;
         }
-        if (averagePercentage >= 70.0) {
-            return "B";
-        }
-        if (averagePercentage >= 60.0) {
-            return "C";
-        }
-        if (averagePercentage >= 50.0) {
-            return "D";
-        }
-        return "F";
+        teacherSemesterRequestList.setPlaceholder(new Label("No pending semester transfer requests."));
+        teacherSemesterRequestList.setCellFactory(listView -> new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null || item.isBlank()) {
+                    setText(null);
+                    setGraphic(null);
+                    return;
+                }
+                SemesterChangeRequest request = pendingSemesterChangeByLabel.get(item);
+                if (request == null) {
+                    setText(item);
+                    setGraphic(null);
+                    return;
+                }
+
+                Label title = new Label(formatDisplayName(request.username()) + "  " + request.currentSemester() + " -> " + request.requestedSemester());
+                title.getStyleClass().add("messaging-request-name");
+                Label subtitle = new Label(request.requestedAt().isBlank() ? "Pending teacher approval" : "Requested at " + request.requestedAt());
+                subtitle.getStyleClass().add("messaging-request-meta");
+                VBox content = new VBox(2, title, subtitle);
+                setText(null);
+                setGraphic(content);
+            }
+        });
     }
 
     @FXML
@@ -1943,7 +1856,6 @@ public class ExamController {
             }
             UserSession.setUsername(activeUser);
             UserSession.setSemester(activeUserSemester);
-            resetDashboardAlertState();
             startDashboardAlertRefresh();
             refreshStudentIdentityDisplay();
             showStudentDashboard();
@@ -1966,8 +1878,25 @@ public class ExamController {
         if (discussionList != null) {
             discussionList.getItems().clear();
         }
+        if (studentSemesterRequestChoice != null) {
+            studentSemesterRequestChoice.getItems().clear();
+            studentSemesterRequestChoice.getSelectionModel().clearSelection();
+            studentSemesterRequestChoice.setDisable(false);
+        }
+        if (studentSemesterRequestButton != null) {
+            studentSemesterRequestButton.setDisable(false);
+        }
+        if (studentSemesterRequestStatusLabel != null) {
+            studentSemesterRequestStatusLabel.setText("No pending semester change request.");
+        }
+        pendingSemesterChangeByLabel.clear();
+        if (teacherSemesterRequestList != null) {
+            teacherSemesterRequestList.getItems().clear();
+        }
+        if (teacherSemesterRequestBadgeLabel != null) {
+            teacherSemesterRequestBadgeLabel.setText("0 Pending");
+        }
         stopDashboardAlertRefresh();
-        resetDashboardAlertState();
         refreshStudentIdentityDisplay();
         showPane(loginPane);
     }
@@ -2357,7 +2286,7 @@ public class ExamController {
             runNetwork(() -> messagingService.fetchFriends(activeUser), friends -> {
                 friendsList.getItems().setAll(friends);
                 if (friends.isEmpty()) {
-                    updateMessagingHeader("Select a friend", "Active");
+                    updateMessagingHeader("Select a friend");
                     if (chatHistoryList != null) {
                         chatHistoryList.getItems().clear();
                     }
@@ -2393,8 +2322,7 @@ public class ExamController {
             if (!messages.isEmpty()) {
                 chatHistoryList.scrollTo(messages.size() - 1);
             }
-            markFriendMessagesAsSeen(friend, messages);
-            updateMessagingHeader(friend, "Active");
+            updateMessagingHeader(friend);
         }, error -> showError("Unable to load chat", error));
     }
 
@@ -2418,10 +2346,11 @@ public class ExamController {
 
     private void startDashboardAlertRefresh() {
         if (dashboardAlertRefreshTimeline == null) {
-            dashboardAlertRefreshTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> refreshDashboardAlerts()));
+            dashboardAlertRefreshTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event ->
+                    refreshStudentSemesterChangeStatus(true)));
             dashboardAlertRefreshTimeline.setCycleCount(Timeline.INDEFINITE);
         }
-        refreshDashboardAlerts();
+        refreshStudentSemesterChangeStatus(true);
         dashboardAlertRefreshTimeline.playFromStart();
     }
 
@@ -2429,7 +2358,6 @@ public class ExamController {
         if (dashboardAlertRefreshTimeline != null) {
             dashboardAlertRefreshTimeline.stop();
         }
-        dashboardAlertRefreshInFlight = false;
     }
 
     private void refreshDiscussion() {
@@ -2533,158 +2461,197 @@ public class ExamController {
         messagingFeedbackLabel.setManaged(hasMessage);
     }
 
-    private void refreshDashboardAlerts() {
-        if (dashboardAlertsLabel == null) {
-            return;
+    private void refreshStudentSemesterChangeControls() {
+        if (studentSemesterRequestChoice != null) {
+            String previous = studentSemesterRequestChoice.getValue();
+            List<String> semesters = SUPPORTED_SEMESTERS.stream()
+                    .filter(semester -> !semester.equals(normalizeSemester(activeUserSemester)))
+                    .toList();
+            studentSemesterRequestChoice.getItems().setAll(semesters);
+            if (previous != null && semesters.contains(previous)) {
+                studentSemesterRequestChoice.getSelectionModel().select(previous);
+            } else if (!semesters.isEmpty()) {
+                studentSemesterRequestChoice.getSelectionModel().selectFirst();
+            } else {
+                studentSemesterRequestChoice.getSelectionModel().clearSelection();
+            }
         }
-        if (!ensureLoggedIn()) {
-            updateDashboardAlertsLabel(0, List.of());
-            return;
-        }
-        if (dashboardAlertRefreshInFlight) {
-            return;
-        }
+        refreshStudentSemesterChangeStatus(false);
+    }
 
-        Map<String, Long> seenSnapshot = new LinkedHashMap<>(latestSeenIncomingMessageByFriend);
-        boolean initializeSnapshot = !chatAlertSnapshotInitialized;
-        dashboardAlertRefreshInFlight = true;
-        runNetwork(() -> buildChatAlertSummary(seenSnapshot, initializeSnapshot), summary -> {
-            dashboardAlertRefreshInFlight = false;
-            latestSeenIncomingMessageByFriend.putAll(summary.seenTimestampUpdates());
-            chatAlertSnapshotInitialized = true;
-            updateDashboardAlertsLabel(summary.unreadCount(), summary.sendingFriends());
+    private void refreshStudentSemesterChangeStatus(boolean silent) {
+        if (studentSemesterRequestStatusLabel == null || !ensureLoggedIn()) {
+            return;
+        }
+        runNetwork(() -> userService.fetchSemesterChangeStatus(activeUser), request -> {
+            if (request != null && request.isApproved() && !request.requestedSemester().isBlank()) {
+                String approvedSemester = normalizeSemester(request.requestedSemester());
+                if (!approvedSemester.isBlank() && !approvedSemester.equals(normalizeSemester(activeUserSemester))) {
+                    activeUserSemester = approvedSemester;
+                    UserSession.setSemester(activeUserSemester);
+                    refreshStudentIdentityDisplay();
+                    refreshDashboardUpcomingCard();
+                }
+            }
+            updateStudentSemesterChangeStatusView(request);
         }, error -> {
-            dashboardAlertRefreshInFlight = false;
-            updateDashboardAlertsLabel(0, List.of());
+            if (!silent) {
+                showError("Semester transfer", error);
+            }
         });
     }
 
-    private ChatAlertSummary buildChatAlertSummary(Map<String, Long> seenSnapshot, boolean initializeSnapshot) throws IOException {
-        List<String> friends = messagingService.fetchFriends(activeUser);
-        Map<String, Long> seenUpdates = new LinkedHashMap<>();
-        List<String> sendingFriends = new ArrayList<>();
-        int unreadCount = 0;
-
-        for (String friend : friends) {
-            if (friend == null || friend.isBlank()) {
-                continue;
-            }
-            List<String> messages = messagingService.fetchChat(activeUser, friend);
-            long latestIncomingTimestamp = latestIncomingChatTimestamp(messages);
-            if (initializeSnapshot || !seenSnapshot.containsKey(friend)) {
-                seenUpdates.put(friend, latestIncomingTimestamp);
-                continue;
-            }
-
-            long seenTimestamp = Math.max(0L, seenSnapshot.getOrDefault(friend, 0L));
-            int friendUnreadCount = countUnreadIncomingMessages(messages, seenTimestamp);
-            if (friendUnreadCount > 0) {
-                unreadCount += friendUnreadCount;
-                sendingFriends.add(friend);
-            }
-        }
-        return new ChatAlertSummary(unreadCount, sendingFriends, seenUpdates);
-    }
-
-    private int countUnreadIncomingMessages(List<String> messages, long seenTimestamp) {
-        if (messages == null || messages.isEmpty()) {
-            return 0;
-        }
-        int unread = 0;
-        for (String raw : messages) {
-            String sender = extractChatSender(raw);
-            if (sender.isBlank() || (activeUser != null && activeUser.equalsIgnoreCase(sender))) {
-                continue;
-            }
-            long timestamp = extractChatTimestamp(raw);
-            if (timestamp > seenTimestamp) {
-                unread++;
-            }
-        }
-        return unread;
-    }
-
-    private long latestIncomingChatTimestamp(List<String> messages) {
-        if (messages == null || messages.isEmpty()) {
-            return 0L;
-        }
-        long latest = 0L;
-        for (String raw : messages) {
-            String sender = extractChatSender(raw);
-            if (sender.isBlank() || (activeUser != null && activeUser.equalsIgnoreCase(sender))) {
-                continue;
-            }
-            latest = Math.max(latest, extractChatTimestamp(raw));
-        }
-        return latest;
-    }
-
-    private void markFriendMessagesAsSeen(String friend, List<String> messages) {
-        if (friend == null || friend.isBlank()) {
+    private void updateStudentSemesterChangeStatusView(SemesterChangeRequest request) {
+        if (studentSemesterRequestStatusLabel == null) {
             return;
         }
-        latestSeenIncomingMessageByFriend.put(friend, latestIncomingChatTimestamp(messages));
-        chatAlertSnapshotInitialized = true;
-    }
-
-    private String extractChatSender(String raw) {
-        String value = raw == null ? "" : raw;
-        String[] metadataParts = value.split(CHAT_METADATA_SEPARATOR, 3);
-        if (metadataParts.length == 3) {
-            return metadataParts[0].trim();
+        boolean hasPending = request != null && request.isPending();
+        if (studentSemesterRequestChoice != null) {
+            studentSemesterRequestChoice.setDisable(hasPending);
         }
-        int split = value.indexOf(": ");
-        return split >= 0 ? value.substring(0, split).trim() : "";
-    }
-
-    private long extractChatTimestamp(String raw) {
-        String value = raw == null ? "" : raw;
-        String[] metadataParts = value.split(CHAT_METADATA_SEPARATOR, 3);
-        if (metadataParts.length == 3) {
-            try {
-                return Long.parseLong(metadataParts[1].trim());
-            } catch (NumberFormatException ignored) {
-                return 0L;
-            }
+        if (studentSemesterRequestButton != null) {
+            studentSemesterRequestButton.setDisable(hasPending);
         }
-        return 0L;
-    }
 
-    private void updateDashboardAlertsLabel(int unreadCount, List<String> sendingFriends) {
-        if (dashboardAlertsLabel == null) {
+        if (request == null) {
+            studentSemesterRequestStatusLabel.setText("No pending semester change request.");
             return;
         }
-
-        String text;
-        String tooltipText;
-        if (unreadCount <= 0) {
-            text = "Alerts Clear";
-            tooltipText = "No new chat messages";
-            dashboardAlertsLabel.getStyleClass().remove("dash-header-pill-alert");
-        } else if (unreadCount == 1 && sendingFriends != null && sendingFriends.size() == 1) {
-            text = sendingFriends.get(0) + " messaged you";
-            tooltipText = "1 unread message from " + sendingFriends.get(0);
-            if (!dashboardAlertsLabel.getStyleClass().contains("dash-header-pill-alert")) {
-                dashboardAlertsLabel.getStyleClass().add("dash-header-pill-alert");
-            }
-        } else {
-            text = unreadCount + " New Messages";
-            tooltipText = sendingFriends == null || sendingFriends.isEmpty()
-                    ? unreadCount + " unread chat messages"
-                    : "New messages from " + String.join(", ", sendingFriends);
-            if (!dashboardAlertsLabel.getStyleClass().contains("dash-header-pill-alert")) {
-                dashboardAlertsLabel.getStyleClass().add("dash-header-pill-alert");
-            }
+        if (request.isPending()) {
+            studentSemesterRequestStatusLabel.setText("Pending approval: " + request.currentSemester() + " -> "
+                    + request.requestedSemester() + ".");
+            return;
         }
-
-        dashboardAlertsLabel.setText(text);
-        dashboardAlertsLabel.setTooltip(new Tooltip(tooltipText));
+        if (request.isApproved()) {
+            studentSemesterRequestStatusLabel.setText("Approved. You are now in semester " + request.requestedSemester() + ".");
+            refreshStudentSemesterRequestChoicesAfterResolution();
+            return;
+        }
+        if (request.isDeclined()) {
+            studentSemesterRequestStatusLabel.setText("Declined by teacher. You can submit a new semester transfer request.");
+            refreshStudentSemesterRequestChoicesAfterResolution();
+            return;
+        }
+        studentSemesterRequestStatusLabel.setText("Semester transfer status: " + request.status());
     }
 
-    private void resetDashboardAlertState() {
-        latestSeenIncomingMessageByFriend.clear();
-        chatAlertSnapshotInitialized = false;
-        updateDashboardAlertsLabel(0, List.of());
+    private void refreshStudentSemesterRequestChoicesAfterResolution() {
+        if (studentSemesterRequestChoice == null) {
+            return;
+        }
+        List<String> semesters = SUPPORTED_SEMESTERS.stream()
+                .filter(semester -> !semester.equals(normalizeSemester(activeUserSemester)))
+                .toList();
+        String selected = studentSemesterRequestChoice.getValue();
+        studentSemesterRequestChoice.getItems().setAll(semesters);
+        if (selected != null && semesters.contains(selected)) {
+            studentSemesterRequestChoice.getSelectionModel().select(selected);
+        } else if (!semesters.isEmpty()) {
+            studentSemesterRequestChoice.getSelectionModel().selectFirst();
+        }
+        studentSemesterRequestChoice.setDisable(false);
+        if (studentSemesterRequestButton != null) {
+            studentSemesterRequestButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    private void submitSemesterChangeRequest() {
+        if (!ensureLoggedIn()) {
+            showError("Semester transfer", "Log in first.");
+            return;
+        }
+        String requestedSemester = studentSemesterRequestChoice == null ? "" : normalizeSemester(studentSemesterRequestChoice.getValue());
+        if (requestedSemester.isBlank()) {
+            showError("Semester transfer", "Select a semester first.");
+            return;
+        }
+        if (requestedSemester.equals(normalizeSemester(activeUserSemester))) {
+            showError("Semester transfer", "You are already in that semester.");
+            return;
+        }
+        runNetwork(() -> userService.requestSemesterChange(activeUser, requestedSemester), outcome -> {
+            switch (outcome) {
+                case CREATED -> {
+                    if (studentSemesterRequestStatusLabel != null) {
+                        studentSemesterRequestStatusLabel.setText("Request sent for " + requestedSemester + ". Waiting for teacher approval.");
+                    }
+                    if (studentSemesterRequestChoice != null) {
+                        studentSemesterRequestChoice.setDisable(true);
+                    }
+                    if (studentSemesterRequestButton != null) {
+                        studentSemesterRequestButton.setDisable(true);
+                    }
+                }
+                case ALREADY_PENDING -> showError("Semester transfer", "A semester transfer request is already pending.");
+                case NO_CHANGE -> showError("Semester transfer", "You are already in that semester.");
+                case NOT_FOUND -> showError("Semester transfer", "Student account was not found.");
+                case INVALID -> showError("Semester transfer", "Choose a valid semester.");
+            }
+        }, error -> showError("Semester transfer", error));
+    }
+
+    private void refreshTeacherSemesterChangeRequests() {
+        if (teacherSemesterRequestList == null) {
+            return;
+        }
+        runNetwork(userService::fetchPendingSemesterChanges, requests -> {
+            pendingSemesterChangeByLabel.clear();
+            List<String> labels = new ArrayList<>();
+            for (SemesterChangeRequest request : requests) {
+                String label = request.username() + " | " + request.currentSemester() + " -> " + request.requestedSemester();
+                pendingSemesterChangeByLabel.put(label, request);
+                labels.add(label);
+            }
+            teacherSemesterRequestList.getItems().setAll(labels);
+            if (teacherSemesterRequestBadgeLabel != null) {
+                teacherSemesterRequestBadgeLabel.setText(labels.size() + (labels.size() == 1 ? " Pending" : " Pending"));
+            }
+        }, error -> {
+            pendingSemesterChangeByLabel.clear();
+            teacherSemesterRequestList.getItems().clear();
+            if (teacherSemesterRequestBadgeLabel != null) {
+                teacherSemesterRequestBadgeLabel.setText("0 Pending");
+            }
+            showError("Semester requests", error);
+        });
+    }
+
+    @FXML
+    private void approveSelectedSemesterChange() {
+        reviewSelectedSemesterChange(true);
+    }
+
+    @FXML
+    private void declineSelectedSemesterChange() {
+        reviewSelectedSemesterChange(false);
+    }
+
+    private void reviewSelectedSemesterChange(boolean approve) {
+        if (teacherSemesterRequestList == null) {
+            return;
+        }
+        String selected = teacherSemesterRequestList.getSelectionModel().getSelectedItem();
+        SemesterChangeRequest request = pendingSemesterChangeByLabel.get(selected);
+        if (request == null) {
+            showError("Semester requests", "Select a request first.");
+            return;
+        }
+        boolean confirmed = showStyledConfirmation(
+                approve ? "Approve Request" : "Decline Request",
+                approve ? "Approve semester transfer?" : "Decline semester transfer?",
+                formatDisplayName(request.username()) + ": " + request.currentSemester() + " -> " + request.requestedSemester()
+        );
+        if (!confirmed) {
+            return;
+        }
+        runNetwork(() -> userService.reviewSemesterChange(request.username(), request.requestedSemester(), approve), updated -> {
+            if (!updated) {
+                showError("Semester requests", "Request no longer exists.");
+                return;
+            }
+            refreshTeacherSemesterChangeRequests();
+        }, error -> showError("Semester requests", error));
     }
 
     @FXML
@@ -2729,25 +2696,6 @@ public class ExamController {
         }
         event.consume();
         postDiscussion();
-    }
-
-    @FXML
-    private void commentDiscussion() {
-        if (discussionList == null) {
-            return;
-        }
-        String selected = discussionList.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-            return;
-        }
-        int index = discussionList.getSelectionModel().getSelectedIndex();
-        runNetwork(() -> discussionService.commentMessage(index), ok -> {
-            if (!ok) {
-                showError("Unable to comment", "Selected message was not found.");
-                return;
-            }
-            refreshDiscussion();
-        }, error -> showError("Unable to comment", error));
     }
 
     @FXML
@@ -5392,11 +5340,6 @@ public class ExamController {
         } catch (Exception ex) {
             return LocalDateTime.MIN;
         }
-    }
-
-    private record ChatAlertSummary(int unreadCount,
-                                    List<String> sendingFriends,
-                                    Map<String, Long> seenTimestampUpdates) {
     }
 
     private static final class TeacherQuestionDraft {

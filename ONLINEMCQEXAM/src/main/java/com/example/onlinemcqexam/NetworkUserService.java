@@ -1,6 +1,7 @@
 package com.example.onlinemcqexam;
 
 import java.io.IOException;
+import java.util.List;
 
 public final class NetworkUserService implements UserService {
     private final ExamClient client;
@@ -49,6 +50,58 @@ public final class NetworkUserService implements UserService {
             throw new IOException("No semester is assigned to this account.");
         }
         throw new IOException("Server error: " + response.message());
+    }
+
+    @Override
+    public SemesterChangeStore.RequestOutcome requestSemesterChange(String username, String requestedSemester) throws IOException {
+        ExamClient.ServerResponse response = client.requestSemesterChange(username, requestedSemester);
+        if (response.ok()) {
+            return SemesterChangeStore.RequestOutcome.CREATED;
+        }
+        return switch (response.message().toUpperCase()) {
+            case "INVALID" -> SemesterChangeStore.RequestOutcome.INVALID;
+            case "NOT_FOUND" -> SemesterChangeStore.RequestOutcome.NOT_FOUND;
+            case "NO_CHANGE" -> SemesterChangeStore.RequestOutcome.NO_CHANGE;
+            case "ALREADY_PENDING" -> SemesterChangeStore.RequestOutcome.ALREADY_PENDING;
+            default -> throw new IOException("Server error: " + response.message());
+        };
+    }
+
+    @Override
+    public List<SemesterChangeRequest> fetchPendingSemesterChanges() throws IOException {
+        return client.fetchPendingSemesterChanges();
+    }
+
+    @Override
+    public boolean reviewSemesterChange(String username, String requestedSemester, boolean approve) throws IOException {
+        ExamClient.ServerResponse response = client.reviewSemesterChange(username, requestedSemester, approve);
+        if (response.ok()) {
+            if (approve) {
+                try {
+                    localUserStore.updateSemester(username, requestedSemester);
+                } catch (IOException ignored) {
+                    // Local cache remains best-effort.
+                }
+            }
+            return true;
+        }
+        if ("NOT_FOUND".equalsIgnoreCase(response.message())) {
+            return false;
+        }
+        throw new IOException("Server error: " + response.message());
+    }
+
+    @Override
+    public SemesterChangeRequest fetchSemesterChangeStatus(String username) throws IOException {
+        SemesterChangeRequest request = client.fetchSemesterChangeStatus(username);
+        if (request != null && request.isApproved()) {
+            try {
+                localUserStore.updateSemester(username, request.requestedSemester());
+            } catch (IOException ignored) {
+                // Local cache remains best-effort.
+            }
+        }
+        return request;
     }
 
     @Override

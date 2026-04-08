@@ -6,73 +6,59 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="loginPane"
-           xmlns="http://javafx.com/javafx/17.0.6"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.example.onlinemcqexam.LoginViewController"
-           visible="true"
-           managed="true">
+<StackPane fx:id="loginPane" managed="true" visible="true" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinemcqexam.LoginViewController">
     <styleClass>
-        <String fx:value="root"/>
-        <String fx:value="login-root"/>
+        <String fx:value="root" />
+        <String fx:value="login-root" />
     </styleClass>
 
     <VBox alignment="CENTER" spacing="18" styleClass="login-layout">
         <VBox alignment="CENTER" spacing="6">
             <Label text="Exam Portal">
                 <styleClass>
-                    <String fx:value="title"/>
-                    <String fx:value="login-app-title"/>
+                    <String fx:value="title" />
+                    <String fx:value="login-app-title" />
                 </styleClass>
             </Label>
         </VBox>
 
-        <VBox spacing="14" alignment="CENTER" styleClass="card" prefWidth="380" maxWidth="380">
+        <VBox alignment="CENTER" maxWidth="380" prefWidth="380" spacing="14" styleClass="card">
             <Label text="Online MCQ Exam">
                 <styleClass>
-                    <String fx:value="section-title"/>
-                    <String fx:value="login-subtitle"/>
+                    <String fx:value="section-title" />
+                    <String fx:value="login-subtitle" />
                 </styleClass>
             </Label>
-            <Label text="Log in to continue" styleClass="muted"/>
+            <Label styleClass="muted" text="Log in to continue" />
 
-            <VBox spacing="6" maxWidth="Infinity" alignment="CENTER_LEFT">
-                <Label text="USERNAME" styleClass="field-label"/>
-                <TextField fx:id="loginUsername"
-                           onAction="#handleLogin"
-                           maxWidth="Infinity"
-                           promptText="Enter your student ID"/>
+            <VBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="6">
+                <Label styleClass="field-label" text="USERNAME" />
+                <TextField fx:id="loginUsername" maxWidth="Infinity" onAction="#handleLogin" promptText="Enter your student ID" />
             </VBox>
 
-            <VBox spacing="6" maxWidth="Infinity" alignment="CENTER_LEFT">
-                <Label text="PASSWORD" styleClass="field-label"/>
-                <PasswordField fx:id="loginPassword" onAction="#handleLogin" maxWidth="Infinity"/>
+            <VBox alignment="CENTER_LEFT" maxWidth="Infinity" spacing="6">
+                <Label styleClass="field-label" text="PASSWORD" />
+                <PasswordField fx:id="loginPassword" maxWidth="Infinity" onAction="#handleLogin" />
             </VBox>
 
-            <Button text="Log In"
-                    styleClass="primary-button"
-                    maxWidth="Infinity"
-                    onAction="#handleLogin"/>
+            <Button maxWidth="Infinity" onAction="#handleLogin" styleClass="primary-button" text="Log In" />
 
             <HBox alignment="CENTER" spacing="6">
-                <Label text="New here?" styleClass="muted"/>
-                <Label text="Create Account" styleClass="link-highlight" onMouseClicked="#handleShowRegister"/>
+                <Label styleClass="muted" text="New here?" />
+                <Label onMouseClicked="#handleShowRegister" styleClass="link-highlight" text="Create Account" />
             </HBox>
 
-            <Button text="Teacher Login"
-                    maxWidth="Infinity"
-                    onAction="#handleShowTeacherLogin">
+            <Button maxWidth="Infinity" onAction="#handleShowTeacherLogin" text="Teacher Login">
                 <styleClass>
-                    <String fx:value="secondary-button"/>
-                    <String fx:value="teacher-login-button"/>
+                    <String fx:value="secondary-button" />
+                    <String fx:value="teacher-login-button" />
                 </styleClass>
             </Button>
-
-            <Label fx:id="loginMessageLabel" styleClass="error-text"/>
+            <Label fx:id="loginMessageLabel" styleClass="error-text" />
         </VBox>
     </VBox>
 </StackPane>
+

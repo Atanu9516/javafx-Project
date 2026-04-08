@@ -11,7 +11,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane fx:id="discussionPane"
-            xmlns="http://javafx.com/javafx/17.0.6"
+            xmlns="http://javafx.com/javafx/21.0.2"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.onlinemcqexam.DiscussionViewController"
             styleClass="discussion-root"
@@ -132,3 +132,4 @@
     </center>
 
 </BorderPane>
+

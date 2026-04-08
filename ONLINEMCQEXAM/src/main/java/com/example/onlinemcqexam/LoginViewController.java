@@ -27,7 +27,6 @@ public class LoginViewController {
     public void setOnTeacherLoginRequested(Runnable onTeacherLoginRequested) {
         this.onTeacherLoginRequested = onTeacherLoginRequested;
     }
-
     @FXML
     private void handleLogin() {
         if (onLoginRequested != null) {

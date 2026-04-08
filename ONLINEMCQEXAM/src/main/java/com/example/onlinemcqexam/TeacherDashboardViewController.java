@@ -2,16 +2,12 @@ package com.example.onlinemcqexam;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 
 public class TeacherDashboardViewController {
     @FXML BorderPane teacherDashboardPane;
     @FXML Label teacherWelcomeLabel;
     @FXML Label teacherActiveExamsBadgeLabel;
-    @FXML Label teacherActiveStudentsLabel;
-    @FXML ProgressBar teacherActiveStudentsProgressBar;
-    @FXML Label teacherAverageGradeLabel;
 
     private Runnable onShowQuestionBank;
     private Runnable onShowCreateExam;

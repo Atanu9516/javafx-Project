@@ -22,16 +22,4 @@ public final class NetworkDiscussionService implements DiscussionService {
             throw new IOException(response.message());
         }
     }
-
-    @Override
-    public boolean commentMessage(int index) throws IOException {
-        ExamClient.ServerResponse response = client.commentDiscussion(index);
-        if (response.ok()) {
-            return true;
-        }
-        if ("NOT_FOUND".equalsIgnoreCase(response.message())) {
-            return false;
-        }
-        throw new IOException(response.message());
-    }
 }

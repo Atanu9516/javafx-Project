@@ -1,11 +1,11 @@
 username,term,course,examId,totalQuestions,correctAnswers,percentage,timeTaken,date,type
-atanu,1-1,CSE101,NA,20,0,0.0,10,2026-03-24T14:11,practice
-atanu,1-1,CSE101,NA,20,17,85.0,135,2026-03-26T17:59,practice
-atanu,1-1,CSE101,NA,20,1,5.0,12,2026-03-26T20:25,practice
+atanu,1-2,CSE101,NA,20,0,0.0,10,2026-03-24T14:11,practice
+atanu,1-2,CSE101,NA,20,17,85.0,135,2026-03-26T17:59,practice
+atanu,1-2,CSE101,NA,20,1,5.0,12,2026-03-26T20:25,practice
 Tabassum,2-2,CSE209,NA,20,2,10.0,69,2026-03-26T20:50,practice
 Tabassum,2-1,CSE207,NA,30,1,3.3,11,2026-03-26T20:54,practice
-atanu,1-1,CSE103,NA,20,11,55.0,135,2026-03-26T21:05,practice
-atanu,1-1,CSE101,EX003,20,7,35.0,58,2026-03-26T21:20,scheduled
+atanu,1-2,CSE103,NA,20,11,55.0,135,2026-03-26T21:05,practice
+atanu,1-2,CSE101,EX003,20,7,35.0,58,2026-03-26T21:20,scheduled
 rahim,1-1,CSE101,NA,20,19,95.0,122,2026-03-25T11:10,practice
 rahim,1-1,CSE101,EX003,20,18,90.0,116,2026-03-27T09:21,scheduled
 rahim,1-1,CSE103,NA,20,16,80.0,128,2026-03-27T18:05,practice
@@ -16,3 +16,4 @@ nabila,1-1,CSE101,NA,20,9,45.0,166,2026-03-25T15:05,practice
 nabila,1-1,CSE101,EX003,20,8,40.0,159,2026-03-27T09:28,scheduled
 nabila,1-1,CSE103,NA,20,10,50.0,162,2026-03-27T18:30,practice
 Tabassum,3-1,CSE309,EX005,20,1,5.0,38,2026-03-26T21:28,scheduled
+atanu,1-2,CSE105,NA,20,1,5.0,19,2026-04-08T08:43,practice

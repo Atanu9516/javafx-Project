@@ -10,7 +10,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.BufferedReader;
@@ -69,8 +68,6 @@ public class ResultsAnalyticsController {
     @FXML
     private Label insightThreeLabel;
     @FXML
-    private TextField studentSearchField;
-    @FXML
     private TableView<StudentPerformanceRow> studentTable;
     @FXML
     private TableColumn<StudentPerformanceRow, String> studentNameColumn;
@@ -93,7 +90,7 @@ public class ResultsAnalyticsController {
     private final List<ResultsAnalyticsModels.StudentRecord> students = new ArrayList<>();
     private final List<ResultsAnalyticsModels.ResultRecord> results = new ArrayList<>();
 
-    private final Map<String, ResultsAnalyticsModels.TermRecord> termByDisplay = new LinkedHashMap<>();
+    private final Map<String, String> yearByDisplay = new LinkedHashMap<>();
     private final Map<String, ResultsAnalyticsModels.CourseRecord> courseByDisplay = new LinkedHashMap<>();
 
     private final ObservableList<StudentPerformanceRow> filteredRows = FXCollections.observableArrayList();
@@ -139,7 +136,6 @@ public class ResultsAnalyticsController {
             }
         });
         applyFiltersButton.setOnAction(event -> applyFilters());
-        studentSearchField.textProperty().addListener((obs, oldValue, newValue) -> applyFilters());
         termFilterChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             repopulateCourseFilter(newValue);
             applyFilters();
@@ -416,33 +412,30 @@ public class ResultsAnalyticsController {
     }
 
     private void populateFilters() {
-        termByDisplay.clear();
+        yearByDisplay.clear();
         courseByDisplay.clear();
 
         termFilterChoice.getItems().clear();
-        termFilterChoice.getItems().add("All Terms");
-        terms.stream()
-                .sorted(Comparator.comparing(ResultsAnalyticsModels.TermRecord::display, String::compareToIgnoreCase))
-                .forEach(term -> {
-                    String display = term.display();
-                    termByDisplay.put(display, term);
-                    termFilterChoice.getItems().add(display);
-                });
+        termFilterChoice.getItems().add("All Years");
+        buildAvailableYears().forEach(year -> {
+            yearByDisplay.put(year, year);
+            termFilterChoice.getItems().add(year);
+        });
         termFilterChoice.getSelectionModel().selectFirst();
 
         repopulateCourseFilter(termFilterChoice.getValue());
         updateSessionIndicator();
     }
 
-    private void repopulateCourseFilter(String termDisplay) {
+    private void repopulateCourseFilter(String yearDisplay) {
         courseByDisplay.clear();
-        ResultsAnalyticsModels.TermRecord selectedTerm = termByDisplay.get(termDisplay);
+        String selectedYear = yearByDisplay.get(yearDisplay);
 
         courseFilterChoice.getItems().clear();
         courseFilterChoice.getItems().add("All Courses");
 
         courses.stream()
-                .filter(course -> selectedTerm == null || selectedTerm.termId().isBlank() || selectedTerm.termId().equalsIgnoreCase(course.termId()))
+                .filter(course -> selectedYear == null || selectedYear.isBlank() || selectedYearMatchesTerm(selectedYear, course.termId()))
                 .sorted(Comparator.comparing(ResultsAnalyticsModels.CourseRecord::display, String::compareToIgnoreCase))
                 .forEach(course -> {
                     String display = course.display();
@@ -456,16 +449,12 @@ public class ResultsAnalyticsController {
 
     private void applyFilters() {
         List<StudentPerformanceRow> allRows = buildJoinedRows();
-        String search = normalized(studentSearchField.getText());
-        ResultsAnalyticsModels.TermRecord selectedTerm = termByDisplay.get(termFilterChoice.getValue());
+        String selectedYear = yearByDisplay.get(termFilterChoice.getValue());
         ResultsAnalyticsModels.CourseRecord selectedCourse = courseByDisplay.get(courseFilterChoice.getValue());
 
         List<StudentPerformanceRow> rows = allRows.stream()
-                .filter(row -> selectedTerm == null || selectedTerm.termId().isBlank() || selectedTerm.termId().equalsIgnoreCase(row.getTermId()))
+                .filter(row -> selectedYear == null || selectedYear.isBlank() || selectedYear.equalsIgnoreCase(row.getYearId()))
                 .filter(row -> selectedCourse == null || selectedCourse.courseCode().isBlank() || selectedCourse.courseCode().replace(" ", "").equalsIgnoreCase(row.getCourseId()))
-                .filter(row -> search.isBlank()
-                        || normalized(row.getStudentName()).contains(search)
-                        || normalized(row.getStudentId()).contains(search))
                 .collect(Collectors.toList());
 
         filteredRows.setAll(rows);
@@ -499,6 +488,7 @@ public class ResultsAnalyticsController {
             double score = result.score();
             String termId = !result.termId().isBlank() ? result.termId() : (exam == null ? "" : exam.termId());
             String courseId = !result.courseId().isBlank() ? result.courseId() : (exam == null ? "" : canonicalCourse(exam.courseId()));
+            String yearId = deriveYearId(termId, examDate);
             if (courseId.isBlank() && exam != null) {
                 courseId = canonicalCourse(exam.courseId());
             }
@@ -512,6 +502,7 @@ public class ResultsAnalyticsController {
                     status,
                     round1(score),
                     termId,
+                    yearId,
                     canonicalCourse(courseId)
             ));
         }
@@ -577,7 +568,7 @@ public class ResultsAnalyticsController {
         if (rows.isEmpty()) {
             insightOneLabel.setText("No result records match the current filters.");
             insightTwoLabel.setText("Load exam attempts into results.csv to generate insights.");
-            insightThreeLabel.setText("Insights update live whenever term, course, or search changes.");
+            insightThreeLabel.setText("Insights update live whenever year or course changes.");
             return;
         }
 
@@ -629,14 +620,19 @@ public class ResultsAnalyticsController {
     }
 
     private void updateSessionIndicator() {
-        ResultsAnalyticsModels.TermRecord term = termByDisplay.get(termFilterChoice.getValue());
-        String year = term == null ? "" : term.academicYear();
-        String termName = term == null ? "All Sessions" : term.display();
+        String year = yearByDisplay.get(termFilterChoice.getValue());
+        String course = courseFilterChoice.getValue();
         if (year == null || year.isBlank()) {
-            sessionIndicatorLabel.setText(termName);
-        } else {
-            sessionIndicatorLabel.setText(termName + " | " + year);
+            sessionIndicatorLabel.setText(course == null || course.isBlank() || "All Courses".equals(course)
+                    ? "All Years | All Courses"
+                    : "All Years | " + course);
+            return;
         }
+        if (course == null || course.isBlank() || "All Courses".equals(course)) {
+            sessionIndicatorLabel.setText(year + " | All Courses");
+            return;
+        }
+        sessionIndicatorLabel.setText(year + " | " + course);
     }
 
     private String formatPct(double value) {
@@ -769,6 +765,51 @@ public class ResultsAnalyticsController {
         return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
     }
 
+    private List<String> buildAvailableYears() {
+        Set<String> years = new LinkedHashSet<>();
+        for (ResultsAnalyticsModels.TermRecord term : terms) {
+            String year = deriveYearId(term.termId(), term.academicYear());
+            if (!year.isBlank()) {
+                years.add(year);
+            }
+        }
+        for (ResultsAnalyticsModels.CourseRecord course : courses) {
+            String year = deriveYearId(course.termId(), "");
+            if (!year.isBlank()) {
+                years.add(year);
+            }
+        }
+        for (ResultsAnalyticsModels.ResultRecord result : results) {
+            String year = deriveYearId(result.termId(), result.examDate());
+            if (!year.isBlank()) {
+                years.add(year);
+            }
+        }
+        return years.stream().sorted(String::compareToIgnoreCase).collect(Collectors.toList());
+    }
+
+    private boolean selectedYearMatchesTerm(String selectedYear, String termId) {
+        return selectedYear.equalsIgnoreCase(deriveYearId(termId, ""));
+    }
+
+    private String deriveYearId(String termId, String fallbackDateOrYear) {
+        String cleanedTerm = termId == null ? "" : termId.trim();
+        if (!cleanedTerm.isBlank()) {
+            int dash = cleanedTerm.indexOf('-');
+            String prefix = dash > 0 ? cleanedTerm.substring(0, dash) : cleanedTerm;
+            if (prefix.chars().allMatch(Character::isDigit)) {
+                return "Year " + prefix;
+            }
+            return cleanedTerm;
+        }
+
+        String fallback = fallbackDateOrYear == null ? "" : fallbackDateOrYear.trim();
+        if (fallback.matches("\\d{4}.*")) {
+            return fallback.substring(0, 4);
+        }
+        return "";
+    }
+
     private record Metrics(double average, double highest, double lowest, double passRate) {
     }
 
@@ -823,11 +864,12 @@ public class ResultsAnalyticsController {
         private final String performanceStatus;
         private final Double score;
         private final String termId;
+        private final String yearId;
         private final String courseId;
 
         public StudentPerformanceRow(String studentName, String studentId, String examDate, String gradeBand,
                                      Double percentage, String performanceStatus, Double score,
-                                     String termId, String courseId) {
+                                     String termId, String yearId, String courseId) {
             this.studentName = studentName;
             this.studentId = studentId;
             this.examDate = examDate;
@@ -836,6 +878,7 @@ public class ResultsAnalyticsController {
             this.performanceStatus = performanceStatus;
             this.score = score;
             this.termId = termId;
+            this.yearId = yearId;
             this.courseId = courseId;
         }
 
@@ -869,6 +912,10 @@ public class ResultsAnalyticsController {
 
         public String getTermId() {
             return termId;
+        }
+
+        public String getYearId() {
+            return yearId;
         }
 
         public String getCourseId() {
