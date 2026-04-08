@@ -29,12 +29,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ScheduleExamController {
-    private static final String TERMS_FILE = "src/main/resources/com/example/onlinemcqexam/terms.csv";
-    private static final String COURSES_FILE = "src/main/resources/com/example/onlinemcqexam/courses.csv";
-    private static final String EXAMS_FILE = "src/main/resources/exams.csv";
-    private static final String QUESTIONS_FILE = "src/main/resources/com/example/onlinemcqexam/questions.csv";
-    private static final String SCHEDULE_FILE = "schedule.csv";
-    private static final String SCHEDULE_DRAFT_FILE = "schedule_drafts.csv";
+    private static final String TERMS_FILE = AppPaths.packageResourceFile("terms.csv").toString();
+    private static final String COURSES_FILE = AppPaths.packageResourceFile("courses.csv").toString();
+    private static final String EXAMS_FILE = AppPaths.resourceFile("exams.csv").toString();
+    private static final String QUESTIONS_FILE = AppPaths.packageResourceFile("questions.csv").toString();
+    private static final String SCHEDULE_FILE = AppPaths.appFile("schedule.csv").toString();
+    private static final String SCHEDULE_DRAFT_FILE = AppPaths.appFile("schedule_drafts.csv").toString();
 
     @FXML
     private Button backButton;

@@ -14,8 +14,10 @@
 <StackPane fx:id="teacherLoginPane"
            xmlns="http://javafx.com/javafx/17.0.6"
            xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.example.onlinemcqexam.ExamController"
-           styleClass="teacher-login-root">
+           fx:controller="com.example.onlinemcqexam.TeacherLoginViewController"
+           styleClass="teacher-login-root"
+           visible="false"
+           managed="false">
 
     <children>
         <Region styleClass="teacher-login-ambient"/>
@@ -45,29 +47,24 @@
                     <Label text="EMPLOYEE ID / USERNAME" styleClass="teacher-login-field-label"/>
                     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
                         <FontIcon iconLiteral="fas-id-badge" styleClass="teacher-login-field-icon"/>
-                        <TextField fx:id="teacherUsername" promptText="Enter your credentials" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                        <TextField fx:id="teacherUsername" onAction="#handleLogin" promptText="Enter your credentials" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
                     </HBox>
                 </VBox>
 
                 <VBox spacing="8" alignment="CENTER_LEFT">
-                    <HBox alignment="CENTER_LEFT">
-                        <Label text="PASSWORD" styleClass="teacher-login-field-label"/>
-                        <Region HBox.hgrow="ALWAYS"/>
-                        <Label text="Forgot Access?" styleClass="teacher-login-forgot"/>
-                    </HBox>
-
+                    <Label text="PASSWORD" styleClass="teacher-login-field-label"/>
                     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="teacher-login-field-shell">
                         <FontIcon iconLiteral="fas-key" styleClass="teacher-login-field-icon"/>
-                        <PasswordField fx:id="teacherPassword" promptText="Enter secure password" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
+                        <PasswordField fx:id="teacherPassword" onAction="#handleLogin" promptText="Enter secure password" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="teacher-login-input"/>
                         <FontIcon iconLiteral="fas-eye" styleClass="teacher-login-field-icon"/>
                     </HBox>
                 </VBox>
 
-                <Button text="Sign In to Dashboard  ->" styleClass="teacher-login-signin" maxWidth="Infinity" onAction="#loginTeacher"/>
+                <Button text="Sign In to Dashboard  ->" styleClass="teacher-login-signin" maxWidth="Infinity" onAction="#handleLogin"/>
 
                 <VBox spacing="8" styleClass="teacher-login-redirect-wrap">
                     <Label text="REDIRECT" styleClass="teacher-login-redirect-label"/>
-                    <Button text="&lt;-  Back to Student Login" styleClass="teacher-login-back" maxWidth="Infinity" onAction="#showLogin"/>
+                    <Button text="&lt;-  Back to Student Login" styleClass="teacher-login-back" maxWidth="Infinity" onAction="#handleBackToStudentLogin"/>
                 </VBox>
 
                 <Label fx:id="teacherLoginMessageLabel" styleClass="teacher-login-status" wrapText="true"/>

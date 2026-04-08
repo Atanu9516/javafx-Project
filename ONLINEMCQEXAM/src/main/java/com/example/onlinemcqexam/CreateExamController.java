@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 
 public class CreateExamController {
     private static final int DEFAULT_SECONDS_PER_QUESTION = 120;
-    private static final String EXAMS_FILE = "src/main/resources/exams.csv";
+    private static final String EXAMS_FILE = AppPaths.resourceFile("exams.csv").toString();
 
     @FXML
     private ChoiceBox<String> termChoice;
@@ -475,12 +475,12 @@ public class CreateExamController {
 
     private Path resolveQuestionCsvPath() {
         List<Path> candidates = List.of(
-                Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
                 Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "questions.csv"),
-                Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
+                Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
                 Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "questions.csv"),
-                Paths.get("src", "main", "resources", "question.csv"),
-                Paths.get("src", "main", "resources", "questions.csv")
+                Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
+                Paths.get("src", "main", "resources", "questions.csv"),
+                Paths.get("src", "main", "resources", "question.csv")
         );
         for (Path candidate : candidates) {
             if (Files.exists(candidate)) {

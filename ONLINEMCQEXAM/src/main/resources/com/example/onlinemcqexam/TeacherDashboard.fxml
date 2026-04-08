@@ -12,11 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:controller="com.example.onlinemcqexam.ExamController"
+<BorderPane fx:controller="com.example.onlinemcqexam.TeacherDashboardViewController"
             fx:id="teacherDashboardPane"
             styleClass="root xdash-root"
             xmlns="http://javafx.com/javafx/17.0.6"
-            xmlns:fx="http://javafx.com/fxml/1">
+            xmlns:fx="http://javafx.com/fxml/1"
+            visible="false"
+            managed="false">
 
     <center>
         <HBox styleClass="xdash-shell" spacing="28">
@@ -47,7 +49,7 @@
                         <Label text="QB Management" styleClass="xdash-card-title"/>
                         <Label text="Organize, filter, and maintain your full question library by term and course." wrapText="true" styleClass="xdash-card-text"/>
                         <Region VBox.vgrow="ALWAYS"/>
-                        <Button text="Access Library →" styleClass="xdash-link" onAction="#showQuestionBank"/>
+                        <Button text="Access Library →" styleClass="xdash-link" onAction="#handleShowQuestionBank"/>
                     </VBox>
 
                     <VBox GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="xdash-card" spacing="11" prefHeight="224">
@@ -57,7 +59,7 @@
                         <Label text="Create Exam" styleClass="xdash-card-title"/>
                         <Label text="Generate new assessments quickly with weighted topics and controlled duration." wrapText="true" styleClass="xdash-card-text"/>
                         <Region VBox.vgrow="ALWAYS"/>
-                        <Button text="Start New" styleClass="xdash-primary" onAction="#showCreateExam"/>
+                        <Button text="Start New" styleClass="xdash-primary" onAction="#handleShowCreateExam"/>
                     </VBox>
 
                     <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="xdash-card" spacing="11" prefHeight="224">
@@ -67,7 +69,7 @@
                         <Label text="Schedule Exam" styleClass="xdash-card-title"/>
                         <Label text="Configure calendar slots, availability windows, and release timing from one panel." wrapText="true" styleClass="xdash-card-text"/>
                         <Region VBox.vgrow="ALWAYS"/>
-                        <Button text="Open Calendar →" styleClass="xdash-link" onAction="#showScheduleExam"/>
+                        <Button text="Open Calendar →" styleClass="xdash-link" onAction="#handleShowScheduleExam"/>
                     </VBox>
 
                     <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="xdash-card" spacing="11" prefHeight="224">
@@ -77,7 +79,7 @@
                         <Label text="Results &amp; Analysis" styleClass="xdash-card-title"/>
                         <Label text="Inspect outcome trends, performance gaps, and section-level scoring insights." wrapText="true" styleClass="xdash-card-text"/>
                         <Region VBox.vgrow="ALWAYS"/>
-                        <Button text="View Insights →" styleClass="xdash-link" onAction="#showTeacherAnalytics"/>
+                        <Button text="View Insights →" styleClass="xdash-link" onAction="#handleShowTeacherAnalytics"/>
                     </VBox>
 
                     <HBox GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" styleClass="xdash-card xdash-wide" alignment="CENTER_LEFT" spacing="14" prefHeight="124">
@@ -89,7 +91,7 @@
                             <Label text="Browse all generated exams and monitor active sessions in one place." styleClass="xdash-card-text"/>
                         </VBox>
                         <Label fx:id="teacherActiveExamsBadgeLabel" text="No data available" styleClass="xdash-badge"/>
-                        <Button text="Open List →" styleClass="xdash-link" onAction="#showViewExams"/>
+                        <Button text="Open List →" styleClass="xdash-link" onAction="#handleShowViewExams"/>
                     </HBox>
                 </GridPane>
             </VBox>
@@ -123,7 +125,7 @@
                         <Label text="Logout" styleClass="xdash-side-title"/>
                     </HBox>
                     <Label text="End your current session securely." styleClass="xdash-note" wrapText="true"/>
-                    <Button text="LOGOUT" styleClass="xdash-logout-btn" onAction="#logout" maxWidth="Infinity"/>
+                    <Button text="LOGOUT" styleClass="xdash-logout-btn" onAction="#handleLogout" maxWidth="Infinity"/>
                 </VBox>
 
                 <VBox styleClass="xdash-side-card xdash-help" spacing="10" VBox.vgrow="ALWAYS">

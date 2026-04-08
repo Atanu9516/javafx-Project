@@ -13,8 +13,10 @@
 <BorderPane fx:id="examPane"
             xmlns="http://javafx.com/javafx/17.0.6"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.onlinemcqexam.ExamController"
-            styleClass="live-exam-root">
+            fx:controller="com.example.onlinemcqexam.LiveExamViewController"
+            styleClass="live-exam-root"
+            visible="false"
+            managed="false">
 
     <top>
         <HBox spacing="12" alignment="CENTER_LEFT" styleClass="live-exam-topbar">
@@ -55,8 +57,8 @@
             <ProgressBar fx:id="progressBar" progress="0" styleClass="live-exam-progress"/>
 
             <HBox alignment="CENTER_LEFT" spacing="10" styleClass="live-exam-footer-bar">
-                <Button fx:id="prevButton" text="&lt; Previous" styleClass="live-exam-nav-button" onAction="#previousQuestion"/>
-                <Button fx:id="nextButton" text="Next &gt;" styleClass="live-exam-nav-button" onAction="#nextQuestion"/>
+                <Button fx:id="prevButton" text="&lt; Previous" styleClass="live-exam-nav-button" onAction="#handlePreviousQuestion"/>
+                <Button fx:id="nextButton" text="Next &gt;" styleClass="live-exam-nav-button" onAction="#handleNextQuestion"/>
 
                 <VBox spacing="2">
                     <Label fx:id="examAutosaveLabel" text="Auto-saving response..." styleClass="live-exam-footer-muted"/>
@@ -65,7 +67,7 @@
 
                 <Region HBox.hgrow="ALWAYS"/>
 
-                <Button fx:id="submitButton" text="Submit Exam" styleClass="live-exam-submit-button" onAction="#submitExam"/>
+                <Button fx:id="submitButton" text="Submit Exam" styleClass="live-exam-submit-button" onAction="#handleSubmitExam"/>
             </HBox>
 
         </VBox>

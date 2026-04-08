@@ -15,35 +15,37 @@
 <BorderPane fx:id="messagingPane"
             xmlns="http://javafx.com/javafx/17.0.6"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.onlinemcqexam.ExamController"
-            styleClass="messaging-root">
+            fx:controller="com.example.onlinemcqexam.MessagingViewController"
+            styleClass="messaging-root"
+            visible="false"
+            managed="false">
 
     <left>
         <VBox spacing="15" styleClass="messaging-sidebar" prefWidth="220">
             <children>
                 <Label text="Exam Portal" styleClass="messaging-logo"/>
 
-                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="messaging-nav-button">
+                <Button text="Dashboard" onAction="#handleShowStudentDashboard" styleClass="messaging-nav-button">
                     <graphic>
                         <FontIcon iconLiteral="fas-th-large" styleClass="messaging-nav-icon"/>
                     </graphic>
                 </Button>
-                <Button text="Available Exams" onAction="#showAvailableExams" styleClass="messaging-nav-button">
+                <Button text="Available Exams" onAction="#handleShowAvailableExams" styleClass="messaging-nav-button">
                     <graphic>
                         <FontIcon iconLiteral="far-question-circle" styleClass="messaging-nav-icon"/>
                     </graphic>
                 </Button>
-                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="messaging-nav-button">
+                <Button text="Scheduled Exams" onAction="#handleShowScheduledExams" styleClass="messaging-nav-button">
                     <graphic>
                         <FontIcon iconLiteral="far-calendar-alt" styleClass="messaging-nav-icon"/>
                     </graphic>
                 </Button>
-                <Button text="My Exams" onAction="#showExamHistory" styleClass="messaging-nav-button">
+                <Button text="My Exams" onAction="#handleShowExamHistory" styleClass="messaging-nav-button">
                     <graphic>
                         <FontIcon iconLiteral="far-edit" styleClass="messaging-nav-icon"/>
                     </graphic>
                 </Button>
-                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="messaging-nav-button">
+                <Button text="Leaderboard" onAction="#handleShowLeaderboard" styleClass="messaging-nav-button">
                     <graphic>
                         <FontIcon iconLiteral="fas-signal" styleClass="messaging-nav-icon"/>
                     </graphic>
@@ -76,10 +78,12 @@
                                 <Label fx:id="messagingRequestBadgeLabel" text="No data available" styleClass="messaging-badge"/>
                             </HBox>
 
+                            <Label fx:id="messagingFeedbackLabel" text="" visible="false" managed="false" wrapText="true" styleClass="messaging-feedback-label"/>
+
                             <HBox spacing="8" alignment="CENTER_LEFT" styleClass="messaging-search-shell">
                                 <FontIcon iconLiteral="fas-search" styleClass="messaging-search-icon"/>
-                                <TextField fx:id="friendRequestField" promptText="Find students..." HBox.hgrow="ALWAYS" styleClass="messaging-search-field"/>
-                                <Button text="Add" onAction="#sendFriendRequest" styleClass="messaging-add-button"/>
+                                <TextField fx:id="friendRequestField" onAction="#handleSendFriendRequest" promptText="Find students..." HBox.hgrow="ALWAYS" styleClass="messaging-search-field"/>
+                                <Button text="Add" onAction="#handleSendFriendRequest" styleClass="messaging-add-button"/>
                             </HBox>
 
                             <ListView fx:id="pendingRequestsList" prefHeight="210" styleClass="messaging-request-list"/>
@@ -105,38 +109,13 @@
                     </VBox>
 
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Button styleClass="messaging-header-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-phone-alt" styleClass="messaging-header-icon"/>
-                        </graphic>
-                    </Button>
-                    <Button styleClass="messaging-header-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-video" styleClass="messaging-header-icon"/>
-                        </graphic>
-                    </Button>
-                    <Button styleClass="messaging-header-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-ellipsis-h" styleClass="messaging-header-icon"/>
-                        </graphic>
-                    </Button>
                 </HBox>
 
                 <ListView fx:id="chatHistoryList" VBox.vgrow="ALWAYS" styleClass="messaging-chat-list"/>
 
                 <HBox alignment="CENTER_LEFT" spacing="8" styleClass="messaging-composer-bar">
-                    <Button styleClass="messaging-composer-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="fas-plus" styleClass="messaging-composer-icon"/>
-                        </graphic>
-                    </Button>
-                    <TextField fx:id="chatMessageField" promptText="Write a message..." HBox.hgrow="ALWAYS" styleClass="messaging-chat-input"/>
-                    <Button styleClass="messaging-composer-icon-button">
-                        <graphic>
-                            <FontIcon iconLiteral="far-smile" styleClass="messaging-composer-icon"/>
-                        </graphic>
-                    </Button>
-                    <Button onAction="#sendChatMessage" styleClass="messaging-send-button">
+                    <TextField fx:id="chatMessageField" onAction="#handleSendChatMessage" promptText="Write a message..." HBox.hgrow="ALWAYS" styleClass="messaging-chat-input"/>
+                    <Button onAction="#handleSendChatMessage" styleClass="messaging-send-button">
                         <graphic>
                             <FontIcon iconLiteral="fas-paper-plane" styleClass="messaging-send-icon"/>
                         </graphic>

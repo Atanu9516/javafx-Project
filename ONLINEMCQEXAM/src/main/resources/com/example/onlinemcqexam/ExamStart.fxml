@@ -13,25 +13,25 @@
 <BorderPane fx:id="startPane"
             xmlns="http://javafx.com/javafx/17.0.6"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.onlinemcqexam.ExamController"
-            styleClass="exam-start-root">
+            fx:controller="com.example.onlinemcqexam.ExamStartViewController"
+            styleClass="exam-start-root"
+            visible="false"
+            managed="false">
 
     <left>
         <VBox spacing="12" styleClass="exam-start-sidebar" prefWidth="220">
             <children>
                 <Label text="Exam Portal" styleClass="exam-start-logo"/>
 
-                <Button text="Dashboard" onAction="#showStudentDashboard" styleClass="exam-start-nav-button"/>
+                <Button text="Dashboard" onAction="#handleShowStudentDashboard" styleClass="exam-start-nav-button"/>
                 <Button text="Available Exams" styleClass="exam-start-nav-button exam-start-nav-active"/>
-                <Button text="Scheduled Exams" onAction="#showScheduledExams" styleClass="exam-start-nav-button"/>
-                <Button text="My Exams" onAction="#showExamHistory" styleClass="exam-start-nav-button"/>
-                <Button text="Leaderboard" onAction="#showLeaderboard" styleClass="exam-start-nav-button"/>
-                <Button text="Discussion" onAction="#showDiscussion" styleClass="exam-start-nav-button"/>
-                <Button text="Messaging" onAction="#showMessaging" styleClass="exam-start-nav-button"/>
+                <Button text="Scheduled Exams" onAction="#handleShowScheduledExams" styleClass="exam-start-nav-button"/>
+                <Button text="My Exams" onAction="#handleShowExamHistory" styleClass="exam-start-nav-button"/>
+                <Button text="Leaderboard" onAction="#handleShowLeaderboard" styleClass="exam-start-nav-button"/>
+                <Button text="Discussion" onAction="#handleShowDiscussion" styleClass="exam-start-nav-button"/>
+                <Button text="Messaging" onAction="#handleShowMessaging" styleClass="exam-start-nav-button"/>
 
                 <VBox VBox.vgrow="ALWAYS"/>
-
-                <Button text="Start Quick Quiz" styleClass="exam-start-quick-button"/>
                 <Button text="Logout" onAction="#handleLogout" styleClass="exam-start-nav-button"/>
             </children>
         </VBox>
@@ -81,7 +81,7 @@
                     </VBox>
 
                     <Button text="Start Exam"
-                            onAction="#startExam"
+                            onAction="#handleStartExam"
                             styleClass="exam-start-primary-button"
                             maxWidth="Infinity"/>
 

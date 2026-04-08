@@ -273,12 +273,12 @@ public class QuestionBankController {
 
     private Path resolveQuestionCsvPath() {
         List<Path> candidates = List.of(
-                Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
                 Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "questions.csv"),
-                Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
+                Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
                 Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "questions.csv"),
-                Paths.get("src", "main", "resources", "question.csv"),
-                Paths.get("src", "main", "resources", "questions.csv")
+                Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
+                Paths.get("src", "main", "resources", "questions.csv"),
+                Paths.get("src", "main", "resources", "question.csv")
         );
         for (Path candidate : candidates) {
             if (Files.exists(candidate)) {

@@ -108,7 +108,11 @@ public class ExamController {
     @FXML
     private Node loginPane;
     @FXML
+    private LoginViewController loginPaneController;
+    @FXML
     private Node registerPane;
+    @FXML
+    private RegisterViewController registerPaneController;
     @FXML
     private Node studentDashboardPane;
     @FXML
@@ -118,7 +122,11 @@ public class ExamController {
     @FXML
     private Node discussionPane;
     @FXML
+    private DiscussionViewController discussionPaneController;
+    @FXML
     private Node messagingPane;
+    @FXML
+    private MessagingViewController messagingPaneController;
     @FXML
     private Node progressPane;
     @FXML
@@ -128,17 +136,25 @@ public class ExamController {
     @FXML
     private Node startPane;
     @FXML
+    private ExamStartViewController startPaneController;
+    @FXML
     private Node examPane;
+    @FXML
+    private LiveExamViewController examPaneController;
     @FXML
     private Node resultPane;
     @FXML
     private Node teacherLoginPane;
+    @FXML
+    private TeacherLoginViewController teacherLoginPaneController;
     @FXML
     private Node teacherAuthFailPane;
     @FXML
     private AuthFailedController authFailedViewController;
     @FXML
     private Node teacherDashboardPane;
+    @FXML
+    private TeacherDashboardViewController teacherDashboardPaneController;
     @FXML
     private Node questionBankPane;
     @FXML
@@ -479,6 +495,7 @@ public class ExamController {
 
     @FXML
     private void initialize() {
+        bindExtractedViews();
         optionA.setToggleGroup(optionsGroup);
         optionB.setToggleGroup(optionsGroup);
         optionC.setToggleGroup(optionsGroup);
@@ -511,6 +528,120 @@ public class ExamController {
         configureExamSelection();
         configureRegisterResponsiveMode();
         showPane(loginPane);
+    }
+
+    private void bindExtractedViews() {
+        if (loginPaneController != null) {
+            loginUsername = loginPaneController.loginUsername;
+            loginPassword = loginPaneController.loginPassword;
+            loginMessageLabel = loginPaneController.loginMessageLabel;
+            loginPaneController.setOnLoginRequested(this::loginUser);
+            loginPaneController.setOnRegisterRequested(this::showRegister);
+            loginPaneController.setOnTeacherLoginRequested(this::showTeacherLogin);
+        }
+
+        if (registerPaneController != null) {
+            registerUsername = registerPaneController.registerUsername;
+            registerSemesterChoice = registerPaneController.registerSemesterChoice;
+            registerPassword = registerPaneController.registerPassword;
+            registerConfirm = registerPaneController.registerConfirm;
+            registerMessageLabel = registerPaneController.registerMessageLabel;
+            registerErrorBanner = registerPaneController.registerErrorBanner;
+            registerPaneController.setOnRegisterRequested(this::registerUser);
+            registerPaneController.setOnShowLoginRequested(this::showLogin);
+        }
+
+        if (discussionPaneController != null) {
+            discussionAskArea = discussionPaneController.discussionAskArea;
+            discussionList = discussionPaneController.discussionList;
+            discussionPaneController.setOnShowStudentDashboard(this::showStudentDashboard);
+            discussionPaneController.setOnShowAvailableExams(this::showAvailableExams);
+            discussionPaneController.setOnShowScheduledExams(this::showScheduledExams);
+            discussionPaneController.setOnShowExamHistory(this::showExamHistory);
+            discussionPaneController.setOnShowLeaderboard(this::showLeaderboard);
+            discussionPaneController.setOnShowMessaging(this::showMessaging);
+            discussionPaneController.setOnLogoutRequested(this::handleLogout);
+            discussionPaneController.setOnPostRequested(this::postDiscussion);
+            discussionPaneController.setOnSubmitKeyPressed(this::handleDiscussionSubmitKey);
+        }
+
+        if (messagingPaneController != null) {
+            friendRequestField = messagingPaneController.friendRequestField;
+            messagingFeedbackLabel = messagingPaneController.messagingFeedbackLabel;
+            messagingRequestBadgeLabel = messagingPaneController.messagingRequestBadgeLabel;
+            pendingRequestsList = messagingPaneController.pendingRequestsList;
+            friendsList = messagingPaneController.friendsList;
+            chatHistoryList = messagingPaneController.chatHistoryList;
+            chatMessageField = messagingPaneController.chatMessageField;
+            messagingActiveFriendLabel = messagingPaneController.messagingActiveFriendLabel;
+            messagingActiveStatusLabel = messagingPaneController.messagingActiveStatusLabel;
+            messagingPaneController.setOnShowStudentDashboard(this::showStudentDashboard);
+            messagingPaneController.setOnShowAvailableExams(this::showAvailableExams);
+            messagingPaneController.setOnShowScheduledExams(this::showScheduledExams);
+            messagingPaneController.setOnShowExamHistory(this::showExamHistory);
+            messagingPaneController.setOnShowLeaderboard(this::showLeaderboard);
+            messagingPaneController.setOnLogoutRequested(this::handleLogout);
+            messagingPaneController.setOnSendFriendRequest(this::sendFriendRequest);
+            messagingPaneController.setOnSendChatMessage(this::sendChatMessage);
+        }
+
+        if (startPaneController != null) {
+            subtitleLabel = startPaneController.subtitleLabel;
+            passLabel = startPaneController.passLabel;
+            examQuestionCountChoice = startPaneController.examQuestionCountChoice;
+            startPaneController.setOnShowStudentDashboard(this::showStudentDashboard);
+            startPaneController.setOnShowScheduledExams(this::showScheduledExams);
+            startPaneController.setOnShowExamHistory(this::showExamHistory);
+            startPaneController.setOnShowLeaderboard(this::showLeaderboard);
+            startPaneController.setOnShowDiscussion(this::showDiscussion);
+            startPaneController.setOnShowMessaging(this::showMessaging);
+            startPaneController.setOnLogoutRequested(this::handleLogout);
+            startPaneController.setOnStartExamRequested(this::startExam);
+        }
+
+        if (examPaneController != null) {
+            progressLabel = examPaneController.progressLabel;
+            timerLabel = examPaneController.timerLabel;
+            questionLabel = examPaneController.questionLabel;
+            examTopicLabel = examPaneController.examTopicLabel;
+            optionA = examPaneController.optionA;
+            optionB = examPaneController.optionB;
+            optionC = examPaneController.optionC;
+            optionD = examPaneController.optionD;
+            levelLabel = examPaneController.levelLabel;
+            progressBar = examPaneController.progressBar;
+            prevButton = examPaneController.prevButton;
+            nextButton = examPaneController.nextButton;
+            examAutosaveLabel = examPaneController.examAutosaveLabel;
+            examCompletionLabel = examPaneController.examCompletionLabel;
+            submitButton = examPaneController.submitButton;
+            examPaneController.setOnPreviousRequested(this::previousQuestion);
+            examPaneController.setOnNextRequested(this::nextQuestion);
+            examPaneController.setOnSubmitRequested(this::submitExam);
+        }
+
+        if (teacherLoginPaneController != null) {
+            teacherRoleChoice = teacherLoginPaneController.teacherRoleChoice;
+            teacherUsername = teacherLoginPaneController.teacherUsername;
+            teacherPassword = teacherLoginPaneController.teacherPassword;
+            teacherLoginMessageLabel = teacherLoginPaneController.teacherLoginMessageLabel;
+            teacherLoginPaneController.setOnLoginRequested(this::loginTeacher);
+            teacherLoginPaneController.setOnBackToStudentLoginRequested(this::showLogin);
+        }
+
+        if (teacherDashboardPaneController != null) {
+            teacherWelcomeLabel = teacherDashboardPaneController.teacherWelcomeLabel;
+            teacherActiveExamsBadgeLabel = teacherDashboardPaneController.teacherActiveExamsBadgeLabel;
+            teacherActiveStudentsLabel = teacherDashboardPaneController.teacherActiveStudentsLabel;
+            teacherActiveStudentsProgressBar = teacherDashboardPaneController.teacherActiveStudentsProgressBar;
+            teacherAverageGradeLabel = teacherDashboardPaneController.teacherAverageGradeLabel;
+            teacherDashboardPaneController.setOnShowQuestionBank(this::showQuestionBank);
+            teacherDashboardPaneController.setOnShowCreateExam(this::showCreateExam);
+            teacherDashboardPaneController.setOnShowScheduleExam(this::showScheduleExam);
+            teacherDashboardPaneController.setOnShowTeacherAnalytics(this::showTeacherAnalytics);
+            teacherDashboardPaneController.setOnShowViewExams(this::showViewExams);
+            teacherDashboardPaneController.setOnLogoutRequested(this::logout);
+        }
     }
 
     private void populateRegistrationSemesters() {
@@ -1473,7 +1604,7 @@ public class ExamController {
             dashboardRankLabel.setText("No data available");
         }
         if (teacherRoleChoice != null) {
-            teacherRoleChoice.getItems().setAll("Teacher", "Admin");
+            teacherRoleChoice.getItems().setAll("Teacher");
             teacherRoleChoice.getSelectionModel().selectFirst();
         }
         refreshViewExamsList();
