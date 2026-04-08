@@ -4,18 +4,22 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -31,6 +35,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class QuestionBankController {
+    private static final String QUESTIONS_FILE = AppPaths.packageResourceFile("questions.csv").toString();
+
     @FXML
     private TextField searchField;
     @FXML
@@ -110,7 +116,7 @@ public class QuestionBankController {
             applyFilters();
         });
         courseChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> applyFilters());
-        addNewQuestionButton.setOnAction(event -> showAddQuestionInfo());
+        addNewQuestionButton.setOnAction(event -> addNewQuestion());
     }
 
     public void setOnBackRequested(Runnable onBackRequested) {
@@ -258,8 +264,156 @@ public class QuestionBankController {
         return complete / (double) rows.size();
     }
 
-    private void showAddQuestionInfo() {
-        showAlert("Add New Question", "Use your existing Teacher Add Question flow to persist a new question to CSV.");
+    private void addNewQuestion() {
+        String term = safeChoiceValue(termChoice, "All Terms");
+        String courseCode = safeChoiceValue(courseChoice, "All Courses");
+        if ("All Terms".equals(term) || "All Courses".equals(courseCode)) {
+            showAlert("Add New Question", "Select a specific term and course first.");
+            return;
+        }
+
+        QuestionDraft draft = showQuestionDialog();
+        if (draft == null) {
+            return;
+        }
+
+        String courseName = resolveCourseName(term, courseCode);
+        String questionId = nextQuestionId(term, courseCode, draft.difficulty());
+        String line = String.join(",",
+                csv(term),
+                csv(courseCode),
+                csv(courseName),
+                csv(questionId),
+                csv(draft.questionText()),
+                csv(draft.optionA()),
+                csv(draft.optionB()),
+                csv(draft.optionC()),
+                csv(draft.optionD()),
+                String.valueOf(draft.correctIndex())
+        );
+
+        try {
+            appendQuestionToCsv(line);
+            loadCsvData();
+            populateFilterChoices();
+            if (termChoice.getItems().contains(term)) {
+                termChoice.getSelectionModel().select(term);
+            }
+            refreshCourseChoicesForTerm(term);
+            if (courseChoice.getItems().contains(courseCode)) {
+                courseChoice.getSelectionModel().select(courseCode);
+            }
+            applyFilters();
+            showAlert("Add New Question", "Question added successfully.");
+        } catch (IOException ex) {
+            showAlert("Add New Question", "Unable to save question.");
+        }
+    }
+
+    private QuestionDraft showQuestionDialog() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Add Question");
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        TextField questionField = new TextField();
+        TextField optionAField = new TextField();
+        TextField optionBField = new TextField();
+        TextField optionCField = new TextField();
+        TextField optionDField = new TextField();
+        ChoiceBox<String> difficultyChoice = new ChoiceBox<>();
+        difficultyChoice.getItems().setAll("Easy", "Medium", "Hard");
+        difficultyChoice.getSelectionModel().selectFirst();
+        ChoiceBox<String> correctChoice = new ChoiceBox<>();
+        correctChoice.getItems().setAll("A", "B", "C", "D");
+        correctChoice.getSelectionModel().selectFirst();
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.addRow(0, new Label("Question"), questionField);
+        grid.addRow(1, new Label("Option A"), optionAField);
+        grid.addRow(2, new Label("Option B"), optionBField);
+        grid.addRow(3, new Label("Option C"), optionCField);
+        grid.addRow(4, new Label("Option D"), optionDField);
+        grid.addRow(5, new Label("Difficulty"), difficultyChoice);
+        grid.addRow(6, new Label("Correct"), correctChoice);
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.showAndWait();
+        if (dialog.getResult() != ButtonType.OK) {
+            return null;
+        }
+
+        String questionText = questionField.getText() == null ? "" : questionField.getText().trim();
+        String optionA = optionAField.getText() == null ? "" : optionAField.getText().trim();
+        String optionB = optionBField.getText() == null ? "" : optionBField.getText().trim();
+        String optionC = optionCField.getText() == null ? "" : optionCField.getText().trim();
+        String optionD = optionDField.getText() == null ? "" : optionDField.getText().trim();
+        if (questionText.isEmpty() || optionA.isEmpty() || optionB.isEmpty() || optionC.isEmpty() || optionD.isEmpty()) {
+            showAlert("Add New Question", "Fill in the question and all four options.");
+            return null;
+        }
+
+        int correctIndex = switch (Objects.toString(correctChoice.getValue(), "A")) {
+            case "B" -> 2;
+            case "C" -> 3;
+            case "D" -> 4;
+            default -> 1;
+        };
+        String difficulty = Objects.toString(difficultyChoice.getValue(), "Easy");
+        return new QuestionDraft(questionText, optionA, optionB, optionC, optionD, correctIndex, difficulty);
+    }
+
+    private void appendQuestionToCsv(String line) throws IOException {
+        Path path = Paths.get(QUESTIONS_FILE);
+        Path parent = path.getParent();
+        if (parent != null && Files.notExists(parent)) {
+            Files.createDirectories(parent);
+        }
+
+        boolean needsHeader = Files.notExists(path) || Files.size(path) == 0;
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
+                java.nio.file.StandardOpenOption.CREATE,
+                java.nio.file.StandardOpenOption.APPEND)) {
+            if (needsHeader) {
+                writer.write("# term,courseCode,courseName,questionId,question,optionA,optionB,optionC,optionD,correctIndex(1-4)");
+                writer.newLine();
+            }
+            writer.write(line);
+            writer.newLine();
+        }
+    }
+
+    private String resolveCourseName(String term, String courseCode) {
+        for (QuestionRow row : allQuestions) {
+            if (term.equals(row.term) && courseCode.equals(row.course) && row.courseName != null && !row.courseName.isBlank()) {
+                return row.courseName;
+            }
+        }
+        return courseCode;
+    }
+
+    private String nextQuestionId(String term, String courseCode, String difficulty) {
+        String normalizedCourse = courseCode.replace(" ", "").trim().toUpperCase(Locale.ROOT);
+        String difficultyMarker = switch (normalized(difficulty)) {
+            case "medium" -> "M";
+            case "hard" -> "H";
+            default -> "E";
+        };
+        int max = 0;
+        for (QuestionRow row : allQuestions) {
+            String id = row.questionId == null ? "" : row.questionId.trim().toUpperCase(Locale.ROOT);
+            String basePrefix = (term + "-" + normalizedCourse).toUpperCase(Locale.ROOT);
+            if (!id.startsWith(basePrefix) || !id.contains("-Q")) {
+                continue;
+            }
+            String suffix = id.substring(id.lastIndexOf("-Q") + 2);
+            try {
+                max = Math.max(max, Integer.parseInt(suffix));
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return term + "-" + normalizedCourse + "-" + difficultyMarker + "-Q" + (max + 1);
     }
 
     private String safeChoiceValue(ChoiceBox<String> choiceBox, String fallback) {
@@ -297,6 +451,7 @@ public class QuestionBankController {
         String id = header.get(values, "question_id", "questionid", "id", "examid");
         String term = header.get(values, "term");
         String course = header.get(values, "course", "coursecode");
+        String courseName = header.get(values, "course_name", "coursename", "coursetitle");
         String difficulty = header.get(values, "difficulty");
         String text = header.get(values, "question_text", "question");
         String optionA = header.get(values, "option_a", "optiona");
@@ -311,7 +466,7 @@ public class QuestionBankController {
         if (difficulty.isBlank()) {
             difficulty = inferDifficulty(id, term);
         }
-        return new QuestionRow(id, term, course, normalizeDifficulty(difficulty), text, optionA, optionB, optionC, optionD, answer);
+        return new QuestionRow(id, term, course, courseName, normalizeDifficulty(difficulty), text, optionA, optionB, optionC, optionD, answer);
     }
 
     private QuestionRow parseWithoutHeader(List<String> values) {
@@ -330,7 +485,8 @@ public class QuestionBankController {
         String answer = valueAt(values, 9);
         String difficulty = inferDifficulty(id, term);
 
-        return new QuestionRow(id, term, course, normalizeDifficulty(difficulty), text, optionA, optionB, optionC, optionD, answer);
+        String courseName = values.size() > 2 ? valueAt(values, 2) : course;
+        return new QuestionRow(id, term, course, courseName, normalizeDifficulty(difficulty), text, optionA, optionB, optionC, optionD, answer);
     }
 
     private String inferDifficulty(String questionId, String term) {
@@ -445,6 +601,7 @@ public class QuestionBankController {
             String questionId,
             String term,
             String course,
+            String courseName,
             String difficulty,
             String questionText,
             String optionA,
@@ -464,5 +621,24 @@ public class QuestionBankController {
                     && !optionD.isBlank()
                     && !answer.isBlank();
         }
+    }
+
+    private record QuestionDraft(
+            String questionText,
+            String optionA,
+            String optionB,
+            String optionC,
+            String optionD,
+            int correctIndex,
+            String difficulty
+    ) {
+    }
+
+    private String csv(String value) {
+        String safe = value == null ? "" : value;
+        if (safe.contains(",") || safe.contains("\"") || safe.contains("\n") || safe.contains("\r")) {
+            return "\"" + safe.replace("\"", "\"\"") + "\"";
+        }
+        return safe;
     }
 }
