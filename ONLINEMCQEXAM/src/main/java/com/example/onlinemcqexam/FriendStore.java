@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class FriendStore {
     private static final int MAX_CHAT_MESSAGES = 500;
@@ -20,9 +23,9 @@ public final class FriendStore {
     private static final Path PENDING_PATH = AppPaths.dataFile("friend_requests.csv");
     private static final Path CHATS_PATH = AppPaths.dataFile("chat_history.csv");
 
-    private final Map<String, Set<String>> friends = new HashMap<>();
-    private final Map<String, Set<String>> pending = new HashMap<>();
-    private final Map<String, List<ChatMessage>> chats = new HashMap<>();
+    private final Map<String, Set<String>> friends = new ConcurrentHashMap<>();
+    private final Map<String, Set<String>> pending = new ConcurrentHashMap<>();
+    private final Map<String, List<ChatMessage>> chats = new ConcurrentHashMap<>();
 
     public FriendStore() {
         loadState();
@@ -37,19 +40,26 @@ public final class FriendStore {
         if (areFriends(sender, target)) {
             return FriendRequestStatus.ALREADY;
         }
-        Set<String> incoming = pending.getOrDefault(sender, new HashSet<>());
-        if (incoming.contains(target)) {
-            incoming.remove(target);
-            if (incoming.isEmpty()) {
-                pending.remove(sender);
+        
+        // Use thread-safe operations
+        Set<String> incomingSet = pending.computeIfAbsent(sender, k -> Collections.synchronizedSet(new HashSet<>()));
+        synchronized (incomingSet) {
+            if (incomingSet.contains(target)) {
+                incomingSet.remove(target);
+                if (incomingSet.isEmpty()) {
+                    pending.remove(sender);
+                }
+                addFriendship(sender, target);
+                persistQuietly();
+                return FriendRequestStatus.ACCEPTED;
             }
-            addFriendship(sender, target);
-            persistQuietly();
-            return FriendRequestStatus.ACCEPTED;
         }
-        Set<String> targetPending = pending.computeIfAbsent(target, key -> new HashSet<>());
-        if (!targetPending.add(sender)) {
-            return FriendRequestStatus.ALREADY;
+        
+        Set<String> targetPendingSet = pending.computeIfAbsent(target, k -> Collections.synchronizedSet(new HashSet<>()));
+        synchronized (targetPendingSet) {
+            if (!targetPendingSet.add(sender)) {
+                return FriendRequestStatus.ALREADY;
+            }
         }
         persistQuietly();
         return FriendRequestStatus.SENT;
@@ -57,19 +67,26 @@ public final class FriendStore {
 
     public synchronized List<String> listPending(String user) {
         String normalized = normalize(user);
-        Set<String> requests = pending.getOrDefault(normalized, Set.of());
-        return new ArrayList<>(new TreeSet<>(requests));
+        Set<String> requests = pending.getOrDefault(normalized, Collections.emptySet());
+        synchronized (requests) {
+            return new ArrayList<>(new TreeSet<>(requests));
+        }
     }
 
     public synchronized boolean acceptRequest(String user, String from) {
         String normalized = normalize(user);
         String sender = normalize(from);
         Set<String> requests = pending.get(normalized);
-        if (requests == null || !requests.remove(sender)) {
+        if (requests == null) {
             return false;
         }
-        if (requests.isEmpty()) {
-            pending.remove(normalized);
+        synchronized (requests) {
+            if (!requests.remove(sender)) {
+                return false;
+            }
+            if (requests.isEmpty()) {
+                pending.remove(normalized);
+            }
         }
         addFriendship(normalized, sender);
         persistQuietly();
@@ -80,11 +97,16 @@ public final class FriendStore {
         String normalized = normalize(user);
         String sender = normalize(from);
         Set<String> requests = pending.get(normalized);
-        if (requests == null || !requests.remove(sender)) {
+        if (requests == null) {
             return false;
         }
-        if (requests.isEmpty()) {
-            pending.remove(normalized);
+        synchronized (requests) {
+            if (!requests.remove(sender)) {
+                return false;
+            }
+            if (requests.isEmpty()) {
+                pending.remove(normalized);
+            }
         }
         persistQuietly();
         return true;
@@ -92,8 +114,10 @@ public final class FriendStore {
 
     public synchronized List<String> listFriends(String user) {
         String normalized = normalize(user);
-        Set<String> list = friends.getOrDefault(normalized, Set.of());
-        return new ArrayList<>(new TreeSet<>(list));
+        Set<String> list = friends.getOrDefault(normalized, Collections.emptySet());
+        synchronized (list) {
+            return new ArrayList<>(new TreeSet<>(list));
+        }
     }
 
     public synchronized boolean sendChat(String from, String to, String text) {
@@ -106,10 +130,12 @@ public final class FriendStore {
             return false;
         }
         String key = chatKey(sender, target);
-        List<ChatMessage> history = chats.computeIfAbsent(key, k -> new ArrayList<>());
-        history.add(new ChatMessage(sender, text.trim(), System.currentTimeMillis()));
-        if (history.size() > MAX_CHAT_MESSAGES) {
-            history.remove(0);
+        List<ChatMessage> history = chats.computeIfAbsent(key, k -> Collections.synchronizedList(new ArrayList<>()));
+        synchronized (history) {
+            history.add(new ChatMessage(sender, text.trim(), System.currentTimeMillis()));
+            if (history.size() > MAX_CHAT_MESSAGES) {
+                history.remove(0);
+            }
         }
         persistQuietly();
         return true;
@@ -122,10 +148,12 @@ public final class FriendStore {
             return List.of();
         }
         String key = chatKey(normalized, other);
-        List<ChatMessage> history = chats.getOrDefault(key, List.of());
-        List<String> display = new ArrayList<>(history.size());
-        for (ChatMessage message : history) {
-            display.add(message.from + CHAT_METADATA_SEPARATOR + message.sentAtEpochMillis + CHAT_METADATA_SEPARATOR + message.text);
+        List<ChatMessage> history = chats.getOrDefault(key, Collections.synchronizedList(new ArrayList<>()));
+        List<String> display = new ArrayList<>();
+        synchronized (history) {
+            for (ChatMessage message : history) {
+                display.add(message.from + CHAT_METADATA_SEPARATOR + message.sentAtEpochMillis + CHAT_METADATA_SEPARATOR + message.text);
+            }
         }
         return display;
     }
@@ -188,7 +216,10 @@ public final class FriendStore {
             if (target.isBlank() || from.isBlank() || target.equals(from)) {
                 continue;
             }
-            pending.computeIfAbsent(target, key -> new HashSet<>()).add(from);
+            Set<String> targetSet = pending.computeIfAbsent(target, k -> Collections.synchronizedSet(new HashSet<>()));
+            synchronized (targetSet) {
+                targetSet.add(from);
+            }
         }
     }
 
@@ -214,8 +245,10 @@ public final class FriendStore {
             if (a.isBlank() || b.isBlank() || sender.isBlank() || text.isBlank()) {
                 continue;
             }
-            chats.computeIfAbsent(chatKey(a, b), key -> new ArrayList<>())
-                    .add(new ChatMessage(sender, text, timestamp));
+            List<ChatMessage> historyList = chats.computeIfAbsent(chatKey(a, b), k -> Collections.synchronizedList(new ArrayList<>()));
+            synchronized (historyList) {
+                historyList.add(new ChatMessage(sender, text, timestamp));
+            }
         }
     }
 
@@ -313,14 +346,25 @@ public final class FriendStore {
         return safe;
     }
 
-    private boolean areFriends(String a, String b) {
-        Set<String> set = friends.get(a);
-        return set != null && set.contains(b);
+    private void addFriendship(String a, String b) {
+        Set<String> aFriends = friends.computeIfAbsent(a, k -> Collections.synchronizedSet(new HashSet<>()));
+        Set<String> bFriends = friends.computeIfAbsent(b, k -> Collections.synchronizedSet(new HashSet<>()));
+        synchronized (aFriends) {
+            aFriends.add(b);
+        }
+        synchronized (bFriends) {
+            bFriends.add(a);
+        }
     }
 
-    private void addFriendship(String a, String b) {
-        friends.computeIfAbsent(a, key -> new HashSet<>()).add(b);
-        friends.computeIfAbsent(b, key -> new HashSet<>()).add(a);
+    private boolean areFriends(String a, String b) {
+        Set<String> set = friends.get(a);
+        if (set == null) {
+            return false;
+        }
+        synchronized (set) {
+            return set.contains(b);
+        }
     }
 
     private String chatKey(String a, String b) {

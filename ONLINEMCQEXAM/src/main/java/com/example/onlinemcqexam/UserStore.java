@@ -24,60 +24,67 @@ public class UserStore {
     );
 
     private final Path usersPath;
+    private final Object lock = new Object();  // Lock for file operations
 
     public UserStore() {
         this.usersPath = AppPaths.dataFile(USERS_FILE);
     }
 
     public Map<String, StoredUser> loadUsers() throws IOException {
-        ensureFileExists();
-        List<String> lines = Files.readAllLines(usersPath, StandardCharsets.UTF_8);
-        Map<String, StoredUser> users = new LinkedHashMap<>();
-        for (String line : lines) {
-            if (line.isBlank() || line.startsWith("#")) {
-                continue;
+        synchronized (lock) {
+            ensureFileExists();
+            List<String> lines = Files.readAllLines(usersPath, StandardCharsets.UTF_8);
+            Map<String, StoredUser> users = new LinkedHashMap<>();
+            for (String line : lines) {
+                if (line.isBlank() || line.startsWith("#")) {
+                    continue;
+                }
+                List<String> parts = parseCsvLine(line);
+                if (parts.size() < 2) {
+                    continue;
+                }
+                String username = normalizeUsername(parts.get(0));
+                String passwordHash = parts.get(1).trim();
+                String semester = parts.size() >= 3 ? normalizeSemester(parts.get(2)) : inferSemester(username);
+                if (username.isBlank() || passwordHash.isBlank()) {
+                    continue;
+                }
+                users.put(username, new StoredUser(username, passwordHash, semester));
             }
-            List<String> parts = parseCsvLine(line);
-            if (parts.size() < 2) {
-                continue;
-            }
-            String username = normalizeUsername(parts.get(0));
-            String passwordHash = parts.get(1).trim();
-            String semester = parts.size() >= 3 ? normalizeSemester(parts.get(2)) : inferSemester(username);
-            if (username.isBlank() || passwordHash.isBlank()) {
-                continue;
-            }
-            users.put(username, new StoredUser(username, passwordHash, semester));
+            return users;
         }
-        return users;
     }
 
     public boolean register(String username, String password, String semester) throws IOException {
-        String normalized = normalizeUsername(username);
-        String normalizedSemester = normalizeSemester(semester);
-        if (normalized.isBlank() || normalizedSemester.isBlank()) {
-            return false;
+        synchronized (lock) {
+            String normalized = normalizeUsername(username);
+            String normalizedSemester = normalizeSemester(semester);
+            if (normalized.isBlank() || normalizedSemester.isBlank()) {
+                return false;
+            }
+            ensureFileExists();
+            Map<String, StoredUser> users = loadUsers();
+            if (users.containsKey(normalized)) {
+                return false;
+            }
+            String hashed = hashPassword(password);
+            String record = csv(normalized) + DELIMITER + csv(hashed) + DELIMITER + csv(normalizedSemester) + System.lineSeparator();
+            Files.writeString(usersPath, record, StandardCharsets.UTF_8, java.nio.file.StandardOpenOption.APPEND);
+            return true;
         }
-        ensureFileExists();
-        Map<String, StoredUser> users = loadUsers();
-        if (users.containsKey(normalized)) {
-            return false;
-        }
-        String hashed = hashPassword(password);
-        String record = csv(normalized) + DELIMITER + csv(hashed) + DELIMITER + csv(normalizedSemester) + System.lineSeparator();
-        Files.writeString(usersPath, record, StandardCharsets.UTF_8, java.nio.file.StandardOpenOption.APPEND);
-        return true;
     }
 
     public StoredUser authenticate(String username, String password) throws IOException {
-        String normalized = normalizeUsername(username);
-        Map<String, StoredUser> users = loadUsers();
-        StoredUser user = users.get(normalized);
-        if (user == null) {
-            return null;
+        synchronized (lock) {
+            String normalized = normalizeUsername(username);
+            Map<String, StoredUser> users = loadUsers();
+            StoredUser user = users.get(normalized);
+            if (user == null) {
+                return null;
+            }
+            String inputHash = hashPassword(password);
+            return user.passwordHash().equals(inputHash) ? user : null;
         }
-        String inputHash = hashPassword(password);
-        return user.passwordHash().equals(inputHash) ? user : null;
     }
 
     public String normalizeUsername(String username) {
@@ -85,43 +92,49 @@ public class UserStore {
     }
 
     public StoredUser findUser(String username) throws IOException {
-        String normalized = normalizeUsername(username);
-        if (normalized.isBlank()) {
-            return null;
+        synchronized (lock) {
+            String normalized = normalizeUsername(username);
+            if (normalized.isBlank()) {
+                return null;
+            }
+            return loadUsers().get(normalized);
         }
-        return loadUsers().get(normalized);
     }
 
     public void upsertUser(String username, String password, String semester) throws IOException {
-        String normalized = normalizeUsername(username);
-        String normalizedSemester = normalizeSemester(semester);
-        if (normalized.isBlank() || normalizedSemester.isBlank()) {
-            return;
+        synchronized (lock) {
+            String normalized = normalizeUsername(username);
+            String normalizedSemester = normalizeSemester(semester);
+            if (normalized.isBlank() || normalizedSemester.isBlank()) {
+                return;
+            }
+            ensureFileExists();
+            Map<String, StoredUser> users = loadUsers();
+            StoredUser existing = users.get(normalized);
+            String passwordHash = existing != null && existing.passwordHash() != null && !existing.passwordHash().isBlank()
+                    ? existing.passwordHash()
+                    : hashPassword(password == null ? "" : password);
+            users.put(normalized, new StoredUser(normalized, passwordHash, normalizedSemester));
+            writeUsers(users);
         }
-        ensureFileExists();
-        Map<String, StoredUser> users = loadUsers();
-        StoredUser existing = users.get(normalized);
-        String passwordHash = existing != null && existing.passwordHash() != null && !existing.passwordHash().isBlank()
-                ? existing.passwordHash()
-                : hashPassword(password == null ? "" : password);
-        users.put(normalized, new StoredUser(normalized, passwordHash, normalizedSemester));
-        writeUsers(users);
     }
 
     public void updateSemester(String username, String semester) throws IOException {
-        String normalized = normalizeUsername(username);
-        String normalizedSemester = normalizeSemester(semester);
-        if (normalized.isBlank() || normalizedSemester.isBlank()) {
-            return;
+        synchronized (lock) {
+            String normalized = normalizeUsername(username);
+            String normalizedSemester = normalizeSemester(semester);
+            if (normalized.isBlank() || normalizedSemester.isBlank()) {
+                return;
+            }
+            ensureFileExists();
+            Map<String, StoredUser> users = loadUsers();
+            StoredUser existing = users.get(normalized);
+            if (existing == null) {
+                return;
+            }
+            users.put(normalized, new StoredUser(normalized, existing.passwordHash(), normalizedSemester));
+            writeUsers(users);
         }
-        ensureFileExists();
-        Map<String, StoredUser> users = loadUsers();
-        StoredUser existing = users.get(normalized);
-        if (existing == null) {
-            return;
-        }
-        users.put(normalized, new StoredUser(normalized, existing.passwordHash(), normalizedSemester));
-        writeUsers(users);
     }
 
     public String normalizeSemester(String semester) {
