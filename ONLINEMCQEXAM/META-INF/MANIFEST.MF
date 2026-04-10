@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.4.1
+Build-Jdk-Spec: 21
+Class-Path: lib/javafx-controls-21.0.2.jar lib/javafx-controls-21.0.2-wi
+ n.jar lib/javafx-graphics-21.0.2.jar lib/javafx-graphics-21.0.2-win.jar
+  lib/javafx-base-21.0.2.jar lib/javafx-base-21.0.2-win.jar lib/javafx-f
+ xml-21.0.2.jar lib/javafx-fxml-21.0.2-win.jar lib/ikonli-javafx-12.3.1.
+ jar lib/ikonli-core-12.3.1.jar lib/ikonli-fontawesome5-pack-12.3.1.jar
+Main-Class: com.example.onlinemcqexam.Launcher
+

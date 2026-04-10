@@ -2,10 +2,11 @@ package com.example.onlinemcqexam;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -159,23 +160,58 @@ public final class QuestionBank {
     }
 
     private static List<Question> loadFromCsv(String resourceName) throws IOException {
-        Path sourcePath = resolveCsvPath(resourceName);
-        if (sourcePath == null) {
-            throw new IOException("CSV file not found in source resources. Checked: "
-                    + Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", resourceName).toAbsolutePath()
-                    + " and "
-                    + Paths.get("src", "main", "resources", resourceName).toAbsolutePath());
-        }
+        List<String> candidates = csvNameCandidates(resourceName);
+        IOException lastReadError = null;
 
-        List<Question> questions = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(sourcePath, StandardCharsets.UTF_8)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.isBlank() || line.startsWith("#")) {
+        for (String candidate : candidates) {
+            try (InputStream in = openBundledCsvStream(candidate)) {
+                if (in == null) {
                     continue;
                 }
-                List<String> values = parseCsvLine(line);
-                try {
+                return readQuestions(new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)));
+            } catch (IOException ex) {
+                lastReadError = ex;
+                System.err.println("Failed to load bundled question CSV '" + candidate + "': " + ex.getMessage());
+            }
+        }
+
+        for (String candidate : candidates) {
+            Path writablePath = AppPaths.packageResourceFile(candidate);
+            if (!Files.exists(writablePath) || isEffectivelyEmpty(writablePath)) {
+                continue;
+            }
+            try (BufferedReader reader = Files.newBufferedReader(writablePath, StandardCharsets.UTF_8)) {
+                return readQuestions(reader);
+            } catch (IOException ex) {
+                lastReadError = ex;
+                System.err.println("Failed to load writable question CSV '" + writablePath + "': " + ex.getMessage());
+            }
+        }
+
+        StringBuilder message = new StringBuilder("Question CSV not found. Checked classpath resources: ");
+        for (int i = 0; i < candidates.size(); i++) {
+            if (i > 0) {
+                message.append(", ");
+            }
+            message.append("/com/example/onlinemcqexam/").append(candidates.get(i));
+        }
+        message.append(" and writable files under ").append(AppPaths.appRoot());
+        IOException failure = new IOException(message.toString());
+        if (lastReadError != null) {
+            failure.initCause(lastReadError);
+        }
+        throw failure;
+    }
+
+    private static List<Question> readQuestions(BufferedReader reader) throws IOException {
+        List<Question> questions = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.isBlank() || line.startsWith("#")) {
+                continue;
+            }
+            List<String> values = parseCsvLine(line);
+            try {
                     // New strict format: term,courseCode,courseName,examId,questionId,question,optionA,optionB,optionC,optionD,correctIndex
                     if (values.size() >= 11) {
                         String term = values.get(0).trim();
@@ -242,33 +278,38 @@ public final class QuestionBank {
                         continue;
                     }
                     questions.add(new Question(id, level, text, options, correctIndex));
-                } catch (RuntimeException ex) {
-                    // Skip malformed rows and continue loading valid questions.
-                    continue;
-                }
+            } catch (RuntimeException ex) {
+                // Skip malformed rows and continue loading valid questions.
+                continue;
             }
         }
         return Collections.unmodifiableList(questions);
     }
 
-    private static Path resolveCsvPath(String resourceName) {
-        Path packagePath = Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", resourceName);
-        if (Files.exists(packagePath)) {
-            return packagePath;
+    private static InputStream openBundledCsvStream(String resourceName) {
+        InputStream in = AppPaths.bundledPackageResourceStream(resourceName);
+        if (in != null) {
+            return in;
         }
-        Path modulePackagePath = Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", resourceName);
-        if (Files.exists(modulePackagePath)) {
-            return modulePackagePath;
+        return AppPaths.bundledResourceStream(resourceName);
+    }
+
+    private static List<String> csvNameCandidates(String resourceName) {
+        if ("questions.csv".equalsIgnoreCase(resourceName)) {
+            return List.of("questions.csv", "question.csv");
         }
-        Path topLevelResourcesPath = Paths.get("src", "main", "resources", resourceName);
-        if (Files.exists(topLevelResourcesPath)) {
-            return topLevelResourcesPath;
+        if ("question.csv".equalsIgnoreCase(resourceName)) {
+            return List.of("question.csv", "questions.csv");
         }
-        Path moduleTopLevelResourcesPath = Paths.get("ONLINEMCQEXAM", "src", "main", "resources", resourceName);
-        if (Files.exists(moduleTopLevelResourcesPath)) {
-            return moduleTopLevelResourcesPath;
+        return List.of(resourceName);
+    }
+
+    private static boolean isEffectivelyEmpty(Path path) {
+        try {
+            return Files.size(path) == 0L;
+        } catch (IOException ex) {
+            return true;
         }
-        return null;
     }
 
     private static Level mapLevelFromTerm(String term) {

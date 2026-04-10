@@ -1,0 +1,7 @@
+course_id,course_name,course_code,term_id
+C001,Introduction to Programming,CS101,1-1
+C002,Data Structures,CS102,1-1
+C003,Database Systems,CS201,1-2
+C004,Calculus I,MATH101,2-1
+C005,Software Engineering,SE301,2-2
+

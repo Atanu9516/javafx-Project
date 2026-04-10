@@ -474,18 +474,14 @@ public class CreateExamController {
     }
 
     private Path resolveQuestionCsvPath() {
-        List<Path> candidates = List.of(
-                Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "questions.csv"),
-                Paths.get("src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
-                Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "questions.csv"),
-                Paths.get("ONLINEMCQEXAM", "src", "main", "resources", "com", "example", "onlinemcqexam", "question.csv"),
-                Paths.get("src", "main", "resources", "questions.csv"),
-                Paths.get("src", "main", "resources", "question.csv")
-        );
-        for (Path candidate : candidates) {
-            if (Files.exists(candidate)) {
-                return candidate;
-            }
+        Path primary = AppPaths.packageResourceFile("questions.csv");
+        if (Files.exists(primary)) {
+            return primary;
+        }
+
+        Path alias = AppPaths.packageResourceFile("question.csv");
+        if (Files.exists(alias)) {
+            return alias;
         }
         return null;
     }

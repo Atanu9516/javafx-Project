@@ -1,12 +1,34 @@
-Server (PowerShell, Terminal 1):
+Project root: E:\javafx-Project\ONLINEMCQEXAM
+
+A) Set JDK 21 (required)
 $env:JAVA_HOME="C:\Program Files\Java\jdk-21.0.10"
 $env:PATH="$env:JAVA_HOME\bin;$env:PATH"
-cd E:\2405117\javafx-Project\ONLINEMCQEXAM
-.\mvnw.cmd -q -DskipTests compile
+Set-Location "E:\javafx-Project\ONLINEMCQEXAM"
+
+B) Build executable JAR + runtime dependencies
+cmd /c mvnw.cmd clean package -DskipTests
+
+C) Run app during development (JavaFX)
+cmd /c mvnw.cmd -q javafx:run
+
+D) Package with automation script (recommended)
+1) Create Windows app-image (no WiX needed):
+powershell -ExecutionPolicy Bypass -File .\package-exe.ps1 -Type app-image
+2) Create Windows EXE installer (WiX required):
+powershell -ExecutionPolicy Bypass -File .\package-exe.ps1 -Type exe
+
+E) Manual jpackage EXE command (same settings as script)
+jpackage --type exe --name OnlineMCQExam --app-version 1.0.0 --dest dist --input .jpackage-input --main-jar onlinemcqexam-1.0-SNAPSHOT.jar --main-class com.example.onlinemcqexam.Launcher --module-path "$env:JAVA_HOME\jmods;target\lib" --add-modules java.base,javafx.controls,javafx.fxml
+
+F) Optional server/client local testing
+Server (Terminal 1):
+cmd /c mvnw.cmd -q -DskipTests compile
 java -cp target\classes com.example.onlinemcqexam.ExamServer
 
-Client (PowerShell, Terminal 2+):
-$env:JAVA_HOME="C:\Program Files\Java\jdk-21.0.10"
-$env:PATH="$env:JAVA_HOME\bin;$env:PATH"
-cd E:\2405117\javafx-Project\ONLINEMCQEXAM
-.\mvnw.cmd -q javafx:run
+Client (Terminal 2+):
+cmd /c mvnw.cmd -q javafx:run
+
+Notes:
+- EXE packaging requires WiX Toolset (candle.exe and light.exe in PATH).
+- Script output folder: dist\
+- Script staging input folder: .jpackage-input\

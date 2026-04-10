@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,12 +23,51 @@ public class UserStore {
     private static final Set<String> VALID_SEMESTERS = Set.of(
             "1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"
     );
+    private static final Map<String, DemoUser> DEMO_USERS = buildDemoUsers();
 
     private final Path usersPath;
     private final Object lock = new Object();  // Lock for file operations
 
     public UserStore() {
         this.usersPath = AppPaths.dataFile(USERS_FILE);
+        ensureDemoAccounts();
+    }
+
+    private static Map<String, DemoUser> buildDemoUsers() {
+        Map<String, DemoUser> users = new LinkedHashMap<>();
+        users.put("student1", new DemoUser("student1", "password", "1-1"));
+        users.put("student2", new DemoUser("student2", "student2", "1-2"));
+        users.put("student3", new DemoUser("student3", "student3", "2-1"));
+        users.put("teacher1", new DemoUser("teacher1", "teacher1", "1-1"));
+        users.put("admin", new DemoUser("admin", "admin123", "1-1"));
+        return Collections.unmodifiableMap(users);
+    }
+
+    private void ensureDemoAccounts() {
+        synchronized (lock) {
+            try {
+                ensureFileExists();
+                Map<String, StoredUser> users = loadUsers();
+                boolean changed = false;
+                for (DemoUser demoUser : DEMO_USERS.values()) {
+                    String username = normalizeUsername(demoUser.username());
+                    String semester = normalizeSemester(demoUser.semester());
+                    String expectedHash = hashPassword(demoUser.password());
+                    StoredUser current = users.get(username);
+                    if (current == null
+                            || !expectedHash.equals(current.passwordHash())
+                            || !semester.equals(current.semester())) {
+                        users.put(username, new StoredUser(username, expectedHash, semester));
+                        changed = true;
+                    }
+                }
+                if (changed) {
+                    writeUsers(users);
+                }
+            } catch (IOException ex) {
+                throw new IllegalStateException("Unable to initialize demo users", ex);
+            }
+        }
     }
 
     public Map<String, StoredUser> loadUsers() throws IOException {
@@ -245,5 +285,8 @@ public class UserStore {
     }
 
     public record StoredUser(String username, String passwordHash, String semester) {
+    }
+
+    private record DemoUser(String username, String password, String semester) {
     }
 }

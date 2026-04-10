@@ -1,0 +1,1059 @@
+# term,courseCode,courseName,questionId,question,optionA,optionB,optionC,optionD,correctIndex(1-4)
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q1,Which of the following is a valid C data type,integer,int,number,real,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q2,Which operator is used to get the address of a variable,*,&,% ,#,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q3,Which operator performs modulus operation,/,% ,*,//,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q4,Which keyword is used to define a constant,constant,final,const,static,3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q5,Which of the following is a loop structure,if,switch,for,goto,3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q6,Which statement selects among multiple alternatives,if,switch,for,loop,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q7,Which operator represents logical AND,&,&&,|,||,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q8,Which operator is the ternary operator,?:,::,??,:,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q9,Which loop is best when the number of iterations is known,while,do while,for,goto,3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q10,Which keyword skips the current iteration of a loop,break,stop,continue,skip,3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q11,Which keyword exits a loop immediately,exit,break,stop,terminate,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q12,Which method passes a copy of variable values to functions,Call by value,Call by pointer,Call by address,Call by reference,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q13,Which structure stores multiple values of the same type,structure,union,array,pointer,3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q14,Which algorithm repeatedly swaps adjacent elements,Selection sort,Bubble sort,Merge sort,Heap sort,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q15,Which search algorithm requires a sorted array,Linear search,Binary search,Sequential search,Random search,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q16,Which header file contains string functions,stdio.h,string.h,math.h,stdlib.h,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q17,Which function copies one string to another,strcmp(),strcpy(),strlen(),strcat(),2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q18,Which function compares two strings,strcmp(),stradd(),strjoin(),strlen(),1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q19,Which function returns the length of a string,strlen(),size(),count(),length(),1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q20,A matrix is an example of which array type,1D array,2D array,pointer,structure,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q21,Recursion refers to a function that,calls another function,calls itself,stops execution,repeats loop,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q22,Which operator performs bitwise OR,||,|,&,^,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q23,Which operator performs bitwise XOR,^,&,|,~,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q24,Which operator performs bitwise NOT,!,~,^,%,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q25,Which keyword defines a structure,struct,structure,record,class,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q26,Which data type allows different types in one variable group,array,union,int,pointer,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q27,Which keyword defines enumeration,enum,enumerator,constant,type,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q28,Which symbol declares a pointer,&,*,%,#,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q29,Which function allocates memory dynamically,malloc(),alloc(),mem(),new(),1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q30,Which function releases allocated memory,delete(),remove(),free(),release(),3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q31,Which file mode reads a file,r,w,a,rw,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q32,Which function reads formatted input,printf(),scanf(),read(),input(),2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q33,Which function writes formatted output,write(),printf(),print(),display(),2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q34,Which function opens a file,fileopen(),fopen(),openfile(),readfile(),2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q35,Which operator accesses pointer value,&,*,->,.,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q36,Which header file supports memory allocation,stdio.h,stdlib.h,string.h,math.h,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q37,Which operator accesses structure member via pointer,.,->,::,*,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q38,Which operator accesses structure member via variable,->,.,*,&,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q39,What does sizeof return,value,address,memory size,type name,3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q40,Which statement creates infinite loop,while(0),while(1),while(a),while(b),2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q41,Which function concatenates strings,strcmp(),strcat(),strcpy(),strlen(),2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q42,Which storage class retains value between calls,auto,static,extern,register,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q43,Which directive includes header files,#define,#include,#pragma,#ifdef,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q44,Which directive defines macro,#include,#define,#macro,#def,2
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q45,Which feature allows variable argument functions,recursion,pointer,variable arguments,inline function,3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q46,Which library supports variable arguments,stdarg.h,var.h,stdlib.h,arg.h,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q47,Which function terminates program execution,try,catch,exit(),stop(),3
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q48,Which operator shifts bits left,<<,>>,<<<,>>>,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q49,Which operator shifts bits right,>>,<<,>>>,<<<,1
+1-1,CSE 101,Structured Programming Language,1-1-CSE101-Q50,Which argument stores command line parameters,argv,args,params,input,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q1,If a set has n elements how many subsets does it have,n^2,n!,2^n,n+1,3
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q2,The empty set is denoted by,{0},{},empty set symbol,Both B and C,4
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q3,If A subset B and B subset A then,A union B empty,A equals B,A not equal B,A proper subset B,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q4,Which operation gives elements common to both sets,Union,Difference,Intersection,Complement,3
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q5,A function where every element of codomain has a preimage is called,Injective,Surjective,Bijective,Identity,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q6,A function mapping distinct inputs to distinct outputs,Surjective,Injective,Constant,Partial,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q7,A function that is both injective and surjective,Bijective,Onto,One-many,Partial,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q8,Domain of a function,Output values,Input values,Range values,All integers,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q9,Range of a function,Possible outputs,Input values,Domain values,All real numbers,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q10,If set A has 5 elements and B has 3 elements what is A cross B size,8,15,5,3,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q11,A relation is subset of,A cross B,A union B,A intersection B,B minus A,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q12,A relation is reflexive if,(a,a) belongs to R for all a,(a,b) belongs to R,(b,a) belongs to R,None,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q13,A relation is symmetric if,(a,a) in R,(a,b) implies (b,a),(a,b) implies (a,a),None,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q14,A relation is transitive if,(a,b) and (b,c) implies (a,c),(a,b) implies (b,a),(a,a),None,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q15,A relation that is reflexive symmetric and transitive is,Partial order,Equivalence relation,Function,Mapping,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q16,A relation that is reflexive antisymmetric and transitive is,Equivalence relation,Partial order relation,Symmetric relation,Function,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q17,Logical AND is represented by,AND symbol,OR symbol,NOT symbol,IMPLIES symbol,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q18,Logical OR operator is,AND,NOT,OR,IMPLIES,3
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q19,Logical negation operator is,AND,NOT,OR,IMPLIES,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q20,If p true and q false then p AND q equals,true,false,undefined,both,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q21,Implication operator represents,AND,OR,IMPLIES,NOT,3
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q22,A statement always true is called,Contradiction,Tautology,Conditional,Negation,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q23,A statement always false is called,Tautology,Contradiction,Implication,Equivalence,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q24,Proof method assuming opposite of statement,Direct proof,Contradiction,Induction,Deduction,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q25,Mathematical induction mainly used for,Real numbers,Natural numbers,Fractions,Complex numbers,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q26,Induction proof consists of,Base step,Inductive step,Both steps,None,3
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q27,Number of permutations of n objects,n^2,n!,2^n,n,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q28,Permutation formula P(n,r),n!/r!,n!/(n-r)!,n!/(r!(n-r)!),r!,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q29,Combination formula C(n,r),n!/(r!(n-r)!),n!/(n-r)!,n!/r!,n^2,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q30,C(5,2) equals,10,20,5,25,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q31,P(5,2) equals,10,20,5,25,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q32,Probability value ranges between,-1 and 1,0 and 1,0 and 10,1 and 100,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q33,Independent events follow,P(A and B)=P(A)P(B),P(A)+P(B),P(A)=P(B),None,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q34,Total probability of sample space equals,0,1,n,2,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q35,Recurrence relation defines,sequence recursively,constant values,matrices,graphs,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q36,Fibonacci recurrence relation,Fn=Fn-1+Fn-2,Fn=n^2,Fn=n+1,Fn=2n,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q37,A graph consists of,vertices and edges,numbers and matrices,nodes only,edges only,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q38,Degree of vertex means,number of incident edges,number of vertices,number of paths,number of graphs,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q39,A path that starts and ends at same vertex is,cycle,edge,tree,chain,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q40,A tree with n vertices has,n edges,n-1 edges,n+1 edges,n^2 edges,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q41,A connected graph without cycles is,tree,forest,path,network,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q42,Edges in complete graph with n vertices,n^2,n(n-1)/2,n,n+1,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q43,Graph with multiple edges between vertices,multigraph,simple graph,tree,bipartite graph,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q44,Number divisible only by 1 and itself,composite,prime,even,rational,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q45,GCD stands for,Greatest Common Divisor,General Common Divisor,Group Common Divisor,Global Common Divisor,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q46,LCM stands for,Least Common Multiple,Largest Common Multiple,Lowest Composite Multiple,Linear Common Multiple,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q47,Algebraic structure with one binary operation,Group,Set,Ring,Field,1
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q48,Commutative group is called,Cyclic group,Abelian group,Normal group,Ring,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q49,Set with two operations satisfying ring properties,Group,Ring,Field,Vector space,2
+1-1,CSE 103,Discrete Mathematics,1-1-CSE103-Q50,Ring where every nonzero element has inverse,Group,Field,Semigroup,Monoid,2
+
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q1,What is an algorithm,A step by step procedure,A programming language,A hardware component,A compiler,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q2,Which notation represents the upper bound of algorithm complexity,O notation,Theta notation,Omega notation,Little o notation,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q3,Which notation represents the lower bound of complexity,Omega notation,Theta notation,O notation,Little o notation,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q4,Which notation represents tight bound complexity,Theta notation,O notation,Omega notation,Little omega notation,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q5,Which factor mainly affects algorithm efficiency,Input size,Screen size,Keyboard layout,Operating system color,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q6,Which technique proves algorithm correctness,Mathematical proof,Debugging only,Compilation,Execution only,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q7,Which theorem helps solve recurrence relations,Master theorem,Pythagorean theorem,Bayes theorem,Gauss theorem,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q8,Which data structure stores elements sequentially in memory,Array,Linked list,Graph,Tree,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q9,Which data structure uses nodes and pointers,Linked list,Array,Stack,Queue,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q10,Which data structure follows LIFO principle,Stack,Queue,Graph,Tree,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q11,Which data structure follows FIFO principle,Queue,Stack,Tree,Heap,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q12,Which traversal visits root left right,Preorder,Inorder,Postorder,Level order,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q13,Which traversal visits left root right,Inorder,Preorder,Postorder,BFS,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q14,Which traversal visits left right root,Postorder,Preorder,Inorder,BFS,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q15,Which traversal explores level by level,BFS,DFS,Preorder,Postorder,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q16,Which traversal explores depth first,DFS,BFS,Level order,Binary traversal,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q17,Which structure represents hierarchical relationships,Tree,Array,Stack,Queue,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q18,Which structure represents pairwise connections,Graph,Array,Stack,Tree,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q19,Which graph representation uses matrix,Adjacency matrix,Adjacency list,Edge list,Node table,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q20,Which graph representation saves memory for sparse graphs,Adjacency list,Adjacency matrix,Edge matrix,Node table,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q21,Which data structure is used in heap implementation,Binary tree,Array only,Graph,Queue,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q22,Which tree keeps smaller elements left and larger right,Binary search tree,Heap,Trie,Binary tree,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q23,Which algorithm design strategy splits problems recursively,Divide and conquer,Greedy,Dynamic programming,Backtracking,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q24,Which strategy makes locally optimal choices,Greedy method,Divide and conquer,Dynamic programming,Brute force,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q25,Which strategy stores results of subproblems,Dynamic programming,Greedy method,Divide and conquer,Randomized method,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q26,Which sorting algorithm compares adjacent elements,Bubble sort,Merge sort,Heap sort,Quick sort,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q27,Which sorting algorithm uses divide and conquer,Merge sort,Insertion sort,Selection sort,Bubble sort,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q28,Which sorting algorithm selects smallest element repeatedly,Selection sort,Merge sort,Quick sort,Heap sort,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q29,Which sorting algorithm inserts elements one by one,Insertion sort,Bubble sort,Merge sort,Heap sort,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q30,Which sorting algorithm has average O(n log n) time,Merge sort,Selection sort,Bubble sort,Insertion sort,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q31,Which sorting algorithm can run in linear time for special cases,Counting sort,Merge sort,Quick sort,Heap sort,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q32,Which sorting algorithm uses heap structure,Heap sort,Merge sort,Insertion sort,Bubble sort,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q33,Lower bound theory studies,Minimum possible complexity,Maximum memory usage,Hardware limits,Compiler design,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q34,Which operation inserts element in stack,Push,Pop,Insert,Append,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q35,Which operation removes element from stack,Pop,Push,Delete,Drop,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q36,Which operation inserts element in queue,Enqueue,Push,Insert,Add,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q37,Which operation removes element from queue,Dequeue,Delete,Pop,Remove,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q38,Which traversal method uses recursion frequently,DFS,BFS,Level traversal,Heap traversal,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q39,Which data structure is commonly used for recursion,Stack,Queue,Tree,Graph,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q40,Which algorithm finds shortest path in unweighted graph,BFS,DFS,Dijkstra,Prim,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q41,Which algorithm explores graph deeply first,DFS,BFS,Dijkstra,Kruskal,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q42,Which structure stores elements with priority,Heap,Stack,Queue,List,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q43,Which tree is complete binary tree used for heap,Heap tree,Binary search tree,AVL tree,Trie,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q44,Which algorithm design method solves overlapping subproblems,Dynamic programming,Greedy method,Divide and conquer,Randomized method,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q45,Which structure supports efficient search operations,Binary search tree,Array,Stack,Queue,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q46,Which complexity describes logarithmic growth,O(log n),O(n),O(n^2),O(1),1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q47,Which complexity describes constant time,O(1),O(n),O(log n),O(n^2),1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q48,Which complexity describes quadratic growth,O(n^2),O(n),O(log n),O(1),1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q49,Which algorithm design method breaks problem into subproblems,Divide and conquer,Greedy,Dynamic programming,Backtracking,1
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q50,Which data structure manages disjoint set operations,Disjoint set structure,Stack,Queue,Graph,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q1,Which paradigm organizes software using objects,Object oriented programming,Procedural programming,Functional programming,Assembly programming,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q2,Which concept hides internal implementation details,Encapsulation,Inheritance,Compilation,Iteration,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q3,Which OOP principle represents real world entities,Abstraction,Looping,Compilation,Debugging,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q4,Which concept allows code reuse through hierarchy,Inheritance,Encapsulation,Iteration,Branching,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q5,Which concept allows one interface many implementations,Polymorphism,Encapsulation,Compilation,Linking,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q6,Which keyword defines a class in C++,class,struct,object,define,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q7,Which entity is an instance of a class,Object,Function,Loop,Pointer,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q8,Which access specifier allows access everywhere,Public,Private,Protected,Hidden,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q9,Which access specifier restricts access within class only,Private,Public,Protected,Package,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q10,Which access specifier allows access to derived classes,Protected,Public,Private,Hidden,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q11,Which function is expanded inline by compiler,Inline function,Recursive function,Friend function,Static function,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q12,Which function can access private members of class,Friend function,Virtual function,Inline function,Static function,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q13,Which special function initializes object,Constructor,Destructor,Operator,Template,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q14,Which special function releases object resources,Destructor,Constructor,Operator,Template,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q15,Which feature allows operators to work with objects,Operator overloading,Function overloading,Inheritance,Templates,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q16,Which inheritance involves one base and one derived class,Single inheritance,Multiple inheritance,Multilevel inheritance,Hybrid inheritance,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q17,Which inheritance involves chain of classes,Multilevel inheritance,Single inheritance,Multiple inheritance,Hybrid inheritance,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q18,Which inheritance involves multiple base classes,Multiple inheritance,Single inheritance,Multilevel inheritance,Linear inheritance,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q19,Which polymorphism occurs at compile time,Function overloading,Virtual functions,Dynamic binding,Runtime polymorphism,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q20,Which polymorphism occurs at runtime,Virtual functions,Function overloading,Inline functions,Templates,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q21,Which function is declared using virtual keyword,Virtual function,Friend function,Static function,Inline function,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q22,Which class cannot be instantiated directly,Abstract class,Base class,Friend class,Inline class,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q23,Which function has no body and ends with zero,Pure virtual function,Inline function,Friend function,Recursive function,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q24,Which feature allows writing generic classes,Templates,Inheritance,Encapsulation,Overloading,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q25,Which template works with functions,Function template,Class template,Operator template,Friend template,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q26,Which template works with classes,Class template,Function template,Operator template,Macro template,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q27,Which library provides ready to use containers in C++,STL,STDIO,IOSTREAM,CMATH,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q28,Which Java class represents immutable string,String,StringBuffer,StringBuilder,CharArray,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q29,Which class represents mutable sequence of characters,StringBuffer,String,StringBuilder,Character,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q30,Which class provides faster mutable strings,StringBuilder,StringBuffer,String,CharSequence,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q31,Which Java class is superclass of all classes,Object,String,Thread,System,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q32,Which Java feature allows multiple inheritance behavior,Interface,Class,Package,Thread,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q33,Which mechanism handles runtime errors,Exception handling,Compilation,Linking,Parsing,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q34,Which keyword throws exception in Java,throw,catch,finally,try,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q35,Which keyword handles exception block,catch,throw,finalize,error,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q36,Which feature allows executing multiple threads,Multithreading,Multiprocessing,Compilation,Debugging,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q37,Which class represents thread in Java,Thread,Object,System,Class,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q38,Which collection stores unique elements,Set,List,Array,Queue,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q39,Which collection maintains ordered elements,List,Set,Map,Stack,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q40,Which Java feature processes collections with functional style,Stream API,Thread API,Socket API,File API,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q41,Which expression provides concise anonymous functions,Lambda expression,Pointer expression,Macro expression,Template expression,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q42,Which class represents network server socket,ServerSocket,Socket,Thread,Stream,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q43,Which class represents client connection socket,Socket,ServerSocket,Thread,Packet,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q44,Which Java concept allows grouping classes,Package,Interface,Thread,Stream,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q45,Which access level allows package level visibility,Package access,Private,Public,Protected,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q46,Which class can exist inside another class,Nested class,Friend class,Inline class,Macro class,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q47,Which class is defined inside method,Local inner class,Nested class,Static class,Derived class,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q48,Which feature allows anonymous implementation of interface,Anonymous class,Static class,Friend class,Inline class,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q49,Which concept improves modularity and reuse,Object oriented programming,Assembly programming,Machine programming,Procedural programming,1
+1-2,CSE 107,Object Oriented Programming Language,1-2-CSE107-Q50,Which advantage reduces code duplication,Inheritance,Compilation,Execution,Iteration,1
+
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q1,Which number system is used in digital logic circuits,Binary,Decimal,Octal,Hexadecimal,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q2,How many possible values does a binary signal have,2,4,8,16,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q3,Which algebra is used for digital circuit analysis,Boolean algebra,Linear algebra,Matrix algebra,Vector algebra,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q4,Which logic gate outputs true only when both inputs are true,AND gate,OR gate,XOR gate,NAND gate,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q5,Which logic gate outputs true when at least one input is true,OR gate,AND gate,NAND gate,NOR gate,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q6,Which gate produces the complement of input,NOT gate,AND gate,OR gate,XOR gate,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q7,Which gate outputs false only when both inputs are true,NAND gate,AND gate,OR gate,XOR gate,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q8,Which gate outputs true only when inputs differ,XOR gate,AND gate,OR gate,NOR gate,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q9,Which gate outputs true when inputs are equal,XNOR gate,XOR gate,AND gate,NAND gate,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q10,Which representation lists outputs for all input combinations,Truth table,Flowchart,Block diagram,State table,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q11,Which form expresses Boolean function as sum of minterms,Canonical SOP,POS form,Truth table form,Logic table,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q12,Which form expresses Boolean function as product of maxterms,Canonical POS,SOP form,Truth table form,Logic table,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q13,Which technique simplifies Boolean expressions,Karnaugh map,Truth table,Flowchart,Timing diagram,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q14,Which circuit performs addition of binary numbers,Adder,Decoder,Encoder,Multiplexer,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q15,Which adder adds three bits including carry,Full adder,Half adder,Encoder,Decoder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q16,Which adder adds two bits only,Half adder,Full adder,Encoder,Multiplexer,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q17,Which circuit converts binary to one active output line,Decoder,Encoder,Multiplexer,Adder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q18,Which circuit converts active input line into binary code,Encoder,Decoder,Multiplexer,Adder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q19,Which device selects one of many inputs to single output,Multiplexer,Encoder,Decoder,Demultiplexer,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q20,Which device distributes single input to multiple outputs,Demultiplexer,Multiplexer,Encoder,Decoder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q21,Which memory element stores one bit,Flip flop,Register,Counter,Adder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q22,Which flip flop has inputs J and K,JK flip flop,D flip flop,T flip flop,SR flip flop,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q23,Which flip flop eliminates race around problem,Master slave JK flip flop,SR flip flop,D flip flop,T flip flop,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q24,Which device stores multiple bits temporarily,Register,Counter,Flip flop,Decoder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q25,Which sequential circuit counts clock pulses,Counter,Register,Decoder,Encoder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q26,Which counter changes state without clock synchronization,Asynchronous counter,Synchronous counter,Modulo counter,Up counter,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q27,Which counter changes state with common clock,Synchronous counter,Asynchronous counter,Down counter,Up counter,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q28,Which diagram represents states and transitions,State diagram,Flowchart,Truth table,K map,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q29,Which machine outputs depend on current state only,Moore machine,Mealy machine,Sequential machine,Digital machine,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q30,Which machine outputs depend on state and input,Mealy machine,Moore machine,Sequential machine,Logic machine,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q31,Which design reduces number of states,State minimization,State expansion,State duplication,State mapping,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q32,Which memory type is volatile,RAM,ROM,EPROM,EEPROM,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q33,Which memory retains data without power,ROM,RAM,Cache,Register,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q34,Which memory stores fixed data permanently,ROM,RAM,Register,Cache,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q35,Which logic device can be programmed to implement logic,PLA,Decoder,Encoder,Multiplexer,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q36,Which technique reduces address pins in memory chips,Address multiplexing,Data multiplexing,Bit shifting,Clock gating,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q37,Which sequential circuit uses clock signal,Synchronous circuit,Asynchronous circuit,Combinational circuit,Static circuit,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q38,Which circuit output depends only on present inputs,Combinational circuit,Sequential circuit,Memory circuit,Register circuit,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q39,Which circuit output depends on past state,Sequential circuit,Combinational circuit,Logic gate circuit,Register circuit,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q40,Which latch has set and reset inputs,SR latch,D latch,JK latch,T latch,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q41,Which latch avoids invalid state in SR latch,D latch,JK latch,T latch,SR latch,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q42,Which flip flop toggles output when input is 1,T flip flop,D flip flop,SR flip flop,JK flip flop,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q43,Which device groups multiple flip flops for storage,Register,Counter,Decoder,Multiplexer,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q44,Which logic mode uses pulses as signals,Pulse mode logic,Level mode logic,Static mode logic,Clock mode logic,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q45,Which design assumes inputs change only when circuit stable,Fundamental mode design,Clocked design,Pulse design,Edge design,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q46,Which logic simplifies Boolean expressions,Karnaugh map,Flowchart,State table,Timing diagram,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q47,Which circuit stores temporary digital data,Register,Decoder,Encoder,Multiplexer,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q48,Which component implements programmable logic arrays,PLA device,Register,Decoder,Encoder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q49,Which digital component counts pulses sequentially,Counter,Register,Decoder,Encoder,1
+2-1,CSE 205,Digital Logic Design,2-1-CSE205-Q50,Which logic gate alone can implement any Boolean function,NAND gate,AND gate,OR gate,XOR gate,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q1,Which algorithm finds minimum spanning tree using greedy strategy,Prim algorithm,Dijkstra algorithm,Bellman Ford algorithm,Floyd Warshall algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q2,Which algorithm builds minimum spanning tree using edge sorting,Kruskal algorithm,Prim algorithm,Dijkstra algorithm,A star algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q3,Which algorithm finds shortest path from single source,Dijkstra algorithm,Prim algorithm,Kruskal algorithm,Merge sort,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q4,Which algorithm can handle negative edge weights,Bellman Ford algorithm,Dijkstra algorithm,Prim algorithm,Kruskal algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q5,Which algorithm computes shortest paths between all pairs,Floyd Warshall algorithm,Dijkstra algorithm,Kruskal algorithm,Prim algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q6,Which algorithm solves maximum flow problem,Ford Fulkerson algorithm,Dijkstra algorithm,Kruskal algorithm,Prim algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q7,Which problem finds maximum matching in bipartite graph,Bipartite matching problem,Shortest path problem,Sorting problem,Searching problem,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q8,Which tree maintains balance using height difference,AVL tree,Binary tree,Heap tree,Trie tree,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q9,Which balanced tree uses color property,Red black tree,AVL tree,Binary tree,B tree,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q10,Which tree adjusts itself after every access,Splay tree,AVL tree,Binary tree,Heap tree,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q11,Which structure maintains sorted list using probabilistic levels,Skip list,Linked list,Array list,Stack,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q12,Which heap supports fast decrease key operation,Fibonacci heap,Binary heap,Max heap,Min heap,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q13,Which heap consists of collection of binomial trees,Binomial heap,Binary heap,AVL tree,Red black tree,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q14,Which technique maps keys to array indices,Hashing,Sorting,Searching,Traversal,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q15,Which function converts key into hash value,Hash function,Sorting function,Traversal function,Search function,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q16,Which problem class can be verified in polynomial time,NP problems,P problems,Hard problems,Exponential problems,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q17,Which class contains problems solvable in polynomial time,P class,NP class,NP complete class,NP hard class,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q18,Which problems are both NP and NP hard,NP complete problems,P problems,Sorting problems,Searching problems,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q19,Which problems are at least as hard as NP complete problems,NP hard problems,P problems,NP easy problems,Polynomial problems,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q20,Which technique tries all possible solutions recursively,Backtracking,Greedy method,Dynamic programming,Divide and conquer,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q21,Which technique prunes search tree using bounds,Branch and bound,Backtracking,Greedy algorithm,Sorting algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q22,Which algorithm technique finds near optimal solutions,Approximation algorithm,Exact algorithm,Sorting algorithm,Search algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q23,Which string matching algorithm compares pattern sequentially,Naive string matching algorithm,KMP algorithm,Boyer Moore algorithm,Rabin Karp algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q24,Which algorithm uses prefix table for pattern matching,KMP algorithm,Naive algorithm,Boyer Moore algorithm,Rabin Karp algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q25,Which algorithm uses hashing for string matching,Rabin Karp algorithm,KMP algorithm,Naive algorithm,DFS algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q26,Which algorithm scans pattern from right to left,Boyer Moore algorithm,KMP algorithm,Naive algorithm,DFS algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q27,Which tree rotation fixes imbalance in AVL trees,Left or right rotation,Sorting rotation,Search rotation,Traversal rotation,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q28,Which property ensures AVL tree balance,Balance factor,Depth factor,Height factor,Weight factor,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q29,Which tree ensures O(log n) search time,Balanced binary search tree,Linked list,Stack,Queue,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q30,Which heap structure improves amortized complexity,Fibonacci heap,Binary heap,AVL tree,Red black tree,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q31,Which technique reduces NP problem complexity heuristically,Approximation algorithm,Exact algorithm,Sorting algorithm,Searching algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q32,Which data structure is commonly used in Dijkstra algorithm,Priority queue,Stack,Queue,Linked list,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q33,Which algorithm repeatedly selects smallest edge,Kruskal algorithm,Prim algorithm,Dijkstra algorithm,Bellman Ford algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q34,Which algorithm expands minimum distance node first,Dijkstra algorithm,Prim algorithm,Kruskal algorithm,DFS algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q35,Which graph problem finds minimal connection cost,Minimum spanning tree,Shortest path,Maximum flow,String matching,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q36,Which matching algorithm is used for bipartite graphs,Hungarian algorithm,Prim algorithm,Kruskal algorithm,Dijkstra algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q37,Which technique solves combinatorial search problems,Backtracking,Sorting,Traversal,Hashing,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q38,Which algorithm technique explores solution space tree,Branch and bound,Greedy algorithm,Dynamic programming,Divide and conquer,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q39,Which algorithm reduces repeated comparisons in string matching,KMP algorithm,Naive algorithm,Bubble sort,Merge sort,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q40,Which algorithm shifts pattern intelligently,Boyer Moore algorithm,Naive algorithm,KMP algorithm,DFS algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q41,Which complexity class contains hardest NP problems,NP complete class,P class,Polynomial class,Linear class,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q42,Which complexity class may not be solvable in polynomial time,NP hard,P class,Sorting class,Search class,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q43,Which tree operation moves accessed node to root,Splay operation,Rotation operation,Insertion operation,Deletion operation,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q44,Which heap operation merges two heaps efficiently,Binomial heap merge,AVL merge,Tree merge,Stack merge,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q45,Which algorithm design deals with difficult problems heuristically,Approximation algorithm,Sorting algorithm,Search algorithm,Traversal algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q46,Which algorithm solves network flow problems,Ford Fulkerson algorithm,Prim algorithm,Dijkstra algorithm,Kruskal algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q47,Which algorithm repeatedly augments paths in flow network,Ford Fulkerson algorithm,Dijkstra algorithm,DFS algorithm,BFS algorithm,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q48,Which data structure supports efficient union operations,Disjoint set,Stack,Queue,Linked list,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q49,Which technique reduces search space using constraints,Branch and bound,Sorting,Traversal,Hashing,1
+2-1,CSE 207,Data Structures and Algorithms II,2-1-CSE207-Q50,Which problem category includes traveling salesman problem,NP complete problem,P problem,Sorting problem,Traversal problem,1
+2-1,CSE 215,Database,2-1-CSE215-Q1,What is a database,A structured collection of data,A program,A compiler,A hardware device,1
+2-1,CSE 215,Database,2-1-CSE215-Q2,Which software manages databases,DBMS,Compiler,Assembler,Interpreter,1
+2-1,CSE 215,Database,2-1-CSE215-Q3,Which model organizes data into tables,Relational model,Hierarchical model,Network model,Object model,1
+2-1,CSE 215,Database,2-1-CSE215-Q4,Which diagram is used for database design,Entity relationship diagram,Flowchart,Block diagram,Class diagram,1
+2-1,CSE 215,Database,2-1-CSE215-Q5,Which component represents real world objects in ER model,Entity,Attribute,Relation,Tuple,1
+2-1,CSE 215,Database,2-1-CSE215-Q6,Which component describes properties of entity,Attribute,Entity,Relation,Schema,1
+2-1,CSE 215,Database,2-1-CSE215-Q7,Which key uniquely identifies a record,Primary key,Foreign key,Composite key,Secondary key,1
+2-1,CSE 215,Database,2-1-CSE215-Q8,Which key references primary key of another table,Foreign key,Primary key,Unique key,Secondary key,1
+2-1,CSE 215,Database,2-1-CSE215-Q9,Which SQL command retrieves data,SELECT,INSERT,DELETE,UPDATE,1
+2-1,CSE 215,Database,2-1-CSE215-Q10,Which SQL command inserts data,INSERT,SELECT,DELETE,ALTER,1
+2-1,CSE 215,Database,2-1-CSE215-Q11,Which SQL command removes data,DELETE,SELECT,INSERT,UPDATE,1
+2-1,CSE 215,Database,2-1-CSE215-Q12,Which SQL command modifies existing records,UPDATE,INSERT,DELETE,SELECT,1
+2-1,CSE 215,Database,2-1-CSE215-Q13,Which SQL clause filters records,WHERE,GROUP BY,ORDER BY,HAVING,1
+2-1,CSE 215,Database,2-1-CSE215-Q14,Which SQL clause sorts results,ORDER BY,WHERE,GROUP BY,HAVING,1
+2-1,CSE 215,Database,2-1-CSE215-Q15,Which SQL clause groups rows,GROUP BY,ORDER BY,WHERE,SELECT,1
+2-1,CSE 215,Database,2-1-CSE215-Q16,Which SQL function counts rows,COUNT,MAX,MIN,SUM,1
+2-1,CSE 215,Database,2-1-CSE215-Q17,Which language describes relational operations,Relational algebra,Assembly language,Machine language,Functional language,1
+2-1,CSE 215,Database,2-1-CSE215-Q18,Which relational algebra operation selects rows,Selection,Projection,Join,Union,1
+2-1,CSE 215,Database,2-1-CSE215-Q19,Which relational algebra operation selects columns,Projection,Selection,Join,Union,1
+2-1,CSE 215,Database,2-1-CSE215-Q20,Which operation combines two tables,Join,Projection,Selection,Difference,1
+2-1,CSE 215,Database,2-1-CSE215-Q21,Which constraint ensures unique values,Unique constraint,Foreign constraint,Join constraint,Check constraint,1
+2-1,CSE 215,Database,2-1-CSE215-Q22,Which constraint prevents null values,Not null constraint,Unique constraint,Primary constraint,Foreign constraint,1
+2-1,CSE 215,Database,2-1-CSE215-Q23,Which database object executes automatically on events,Trigger,View,Index,Procedure,1
+2-1,CSE 215,Database,2-1-CSE215-Q24,Which database object stores reusable SQL code,Stored procedure,Index,View,Trigger,1
+2-1,CSE 215,Database,2-1-CSE215-Q25,Which dependency describes relation between attributes,Functional dependency,Logical dependency,Data dependency,Key dependency,1
+2-1,CSE 215,Database,2-1-CSE215-Q26,Which process removes redundancy in database,Normalization,Denormalization,Compilation,Optimization,1
+2-1,CSE 215,Database,2-1-CSE215-Q27,Which normal form removes partial dependency,Second normal form,First normal form,Third normal form,Fourth normal form,1
+2-1,CSE 215,Database,2-1-CSE215-Q28,Which normal form removes transitive dependency,Third normal form,First normal form,Second normal form,Boyce Codd normal form,1
+2-1,CSE 215,Database,2-1-CSE215-Q29,Which storage structure improves search speed,Index,Trigger,Procedure,View,1
+2-1,CSE 215,Database,2-1-CSE215-Q30,Which index structure is commonly used in databases,B plus tree index,AVL tree index,Red black tree index,Heap index,1
+2-1,CSE 215,Database,2-1-CSE215-Q31,Which indexing technique uses hash functions,Hash index,B tree index,B plus tree index,Tree index,1
+2-1,CSE 215,Database,2-1-CSE215-Q32,Which process translates SQL query into execution plan,Query processing,Data mining,Data cleaning,Indexing,1
+2-1,CSE 215,Database,2-1-CSE215-Q33,Which process improves query execution efficiency,Query optimization,Data sorting,Data compression,Data cleaning,1
+2-1,CSE 215,Database,2-1-CSE215-Q34,Which concept ensures atomic operations in database,Transaction,Indexing,Trigger,View,1
+2-1,CSE 215,Database,2-1-CSE215-Q35,Which property ensures all or nothing execution,Atomicity,Consistency,Isolation,Durability,1
+2-1,CSE 215,Database,2-1-CSE215-Q36,Which property ensures database remains valid after transaction,Consistency,Atomicity,Isolation,Durability,1
+2-1,CSE 215,Database,2-1-CSE215-Q37,Which property isolates concurrent transactions,Isolation,Atomicity,Consistency,Durability,1
+2-1,CSE 215,Database,2-1-CSE215-Q38,Which property ensures data survives failures,Durability,Atomicity,Consistency,Isolation,1
+2-1,CSE 215,Database,2-1-CSE215-Q39,Which technique manages simultaneous transactions,Concurrency control,Data compression,Indexing,Query parsing,1
+2-1,CSE 215,Database,2-1-CSE215-Q40,Which mechanism restores database after failure,Recovery system,Backup system,Replication system,Indexing system,1
+2-1,CSE 215,Database,2-1-CSE215-Q41,Which database distributes data across multiple servers,Distributed database,Relational database,Centralized database,Object database,1
+2-1,CSE 215,Database,2-1-CSE215-Q42,Which database processes queries using multiple processors,Parallel database,Sequential database,Centralized database,Distributed database,1
+2-1,CSE 215,Database,2-1-CSE215-Q43,Which term refers to very large datasets,Big data,Small data,Meta data,Mini data,1
+2-1,CSE 215,Database,2-1-CSE215-Q44,Which technology analyzes large datasets,Big data analytics,SQL analytics,Array analytics,Graph analytics,1
+2-1,CSE 215,Database,2-1-CSE215-Q45,Which database type supports flexible schema,NoSQL database,Relational database,Hierarchical database,Network database,1
+2-1,CSE 215,Database,2-1-CSE215-Q46,Which NoSQL database stores data as key value pairs,Key value store,Relational store,Graph store,Document store,1
+2-1,CSE 215,Database,2-1-CSE215-Q47,Which NoSQL database stores JSON like documents,Document database,Graph database,Key value database,Column database,1
+2-1,CSE 215,Database,2-1-CSE215-Q48,Which NoSQL database represents relationships as nodes and edges,Graph database,Document database,Key value database,Column database,1
+2-1,CSE 215,Database,2-1-CSE215-Q49,Which SQL command defines database structure,DDL,MLL,DML,DQL,1
+2-1,CSE 215,Database,2-1-CSE215-Q50,Which SQL command controls permissions,DCL,DML,DDL,DQL,1
+
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q1,What is the main purpose of technical writing,Communicate technical information clearly,Write fictional stories,Create advertisements,Write poetry,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q2,Which quality is most important in technical writing,Clarity,Humor,Length,Decoration,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q3,Which section briefly summarizes a research paper,Abstract,Introduction,Conclusion,Appendix,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q4,Which section lists all references used,Bibliography,Preface,Index,Contents,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q5,Which section appears before the main content and explains purpose,Preface,Appendix,Index,Bibliography,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q6,Which section shows structure of chapters,Table of contents,Abstract,Index,Appendix,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q7,Which section lists important topics with page numbers,Index,Preface,Abstract,Title page,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q8,Which document describes research findings,Research paper,Advertisement,Blog post,Story,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q9,Which document summarizes evaluation of a book,Book review,Research paper,Technical report,Essay,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q10,Which report evaluates submitted research paper,Referee report,Technical manual,User guide,Book index,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q11,Which writing style defines technical terms,Definition style,Narrative style,Poetic style,Story style,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q12,Which writing component states a mathematical claim,Proposition,Paragraph,Section,Diagram,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q13,Which statement expresses proven mathematical truth,Theorem,Sentence,Topic,Example,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q14,Which part explains why a theorem is true,Proof,Definition,Example,Note,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q15,Which feature improves readability of documents,Proper formatting,Random formatting,No headings,Long paragraphs,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q16,Which tool is widely used for scientific document preparation,LaTeX,Photoshop,Excel,PowerPoint,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q17,Which LaTeX command creates a section,Section command,Paragraph command,Frame command,Label command,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q18,Which LaTeX environment is used for equations,Equation environment,Figure environment,Table environment,List environment,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q19,Which tool helps draw technical diagrams,Diagram drawing software,Video editor,Audio editor,Text editor,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q20,Which tool is commonly used for presentations,PowerPoint,Notepad,Calculator,Compiler,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q21,Which slide element highlights main idea,Title,Footer,Page number,Logo,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q22,Which presentation feature emphasizes key points,Bullet points,Random text,Large paragraphs,Long sentences,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q23,Which communication skill improves presentations,Clear speaking,Fast speaking,Mumbling,Reading slides,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q24,Which element improves understanding in presentations,Visual aids,Random animations,Long text slides,Complex sentences,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q25,Which part of report introduces the topic,Introduction,Conclusion,Appendix,Bibliography,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q26,Which section summarizes findings,Conclusion,Introduction,Title page,Preface,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q27,Which citation style is common in academic writing,APA style,Comic style,Magazine style,Informal style,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q28,Which practice avoids plagiarism,Citing sources,Copying text,Hiding references,Ignoring sources,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q29,Which element explains abbreviations in reports,Glossary,Appendix,Preface,Title page,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q30,Which section includes extra material,Appendix,Introduction,Conclusion,Abstract,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q31,Which writing style uses precise language,Technical style,Informal style,Story style,Humorous style,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q32,Which quality ensures document accuracy,Correctness,Decoration,Length,Color,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q33,Which writing method improves clarity,Short sentences,Long paragraphs,Complex grammar,Slang words,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q34,Which figure explains relationships visually,Diagram,Paragraph,Sentence,Table,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q35,Which part appears first in research paper,Title page,Appendix,Bibliography,Index,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q36,Which skill helps deliver effective presentations,Confidence,Nervousness,Silence,Avoiding eye contact,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q37,Which slide rule improves readability,Few words per slide,Long sentences,Paragraph slides,Random text,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q38,Which method improves audience engagement,Visual examples,Long theory,Reading slides,No explanation,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q39,Which part contains acknowledgments,Acknowledgment section,Appendix,Index,Table,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q40,Which writing tool manages references,Bibliography manager,Video editor,Compiler,Calculator,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q41,Which file format commonly stores research papers,PDF,MP3,JPG,AVI,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q42,Which practice improves writing quality,Proofreading,Ignoring errors,Skipping review,Rushing submission,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q43,Which step checks grammar and spelling,Editing,Compilation,Encoding,Encryption,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q44,Which type of document explains system usage,Technical manual,Novel,Poem,Advertisement,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q45,Which section describes background information,Introduction,Appendix,Index,Conclusion,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q46,Which presentation feature shows data visually,Charts,Paragraphs,Footnotes,References,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q47,Which speaking technique improves clarity,Moderate pace,Fast talking,Mumbling,Whispering,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q48,Which design principle keeps slides simple,Minimalism,Complexity,Decoration,Overcrowding,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q49,Which document records research progress,Technical report,Novel,Advertisement,Story,1
+2-2,CSE 200,Technical Writing and Presentation,2-2-CSE200-Q50,Which goal ensures audience understanding,Clear communication,Long explanation,Complex language,Hidden meaning,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q1,What is the basic unit of information in computers,Bit,Byte,Word,Register,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q2,How many bits are in one byte,8,4,16,32,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q3,Which system represents numbers using 0 and 1,Binary system,Decimal system,Octal system,Hexadecimal system,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q4,Which metric measures program execution speed,Execution time,File size,Memory size,Program length,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q5,Which architecture is widely used in modern processors,ARM architecture,MIPS architecture,SPARC architecture,VLIW architecture,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q6,Which architecture is commonly used for teaching computer architecture,MIPS architecture,ARM architecture,Intel architecture,Power architecture,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q7,Which component performs arithmetic operations,ALU,Control unit,Cache,Register file,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q8,Which component stores temporary data inside CPU,Register,Cache,Main memory,Hard disk,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q9,Which instruction format includes opcode and operands,Machine instruction,Source code,Object code,Assembly code,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q10,Which representation encodes instructions in binary form,Machine code,Assembly language,High level language,Scripting language,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q11,Which arithmetic operation handles signed integers,Integer arithmetic,Floating arithmetic,Vector arithmetic,Matrix arithmetic,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q12,Which arithmetic format represents real numbers,Floating point,Integer format,Binary format,Decimal format,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q13,Which processor design executes instruction in one clock cycle,Single cycle datapath,Pipeline datapath,Multicycle datapath,Parallel datapath,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q14,Which processor design overlaps instruction execution,Pipelined datapath,Single cycle datapath,Sequential datapath,Serial datapath,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q15,Which issue occurs when pipeline stages conflict,Pipeline hazard,Cache miss,Branch miss,Register miss,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q16,Which hazard occurs due to data dependency,Data hazard,Control hazard,Structural hazard,Memory hazard,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q17,Which hazard occurs due to branch instructions,Control hazard,Data hazard,Structural hazard,Cache hazard,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q18,Which hazard occurs when hardware resources conflict,Structural hazard,Control hazard,Data hazard,Branch hazard,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q19,Which mechanism handles abnormal conditions during execution,Exception handling,Interrupt disabling,Instruction skipping,Memory reset,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q20,Which technique executes multiple instructions simultaneously,Instruction level parallelism,Process scheduling,Thread management,Memory allocation,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q21,Which technique issues multiple instructions per cycle,Multiple issue,Single issue,Sequential issue,Pipeline issue,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q22,Which technique predicts branch outcomes,Speculation,Segmentation,Virtualization,Compilation,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q23,Which processor type issues multiple instructions dynamically,Superscalar processor,Scalar processor,Vector processor,Serial processor,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q24,Which technique allows instructions to execute in different order,Out of order execution,Sequential execution,Static execution,Linear execution,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q25,Which method removes false dependencies,Register renaming,Register deletion,Register copying,Register swapping,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q26,Which memory is fastest in hierarchy,Register memory,Cache memory,Main memory,Disk storage,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q27,Which memory stores frequently accessed data,Cache memory,Hard disk,Optical disk,Flash drive,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q28,Which metric measures cache effectiveness,Cache hit rate,Cache size,Cache color,Cache voltage,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q29,Which memory technique uses disk as extension of RAM,Virtual memory,Cache memory,Register memory,Static memory,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q30,Which structure maps virtual addresses to physical addresses,Page table,Cache table,Index table,Pointer table,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q31,Which architecture uses single instruction single data,SISD architecture,MIMD architecture,SIMD architecture,SPMD architecture,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q32,Which architecture uses multiple instruction multiple data,MIMD architecture,SISD architecture,SIMD architecture,SPMD architecture,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q33,Which architecture performs same instruction on multiple data,SIMD architecture,SISD architecture,MIMD architecture,SPMD architecture,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q34,Which programming model runs same program on different processors,SPMD model,SIMD model,SISD model,MIMD model,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q35,Which processor design uses multiple cores,Multiprocessor system,Single processor system,Serial processor system,Scalar processor system,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q36,Which technique processes multiple data elements simultaneously,Data level parallelism,Instruction level parallelism,Thread level parallelism,Process level parallelism,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q37,Which architecture uses vector operations,Vector architecture,Scalar architecture,Serial architecture,Single architecture,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q38,Which processor type accelerates graphics computation,GPU,CPU,DSP,ALU,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q39,Which architecture is optimized for parallel graphics processing,GPU architecture,CPU architecture,ARM architecture,MIPS architecture,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q40,Which unit controls execution of instructions,Control unit,ALU,Register file,Cache unit,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q41,Which unit stores frequently used instructions,Instruction cache,Data cache,Register file,Main memory,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q42,Which technique improves pipeline efficiency,Forwarding,Blocking,Stalling,Halting,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q43,Which instruction transfers control to another location,Branch instruction,Arithmetic instruction,Logical instruction,Load instruction,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q44,Which instruction loads data from memory,Load instruction,Store instruction,Jump instruction,Branch instruction,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q45,Which instruction writes data to memory,Store instruction,Load instruction,Jump instruction,Branch instruction,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q46,Which instruction changes program execution flow,Jump instruction,Load instruction,Store instruction,Add instruction,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q47,Which factor affects CPU performance,Clock rate,Screen size,Keyboard layout,Color depth,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q48,Which component stores program instructions,Main memory,ALU,Cache controller,Register file,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q49,Which hardware element coordinates processor operations,Control unit,ALU,Cache memory,Register file,1
+2-2,CSE 209,Computer Architecture,2-2-CSE209-Q50,Which architecture improves performance using parallel processors,Parallel architecture,Sequential architecture,Serial architecture,Single core architecture,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q1,Which type of language is recognized by finite automata,Regular language,Context free language,Context sensitive language,Recursive language,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q2,Which machine recognizes regular languages,Finite automaton,Pushdown automaton,Turing machine,Linear bounded automaton,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q3,Which automaton has exactly one transition for each symbol,DFA,NFA,PDA,Turing machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q4,Which automaton may have multiple transitions for same symbol,NFA,DFA,PDA,Turing machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q5,Which model is equivalent in power to NFA,DFA,PDA,Turing machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q6,Which notation describes regular languages using symbols,Regular expression,Grammar,Parse tree,Derivation tree,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q7,Which theorem proves some languages are not regular,Pumping lemma for regular languages,Church theorem,Savitch theorem,Cook theorem,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q8,Which language type is generated by context free grammar,Context free language,Regular language,Recursive language,Decidable language,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q9,Which machine recognizes context free languages,Pushdown automaton,Finite automaton,Turing machine,Register machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q10,Which grammar form restricts productions to two variables or one terminal,Chomsky normal form,Greibach normal form,Regular form,Canonical form,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q11,Which concept describes multiple parse trees for same string,Ambiguity,Regularity,Completeness,Consistency,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q12,Which lemma proves some languages are not context free,Pumping lemma for context free languages,Church theorem,Cook theorem,Savitch theorem,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q13,Which machine has infinite tape for computation,Turing machine,Finite automaton,Pushdown automaton,Stack automaton,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q14,Which model is most powerful among automata,Turing machine,Pushdown automaton,Finite automaton,DFA,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q15,Which concept states that Turing machines capture algorithmic computation,Church Turing thesis,Cook theorem,Savitch theorem,Pumping lemma,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q16,Which technique proves undecidability,Diagonalization,Recursion,Iteration,Induction,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q17,Which famous undecidable problem asks if a program halts,Halting problem,Shortest path problem,Sorting problem,Traveling salesman problem,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q18,Which language type has algorithm to decide membership,Decidable language,Undecidable language,Context sensitive language,Ambiguous language,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q19,Which technique converts one problem into another,Reduction,Compilation,Translation,Optimization,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q20,Which complexity class contains problems solvable in polynomial time,P class,NP class,NP complete class,NP hard class,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q21,Which class contains problems verifiable in polynomial time,NP class,P class,EXPTIME class,PSPACE class,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q22,Which problems are both NP and NP hard,NP complete problems,P problems,Regular problems,Context free problems,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q23,Which theorem proves SAT is NP complete,Cook theorem,Church theorem,Savitch theorem,Pumping lemma,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q24,Which theorem relates space complexity classes,Savitch theorem,Cook theorem,Church theorem,Pumping lemma,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q25,Which complexity measure counts number of steps,Time complexity,Space complexity,Input complexity,Output complexity,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q26,Which complexity measure counts memory used,Space complexity,Time complexity,Code complexity,Data complexity,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q27,Which machine uses stack memory,Pushdown automaton,Finite automaton,Turing machine,DFA,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q28,Which automaton reads input symbol by symbol,Finite automaton,Pushdown automaton,Turing machine,Register machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q29,Which structure represents grammar derivation,Parse tree,Graph,Stack,Heap,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q30,Which grammar rule generates context free languages,Single variable on left side,Two variables on left side,Terminal only,No variables allowed,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q31,Which machine is theoretical model of computation,Turing machine,Compiler,Assembler,Interpreter,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q32,Which machine reads and writes symbols on tape,Turing machine,Finite automaton,Pushdown automaton,DFA,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q33,Which concept defines limits of computation,Computability theory,Graph theory,Number theory,Control theory,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q34,Which complexity class contains hardest NP problems,NP complete,P class,Regular class,Context free class,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q35,Which language class contains regular languages,Context free languages,P languages,NP languages,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q36,Which problem is example of NP complete problem,SAT problem,Sorting problem,Addition problem,Search problem,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q37,Which automaton uses transition function,DFA,NFA,PDA,Turing machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q38,Which model includes tape head movement,Turing machine,DFA,NFA,PDA,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q39,Which concept measures algorithm efficiency,Complexity theory,Graph theory,Number theory,Control theory,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q40,Which machine accepts by final state,Finite automaton,Pushdown automaton,Turing machine,Register machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q41,Which problem is undecidable,Halting problem,Sorting problem,Searching problem,Minimum spanning tree problem,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q42,Which automaton processes regular expressions,Finite automaton,Pushdown automaton,Turing machine,Register machine,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q43,Which grammar generates programming language syntax,Context free grammar,Regular grammar,Linear grammar,Ambiguous grammar,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q44,Which structure is used in pushdown automata,Stack,Queue,Heap,Register,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q45,Which language cannot be recognized by DFA,Nonregular language,Regular language,Finite language,Empty language,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q46,Which machine simulates algorithmic procedures,Turing machine,DFA,NFA,PDA,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q47,Which concept studies solvability of problems,Computability,Optimization,Compilation,Encryption,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q48,Which complexity class includes polynomial time algorithms,P class,NP class,NP complete class,PSPACE class,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q49,Which complexity class contains NP complete problems,NP class,P class,Linear class,Constant class,1
+2-2,CSE 211,Theory of Computation,2-2-CSE211-Q50,Which theorem connects NP problems with SAT,Cook theorem,Church theorem,Savitch theorem,Pumping lemma,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q1,What is the main goal of software engineering,Develop reliable software systems,Write random code,Create hardware devices,Design networks,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q2,Which process describes stages of software development,Software development life cycle,Compilation cycle,Hardware cycle,Execution cycle,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q3,Which stage gathers user needs,Requirements analysis,Testing,Deployment,Maintenance,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q4,Which requirement describes system behavior,Functional requirement,Nonfunctional requirement,Hardware requirement,Network requirement,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q5,Which requirement describes performance or security,Nonfunctional requirement,Functional requirement,Hardware requirement,Software requirement,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q6,Which process gathers requirements from stakeholders,Requirement elicitation,Requirement deletion,Requirement execution,Requirement compilation,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q7,Which document formally describes system requirements,Requirement specification,Test report,User manual,Maintenance log,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q8,Which technique checks correctness of requirements,Requirement validation,Requirement deletion,Requirement transformation,Requirement expansion,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q9,Which diagram shows interaction between user and system,Use case diagram,Class diagram,Sequence diagram,State diagram,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q10,Which modeling language is widely used in software design,UML,HTML,SQL,XML,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q11,Which UML diagram represents classes and relationships,Class diagram,Use case diagram,Activity diagram,State diagram,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q12,Which UML diagram shows sequence of messages,Sequence diagram,Class diagram,Component diagram,Deployment diagram,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q13,Which design focuses on user interaction,User interface design,System architecture design,Hardware design,Database design,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q14,Which design pattern creates objects,Creational pattern,Structural pattern,Behavioral pattern,Functional pattern,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q15,Which design pattern organizes class relationships,Structural pattern,Creational pattern,Behavioral pattern,Procedural pattern,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q16,Which design pattern manages communication between objects,Behavioral pattern,Creational pattern,Structural pattern,Logical pattern,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q17,Which practice evaluates code quality by peers,Code review,Code deletion,Code execution,Code compression,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q18,Which activity explains how code works,Documentation,Compilation,Optimization,Encryption,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q19,Which system manages source code versions,Version control system,Database system,Operating system,Compiler system,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q20,Which tool is widely used for version control,Git,Excel,Photoshop,PowerPoint,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q21,Which term refers to poor coding practices,Code smell,Code syntax,Code style,Code token,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q22,Which process improves code structure without changing behavior,Refactoring,Compilation,Encryption,Execution,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q23,Which testing checks individual components,Unit testing,System testing,Acceptance testing,Stress testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q24,Which testing checks combined modules,Integration testing,Unit testing,Regression testing,Security testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q25,Which testing ensures old features still work after changes,Regression testing,Unit testing,Integration testing,Acceptance testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q26,Which testing analyzes internal code logic,White box testing,Black box testing,Acceptance testing,System testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q27,Which testing evaluates external behavior,Black box testing,White box testing,Unit testing,Mutation testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q28,Which testing checks application speed and scalability,Performance testing,Security testing,Functional testing,Regression testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q29,Which testing identifies vulnerabilities,Security testing,Unit testing,Integration testing,Acceptance testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q30,Which testing compares two versions of a feature,A B testing,Unit testing,Integration testing,System testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q31,Which report describes software defects,Bug report,Test case,Requirement report,Design report,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q32,Which role ensures software quality,Quality assurance engineer,System administrator,Database designer,Hardware engineer,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q33,Which phase releases software to users,Deployment phase,Design phase,Testing phase,Requirement phase,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q34,Which phase updates software after release,Maintenance phase,Design phase,Requirement phase,Compilation phase,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q35,Which diagram represents workflow of activities,Activity diagram,Class diagram,Sequence diagram,State diagram,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q36,Which diagram represents system states,State diagram,Sequence diagram,Class diagram,Activity diagram,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q37,Which concept focuses on ethical software development,Software ethics,Software syntax,Software token,Software indexing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q38,Which development approach divides project into iterations,Agile methodology,Waterfall methodology,Linear methodology,Sequential methodology,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q39,Which development model follows sequential phases,Waterfall model,Agile model,Iterative model,Spiral model,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q40,Which document explains system architecture,Design document,Test case,Bug report,User guide,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q41,Which artifact describes how software should behave,Requirement document,Test document,User manual,Maintenance guide,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q42,Which software practice improves collaboration,Version control,Manual coding,Ignoring reviews,Skipping testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q43,Which testing ensures system works as whole,System testing,Unit testing,Integration testing,Regression testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q44,Which testing validates user requirements,Acceptance testing,Unit testing,Regression testing,Stress testing,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q45,Which test double simulates real components,Mock object,Class object,Static object,Global object,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q46,Which artifact records software design decisions,Design documentation,Test script,Bug report,Build script,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q47,Which practice improves maintainability,Refactoring,Compilation,Execution,Encryption,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q48,Which activity identifies software defects,Debugging,Compilation,Encryption,Deployment,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q49,Which practice tracks changes in code repository,Version control,Debugging,Deployment,Compilation,1
+2-2,CSE 213,Software Engineering,2-2-CSE213-Q50,Which software engineering goal improves reliability,Systematic development,Random coding,Minimal testing,Ignoring documentation,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q1,What is a signal,A function representing information,A hardware device,A compiler,A program,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q2,Which signal is defined at discrete time instants,Discrete time signal,Continuous signal,Analog signal,Periodic signal,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q3,Which signal is defined for every time value,Continuous time signal,Discrete signal,Digital signal,Impulse signal,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q4,Which function represents sudden impulse at zero time,Unit impulse function,Unit step function,Ramp function,Sinusoidal function,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q5,Which function changes from zero to one at time zero,Unit step function,Impulse function,Exponential function,Sinusoid function,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q6,Which operation shifts a signal in time,Time shifting,Time scaling,Time reversal,Amplitude scaling,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q7,Which operation reverses signal in time,Time reversal,Time shifting,Amplitude scaling,Time addition,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q8,Which system satisfies superposition principle,Linear system,Nonlinear system,Dynamic system,Memoryless system,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q9,Which system output depends only on current input,Memoryless system,Dynamic system,Linear system,Time invariant system,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q10,Which system property means behavior does not change over time,Time invariant system,Linear system,Dynamic system,Static system,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q11,Which system property ensures proportional output to input,Linearity,Time invariance,Stability,Causality,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q12,Which system output depends on past inputs,Dynamic system,Memoryless system,Linear system,Static system,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q13,Which system produces bounded output for bounded input,Stable system,Unstable system,Linear system,Dynamic system,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q14,Which system output depends only on past and present inputs,Causal system,Noncausal system,Stable system,Linear system,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q15,Which system type is described by convolution,LTI system,Nonlinear system,Dynamic system,Static system,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q16,Which operation determines output of LTI systems,Convolution,Integration,Differentiation,Transformation,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q17,Which equation describes continuous LTI systems,Differential equation,Algebraic equation,Boolean equation,Matrix equation,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q18,Which equation describes discrete LTI systems,Difference equation,Matrix equation,Boolean equation,Algebraic equation,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q19,Which representation expresses periodic signals as sum of sinusoids,Fourier series,Fourier transform,Laplace transform,Z transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q20,Which representation analyzes non periodic signals,Fourier transform,Fourier series,Laplace transform,Z transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q21,Which transform analyzes continuous signals in frequency domain,Fourier transform,Laplace transform,Z transform,Hilbert transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q22,Which transform analyzes discrete signals,Z transform,Laplace transform,Fourier series,Wave transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q23,Which transform is useful for solving differential equations,Laplace transform,Fourier transform,Z transform,Wave transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q24,Which property relates time and frequency representations,Duality property,Linearity property,Time shift property,Scaling property,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q25,Which theorem allows signal reconstruction from samples,Sampling theorem,Nyquist theorem,Fourier theorem,Shannon law,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q26,Which phenomenon occurs when sampling rate is too low,Aliasing,Distortion,Reflection,Diffraction,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q27,Which process reconstructs signal from samples,Interpolation,Sampling,Quantization,Compression,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q28,Which transform converts time domain to complex frequency domain,Laplace transform,Fourier series,Z transform,Wave transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q29,Which operation retrieves original signal from Laplace transform,Inverse Laplace transform,Direct Laplace transform,Partial transform,Series transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q30,Which operation retrieves signal from Z transform,Inverse Z transform,Direct Z transform,Series transform,Partial transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q31,Which domain describes signals as functions of time,Time domain,Frequency domain,Transform domain,Spatial domain,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q32,Which domain describes signals by frequency components,Frequency domain,Time domain,Transform domain,Signal domain,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q33,Which property allows signals to be added,Linearity property,Stability property,Causality property,Time invariance,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q34,Which signal repeats after fixed interval,Periodic signal,Aperiodic signal,Impulse signal,Random signal,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q35,Which signal does not repeat,Aperiodic signal,Periodic signal,Impulse signal,Step signal,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q36,Which function increases linearly with time,Ramp function,Impulse function,Step function,Sinusoidal function,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q37,Which signal contains only one frequency component,Sinusoidal signal,Impulse signal,Step signal,Ramp signal,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q38,Which signal property measures signal strength,Amplitude,Frequency,Phase,Period,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q39,Which parameter measures oscillation rate,Frequency,Amplitude,Phase,Offset,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q40,Which parameter measures shift of waveform,Phase,Amplitude,Frequency,Period,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q41,Which concept studies signals mathematically,Signal processing,System engineering,Data science,Control logic,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q42,Which property ensures system does not depend on time origin,Time invariance,Linearity,Stability,Causality,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q43,Which representation helps analyze signals in frequency domain,Fourier transform,Time transform,Laplace equation,Boolean transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q44,Which transform simplifies analysis of LTI systems,Laplace transform,Fourier transform,Z transform,Wave transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q45,Which transform is discrete version of Laplace transform,Z transform,Fourier transform,Wave transform,Series transform,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q46,Which property relates convolution in time to multiplication in frequency,Convolution theorem,Sampling theorem,Duality theorem,Shift theorem,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q47,Which signal characteristic determines duration,Time support,Amplitude support,Frequency support,Phase support,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q48,Which analysis studies system response to input,System analysis,Signal generation,Signal filtering,Signal compression,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q49,Which response describes output of LTI system to impulse input,Impulse response,Step response,Frequency response,Transient response,1
+2-2,CSE 219,Signals and Linear Systems,2-2-CSE219-Q50,Which response describes system output to sinusoidal input,Frequency response,Impulse response,Step response,Transient response,1
+
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q1,Which concept counts number of possible outcomes,Combinatorics,Algebra,Geometry,Calculus,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q2,Which function counts combinations of n items taken k at a time,Binomial coefficient,Factorial function,Linear function,Exponential function,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q3,Which method represents sequences using power series,Generating function,Recurrence relation,Probability function,Distribution function,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q4,Which recurrence relation expresses terms using previous terms,Recursive relation,Linear relation,Polynomial relation,Geometric relation,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q5,Which variable represents outcome of random experiment,Random variable,Control variable,Static variable,Loop variable,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q6,Which random variable takes countable values,Discrete random variable,Continuous random variable,Gaussian variable,Uniform variable,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q7,Which random variable takes real values in interval,Continuous random variable,Discrete random variable,Boolean variable,Finite variable,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q8,Which distribution describes multiple random variables,Multivariate distribution,Uniform distribution,Binomial distribution,Poisson distribution,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q9,Which function summarizes moments of random variable,Moment generating function,Generating function,Probability density function,Distribution function,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q10,Which probability measures likelihood given another event,Conditional probability,Joint probability,Independent probability,Uniform probability,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q11,Which expectation uses conditional information,Conditional expectation,Expected value,Variance,Standard deviation,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q12,Which inequality bounds probability using expected value,Markov inequality,Chebyshev inequality,Cauchy inequality,Jensen inequality,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q13,Which inequality bounds variance based probability,Chebyshev inequality,Markov inequality,Chernoff bound,Jensen inequality,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q14,Which bound provides tight exponential probability bounds,Chernoff bound,Markov inequality,Chebyshev inequality,Union bound,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q15,Which inequality relates inner products and norms,Cauchy Schwarz inequality,Jensen inequality,Markov inequality,Chebyshev inequality,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q16,Which inequality relates convex functions and expectation,Jensen inequality,Markov inequality,Chebyshev inequality,Cauchy inequality,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q17,Which theorem states sample mean converges to expected value,Law of large numbers,Central limit theorem,Bayes theorem,Markov theorem,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q18,Which theorem approximates distribution of sums by normal distribution,Central limit theorem,Law of large numbers,Bayes theorem,Markov theorem,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q19,Which statistical process estimates unknown parameters,Statistical inference,Probability estimation,Data sampling,Signal estimation,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q20,Which model assumes specific distribution form,Parametric model,Nonparametric model,Graph model,Linear model,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q21,Which model does not assume specific distribution,Nonparametric model,Parametric model,Gaussian model,Uniform model,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q22,Which estimation method chooses parameter maximizing likelihood,Maximum likelihood estimation,Bayesian estimation,Least squares estimation,Monte Carlo estimation,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q23,Which estimation method uses prior probability,Bayesian estimation,Maximum likelihood estimation,Least squares estimation,Regression estimation,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q24,Which Bayesian estimate maximizes posterior probability,Maximum a posteriori estimation,Maximum likelihood estimation,Least squares estimation,Uniform estimation,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q25,Which statistical method tests assumptions,Hypothesis testing,Parameter estimation,Regression analysis,Data clustering,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q26,Which test compares likelihood of two hypotheses,Likelihood ratio test,Permutation test,Chi square test,T test,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q27,Which test uses random reordering of samples,Permutation test,Chi square test,Regression test,Variance test,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q28,Which technique estimates distribution by resampling,Bootstrapping,Sampling,Regression,Clustering,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q29,Which interval estimates parameter range,Confidence interval,Prediction interval,Estimation interval,Sampling interval,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q30,Which process models random events over time,Stochastic process,Deterministic process,Linear process,Static process,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q31,Which stochastic process counts events occurring randomly,Poisson process,Gaussian process,Brownian process,Markov process,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q32,Which stochastic process models continuous distributions,Gaussian process,Poisson process,Bernoulli process,Markov process,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q33,Which process has memoryless transitions,Markov chain,Poisson process,Gaussian process,Brownian motion,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q34,Which Markov chain operates in discrete steps,Discrete time Markov chain,Continuous time Markov chain,Hidden Markov chain,Random Markov chain,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q35,Which Markov chain evolves continuously over time,Continuous time Markov chain,Discrete time Markov chain,Hidden Markov chain,Finite Markov chain,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q36,Which process models arrivals and departures,Birth death process,Gaussian process,Poisson process,Markov chain,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q37,Which theory analyzes waiting lines,Queuing theory,Game theory,Graph theory,Control theory,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q38,Which distribution models waiting times in queues,Exponential distribution,Normal distribution,Binomial distribution,Uniform distribution,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q39,Which network allows jobs to enter from outside,Open queue network,Closed queue network,Static queue network,Linear queue network,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q40,Which network has fixed number of jobs,Closed queue network,Open queue network,Random queue network,Static queue network,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q41,Which analysis evaluates queue performance,Queue analysis,Network analysis,Data analysis,System analysis,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q42,Which probability distribution models rare events,Poisson distribution,Uniform distribution,Normal distribution,Binomial distribution,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q43,Which distribution models continuous Gaussian noise,Normal distribution,Poisson distribution,Binomial distribution,Uniform distribution,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q44,Which statistical measure represents average value,Mean,Variance,Median,Mode,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q45,Which measure describes spread of distribution,Variance,Mean,Median,Mode,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q46,Which function describes probability density of continuous variable,Probability density function,Probability mass function,Distribution function,Generating function,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q47,Which function describes probability of discrete variable,Probability mass function,Probability density function,Distribution function,Generating function,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q48,Which inference method updates belief using evidence,Bayesian inference,Frequentist inference,Regression inference,Sampling inference,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q49,Which theorem describes probability bounds using expectations,Markov inequality,Central limit theorem,Law of large numbers,Cauchy theorem,1
+3-1,CSE 301,Mathematics for Computing and Data Science,3-1-CSE301-Q50,Which field combines probability and statistics for data analysis,Data science,Computer graphics,Network engineering,System programming,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q1,What is the main function of a compiler,Translate high level code to machine code,Execute programs,Store data,Manage memory,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q2,Which part of compiler analyzes source code structure,Front end,Back end,Optimizer,Assembler,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q3,Which part of compiler generates machine code,Back end,Front end,Parser,Lexer,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q4,Which compiler phase converts characters to tokens,Lexical analysis,Syntax analysis,Semantic analysis,Code generation,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q5,Which unit of lexical analysis represents keywords or identifiers,Token,Pattern,Lexeme,Symbol,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q6,Which term refers to actual sequence of characters forming token,Lexeme,Pattern,Token,Symbol,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q7,Which structure recognizes lexical patterns,Transition diagram,Parse tree,Control flow graph,Call graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q8,Which tool generates lexical analyzers automatically,Lex generator,Yacc generator,Parser generator,Assembler generator,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q9,Which phase checks grammar rules,Syntax analysis,Lexical analysis,Code generation,Optimization,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q10,Which structure represents syntactic structure of program,Parse tree,Symbol table,Call graph,Flow graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q11,Which parsing method starts from root of parse tree,Top down parsing,Bottom up parsing,Shift reduce parsing,LR parsing,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q12,Which parsing method constructs tree from leaves upward,Bottom up parsing,Top down parsing,Recursive parsing,Predictive parsing,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q13,Which parsing technique uses shift and reduce actions,LR parsing,LL parsing,Recursive descent parsing,Top down parsing,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q14,Which tool automatically generates parser,Yacc generator,Lex generator,Assembler generator,Debugger generator,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q15,Which concept defines translation using grammar rules,Syntax directed translation,Code optimization,Lexical translation,Machine translation,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q16,Which graph shows dependencies among attributes,Dependency graph,Flow graph,Call graph,Parse graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q17,Which structure represents hierarchical syntax,Syntax tree,Symbol table,Call graph,Control graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q18,Which intermediate representation uses simple instructions,Three address code,Assembly code,Object code,Machine code,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q19,Which representation stores instructions with four fields,Quadruple representation,Triple representation,Indirect triple representation,Assembly representation,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q20,Which representation stores operations using three fields,Triple representation,Quadruple representation,Indirect triple representation,Assembly representation,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q21,Which intermediate representation assigns each variable once,Static single assignment form,Three address code,Object code,Machine code,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q22,Which phase checks correctness of types,Type checking,Parsing,Code generation,Optimization,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q23,Which structure stores variable information,Symbol table,Parse tree,Control graph,Call graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q24,Which structure represents control transfer between blocks,Control flow graph,Parse tree,Call graph,Dependency graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q25,Which concept divides code into straight line sequences,Basic block,Control block,Execution block,Memory block,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q26,Which environment manages memory during execution,Run time environment,Compile time environment,Link time environment,Load time environment,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q27,Which memory allocation happens during program execution,Dynamic allocation,Static allocation,Compile allocation,Constant allocation,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q28,Which structure stores information about function calls,Activation record,Parse record,Memory record,Execution record,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q29,Which structure represents function call hierarchy,Activation tree,Call graph,Parse tree,Flow graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q30,Which memory region stores dynamically allocated objects,Heap memory,Stack memory,Register memory,Cache memory,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q31,Which technique automatically frees unused memory,Garbage collection,Memory allocation,Memory mapping,Memory paging,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q32,Which compiler phase produces final machine instructions,Code generation,Parsing,Lexical analysis,Optimization,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q33,Which technique improves code efficiency,Code optimization,Code deletion,Code duplication,Code expansion,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q34,Which optimization examines small instruction sequences,Peephole optimization,Loop optimization,Global optimization,Dynamic optimization,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q35,Which process assigns variables to CPU registers,Register allocation,Memory allocation,Instruction allocation,Symbol allocation,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q36,Which process selects machine instructions,Instruction selection,Instruction decoding,Instruction loading,Instruction branching,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q37,Which optimization does not depend on machine architecture,Machine independent optimization,Machine dependent optimization,Hardware optimization,Runtime optimization,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q38,Which graph represents function call relationships,Call graph,Flow graph,Parse tree,Dependency graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q39,Which analysis studies pointer relationships,Pointer analysis,Memory analysis,Control analysis,Loop analysis,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q40,Which optimization removes redundant computations,Common subexpression elimination,Loop unrolling,Dead code elimination,Constant folding,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q41,Which optimization removes unused instructions,Dead code elimination,Constant propagation,Loop fusion,Code motion,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q42,Which optimization evaluates expressions at compile time,Constant folding,Loop optimization,Register allocation,Code motion,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q43,Which optimization moves code outside loops,Code motion,Loop splitting,Loop merging,Loop duplication,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q44,Which stage produces intermediate code,Intermediate code generation,Lexical analysis,Syntax analysis,Code optimization,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q45,Which structure represents expression evaluation,DAG for expressions,Parse tree,Call graph,Symbol table,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q46,Which table keeps track of variables and types,Symbol table,Memory table,Instruction table,Parse table,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q47,Which structure represents program execution paths,Flow graph,Parse tree,Call graph,Dependency graph,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q48,Which technique analyzes functions across program,Interprocedural analysis,Local analysis,Loop analysis,Symbol analysis,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q49,Which compiler stage improves intermediate code efficiency,Optimization stage,Lexical stage,Parsing stage,Translation stage,1
+3-1,CSE 309,Compiler,3-1-CSE309-Q50,Which compiler component produces executable program,Code generator,Parser,Lexer,Optimizer,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q1,What is the main role of an operating system,Manage computer resources,Compile programs,Design hardware,Create networks,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q2,Which OS type allows multiple users simultaneously,Multiuser operating system,Single user system,Batch system,Embedded system,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q3,Which OS feature allows multiple programs to run at once,Multitasking,Multiprocessing,Multithreading,Multiprogramming,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q4,What is a process,A program in execution,A compiled program,A stored program,A program file,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q5,Which structure stores process information,Process control block,File control block,Memory block,Control table,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q6,Which thread type is managed by operating system kernel,Kernel thread,User thread,Lightweight thread,Green thread,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q7,Which thread type is managed by user level libraries,User thread,Kernel thread,System thread,Parallel thread,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q8,Which mechanism allows processes to communicate,Inter process communication,Memory swapping,Process scheduling,File management,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q9,Which IPC method uses message passing,Message queue,Register communication,Stack communication,Heap communication,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q10,Which system architecture connects clients to servers,Client server system,Peer system,Distributed kernel system,Standalone system,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q11,Which algorithm schedules processes in order of arrival,First come first serve,Shortest job first,Round robin,Priority scheduling,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q12,Which scheduling algorithm uses time slices,Round robin,FCFS,Shortest job first,Priority scheduling,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q13,Which scheduling algorithm selects smallest execution time,Shortest job first,Round robin,Priority scheduling,FCFS,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q14,Which scheduling metric measures CPU utilization,CPU usage percentage,Memory usage,Disk usage,Network usage,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q15,Which problem occurs when processes wait indefinitely,Starvation,Deadlock,Thrashing,Fragmentation,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q16,Which problem occurs when processes block each other,Deadlock,Starvation,Thrashing,Fragmentation,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q17,Which condition requires mutual exclusion in synchronization,Critical section,Deadlock,Starvation,Blocking,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q18,Which synchronization primitive uses integer variable,Semaphore,Monitor,Mutex,Barrier,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q19,Which synchronization construct uses condition variables,Monitor,Semaphore,Mutex,Barrier,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q20,Which deadlock condition requires exclusive resource access,Mutual exclusion,Hold and wait,No preemption,Circular wait,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q21,Which deadlock handling method avoids unsafe states,Deadlock avoidance,Deadlock detection,Deadlock recovery,Deadlock ignoring,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q22,Which method checks system for deadlocks periodically,Deadlock detection,Deadlock prevention,Deadlock avoidance,Deadlock ignoring,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q23,Which technique loads processes into memory temporarily,Swapping,Paging,Segmentation,Partitioning,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q24,Which memory method divides memory into fixed size blocks,Paging,Segmentation,Swapping,Partitioning,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q25,Which memory technique divides memory by logical units,Segmentation,Paging,Swapping,Partitioning,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q26,Which technique allows programs larger than physical memory,Virtual memory,Cache memory,Register memory,Static memory,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q27,Which table maps virtual addresses to physical addresses,Page table,Segment table,Process table,File table,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q28,Which phenomenon occurs when memory is heavily swapped,Thrashing,Deadlock,Starvation,Blocking,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q29,Which hardware component handles I O operations,I O controller,CPU core,Register unit,Cache unit,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q30,Which storage device uses rotating disks,Hard disk drive,SSD,Flash drive,Cache memory,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q31,Which device provides user interaction with system,Terminal,Printer,Router,Scanner,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q32,Which OS component manages files,File system,Memory manager,Process scheduler,Device manager,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q33,Which structure organizes files hierarchically,Directory,Heap,Stack,Buffer,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q34,Which concept restricts file access,File protection,File allocation,File scheduling,File buffering,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q35,Which system uses multiple CPUs,Multiprocessor system,Single processor system,Embedded system,Standalone system,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q36,Which OS supports parallel CPU execution,Multiprocessor OS,Single processor OS,Batch OS,Real time OS,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q37,Which synchronization is required between processors,Multiprocessor synchronization,Thread synchronization,Memory synchronization,Disk synchronization,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q38,Which scheduling distributes processes across CPUs,Multiprocessor scheduling,Thread scheduling,Disk scheduling,File scheduling,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q39,Which disk scheduling algorithm moves head sequentially,SCAN algorithm,FCFS algorithm,Priority algorithm,RR algorithm,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q40,Which disk scheduling algorithm serves requests in arrival order,FCFS disk scheduling,SCAN scheduling,SSTF scheduling,C LOOK scheduling,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q41,Which algorithm selects closest disk request,SSTF scheduling,SCAN scheduling,FCFS scheduling,RR scheduling,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q42,Which OS type responds within strict time limits,Real time operating system,Batch system,Distributed system,Time sharing system,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q43,Which OS allows many users with time sharing,Time sharing OS,Batch OS,Embedded OS,Standalone OS,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q44,Which OS structure separates kernel and user mode,Layered architecture,Monolithic architecture,Hybrid architecture,Microkernel architecture,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q45,Which OS component schedules CPU tasks,CPU scheduler,Memory manager,File manager,Device manager,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q46,Which OS component manages devices,Device manager,Memory manager,File manager,Process scheduler,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q47,Which OS component handles memory allocation,Memory manager,Device manager,File manager,Process manager,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q48,Which OS component manages processes,Process manager,File manager,Memory manager,Device manager,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q49,Which system call creates new process,Fork,Exec,Open,Read,1
+3-1,CSE 313,Operating System,3-1-CSE313-Q50,Which system call loads new program into process,Exec,Fork,Open,Write,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q1,What is an embedded system,A computer system designed for specific tasks,A general purpose computer,A networking device,A database server,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q2,Which component performs processing operations,Microprocessor,Sensor,Actuator,Display,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q3,Which device integrates CPU memory and peripherals on a single chip,Microcontroller,Microprocessor,Sensor,Cache,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q4,Which architecture is widely used in mobile processors,ARM architecture,x86 architecture,SPARC architecture,PowerPC architecture,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q5,Which architecture is common in desktop processors,x86 architecture,ARM architecture,AVR architecture,MIPS architecture,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q6,Which addressing mode accesses data directly from memory,Direct addressing,Immediate addressing,Register addressing,Indexed addressing,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q7,Which addressing mode stores operand within instruction,Immediate addressing,Direct addressing,Indirect addressing,Register addressing,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q8,Which processor component handles floating point arithmetic,Arithmetic co processor,ALU,Register file,Control unit,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q9,Which feature allows multiple programs to run simultaneously,Multitasking,Pipelining,Branching,Segmentation,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q10,Which memory technique allows larger logical memory than physical memory,Virtual memory,Cache memory,Register memory,ROM memory,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q11,Which microcontroller architecture separates instruction and data memory,Harvard architecture,Von Neumann architecture,Hybrid architecture,Parallel architecture,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q12,Which architecture uses same memory for data and instructions,Von Neumann architecture,Harvard architecture,Distributed architecture,Parallel architecture,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q13,Which programming language interacts directly with hardware,Assembly language,C language,Java language,Python language,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q14,Which memory transfer technique bypasses CPU,DMA,Interrupt polling,Cache transfer,Memory mapping,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q15,Which I O technique maps devices into memory address space,Memory mapped I O,Port mapped I O,Direct I O,Buffered I O,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q16,Which pins allow direct digital input output operations,GPIO pins,Clock pins,Reset pins,Power pins,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q17,Which component detects external hardware events,Interrupt controller,ALU,Register file,Cache controller,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q18,Which module measures time intervals,Timer,Decoder,Encoder,Comparator,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q19,Which communication interface is used for serial communication,UART,SPI,I2C,USB,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q20,Which interface uses synchronous serial communication,SPI,UART,USB,I2C,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q21,Which interface supports multi device communication,I2C,UART,SPI,USB,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q22,Which interface connects peripheral devices to computers,USB,SPI,UART,I2C,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q23,Which technique controls motor speed,Pulse width modulation,Frequency modulation,Amplitude modulation,Phase modulation,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q24,Which motor type moves in discrete steps,Stepper motor,DC motor,AC motor,Servo motor,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q25,Which device displays characters using liquid crystals,LCD display,LED display,CRT display,OLED display,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q26,Which converter transforms analog signals to digital form,ADC,DAC,Comparator,Amplifier,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q27,Which converter transforms digital signals to analog form,DAC,ADC,Comparator,Amplifier,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q28,Which device measures environmental data,Sensor,Actuator,Controller,Processor,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q29,Which device converts electrical signal into physical action,Actuator,Sensor,Processor,Controller,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q30,Which communication method sends data without wires,Wireless communication,Serial communication,Parallel communication,Optical communication,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q31,Which stage defines system requirements,Specification stage,Testing stage,Deployment stage,Execution stage,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q32,Which stage represents system behavior mathematically,Modeling stage,Deployment stage,Debugging stage,Compilation stage,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q33,Which system design step converts specification into architecture,Design stage,Testing stage,Implementation stage,Maintenance stage,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q34,Which feature reduces energy consumption,Power management,Clock gating,Memory swapping,Thread scheduling,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q35,Which system connects many embedded devices through internet,Internet of Things,Distributed computing,Parallel computing,Grid computing,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q36,Which system uses multiple embedded nodes,Distributed embedded system,Standalone system,Sequential system,Monolithic system,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q37,Which operating system responds within strict time constraints,Real time operating system,General purpose OS,Batch OS,Distributed OS,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q38,Which RTOS property ensures deadlines are met,Deterministic timing,Random timing,Dynamic timing,Sequential timing,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q39,Which device stores instructions for microcontroller,Flash memory,Cache memory,Register memory,Virtual memory,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q40,Which device temporarily stores execution data,RAM memory,ROM memory,Flash memory,EEPROM memory,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q41,Which bus transfers data between components,Data bus,Address bus,Control bus,Power bus,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q42,Which bus carries memory addresses,Address bus,Data bus,Control bus,Clock bus,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q43,Which bus controls read and write operations,Control bus,Data bus,Address bus,Power bus,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q44,Which component synchronizes processor operations,Clock,Timer,Counter,Interrupt controller,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q45,Which feature allows processors to handle multiple tasks concurrently,Multitasking,Pipelining,Branch prediction,Cache optimization,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q46,Which system component interacts with physical environment,Sensor and actuator module,Processor module,Memory module,Cache module,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q47,Which protocol transmits serial data asynchronously,UART,SPI,I2C,USB,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q48,Which protocol supports full duplex synchronous communication,SPI,I2C,UART,USB,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q49,Which device converts sensor signals for processing,ADC,DAC,Timer,Interrupt,1
+3-1,CSE 315,"Microprocessors, Microcontrollers and Embedded Systems",3-1-CSE315-Q50,Which embedded system feature integrates hardware and software tightly,Hardware software co design,Code compilation,Memory allocation,Instruction scheduling,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q1,What is the goal of artificial intelligence,Create intelligent machines,Build faster hardware,Design networks,Store data efficiently,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q2,Which entity perceives environment and takes actions,Intelligent agent,Compiler,Operating system,Database,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q3,Which AI technique explores possible states to reach a goal,Search algorithm,Sorting algorithm,Compression algorithm,Hashing algorithm,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q4,Which search strategy uses heuristic estimates,Informed search,Uninformed search,Random search,Blind search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q5,Which search algorithm expands node with lowest heuristic value,Greedy best first search,Breadth first search,Depth first search,Uniform cost search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q6,Which search algorithm uses cost plus heuristic,A star search,Greedy search,Depth first search,Uniform search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q7,Which heuristic property guarantees optimal solution,Admissible heuristic,Inadmissible heuristic,Random heuristic,Dynamic heuristic,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q8,Which search technique evaluates neighbors iteratively,Hill climbing search,Depth first search,Breadth first search,Uniform cost search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q9,Which algorithm allows occasional worse moves to escape local maxima,Simulated annealing,Hill climbing,Breadth first search,Depth first search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q10,Which algorithm maintains multiple candidate states,Local beam search,Depth first search,Uniform cost search,Greedy search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q11,Which algorithm mimics biological evolution,Evolutionary algorithm,Greedy algorithm,Divide and conquer,Dynamic programming,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q12,Which search is used in competitive games,Adversarial search,Local search,Blind search,Greedy search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q13,Which algorithm improves minimax efficiency,Alpha beta pruning,Breadth first search,Uniform cost search,Greedy search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q14,Which technique uses simulation for decision making,Monte Carlo tree search,Depth first search,Greedy search,Uniform search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q15,Which problem type requires satisfying constraints,Constraint satisfaction problem,Optimization problem,Sorting problem,Traversal problem,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q16,Which technique solves CSP using recursive assignment,Backtracking search,Greedy search,Dynamic programming,Branch search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q17,Which AI concept represents knowledge using logic,Knowledge representation,Data compression,Network routing,Memory mapping,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q18,Which reasoning method derives conclusions from facts,Logical inference,Compilation,Parsing,Hashing,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q19,Which logic represents relationships using predicates,First order logic,Propositional logic,Boolean logic,Linear logic,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q20,Which AI process determines sequence of actions,Automated planning,Automated testing,Automated debugging,Automated compilation,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q21,Which learning type uses labeled examples,Supervised learning,Unsupervised learning,Reinforcement learning,Online learning,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q22,Which algorithm learns classification trees,Decision tree learning,Linear regression,K means clustering,Principal component analysis,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q23,Which concept chooses best model among alternatives,Model selection,Feature extraction,Data compression,Signal filtering,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q24,Which model predicts continuous values,Linear regression,Logistic regression,K means clustering,Decision tree,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q25,Which model predicts categorical labels,Classification model,Regression model,Clustering model,Optimization model,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q26,Which model uses nearest training samples,Nearest neighbor model,Linear regression,Decision tree,Neural network,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q27,Which algorithm separates classes with maximum margin,Support vector machine,K means clustering,Decision tree,Naive Bayes,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q28,Which learning method combines multiple models,Ensemble learning,Transfer learning,Online learning,Reinforcement learning,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q29,Which ensemble method trains models on random samples,Bagging,Boosting,Stacking,Gradient descent,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q30,Which ensemble method builds sequential weak learners,Boosting,Bagging,Stacking,Regression,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q31,Which ensemble method uses decision trees extensively,Random forest,Naive Bayes,Logistic regression,Nearest neighbor,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q32,Which algorithm optimizes predictions sequentially,Gradient boosting,Bagging,Stacking,K means,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q33,Which learning type updates model continuously,Online learning,Supervised learning,Offline learning,Batch learning,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q34,Which framework models sequential decision making,Markov decision process,Hidden Markov model,Bayesian network,Decision tree,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q35,Which MDP variant includes incomplete observations,Partially observable MDP,Hidden Markov model,Markov chain,Decision tree,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q36,Which learning type uses reward feedback,Reinforcement learning,Supervised learning,Unsupervised learning,Online learning,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q37,Which reinforcement algorithm learns optimal action values,Q learning,Gradient descent,K means clustering,Decision tree learning,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q38,Which method searches for best policy directly,Policy search,Value iteration,Dynamic programming,Greedy search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q39,Which AI field studies robots interacting with environment,Robotics,Computer vision,Natural language processing,Speech recognition,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q40,Which robotics function interprets sensor data,Robotic perception,Robotic control,Robotic motion,Robotic planning,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q41,Which robotics task determines movement paths,Motion planning,Signal processing,Image compression,Data mining,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q42,Which robotics task adjusts actuators to achieve movement,Control system,Signal processing,Data mining,Image analysis,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q43,Which AI approach enables robots to learn from rewards,Reinforcement learning,Supervised learning,Unsupervised learning,Online learning,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q44,Which AI concept ensures fairness and accountability,AI ethics,AI optimization,AI scheduling,AI simulation,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q45,Which AI field studies natural language understanding,Natural language processing,Computer vision,Robotics,Game AI,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q46,Which AI field studies image recognition,Computer vision,Natural language processing,Robotics,Speech synthesis,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q47,Which algorithm searches graph systematically,Breadth first search,Sorting algorithm,Compression algorithm,Hash algorithm,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q48,Which search explores deepest nodes first,Depth first search,Breadth first search,Uniform cost search,Greedy search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q49,Which search guarantees optimal solution with non negative costs,Uniform cost search,Greedy search,Depth first search,Local search,1
+3-1,CSE 317,Artificial Intelligence,3-1-CSE317-Q50,Which field aims to create systems that learn from data,Machine learning,Operating systems,Computer networks,Database systems,1
+
+3-2,CSE 311,Data Communication,3-2-CSE311-Q1,What does data communication refer to,Transmission of data between devices,Storage of data in memory,Execution of programs,Compilation of code,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q2,Which term represents range of frequencies of a signal,Bandwidth,Latency,Amplitude,Bit rate,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q3,Which ratio measures signal strength relative to noise,Signal to noise ratio,Bit error rate,Channel capacity,Propagation delay,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q4,Which theorem determines maximum channel capacity,Shannon capacity theorem,Nyquist theorem,Markov theorem,Bayes theorem,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q5,Which modulation varies signal amplitude,Amplitude modulation,Frequency modulation,Phase modulation,Pulse modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q6,Which modulation varies signal frequency,Frequency modulation,Amplitude modulation,Phase modulation,Pulse modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q7,Which modulation varies signal phase,Phase modulation,Amplitude modulation,Frequency modulation,Pulse modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q8,Which AM variant suppresses carrier signal,DSB SC,SSB,AM,FM,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q9,Which AM method transmits only one sideband,SSB modulation,AM modulation,FM modulation,PM modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q10,Which technique converts analog signal to digital form,Analog to digital conversion,Digital to analog conversion,Signal amplification,Signal filtering,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q11,Which process measures signal at discrete intervals,Sampling,Quantization,Encoding,Multiplexing,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q12,Which process approximates signal amplitude levels,Quantization,Sampling,Filtering,Compression,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q13,Which technique converts samples into binary code,Pulse code modulation,Frequency modulation,Amplitude modulation,Delta modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q14,Which modulation encodes signal differences,DPCM,PCM,ADPCM,Delta modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q15,Which modulation sends difference between successive samples,Delta modulation,PCM,DPCM,ADPCM,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q16,Which technique represents digital signals over transmission line,Line coding,Signal amplification,Signal detection,Signal filtering,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q17,Which phenomenon causes symbols to interfere with neighbors,Intersymbol interference,Signal fading,Multipath interference,Noise distortion,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q18,Which modulation uses amplitude variations for digital data,Amplitude shift keying,Frequency shift keying,Phase shift keying,Quadrature modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q19,Which modulation uses frequency variations,Frequency shift keying,Amplitude shift keying,Phase shift keying,Quadrature modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q20,Which modulation uses phase variations,Phase shift keying,Frequency shift keying,Amplitude shift keying,Delta modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q21,Which modulation combines amplitude and phase changes,QAM modulation,ASK modulation,FSK modulation,PSK modulation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q22,Which PSK type uses two phase states,Binary PSK,Quadrature PSK,Octal PSK,Differential PSK,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q23,Which PSK type uses four phase states,Quadrature PSK,Binary PSK,Differential PSK,M ary PSK,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q24,Which FSK uses multiple frequency levels,M ary FSK,Binary FSK,Minimum shift keying,Gaussian FSK,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q25,Which modulation reduces bandwidth using Gaussian filtering,GMSK,MSK,PSK,QAM,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q26,Which multiplexing divides channel by time slots,TDM,CDMA,FDM,OFDM,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q27,Which multiplexing divides channel by frequency bands,FDM,TDM,CDMA,OFDM,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q28,Which multiplexing uses orthogonal subcarriers,OFDM,TDM,FDM,CDMA,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q29,Which multiple access method uses spreading codes,CDMA,FDMA,TDMA,OFDM,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q30,Which noise type has constant spectral density,Additive white Gaussian noise,Impulse noise,Shot noise,Thermal noise,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q31,Which measure indicates incorrect received bits,Bit error rate,Signal to noise ratio,Throughput,Latency,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q32,Which concept measures information uncertainty,Entropy,Energy,Amplitude,Frequency,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q33,Which measure indicates shared information between variables,Mutual information,Entropy,Variance,Correlation,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q34,Which coding technique compresses data using variable length codes,Huffman coding,Lempel Ziv coding,Run length coding,Arithmetic coding,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q35,Which compression algorithm uses dictionary based encoding,Lempel Ziv coding,Huffman coding,Run length coding,Arithmetic coding,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q36,Which error control code uses parity check matrix,Linear block code,Cyclic code,Convolutional code,Hamming code,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q37,Which code uses polynomial division,Cyclic code,Linear block code,Convolutional code,Parity code,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q38,Which code processes input bit streams sequentially,Convolutional code,Cyclic code,Block code,Huffman code,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q39,Which decoding algorithm is used for convolutional codes,Viterbi decoding,Huffman decoding,Shannon decoding,CRC decoding,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q40,Which communication system uses cellular towers,Cellular communication,Satellite communication,Optical communication,Power line communication,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q41,Which communication system uses orbiting satellites,Satellite communication,Cellular communication,Optical communication,Radio communication,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q42,Which communication medium uses light signals,Optical fiber communication,Radio communication,Satellite communication,Power line communication,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q43,Which communication system uses existing power lines,Power line carrier communication,Optical communication,Cellular communication,Satellite communication,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q44,Which system sends data through electromagnetic waves,Wireless communication,Optical communication,Wired communication,Power communication,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q45,Which parameter determines number of bits per symbol,Modulation order,Signal bandwidth,Channel noise,Carrier frequency,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q46,Which system property measures transmission speed,Data rate,Signal amplitude,Signal frequency,Noise power,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q47,Which system component converts digital data into analog signal,Modulator,Demodulator,Amplifier,Filter,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q48,Which component recovers digital data from analog signal,Demodulator,Modulator,Encoder,Multiplexer,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q49,Which channel characteristic causes signal attenuation,Noise and interference,Signal amplification,Signal coding,Signal sampling,1
+3-2,CSE 311,Data Communication,3-2-CSE311-Q50,Which field studies transmission of information across channels,Data communication theory,Network programming,Database design,Software engineering,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q1,What is a computer network,A collection of interconnected computers,A standalone computer,A database system,A compiler program,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q2,Which structure organizes network communication into layers,Protocol hierarchy,Network topology,Routing table,Packet queue,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q3,Which layer is responsible for node to node data transfer,Data link layer,Transport layer,Application layer,Network layer,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q4,Which IEEE standard defines Ethernet networks,IEEE 802.3,IEEE 802.11,IEEE 802.15,IEEE 802.16,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q5,Which device connects multiple Ethernet devices,Hubs,Router,Modem,Gateway,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q6,Which device forwards frames based on MAC address,Switch,Router,Hub,Repeater,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q7,Which device connects different network segments using MAC filtering,Bridge,Hub,Router,Repeater,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q8,Which Ethernet standard supports higher data rate,Fast Ethernet,Standard Ethernet,Gigabit Ethernet,Token ring,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q9,Which protocol handles packet routing across networks,IP protocol,TCP protocol,HTTP protocol,FTP protocol,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q10,Which routing algorithm selects shortest path,Dijkstra algorithm,Bellman Ford algorithm,Prim algorithm,Kruskal algorithm,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q11,Which IP version uses 32 bit addressing,IPv4,IPv6,ARP,RARP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q12,Which IP version uses 128 bit addressing,IPv6,IPv4,ARP,DHCP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q13,Which protocol maps IP addresses to MAC addresses,ARP,RARP,DNS,DHCP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q14,Which protocol retrieves IP address from MAC address,RARP,ARP,DHCP,DNS,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q15,Which protocol automatically assigns IP addresses,DHCP,ARP,RARP,BGP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q16,Which routing protocol exchanges routing information between autonomous systems,BGP,OSPF,RIP,ICMP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q17,Which transport protocol provides unreliable connectionless service,UDP,TCP,IP,FTP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q18,Which transport protocol provides reliable connection oriented service,TCP,UDP,IP,HTTP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q19,Which mechanism ensures correct packet delivery,Reliable data transfer,Packet switching,Circuit switching,Routing control,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q20,Which concept limits traffic to avoid network overload,Congestion control,Flow control,Routing control,Packet filtering,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q21,Which TCP mechanism prevents receiver overflow,Flow control,Congestion control,Routing control,Buffer control,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q22,Which application protocol is used for web browsing,HTTP,FTP,SMTP,DNS,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q23,Which protocol transfers files across networks,FTP,HTTP,SMTP,DNS,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q24,Which protocol sends electronic mail,SMTP,HTTP,FTP,DNS,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q25,Which system converts domain names to IP addresses,DNS,ARP,DHCP,HTTP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q26,Which network model organizes communication into layers,OSI model,Client server model,Peer model,Hybrid model,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q27,Which OSI layer manages end to end communication,Transport layer,Network layer,Application layer,Physical layer,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q28,Which OSI layer handles logical addressing,Network layer,Data link layer,Transport layer,Session layer,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q29,Which OSI layer handles physical transmission,Physical layer,Transport layer,Application layer,Session layer,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q30,Which architecture uses connected sensors and devices,Internet of Things,Distributed computing,Parallel computing,Cloud computing,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q31,Which IoT component collects data from environment,Edge device,Router,Gateway,Server,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q32,Which IoT layer processes data near the source,Edge computing,Cloud computing,Grid computing,Cluster computing,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q33,Which IoT communication commonly uses wireless technology,Wireless sensor networks,Wired networks,Optical networks,Power networks,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q34,Which IoT platform integrates edge and cloud services,Edge cloud IoT platform,Standalone platform,Local network platform,Database platform,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q35,Which mechanism distributes workloads across servers,Load balancing,Packet switching,Routing control,Data caching,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q36,Which IoT concern protects devices from attacks,IoT security,IoT routing,IoT scheduling,IoT caching,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q37,Which IoT factor improves energy efficiency,Energy management,Load management,Network control,Packet routing,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q38,Which network architecture is used in cloud servers,Datacenter topology,Mesh topology,Bus topology,Ring topology,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q39,Which topology connects nodes to a central device,Star topology,Bus topology,Ring topology,Mesh topology,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q40,Which topology connects each node to every other node,Mesh topology,Star topology,Bus topology,Ring topology,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q41,Which switching technique sends packets independently,Packet switching,Circuit switching,Message switching,Frame switching,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q42,Which switching technique establishes dedicated path,Circuit switching,Packet switching,Frame switching,Message switching,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q43,Which network device connects multiple networks,Router,Switch,Hub,Bridge,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q44,Which protocol reports network errors,ICMP,HTTP,FTP,SMTP,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q45,Which mechanism ensures packet ordering in TCP,Sequence numbers,Packet IDs,Buffer numbers,Frame numbers,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q46,Which mechanism detects lost packets,Acknowledgment system,Packet switching,Multiplexing,Routing,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q47,Which network service provides web pages,HTTP service,FTP service,SMTP service,DNS service,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q48,Which network layer handles application services,Application layer,Transport layer,Network layer,Physical layer,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q49,Which communication protocol ensures reliable delivery,TCP protocol,UDP protocol,IP protocol,ARP protocol,1
+3-2,CSE 321,Computer Networks,3-2-CSE321-Q50,Which field studies interconnected communication systems,Computer networking,Operating systems,Database systems,Software engineering,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q1,What is the main goal of project management,Ensure project success within constraints,Write program code,Compile software,Store project data,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q2,Which activity identifies potential project risks,Risk management,Quality assurance,Configuration management,Deployment management,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q3,Which process manages relationships with project participants,Stakeholder management,Issue management,Task scheduling,Cost estimation,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q4,Which activity coordinates work among team members,Team management,Risk management,Issue management,Cost modeling,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q5,Which process tracks and resolves project problems,Issue management,Team management,Deployment management,Testing management,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q6,Which planning activity determines project timeline,Project scheduling,Project testing,Project deployment,Project documentation,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q7,Which concept estimates software development cost,Software pricing,Software testing,Software design,Software deployment,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q8,Which technique predicts project effort,Estimation technique,Testing technique,Debugging technique,Compilation technique,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q9,Which cost estimation model uses project size,COCOMO model,Agile model,Waterfall model,Spiral model,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q10,Which development model follows sequential stages,Waterfall model,Agile model,Scrum model,Kanban model,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q11,Which development methodology emphasizes iterative progress,Agile methodology,Waterfall methodology,Spiral methodology,Linear methodology,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q12,Which Agile framework organizes work into sprints,Scrum,Kanban,Waterfall,Spiral,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q13,Which Agile method visualizes workflow using boards,Kanban,Scrum,Waterfall,Spiral,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q14,Which activity ensures software meets quality standards,Software quality assurance,Project scheduling,Risk management,Deployment management,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q15,Which measure evaluates software performance,Software metric,Software model,Software schema,Software pattern,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q16,Which analysis checks code without executing it,Static analysis,Dynamic analysis,Runtime analysis,Parallel analysis,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q17,Which concept defines conditions for software acceptance,Acceptance criteria,Design criteria,Execution criteria,Testing criteria,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q18,Which architecture delivers software via internet,Software as a service,Embedded architecture,Client server architecture,Standalone architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q19,Which architecture organizes services independently,Service oriented architecture,Layered architecture,Pipeline architecture,Monolithic architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q20,Which architecture splits applications into small services,Microservices architecture,Monolithic architecture,Client server architecture,Layered architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q21,Which design pattern separates UI from logic,Model view controller,Singleton pattern,Factory pattern,Adapter pattern,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q22,Which architecture divides application into multiple layers,N tier architecture,Client server architecture,Peer to peer architecture,Distributed architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q23,Which activity installs software into production,Deployment,Testing,Compilation,Debugging,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q24,Which process automates build and test integration,Continuous integration,Continuous deployment,Manual integration,Static deployment,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q25,Which process automates release to production,Continuous delivery,Manual delivery,Static delivery,Iterative delivery,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q26,Which technology packages application with dependencies,Containerization,Virtual memory,Code compilation,Static linking,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q27,Which technology runs multiple systems on single hardware,Virtualization,Containerization,Compilation,Encryption,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q28,Which activity tracks application performance,Monitoring,Compilation,Deployment,Designing,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q29,Which system measures application runtime metrics,Application performance monitoring,Project monitoring,Memory monitoring,Network monitoring,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q30,Which metric measures software reliability,Failure rate,Compilation speed,Execution count,Memory size,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q31,Which metric measures software maintainability,Maintainability index,CPU speed,Memory capacity,Disk throughput,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q32,Which architecture divides application into presentation logic and data layers,N tier architecture,Peer to peer architecture,Mesh architecture,Ring architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q33,Which Agile role manages product backlog,Product owner,Scrum master,Developer,Tester,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q34,Which Agile role facilitates Scrum process,Scrum master,Product owner,Project manager,Developer,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q35,Which artifact lists planned tasks in Scrum,Sprint backlog,Product backlog,Release backlog,Task backlog,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q36,Which board visualizes workflow in Kanban,Kanban board,Scrum board,Task board,Project board,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q37,Which concept measures productivity of development team,Velocity,Latency,Throughput,Efficiency ratio,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q38,Which stage includes bug fixes after release,Maintenance stage,Design stage,Testing stage,Planning stage,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q39,Which architecture type provides web based services,SaaS architecture,Client server architecture,Embedded architecture,Standalone architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q40,Which component collects application metrics,Monitoring system,Compilation system,Deployment system,Execution system,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q41,Which activity measures software performance,Performance monitoring,Debugging,Compilation,Refactoring,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q42,Which tool automates build and testing pipelines,CI tool,Database tool,Compiler tool,IDE tool,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q43,Which technique isolates applications using containers,Containerization,Virtual memory,Thread scheduling,Memory mapping,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q44,Which practice continuously integrates code changes,Continuous integration,Continuous deployment,Manual integration,Static testing,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q45,Which architecture divides services by functionality,Microservices architecture,Monolithic architecture,Client server architecture,Peer architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q46,Which concept improves scalability of services,Service oriented architecture,Standalone architecture,Embedded architecture,Monolithic architecture,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q47,Which process measures runtime application performance,APM monitoring,Code compilation,Code execution,Code optimization,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q48,Which concept distributes system load across servers,Load balancing,Packet routing,Memory allocation,Thread scheduling,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q49,Which lifecycle phase focuses on system deployment,Deployment phase,Design phase,Requirement phase,Testing phase,1
+3-2,CSE 325,Information Systems Development and Management,3-2-CSE325-Q50,Which discipline manages information systems development projects,Information systems management,Operating system management,Network management,Database management,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q1,What is the goal of machine learning,Learn patterns from data,Compile programs,Manage networks,Store files,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q2,Which step defines the ML objective,Problem formulation,Model training,Model testing,Deployment,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q3,Which stage collects raw data for ML systems,Data collection,Model evaluation,Feature selection,Model optimization,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q4,Which process prepares raw data for modeling,Data preprocessing,Model inference,Prediction stage,Deployment stage,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q5,Which technique explores patterns in datasets,Exploratory data analysis,Regression analysis,Optimization analysis,Data compression,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q6,Which technique displays data graphically,Data visualization,Data normalization,Data encoding,Data compression,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q7,Which model predicts continuous outputs,Linear regression,Decision tree,K means clustering,Naive Bayes,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q8,Which concept represents neural network computation,Forward propagation,Backward propagation,Gradient descent,Weight decay,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q9,Which algorithm computes gradients for training networks,Backpropagation,Forward propagation,Gradient clipping,Weight initialization,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q10,Which structure represents operations and dependencies,Computation graph,Decision tree,Flow graph,Control graph,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q11,Which issue occurs due to extremely large or small numbers,Numerical instability,Overfitting,Underfitting,Noise distortion,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q12,Which method initializes neural network parameters,Weight initialization,Gradient descent,Backpropagation,Normalization,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q13,Which optimization algorithm uses full dataset,Batch gradient descent,Stochastic gradient descent,Mini batch gradient descent,Random descent,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q14,Which optimization algorithm updates parameters per sample,Stochastic gradient descent,Batch gradient descent,Newton method,Coordinate descent,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q15,Which neural network is used for image processing,Convolutional neural network,Recurrent neural network,Decision tree,Naive Bayes,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q16,Which CNN operation extracts features using filters,Convolution,Pooling,Padding,Stride,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q17,Which technique adds border around images in CNN,Padding,Pooling,Stride,Normalization,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q18,Which CNN parameter controls filter movement,Stride,Padding,Pooling,Normalization,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q19,Which layer reduces spatial dimensions,Pooling layer,Convolution layer,Dense layer,Dropout layer,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q20,Which CNN architecture won ImageNet 2012,AlexNet,VGG,ResNet,GoogLeNet,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q21,Which normalization technique stabilizes training,Batch normalization,Dropout,Weight decay,Pooling,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q22,Which neural network processes sequential data,RNN,ANN,CNN,SVM,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q23,Which RNN variant solves long term dependency,LSTM,RNN,CNN,MLP,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q24,Which RNN unit uses gating mechanisms,GRU,LSTM,RNN,CNN,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q25,Which model maps input sequence to output sequence,Seq2Seq model,RNN model,CNN model,Transformer model,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q26,Which technique prevents neural network overfitting,Dropout,Pooling,Padding,Stride,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q27,Which regularization method penalizes large weights,Weight decay,Dropout,Batch normalization,Pooling,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q28,Which graphical model represents probabilistic relationships,Bayesian network,Markov chain,Decision tree,Support vector machine,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q29,Which algorithm removes variables during probabilistic inference,Variable elimination,Forward elimination,Backward elimination,Feature elimination,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q30,Which sampling method draws samples sequentially,Gibbs sampling,Random sampling,Cluster sampling,Reservoir sampling,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q31,Which model represents time dependent states,Hidden Markov model,Naive Bayes model,Linear regression,Decision tree,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q32,Which filter estimates dynamic systems,Kalaman filter,Particle filter,Bayes filter,Gaussian filter,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q33,Which learning approach uses probability distributions,Bayesian learning,Supervised learning,Unsupervised learning,Reinforcement learning,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q34,Which model assumes feature independence,Naive Bayes,Decision tree,Logistic regression,SVM,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q35,Which model predicts probability using linear function,Generalized linear model,Linear regression,Decision tree,Random forest,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q36,Which algorithm handles hidden variables,Expectation maximization,Gradient descent,Backpropagation,Clustering,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q37,Which model groups similar data points,Mixture model,Decision tree,Linear model,Regression model,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q38,Which clustering algorithm partitions data into k groups,K means clustering,Hierarchical clustering,DBSCAN clustering,Mean shift clustering,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q39,Which algorithm learns mixture of Gaussians,EM algorithm,K means algorithm,Decision tree algorithm,SVM algorithm,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q40,Which method reduces dimensionality,PCA,Regression,Classification,Clustering,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q41,Which technique finds principal components,PCA,ICA,LDA,SVD,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q42,Which system recommends items to users,Recommender system,Decision system,Prediction system,Automation system,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q43,Which recommendation method uses user similarity,Collaborative filtering,Content filtering,Hybrid filtering,Random filtering,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q44,Which technique factorizes user item matrix,Matrix factorization,Matrix multiplication,Matrix inversion,Matrix normalization,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q45,Which model type generates data samples,Generative model,Discriminative model,Regression model,Clustering model,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q46,Which model type distinguishes between classes,Discriminative model,Generative model,Clustering model,Regression model,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q47,Which ML method learns hidden patterns without labels,Unsupervised learning,Supervised learning,Reinforcement learning,Online learning,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q48,Which ML method learns using labeled data,Supervised learning,Unsupervised learning,Reinforcement learning,Online learning,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q49,Which ML technique improves performance with more data,Deep learning,Linear regression,Decision trees,Naive Bayes,1
+3-2,CSE 329,Machine Learning,3-2-CSE329-Q50,Which field studies algorithms that learn from data,Machine learning,Data mining,Artificial intelligence,Statistics,1
+
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-Q51,asdadsd,asd,asd,asd,asd,3
+1-2,CSE 105,Data Structures and Algorithms I,1-2-CSE105-E-Q52,sa,d,a,d,w,1

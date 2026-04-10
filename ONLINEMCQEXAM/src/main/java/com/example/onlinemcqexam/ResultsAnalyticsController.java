@@ -161,10 +161,7 @@ public class ResultsAnalyticsController {
     }
 
     private void loadTerms() {
-        Path path = resolveFirstExisting(
-                "src/main/resources/com/example/onlinemcqexam/terms.csv",
-                "src/main/resources/terms.csv"
-        );
+        Path path = AppPaths.packageResourceFile("terms.csv");
         if (path == null) {
             return;
         }
@@ -186,10 +183,7 @@ public class ResultsAnalyticsController {
     }
 
     private void loadCourses() {
-        Path path = resolveFirstExisting(
-                "src/main/resources/com/example/onlinemcqexam/courses.csv",
-                "src/main/resources/courses.csv"
-        );
+        Path path = AppPaths.packageResourceFile("courses.csv");
         if (path == null) {
             return;
         }
@@ -217,7 +211,7 @@ public class ResultsAnalyticsController {
     }
 
     private void loadExams() {
-        Path path = resolveFirstExisting("src/main/resources/exams.csv");
+        Path path = AppPaths.resourceFile("exams.csv");
         if (path == null) {
             return;
         }

@@ -1,7 +1,9 @@
 package com.example.onlinemcqexam;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -11,37 +13,55 @@ import java.io.IOException;
 public class ExamApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(ExamApplication.class.getResource("exam-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        scene.setFill(Color.web("#08130d"));
-        scene.getStylesheets().add(ExamApplication.class.getResource("styles.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("dashboard.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("availableExams.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("scheduledExams.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("progress.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("leaderboard.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("createAccount.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("discussion.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("messaging.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("examStart.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("liveExam.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("examResult.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("teacherLogin.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("teacherDashboard.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("questionBank.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("createExam.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("scheduleExam.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("resultsAnalytics.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("examLibrary.css").toExternalForm());
-        scene.getStylesheets().add(ExamApplication.class.getResource("authFailed.css").toExternalForm());
-        stage.setTitle("Online MCQ Exam");
-        stage.setMinWidth(900);
-        stage.setMinHeight(600);
-        stage.setScene(scene);
-        stage.show();
+        try {
+            AppPaths.initialize();
+            FXMLLoader loader = new FXMLLoader(ExamApplication.class.getResource("exam-view.fxml"));
+            Scene scene = new Scene(loader.load());
+            scene.setFill(Color.web("#08130d"));
+            addStylesheet(scene, "styles.css");
+            addStylesheet(scene, "dashboard.css");
+            addStylesheet(scene, "availableExams.css");
+            addStylesheet(scene, "scheduledExams.css");
+            addStylesheet(scene, "progress.css");
+            addStylesheet(scene, "leaderboard.css");
+            addStylesheet(scene, "createAccount.css");
+            addStylesheet(scene, "discussion.css");
+            addStylesheet(scene, "messaging.css");
+            addStylesheet(scene, "examStart.css");
+            addStylesheet(scene, "liveExam.css");
+            addStylesheet(scene, "examResult.css");
+            addStylesheet(scene, "teacherLogin.css");
+            addStylesheet(scene, "teacherDashboard.css");
+            addStylesheet(scene, "questionBank.css");
+            addStylesheet(scene, "createExam.css");
+            addStylesheet(scene, "scheduleExam.css");
+            addStylesheet(scene, "resultsAnalytics.css");
+            addStylesheet(scene, "examLibrary.css");
+            addStylesheet(scene, "authFailed.css");
+            stage.setTitle("Online MCQ Exam");
+            stage.setMinWidth(900);
+            stage.setMinHeight(600);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Online MCQ Exam");
+            alert.setHeaderText("The application failed to start.");
+            alert.setContentText(ex.getMessage() == null ? ex.toString() : ex.getMessage());
+            alert.showAndWait();
+            Platform.exit();
+        }
+    }
+
+    private void addStylesheet(Scene scene, String resourceName) {
+        var url = ExamApplication.class.getResource(resourceName);
+        if (url != null) {
+            scene.getStylesheets().add(url.toExternalForm());
+        }
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

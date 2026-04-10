@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.BufferedReader;
@@ -22,7 +21,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -156,10 +154,7 @@ public class ExamLibraryController {
     }
 
     private void loadTerms() {
-        Path path = resolveFirstExisting(
-                "src/main/resources/com/example/onlinemcqexam/terms.csv",
-                "src/main/resources/terms.csv"
-        );
+        Path path = AppPaths.packageResourceFile("terms.csv");
         if (path == null) {
             return;
         }
@@ -182,10 +177,7 @@ public class ExamLibraryController {
     }
 
     private void loadCourses() {
-        Path path = resolveFirstExisting(
-                "src/main/resources/com/example/onlinemcqexam/courses.csv",
-                "src/main/resources/courses.csv"
-        );
+        Path path = AppPaths.packageResourceFile("courses.csv");
         if (path == null) {
             return;
         }
@@ -214,7 +206,7 @@ public class ExamLibraryController {
     }
 
     private void loadSchedules() {
-        Path path = resolveFirstExisting("schedule.csv", "src/main/resources/schedule.csv");
+        Path path = AppPaths.resourceFile("schedule.csv");
         if (path == null) {
             return;
         }
@@ -263,7 +255,7 @@ public class ExamLibraryController {
     }
 
     private void loadExams() {
-        Path path = resolveFirstExisting("src/main/resources/exams.csv");
+        Path path = AppPaths.resourceFile("exams.csv");
         if (path == null) {
             return;
         }
